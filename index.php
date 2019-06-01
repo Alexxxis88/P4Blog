@@ -1,7 +1,8 @@
 <?php   
 require('modele.php');
 
-$posts  = getPosts();
+$posts = getPosts();
+
 
 require('indexView.php');
 

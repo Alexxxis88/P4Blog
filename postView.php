@@ -5,42 +5,39 @@
 		<meta charset="utf-8" /> 
         <link rel="stylesheet" href="css/style.css" />
 	</head> 
+
 	<body> 
         <section id="header">
                 <h1>Billet simple pour l'Alaska</h1>
-                <div class="adminFields">
-                    <form method="post" action ="admin.php">
-                        <input type="text" name="log" placeholder="votre pseudo" required />
-                        <input type="password" name="password" placeholder="votre password" required />
-                        <input type="submit" name="login" value ="Connexion" /> 
-                    </form>
-                </div>
-            </div>
             <p class="pagination">Page: PAGINATION</p>
-        </section>
-
-        <?php
-         while($datas = $posts->fetch())
-        {
-        $id = (int) $datas['id']; 
-        ?>
         
+        </section>
+        <p><a href="index.php">Retour à la page d'accueil</a></p>
             <div class="posts">
-                <h2><?= htmlspecialchars($datas['title']) ?></h2>
-                <p>Publié le <?= $datas['mod_publish_date'] ?></p>
+                <h2><?= htmlspecialchars($post['title']) ?></h2>
+                <p>Publié le <?= $post['mod_publish_date'] ?></p>
                     
                 <p class="posts">
-                    <?= nl2br(htmlspecialchars($datas['content'])) ?>
+                    <?= nl2br(htmlspecialchars($post['content'])) ?>
                         <button>Lire la suite</button><br/>
-                    <a href="post.php?id=<?=$id?>">Commentaires</a>
                 </p>
                 <button class="adminBtns">Modifier</button>
                 <button class="adminBtns">Supprimer</button>
             </div>
+
+            <h2>Commentaires</h2>
+
         <?php
-        }  
-        $posts->closeCursor();
-        ?>     
+        while ($comment = $comments->fetch())
+        {
+        ?>
+            <p><strong><?= htmlspecialchars($comment['author']) ?></strong> le <?= $comment['mod_comment_date'] ?></p>
+            <p><?= nl2br(htmlspecialchars($comment['comment'])) ?></p>
+        <?php
+        }
+        ?>
+
+             
 
         <section id="footer">
             <p>Page: PAGINATION</p>
