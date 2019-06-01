@@ -23,8 +23,6 @@ h1{
 
 .adminBtns{
     margin-left:5px;
-    display: flex;
-    justify-content: right;
 }
 
 .adminFields input[type="submit"]{
