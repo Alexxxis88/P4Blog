@@ -2,21 +2,27 @@
 
 <?php ob_start(); ?>
     <p><a href="index.php">Retour à la page d'accueil</a></p>
-        <div class="posts">
-            <h2><?= htmlspecialchars($post['title']) ?></h2>
-            <p>Publié le <?= $post['mod_publish_date'] ?></p>
-                
-            <p class="posts">
-                <?= nl2br(htmlspecialchars($post['content'])) ?>
-                <button>Lire la suite</button><br/>
-            </p>
-            <button class="adminBtns">Modifier</button>
-            <button class="adminBtns">Supprimer</button>
-        </div>
+    <div class="posts">
+        <h2><?= htmlspecialchars($post['title']) ?></h2>
+        <p>Publié le <?= $post['mod_publish_date'] ?></p>
+            
+        <p class="posts">
+            <?= nl2br(htmlspecialchars($post['content'])) ?>
+            <button>Lire la suite</button><br/>
+        </p>
+        <button class="adminBtns">Modifier</button>
+        <button class="adminBtns">Supprimer</button>
+    </div>
+    <aside>
 
-    <h2>Commentaires</h2>
+    
+    <h3>Les derniers chapitres publiés</h3>
+    
+    </aside>
 
-    <form action="index.php?action=addComment&amp;id=<?= $post['id'] ?>" method="post">
+    <h2 id="commentsAnchor">Commentaires</h2>
+
+    <form action="index.php?action=addComment&amp;id=<?= $post['id'] ?>#commentsAnchor" method="post">
     <div>
         <label for="author">Auteur</label><br />
         <input type="text" id="author" name="author" required/>
@@ -38,6 +44,8 @@
     ?>
         <p><strong><?= htmlspecialchars($comment['author']) ?></strong> le <?= $comment['mod_comment_date'] ?></p>
         <p><?= nl2br(htmlspecialchars($comment['comment'])) ?></p>
+        <button class="userBtns"><a href="index.php?action=signal">Signaler</a></button>
+        <button class="adminBtns"><a href="index.php?action=deleteComments">Supprimer</a></button>
     <?php
     }
     ?>

@@ -13,9 +13,10 @@ $id = (int) $datas['id'];
         <p>Publié le <?= $datas['mod_publish_date'] ?></p>
             
         <p class="posts">
-            <?= nl2br(htmlspecialchars($datas['content'])) ?>
-                <button>Lire la suite</button><br/>
-            <a href="index.php?action=post&id=<?=$id?>">Commentaires</a>
+            <?= substr($datas['content'], 0, 600) . "..." ?>
+                <button><a href="index.php?action=post&id=<?=$id?>">Lire la suite</a></button><br/>
+                <button><a href="index.php?action=post&id=<?=$id?>#commentsAnchor">Commentaires</a></button>
+
         </p>
         <button class="adminBtns">Modifier</button>
         <button class="adminBtns">Supprimer</button>
@@ -27,5 +28,3 @@ $posts->closeCursor();
 <?php $content = ob_get_clean(); ?>
 
 <?php require('template.php'); ?>
-
-        
