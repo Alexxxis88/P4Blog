@@ -20,23 +20,27 @@ function getPost($postId)
 function getComments($postId)
 {
     $db = dbConnect();
-    $comments = $db->prepare('SELECT id, author, comment, DATE_FORMAT(comment_date, \'%d/%m/%Y à %Hh%imin%ss\') AS mod_comment_date FROM comments WHERE post_id = ? ORDER BY comment_date DESC');
+    $comments = $db->prepare('SELECT id, author, comment, DATE_FORMAT(comment_date, \'%d/%m/%Y à %Hh%imin%ss\') AS mod_comment_date FROM comments WHERE post_id = ? ORDER BY comment_date');
     $comments->execute(array($postId));
 
     return $comments;
 }
 
+
+function postComment($postId, $author, $comment)
+{
+    $db = dbConnect();
+    $comments = $db->prepare('INSERT INTO comments(post_id, author, comment, comment_date) VALUES(?, ?, ?, NOW())');
+    $affectedLines = $comments->execute(array($postId, $author, $comment));
+
+    return $affectedLines;
+}
+
+
 // Nouvelle fonction qui nous permet d'éviter de répéter du code
 function dbConnect()
 {
-    try
-    {
-        $db = new PDO('mysql:host=localhost;dbname=p4blog;charset=utf8', 'root', '');
-        return $db;
-    }
-    catch(Exception $e)
-    {
-        die('Erreur : '.$e->getMessage());
-    }
+    $db = new PDO('mysql:host=localhost;dbname=p4blog;charset=utf8', 'root', '');
+    return $db;
 }
 
