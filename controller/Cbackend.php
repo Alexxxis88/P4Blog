@@ -13,4 +13,3 @@ function newPost($title, $content)
     $newPost = insertNewPost($title, $content);
     
 }
-
