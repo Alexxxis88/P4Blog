@@ -14,6 +14,13 @@
                         <input type="submit" name="logout" value ="Deconnexion" /> 
                     </form>
                 </div>
+
+                <div style="text-align:center" >
+        <button class="adminBtns"><a href="view/backend/publishView.php">Publier un chapitre</a></button>
+        <button class="adminBtns"><a href="index.php?action=listPostsAdmin">Editer les chapitres</a></button>
+        <button class="adminBtns"><a href="index.php?action=manageComments">Commentaires</a></button>
+            
+    </div>
         
         <?= $content ?>
 

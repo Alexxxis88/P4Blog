@@ -35,6 +35,12 @@ try {
         elseif ($_GET['action'] == 'listPostsAdmin') {
             listPostsAdmin();
         }
+        elseif ($_GET['action'] == 'publishChapter') {
+            newPost($_POST['title'], $_POST['postContent']);
+        }
+
+
+    //Default behavior    
     }
     else {
         listPosts();

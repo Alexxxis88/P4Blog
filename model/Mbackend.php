@@ -7,6 +7,14 @@ function getPostsAdmin()
     return $req;
 }
 
+function insertNewPost($title, $content)
+{
+    $db = dbConnectAdmin();
+    $newPostDb = $db->prepare('INSERT INTO posts( title, content, publish_date) VALUES(?, ?, NOW())');
+    $newPostDb->execute(array($title, $content));
+}
+
+
 
 // Nouvelle fonction qui nous permet d'éviter de répéter du code
 function dbConnectAdmin()

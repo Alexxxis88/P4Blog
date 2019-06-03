@@ -2,12 +2,7 @@
 
 <?php ob_start(); ?>
 
-    <div style="text-align:center" >
-        <button class="adminBtns"><a href="index.php?action=publishChapter">Publier un chapitre</a></button>
-        <button class="adminBtns"><a href="index.php?action=listPostsAdmin">Editer les chapitres</a></button>
-        <button class="adminBtns"><a href="index.php?action=manageComments">Commentaires</a></button>
-            
-    </div>
+    
 
     <?php
 while($datasAdmin = $postsAdmin->fetch())
