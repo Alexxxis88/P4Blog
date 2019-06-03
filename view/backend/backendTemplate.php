@@ -10,8 +10,8 @@
     
                 <h1><?= $title ?></h1>
                 <div class="adminFields">
-                    <form method="post" action ="../../index.php"> <!-- URL à améliorer -->
-                        <input type="submit" name="login" value ="Deconnexion" /> 
+                    <form method="post" action ="index.php"> <!-- URL à améliorer -->
+                        <input type="submit" name="logout" value ="Deconnexion" /> 
                     </form>
                 </div>
         

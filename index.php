@@ -1,7 +1,10 @@
 <?php
 require('controller/Cfrontend.php');
+require('controller/Cbackend.php');
+
 try {
     if (isset($_GET['action'])) {
+    //Frontend    
         if ($_GET['action'] == 'listPosts') {
             listPosts();
         }
@@ -27,6 +30,11 @@ try {
             }
         }
 
+
+        //Backend
+        elseif ($_GET['action'] == 'listPostsAdmin') {
+            listPostsAdmin();
+        }
     }
     else {
         listPosts();

@@ -10,7 +10,7 @@
     <section id="header">
                 <h1>Billet simple pour l'Alaska</h1>
                 <div class="adminFields">
-                    <form method="post" action ="view/backend/adminView.php">
+                    <form method="post" action ="index.php?action=listPostsAdmin">
                         <input type="text" name="log" placeholder="votre pseudo" required />
                         <input type="password" name="password" placeholder="votre password" required />
                         <input type="submit" name="login" value ="Connexion" /> 
