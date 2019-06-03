@@ -45,7 +45,9 @@
         <p><strong><?= htmlspecialchars($comment['author']) ?></strong> le <?= $comment['mod_comment_date'] ?></p>
         <p><?= nl2br(htmlspecialchars($comment['comment'])) ?></p>
         <button class="userBtns"><a href="index.php?action=signal">Signaler</a></button>
-        <button class="adminBtns"><a href="index.php?action=deleteComments">Supprimer</a></button>
+
+        <!-- gets the commentId as a parameter in the URL of the comment to delete AND the post id to return on the same post after comment has been deleted-->
+        <button class="adminBtns"><a href="index.php?action=deleteComment&amp;id=<?= $post['id'] ?>&amp;commentId=<?= $comment['id'] ?>">Supprimer</a></button>
     <?php
     }
     ?>

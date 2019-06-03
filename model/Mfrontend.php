@@ -2,7 +2,7 @@
 function getPosts()
 {
     $db = dbConnect();
-    $req = $db->query('SELECT id, title, content, DATE_FORMAT(publish_date, \'%d/%m/%Y à %Hh%imin%ss\') AS mod_publish_date FROM posts ORDER BY publish_date DESC LIMIT 0, 5');
+    $req = $db->query('SELECT id, title, content, DATE_FORMAT(publish_date, \'%d/%m/%Y à %Hh%imin%ss\') AS mod_publish_date FROM posts ORDER BY publish_date DESC LIMIT 0, 10');
 
     return $req;
 }
@@ -34,6 +34,15 @@ function postComment($postId, $author, $comment)
     $affectedLines = $comments->execute(array($postId, $author, $comment));
 
     return $affectedLines;
+}
+
+
+function eraseComment($commentId)
+{
+    $db = dbConnect();
+    $comDelete = $db->prepare('DELETE FROM comments WHERE id = ?');
+    $comDelete->execute(array($commentId));
+    return $comDelete;
 }
 
 
