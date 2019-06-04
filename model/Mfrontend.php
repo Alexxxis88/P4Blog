@@ -42,7 +42,14 @@ function eraseComment($commentId)
     $db = dbConnect();
     $comDelete = $db->prepare('DELETE FROM comments WHERE id = ?');
     $comDelete->execute(array($commentId));
-    return $comDelete;
+}
+
+
+function erasePost($postId) // est ce que ce $postId est le même que celui de postComment ? 
+{
+    $db = dbConnect();
+    $postDelete = $db->prepare('DELETE FROM posts WHERE id = ?');
+    $postDelete->execute(array($postId));
 }
 
 

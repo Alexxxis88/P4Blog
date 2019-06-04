@@ -26,7 +26,7 @@ $id = (int) $datasAdmin['id'];
 
         </p>
         <button class="adminBtns">Modifier</button>
-        <button class="adminBtns">Supprimer</button>
+        <button class="adminBtns"><a href="index.php?action=deletePost&amp;id=<?= $id?>">Supprimer</a></button>
     </div>
 <?php
 }  

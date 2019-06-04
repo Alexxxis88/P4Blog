@@ -32,3 +32,9 @@ function deleteComment($commentId)
     header('Location: index.php?action=post&id=' . $_GET['id'] . '#commentsAnchor'); //FIXME : SQL injection issue ? 
 
 } 
+
+function deletePost($postId)
+{
+    $postDelete = erasePost($postId);
+    header('Location: index.php?action=listPosts'); //FIXME problem = when delete button used on Admin page (BE), sends back to FE home page instead of BE Adminpage
+} 
