@@ -13,7 +13,11 @@
 
 
         <!-- FIXME : edit class of the approve btn -->
-        <button class="userBtns"><a href="index.php?action=approveComment"  onclick="return alert('Commentaire approuvé')" >Approuver</a></button>
+        <button class="userBtns"><a href="index.php?action=approveComment&amp;commentId=<?= $datas['id'] ?>"  onclick="return alert('Commentaire approuvé')" >Approuver</a></button>
+
+
+
+
 
         <!-- TODO : make the button work-->
         <button class="adminBtns"><a href="#" onclick="return confirm('Etes vous sûr?')">Supprimer</a></button>

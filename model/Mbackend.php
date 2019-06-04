@@ -11,10 +11,18 @@ function getPostsAdmin()
 function getReportedComments()
 {
     $db = dbConnectAdmin();
-    $reportedComment = $db->query('SELECT post_id, author, comment, DATE_FORMAT(comment_date, \'%d/%m/%Y à %Hh%imin%ss\') AS mod_comment_date FROM comments WHERE flag = 1 ORDER BY comment_date DESC');
+    $reportedComment = $db->query('SELECT id, post_id, author, comment, DATE_FORMAT(comment_date, \'%d/%m/%Y à %Hh%imin%ss\') AS mod_comment_date FROM comments WHERE flag = 1 ORDER BY comment_date DESC');
 
     return $reportedComment;
 }
+
+function approveComment($commentId){
+    $db = dbConnectAdmin();
+    $commentApprove = $db->prepare('UPDATE comments SET flag = 0 WHERE id = ?');
+    $commentApprove->execute(array($commentId));
+}
+
+
 
 // General function to connect to database
 function dbConnectAdmin()

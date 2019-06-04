@@ -59,6 +59,10 @@ try {
         elseif ($_GET['action'] == 'manageComments') {
             listResportedComments();
         }
+
+        elseif ($_GET['action'] == 'approveComment') {
+            approveComments($_GET['commentId']);
+        }
     }
 
 
