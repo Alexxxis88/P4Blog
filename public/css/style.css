@@ -69,3 +69,8 @@ button a:hover{
 button:hover{
     cursor: pointer;
 }
+
+
+.reportedComments{
+    background:rgb(236, 117, 117) !important;
+}

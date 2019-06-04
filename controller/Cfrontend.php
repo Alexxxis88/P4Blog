@@ -29,7 +29,7 @@ function addComment($postId, $author, $comment)
 function deleteComment($commentId)
 {
     $comDelete = eraseComment($commentId);
-    header('Location: index.php?action=post&id=' . $_GET['id'] . '#commentsAnchor'); //FIXME : SQL injection issue ? 
+    header('Location: ' . $_SERVER['HTTP_REFERER']); //FIXME : SQL injection issue ? 
 
 } 
 
