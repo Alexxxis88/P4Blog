@@ -40,6 +40,18 @@ try {
             }
         }
 
+
+        elseif ($_GET['action'] == 'reportComment') {
+            if (isset($_GET['commentId']) && $_GET['commentId'] > 0) {
+                reportComments($_GET['commentId']);
+            }
+            else {
+                throw new Exception('Aucun identifiant de billet envoyé');
+            }
+        }
+
+
+
         elseif ($_GET['action'] == 'deletePost') {
             if (isset($_GET['id']) && $_GET['id'] > 0) {
                 deletePost($_GET['id']);

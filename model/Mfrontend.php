@@ -45,6 +45,14 @@ function eraseComment($commentId)
 }
 
 
+function reportComment($commentId)
+{
+    $db = dbConnect();
+    $commentReport = $db->prepare('UPDATE comments SET flag = 1 WHERE id = ?');
+    $commentReport->execute(array($commentId));
+}
+
+
 function erasePost($postId) // est ce que ce $postId est le même que celui de postComment ? 
 {
     $db = dbConnect();
