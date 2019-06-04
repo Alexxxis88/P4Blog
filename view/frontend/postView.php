@@ -8,7 +8,7 @@
             
         <p class="posts">
             <?= nl2br(htmlspecialchars($post['content'])) ?>
-            <button>Lire la suite</button><br/>
+            
         </p>
         <button class="adminBtns">Modifier</button>
         <button class="adminBtns"><a href="index.php?action=deletePost&amp;id=<?= $post['id'] ?>">Supprimer</a></button>
