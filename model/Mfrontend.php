@@ -53,7 +53,7 @@ function erasePost($postId) // est ce que ce $postId est le même que celui de p
 }
 
 
-// Nouvelle fonction qui nous permet d'éviter de répéter du code
+// General function to connect to database
 function dbConnect()
 {
     $db = new PDO('mysql:host=localhost;dbname=p4blog;charset=utf8', 'root', '');

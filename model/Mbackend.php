@@ -7,8 +7,16 @@ function getPostsAdmin()
     return $req;
 }
 
+//gets the Reported comments (where flag = 1)
+function getReportedComments()
+{
+    $db = dbConnectAdmin();
+    $reportedComment = $db->query('SELECT post_id, author, comment, DATE_FORMAT(comment_date, \'%d/%m/%Y à %Hh%imin%ss\') AS mod_comment_date FROM comments WHERE flag = 1 ORDER BY comment_date DESC');
 
-// Nouvelle fonction qui nous permet d'éviter de répéter du code
+    return $reportedComment;
+}
+
+// General function to connect to database
 function dbConnectAdmin()
 {
     $db = new PDO('mysql:host=localhost;dbname=p4blog;charset=utf8', 'root', '');

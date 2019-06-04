@@ -55,7 +55,14 @@ try {
         elseif ($_GET['action'] == 'listPostsAdmin') {
             listPostsAdmin();
         }
+
+        elseif ($_GET['action'] == 'manageComments') {
+            listResportedComments();
+        }
     }
+
+
+    //Default behavior
     else {
         listPosts();
     }
