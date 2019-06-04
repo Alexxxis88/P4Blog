@@ -37,11 +37,20 @@
 </form>
 
 
-
     <?php
     while ($comment = $comments->fetch())
     {
+    //display reported comments with a red background
+    if($comment['flag'] == 1)
+    {
+        echo '<div class="reportedComments">
+              <p>Commentaire signalé. En attente de modération.</p>';
+    }elseif($comment['flag'] == 0)
+    {
+        echo '<div>';
+    }
     ?>
+     
         <p><strong><?= htmlspecialchars($comment['author']) ?></strong> le <?= $comment['mod_comment_date'] ?></p>
         <p><?= nl2br(htmlspecialchars($comment['comment'])) ?></p>
 
@@ -49,9 +58,11 @@
 
         <!-- gets the commentId as a parameter in the URL of the comment to delete AND the post id to return on the same post after comment has been deleted-->
         <button class="adminBtns"><a href="index.php?action=deleteComment&amp;id=<?= $post['id'] ?>&amp;commentId=<?= $comment['id'] ?>" onclick="return confirm('Etes vous sûr?')">Supprimer</a></button>
+    </div>
     <?php
     }
     ?>
+    
 <?php $content = ob_get_clean(); ?>
 
 <?php require('template.php'); ?>

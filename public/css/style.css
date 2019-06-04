@@ -70,7 +70,11 @@ button:hover{
     cursor: pointer;
 }
 
-
 .reportedComments{
-    background:rgb(236, 117, 117) !important;
+    background:rgb(245, 176, 176) !important;
+}
+
+.reportedComments p:first-child{
+    background:red;
+    color: white;
 }

@@ -2,12 +2,12 @@
 
 <?php ob_start(); ?>
 
-    
+<div class="reportedComments">    
 <?php
     while ($datas = $reportedComments->fetch())
     {
     ?>
-        <div class="reportedComments">
+        
             <p><strong><?= htmlspecialchars($datas['author']) ?></strong> le <?= $datas['mod_comment_date'] ?></p>
             <p><?= nl2br(htmlspecialchars($datas['comment'])) ?></p>
             <p><a href="index.php?action=post&id=<?= $datas['post_id']?>">Voir l'article associé [<?= $datas['post_id'] ?>]</a> </p>
