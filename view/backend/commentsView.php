@@ -1,6 +1,11 @@
 <?php $title = 'Administration des commentaires'; ?>
 
-<?php ob_start(); ?>
+<?php ob_start();
+
+// if($nbOfReportedComment['nbReportedComments'] = 0 ){
+//         echo 'rien';
+// }?>
+
 
 <div class="reportedComments">    
 <?php
