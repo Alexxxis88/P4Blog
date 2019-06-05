@@ -80,6 +80,15 @@ button:hover{
 }
 
 .reportedComments p:first-child{
-    background:red;
+    background: red;
     color: white;
+}
+
+.noCommentsToManage{
+    color: white;
+    font-weight: bold;
+    background: rgb(84, 212, 84);
+    text-align: center;
+    margin: 50px;
+    padding: 20px;
 }

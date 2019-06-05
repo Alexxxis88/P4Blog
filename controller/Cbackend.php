@@ -1,7 +1,6 @@
 <?php
 require('model/Mbackend.php');
 
-
 function listPostsAdmin()
 {
     $postsAdmin = getPostsAdmin();

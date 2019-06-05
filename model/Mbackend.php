@@ -16,6 +16,7 @@ function getReportedComments()
     return $reportedComment;
 }
 
+
 function approveComment($commentId){
     $db = dbConnectAdmin();
     $commentApprove = $db->prepare('UPDATE comments SET flag = 0 WHERE id = ?');

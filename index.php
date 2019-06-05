@@ -70,7 +70,9 @@ try {
         }
 
         elseif ($_GET['action'] == 'manageComments') {
+            
             listResportedComments();
+            // checkIfReportedComments();
         }
 
         elseif ($_GET['action'] == 'approveComment') {
