@@ -16,5 +16,5 @@ function listResportedComments()
 
 function approveComments($commentId){
     $commentApproved = approveComment($commentId);
-    header('Location: index.php?action=manageComments');
+    header('Location: ' . $_SERVER['HTTP_REFERER']);
 }

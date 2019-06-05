@@ -14,8 +14,8 @@ $id = (int) $datas['id'];
             
         <p class="posts">
             <?= substr($datas['content'], 0, 600) . "..." ?>
-                <button><a href="index.php?action=post&id=<?=$id?>">Lire la suite</a></button><br/>
-                <button><a href="index.php?action=post&id=<?=$id?>#commentsAnchor">Commentaires</a></button>
+                <button class="regularBtns"><a href="index.php?action=post&id=<?=$id?>">Lire la suite</a></button>
+                <button class="regularBtns"><a href="index.php?action=post&id=<?=$id?>#commentsAnchor">Commentaires</a></button>
 
         </p>
         <button class="adminBtns">Modifier</button>

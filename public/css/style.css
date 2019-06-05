@@ -24,13 +24,13 @@ button a:hover{
     margin-right:30px;
 }
 
-.adminFields input, .adminBtns, .userBtns{
+.adminFields input, .adminBtns, .userBtns, .regularBtns{
     border-radius: 4px;
     border:1px solid grey;
     padding:5px;
 }
 
-.adminBtns, .userBtns{
+.adminBtns, .userBtns, .regularBtns{
     margin-left:5px;
 }
 
@@ -40,6 +40,11 @@ button a:hover{
 
 .userBtns{
     background:green;
+}
+
+.regularBtns{
+    background:rgb(72, 72, 250);
+    margin-top: 20px;
 }
 
 .adminFields input[type="submit"]{

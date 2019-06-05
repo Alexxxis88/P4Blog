@@ -11,7 +11,7 @@ function getPostsAdmin()
 function getReportedComments()
 {
     $db = dbConnectAdmin();
-    $reportedComment = $db->query('SELECT id, post_id, author, comment, DATE_FORMAT(comment_date, \'%d/%m/%Y à %Hh%imin%ss\') AS mod_comment_date FROM comments WHERE flag = 1 ORDER BY comment_date DESC');
+    $reportedComment = $db->query('SELECT id, post_id, author, comment, DATE_FORMAT(comment_date, \'%d/%m/%Y à %Hh%imin%ss\') AS mod_comment_date, flag FROM comments WHERE flag = 1 ORDER BY comment_date DESC');
 
     return $reportedComment;
 }

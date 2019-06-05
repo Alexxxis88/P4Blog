@@ -6,6 +6,8 @@
 <?php
     while ($datas = $reportedComments->fetch())
     {
+
+        
     ?>
         
             <p><strong><?= htmlspecialchars($datas['author']) ?></strong> le <?= $datas['mod_comment_date'] ?></p>
@@ -19,6 +21,7 @@
             <button class="adminBtns"><a href="index.php?action=deleteComment&amp;id=<?= $datas['id'] ?>&amp;commentId=<?= $datas['id'] ?>" onclick="return confirm('Etes vous sûr?')">Supprimer</a></button>
     <?php
     }
+    
     ?>
             </div>
         

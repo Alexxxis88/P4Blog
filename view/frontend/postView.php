@@ -59,6 +59,9 @@
     if($comment['flag'] == 0)
     {
         echo '<button class="userBtns"><a href="index.php?action=reportComment&amp;id=' . $post['id'] . '&amp;commentId='. $comment['id'] . '"  onclick="return alert(\'Commentaire signalé\')" >Signaler</a></button>' ;
+    }
+    else{//FIXME : change class of the approve button
+        echo '<button class="userBtns"><a href="index.php?action=approveComment&amp;id=' . $post['id'] . '&amp;commentId='. $comment['id'] . '"  onclick="return alert(\'Commentaire approuvé\')" >Approuver</a></button>' ;
     }   
     ?>    
 
