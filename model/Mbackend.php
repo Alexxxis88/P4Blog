@@ -21,6 +21,11 @@ function approveComment($commentId){
     $db = dbConnectAdmin();
     $commentApprove = $db->prepare('UPDATE comments SET flag = 0 WHERE id = ?');
     $commentApprove->execute(array($commentId));
+function insertNewPost($title, $content)
+{
+    $db = dbConnectAdmin();
+    $newPostDb = $db->prepare('INSERT INTO posts( title, content, publish_date) VALUES(?, ?, NOW())');
+    $newPostDb->execute(array($title, $content));
 }
 
 

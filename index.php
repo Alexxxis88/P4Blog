@@ -72,12 +72,20 @@ try {
         elseif ($_GET['action'] == 'manageComments') {
             
             listResportedComments();
-            // checkIfReportedComments();
         }
 
         elseif ($_GET['action'] == 'approveComment') {
             approveComments($_GET['commentId']);
         }
+        elseif ($_GET['action'] == 'publishChapter') {
+            newPost($_POST['title'], $_POST['postContent']);
+        }
+
+        elseif ($_GET['action'] == 'displayPublishView') {
+            displayPublishView();
+        }
+
+    //Default behavior    
     }
 
 
@@ -86,7 +94,7 @@ try {
         listPosts();
     }
 }
-catch(Exception $e) { // S'il y a eu une erreur, alors...
+catch(Exception $e) {
     $errorMessage = $e->getMessage();
     require('view/errorView.php');
 
