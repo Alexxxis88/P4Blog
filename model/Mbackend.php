@@ -21,6 +21,8 @@ function approveComment($commentId){
     $db = dbConnectAdmin();
     $commentApprove = $db->prepare('UPDATE comments SET flag = 0 WHERE id = ?');
     $commentApprove->execute(array($commentId));
+}
+ 
 function insertNewPost($title, $content)
 {
     $db = dbConnectAdmin();
@@ -34,5 +36,6 @@ function insertNewPost($title, $content)
 function dbConnectAdmin()
 {
     $db = new PDO('mysql:host=localhost;dbname=p4blog;charset=utf8', 'root', '');
+
     return $db;
 }
