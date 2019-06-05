@@ -55,6 +55,7 @@ try {
         elseif ($_GET['action'] == 'deletePost') {
             if (isset($_GET['id']) && $_GET['id'] > 0) {
                 deletePost($_GET['id']);
+                deleteAllComments($_GET['id']); //delete all the comments related to the post we're deleting with deletePost()
             }
             else {
                 throw new Exception('Aucun identifiant de billet envoyé');

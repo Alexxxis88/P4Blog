@@ -45,3 +45,10 @@ function deletePost($postId)
     $postDelete = erasePost($postId);
     header('Location: ' . $_SERVER['HTTP_REFERER']); //FIXME problem = when delete button used on a specific post (BE), sends back to post that has just been deleted. + not good to use ? see : https://stackoverflow.com/questions/5285031/back-to-previous-page-with-header-location-in-php
 } 
+
+//erase all the comments related to a post when "delete post" action is done
+function deleteAllComments($postId)
+{
+    $AllcomsDelete = eraseAllComments($postId);
+    header('Location: ' . $_SERVER['HTTP_REFERER']); //FIXME problem = when delete button used on a specific post (BE), sends back to post that has just been deleted.
+} 

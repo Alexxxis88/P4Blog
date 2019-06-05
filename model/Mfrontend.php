@@ -60,6 +60,14 @@ function erasePost($postId) // est ce que ce $postId est le même que celui de p
     $postDelete->execute(array($postId));
 }
 
+//erase all the comments related to a post when "delete post" action is done
+function eraseAllComments($postId)
+{
+    $db = dbConnect();
+    $allComDelete = $db->prepare('DELETE FROM comments WHERE post_id = ?');
+    $allComDelete->execute(array($postId));
+}
+
 
 // General function to connect to database
 function dbConnect()
