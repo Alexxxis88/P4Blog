@@ -11,5 +11,10 @@ function listPostsAdmin()
 function newPost($title, $content)
 {
     $newPost = insertNewPost($title, $content);
-    
+    header('Location: index.php?action=listPostsAdmin');
+}
+
+function displayPublishView()
+{
+    require('view/backend/publishView.php');
 }

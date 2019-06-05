@@ -5,7 +5,7 @@
     
 <h2>Publier un nouveau chapitre</h2>
 
-    <form action="../../index.php?action=publishChapter" method="post"><!-- URL à améliorer -->
+    <form action="index.php?action=publishChapter" method="post">
     <div>
         <label for="title">Titre</label><br />
         <input type="text" id="title" name="title" placeholder="Titre du chapitre" required/>

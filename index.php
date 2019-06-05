@@ -39,6 +39,9 @@ try {
             newPost($_POST['title'], $_POST['postContent']);
         }
 
+        elseif ($_GET['action'] == 'displayPublishView') {
+            displayPublishView();
+        }
 
     //Default behavior    
     }
@@ -46,7 +49,7 @@ try {
         listPosts();
     }
 }
-catch(Exception $e) { // S'il y a eu une erreur, alors...
+catch(Exception $e) {
     $errorMessage = $e->getMessage();
     require('view/errorView.php');
 
