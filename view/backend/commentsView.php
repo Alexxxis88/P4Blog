@@ -1,21 +1,24 @@
+<head>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+</head>
+
 <?php $title = 'Administration des commentaires'; ?>
 
-<?php ob_start();
+<?php ob_start(); ?>
 
-// if($nbOfReportedComment['nbReportedComments'] = 0 ){
+<?php
+// if($nbOfReportedComment['nbReportedComments'] = 0 ){ FIXME : NOT WORKING
 //         echo 'rien';
 // }?>
 
-
-<div class="reportedComments">    
 <?php
     while ($datas = $reportedComments->fetch())
     {
 
         
     ?>
-        
-            <p><strong><?= htmlspecialchars($datas['author']) ?></strong> le <?= $datas['mod_comment_date'] ?></p>
+                <div class="reportedComments">       
+            <p ><strong><?= htmlspecialchars($datas['author']) ?></strong> le <?= $datas['mod_comment_date'] ?></p>
             <p><?= nl2br(htmlspecialchars($datas['comment'])) ?></p>
             <p><a href="index.php?action=post&id=<?= $datas['post_id']?>">Voir l'article associé [<?= $datas['post_id'] ?>]</a> </p>
 
@@ -24,11 +27,21 @@
             <button class="userBtns"><a href="index.php?action=approveComment&amp;commentId=<?= $datas['id'] ?>"  onclick="return alert('Commentaire approuvé')" >Approuver</a></button>
 
             <button class="adminBtns"><a href="index.php?action=deleteComment&amp;id=<?= $datas['id'] ?>&amp;commentId=<?= $datas['id'] ?>" onclick="return confirm('Etes vous sûr?')">Supprimer</a></button>
+            </div>
     <?php
     }
     
     ?>
-            </div>
+            
+        <div class="noCommentsToManage">Il n'y a pas de commentaire à modérer</div>
+        <script>
+                if ( !$.trim($('.reportedComments').html() ).length ) 
+                {
+                        $('.noCommentsToManage').css("display", "block");
+                } else {
+                        $('.noCommentsToManage').css("display", "none");
+                }
+       </script>     
         
    
 <?php $content = ob_get_clean(); ?>
