@@ -1,7 +1,6 @@
 <?php
 require('model/Mbackend.php');
 
-
 function listPostsAdmin()
 {
     $postsAdmin = getPostsAdmin();
@@ -13,13 +12,6 @@ function listResportedComments()
     $reportedComments = getReportedComments();
     require('view/backend/commentsView.php');
 }
-
-// function checkIfReportedComments()
-// {
-//     $nbOfReportedComments = checkIfReportedComment();
-//     require('view/backend/commentsView.php');
-// }
-
 
 function approveComments($commentId){
     $commentApproved = approveComment($commentId);

@@ -16,14 +16,6 @@ function getReportedComments()
     return $reportedComment;
 }
 
-// function checkIfReportedComment()
-// {
-//     $db = dbConnectAdmin();
-//     $nbOfReportedComment = $db->query('SELECT COUNT(*) AS nbReportedComments FROM comments WHERE flag = 1');
-
-//     return $nbOfReportedComment;
-// }
-
 
 function approveComment($commentId){
     $db = dbConnectAdmin();

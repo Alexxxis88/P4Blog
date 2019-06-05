@@ -1,15 +1,6 @@
-<head>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
-</head>
-
 <?php $title = 'Administration des commentaires'; ?>
 
 <?php ob_start(); ?>
-
-<?php
-// if($nbOfReportedComment['nbReportedComments'] = 0 ){ FIXME : NOT WORKING
-//         echo 'rien';
-// }?>
 
 <?php
     while ($datas = $reportedComments->fetch())
