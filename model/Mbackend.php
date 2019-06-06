@@ -27,25 +27,13 @@ function getNewComments()
 
 
 //must receive an array of ids to delete all the comments at once. (?) = my array, see here https://www.tutorialspoint.com/mysql/mysql-in-clause.htm
-function eraseAllSelectedComments($arrayCommentsIDs)
+function eraseAllSelectedComments($arrayCommentsIDs) //NOT WORKING :
 {
     $db = dbConnectAdmin();
     $eraseAllSelectedComments = $db->prepare('DELETE FROM comments WHERE id IN (?)');
     $eraseAllSelectedComments->execute(array($arrayCommentsIDs));
 }
 
-
-
-
-//////////////////////
-function getNbOfReportedComments() // NOT WORKING : display number of comments to manage 
-{
-    $db = dbConnectAdmin();
-    $reportedCommentNb = $db->query('SELECT SUM(flag) AS flag_total FROM comments');
-
-    return $reportedCommentNb;
-}
-//////////////////////
 
 function approveComment($commentId){
     $db = dbConnectAdmin();

@@ -16,19 +16,9 @@ function listAllComments()
 }
 
 
-function deleteAllSelectedComments($arrayCommentsIDs){
+function deleteAllSelectedComments($arrayCommentsIDs){ // NOT WORKING : display number of comments to manage 
     $deleteAllSelectedComments = eraseAllSelectedComments($arrayCommentsIDs);
     // header('Location: ' . $_SERVER['HTTP_REFERER']);
-}
-
-
-
-
-
-function nbOfReportedComments() // NOT WORKING : display number of comments to manage 
-{
-    $nbOfReportedComments = getNbOfReportedComments();
-    require('view/backend/backendTemplate.php');
 }
 
 
