@@ -88,8 +88,11 @@ try {
         elseif ($_GET['action'] == 'manageView') {
             displayPostToEdit($_GET['id']);
         }
+        
+        elseif ($_GET['action'] == 'updatePost') {
+            updatePost($_POST['title'], $_POST['postContent'], $_GET['id']);
+        }
 
-    //Default behavior    
     }
 
 

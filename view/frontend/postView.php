@@ -10,7 +10,7 @@
             <?= nl2br(htmlspecialchars($post['content'])) ?>
             
         </p>
-        <button class="adminBtns">Modifier</button>
+        <button class="adminBtns"><a href="index.php?action=manageView&id=<?=$post['id']?>">Modifier</a></button>
         <button class="adminBtns"><a href="index.php?action=deletePost&amp;id=<?= $post['id'] ?>" onclick="return confirm('Etes vous sûr?')" >Supprimer</a></button>
     </div>
     <aside>

@@ -13,6 +13,7 @@
         </div>
         <div>
             <p>Publié le <?= $displayedPostToEdit['mod_publish_date'] ?></p>
+            <p>Edité le <?= $displayedPostToEdit['mod_edit_date'] ?></p>
             <input type="submit" onclick="return confirm('Sauvegarder les changements?')" value="Sauvegarder" />
         </div>
         </form>

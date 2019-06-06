@@ -34,3 +34,8 @@ function displayPostToEdit($postId)
     $displayedPostToEdit = getPostToEdit($postId);
     require('view/backend/manageView.php');
 }
+
+function updatePost($title, $content, $postId){
+    $updatedPost = editPost($title, $content, $postId);
+    header('Location: index.php?action=post&id=' . $postId);
+}
