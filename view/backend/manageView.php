@@ -9,7 +9,7 @@
         </div>
         <div>
             <label for="postContent">Contenu</label><br />
-            <textarea id="postContent" name="postContent" rows="15" cols="150" required><?= nl2br(htmlspecialchars($displayedPostToEdit['content'])) ?></textarea>
+            <textarea id="postContent" name="postContent" required><?= nl2br(htmlspecialchars($displayedPostToEdit['content'])) ?></textarea>
         </div>
         <div>
             <p>Publié le <?= $displayedPostToEdit['mod_publish_date'] ?></p>
@@ -17,7 +17,7 @@
             <input type="submit" onclick="return confirm('Sauvegarder les changements?')" value="Sauvegarder" />
         </div>
         </form>
-    
+    </div>
 <?php $content = ob_get_clean(); ?>
 
 <?php require('backendTemplate.php'); ?>

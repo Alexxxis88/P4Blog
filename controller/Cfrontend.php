@@ -7,16 +7,9 @@ function listPosts()
     require('view/frontend/listPostsView.php');
 }
 
-//gets last 3 posts to display in postView aside. duplicatede code with getLastPosts (except LIMIT values in Mfrontend.php require here)
-function listLastPosts()
-{
-    $lastPosts = getLastPosts();
-    require('view/frontend/lastPostsView.php');
-
-}
-
 function post()
 {
+    $lastPosts = getLastPosts();
     $post = getPost($_GET['id']);
     $comments = getComments($_GET['id']);
     require('view/frontend/postView.php');

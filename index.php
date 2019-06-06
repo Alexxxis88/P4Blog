@@ -11,7 +11,6 @@ try {
         elseif ($_GET['action'] == 'post') {
             if (isset($_GET['id']) && $_GET['id'] > 0) {
                 post();
-                listLastPosts();
             }
             else {
                 throw new Exception('Aucun identifiant de billet envoyé');
