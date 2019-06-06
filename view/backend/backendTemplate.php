@@ -20,7 +20,8 @@
         <button class="adminBtns"><a href="index.php?action=displayPublishView">Publier un chapitre</a></button>
         <button class="adminBtns"><a href="index.php?action=listPostsAdmin">Editer les chapitres</a></button>
         <button class="adminBtns"><a href="index.php?action=manageComments">Commentaires</a></button>
-            
+        <!-- <p>test < ?= $nbOfReportedComments['flag_total'] ?></p>  NOT WORKING : display number of comments to manage --> 
+        
     </div>
         
         <?= $content ?>

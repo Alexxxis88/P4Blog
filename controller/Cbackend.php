@@ -13,6 +13,14 @@ function listResportedComments()
     require('view/backend/commentsView.php');
 }
 
+
+function nbOfReportedComments() // NOT WORKING : display number of comments to manage 
+{
+    $nbOfReportedComments = getNbOfReportedComments();
+    require('view/backend/backendTemplate.php');
+}
+
+
 function approveComments($commentId){
     $commentApproved = approveComment($commentId);
     header('Location: ' . $_SERVER['HTTP_REFERER']);
