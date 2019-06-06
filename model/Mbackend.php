@@ -30,6 +30,15 @@ function insertNewPost($title, $content)
     $newPostDb->execute(array($title, $content));
 }
 
+function getPostToEdit($postId)
+{
+    $db = dbConnectAdmin();
+    $req = $db->prepare('SELECT id, title, content, DATE_FORMAT(publish_date, \'%d/%m/%Y à %Hh%imin%ss\') AS mod_publish_date FROM posts WHERE id = ?');
+    $req->execute(array($postId));
+    $postToEdit = $req->fetch();
+
+    return $postToEdit;
+}
 
 
 // General function to connect to database

@@ -1,4 +1,4 @@
-<?php $title = 'Page d\'administration'; ?>
+<?php $title = 'Publier un nouveau chapitre'; ?>
 
 <?php ob_start(); ?>
 

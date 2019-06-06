@@ -85,6 +85,10 @@ try {
             displayPublishView();
         }
 
+        elseif ($_GET['action'] == 'manageView') {
+            displayPostToEdit($_GET['id']);
+        }
+
     //Default behavior    
     }
 

@@ -27,3 +27,10 @@ function displayPublishView()
 {
     require('view/backend/publishView.php');
 }
+
+
+function displayPostToEdit($postId)
+{
+    $displayedPostToEdit = getPostToEdit($postId);
+    require('view/backend/manageView.php');
+}

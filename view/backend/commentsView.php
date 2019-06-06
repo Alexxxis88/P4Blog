@@ -1,4 +1,4 @@
-<?php $title = 'Administration des commentaires'; ?>
+<?php $title = 'Gestion des commentaires'; ?>
 
 <?php ob_start(); ?>
 
