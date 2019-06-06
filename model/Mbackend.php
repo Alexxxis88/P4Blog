@@ -7,24 +7,33 @@ function getPostsAdmin()
     return $req;
 }
 
-//gets the Reported comments (where flag >0 and sort them by number of time reported OR by date showing older first if reported the same nb of times)
+//gets the Reported comments (where 0<flag<9999 and sort them by number of time reported OR by date showing older first if reported the same nb of times)
 function getReportedComments()
 {
     $db = dbConnectAdmin();
-    $reportedComment = $db->query('SELECT id, post_id, author, comment, DATE_FORMAT(comment_date, \'%d/%m/%Y à %Hh%imin%ss\') AS mod_comment_date, flag FROM comments WHERE flag > 0 ORDER BY flag DESC, comment_date');
+    $reportedComment = $db->query('SELECT id, post_id, author, comment, DATE_FORMAT(comment_date, \'%d/%m/%Y à %Hh%imin%ss\') AS mod_comment_date, flag FROM comments WHERE flag > 0 AND flag < 9999 ORDER BY flag DESC, comment_date');
 
     return $reportedComment;
 }
 
+//get new comments (flag value = 9999 by default)
+function getNewComments()
+{
+    $db = dbConnectAdmin();
+    $newComment = $db->query('SELECT id, post_id, author, comment, DATE_FORMAT(comment_date, \'%d/%m/%Y à %Hh%imin%ss\') AS mod_comment_date, flag FROM comments WHERE flag = 9999 ORDER BY comment_date');
+
+    return $newComment;
+}
+
+//////////////////////
 function getNbOfReportedComments() // NOT WORKING : display number of comments to manage 
 {
     $db = dbConnectAdmin();
     $reportedCommentNb = $db->query('SELECT SUM(flag) AS flag_total FROM comments');
 
     return $reportedCommentNb;
-
 }
-
+//////////////////////
 
 function approveComment($commentId){
     $db = dbConnectAdmin();

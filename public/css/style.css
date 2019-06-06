@@ -79,12 +79,17 @@ button:hover{
     background:rgb(245, 176, 176) !important;
 }
 
+.acceptDenyComments{
+    background:lightblue !important;
+
+}
+
 .reportedComments p:first-child{
     background: red;
     color: white;
 }
 
-.noCommentsToManage{
+.noReportedComments, .noCommentsToManage{
     color: white;
     font-weight: bold;
     background: rgb(84, 212, 84);

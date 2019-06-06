@@ -42,7 +42,7 @@
         <textarea id="comment" name="comment" required></textarea>
     </div>
     <div>
-        <input type="submit" />
+        <input type="submit" onclick="return alert('Merci pour votre commentaire.\n Il sera affiché après validation d\'un modérateur')" />
     </div>
 </form>
 
@@ -50,39 +50,42 @@
     <?php
     while ($comment = $comments->fetch())
     {
-    //display reported comments with a red background
-    if($comment['flag'] > 0)
-    {
-        echo '<div class="reportedComments">
-              <p>Commentaire signalé <strong>' .$comment['flag'] . '</strong> fois En attente de modération.</p>';
-    }else
-    {
-        echo '<div>';
-    }
-    ?>
-     
-        <p><strong><?= htmlspecialchars($comment['author']) ?></strong> le <?= $comment['mod_comment_date'] ?></p>
-        <p><?= nl2br(htmlspecialchars($comment['comment'])) ?></p>
-
-    
-        <button class="userBtns"><a href="index.php?action=reportComment&amp;id=<?= $post['id'] ?>&amp;commentId=<?= $comment['id'] ?>" onclick="return alert('Commentaire signalé')">Signaler</a></button>
-
-
-    
-    <?php 
-    //display approve button only if comment already reported
-        if($comment['flag'] > 0)
-    {
-        //FIXME : change class of the approve button
-        echo '<button class="adminBtns"><a href="index.php?action=approveComment&amp;id=' . $post['id'] . '&amp;commentId='. $comment['id'] . '"  onclick="return alert(\'Commentaire approuvé\')" >Approuver</a></button>' ;
-    }
+        if($comment['flag'] < 9999)
+        {
+            //display reported comments with a red background
+            if($comment['flag'] > 0)
+            {
+                echo '<div class="reportedComments">
+                    <p>Commentaire signalé <strong>' .$comment['flag'] . '</strong> fois En attente de modération.</p>';
+            }else
+            {
+                echo '<div>';
+            }
+            ?>
             
-    ?>    
+                <p><strong><?= htmlspecialchars($comment['author']) ?></strong> le <?= $comment['mod_comment_date'] ?></p>
+                <p><?= nl2br(htmlspecialchars($comment['comment'])) ?></p>
 
-        <!-- gets the commentId as a parameter in the URL of the comment to delete AND the post id to return on the same post after comment has been deleted-->
-        <button class="adminBtns"><a href="index.php?action=deleteComment&amp;id=<?= $post['id'] ?>&amp;commentId=<?= $comment['id'] ?>" onclick="return confirm('Etes vous sûr?')">Supprimer</a></button>
-    </div>
+            
+                <button class="userBtns"><a href="index.php?action=reportComment&amp;id=<?= $post['id'] ?>&amp;commentId=<?= $comment['id'] ?>" onclick="return alert('Commentaire signalé')">Signaler</a></button>
+
+
+            
+            <?php 
+            //display approve button only if comment already reported
+                if($comment['flag'] > 0)
+            {
+                //FIXME : change class of the approve button
+                echo '<button class="adminBtns"><a href="index.php?action=approveComment&amp;id=' . $post['id'] . '&amp;commentId='. $comment['id'] . '"  onclick="return alert(\'Commentaire approuvé\')" >Approuver</a></button>' ;
+            }
+                    
+            ?>    
+
+                <!-- gets the commentId as a parameter in the URL of the comment to delete AND the post id to return on the same post after comment has been deleted-->
+                <button class="adminBtns"><a href="index.php?action=deleteComment&amp;id=<?= $post['id'] ?>&amp;commentId=<?= $comment['id'] ?>" onclick="return confirm('Etes vous sûr?')">Supprimer</a></button>
+            </div>
     <?php
+        }
     }
     ?>
     

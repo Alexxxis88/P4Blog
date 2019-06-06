@@ -7,11 +7,14 @@ function listPostsAdmin()
     require('view/backend/adminView.php');
 }
 
-function listResportedComments()
+//display reported and new comments
+function listAllComments()
 {
     $reportedComments = getReportedComments();
+    $newComments = getNewComments();
     require('view/backend/commentsView.php');
 }
+
 
 
 function nbOfReportedComments() // NOT WORKING : display number of comments to manage 
