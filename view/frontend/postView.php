@@ -4,8 +4,18 @@
     <p><a href="index.php">Retour à la page d'accueil</a></p>
     <div class="posts">
         <h2><?= htmlspecialchars($post['title']) ?></h2>
-        <p>Publié le <?= $post['mod_publish_date'] ?></p>
-            
+
+    <?php //FIXME duplicate content (except $post instead of $data) with listPostsView. Worth factoring into a function ? 
+        if($post['mod_publish_date'] ==  $post['mod_edit_date'] )
+        {
+           echo '<p>Publié le '. $post['mod_publish_date'] . '</p>';
+        }
+        else
+        {
+            echo '<p>Edité le '. $post['mod_edit_date'] . '</p>';
+        }
+         
+    ?>    
         <p class="posts">
             <?= nl2br(htmlspecialchars($post['content'])) ?>
             

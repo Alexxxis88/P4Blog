@@ -10,7 +10,18 @@ $id = (int) $datas['id'];
 
     <div class="posts">
         <h2><?= htmlspecialchars($datas['title']) ?></h2>
-        <p>Publié le <?= $datas['mod_publish_date'] ?></p>
+        
+        <?php //FIXME duplicate content (except $data instead of $post) with PostsView. Worth factoring into a function ? 
+        if($datas['mod_publish_date'] ==  $datas['mod_edit_date'] )
+        {
+           echo '<p>Publié le '. $datas['mod_publish_date'] . '</p>';
+        }
+        else
+        {
+            echo '<p>Edité le '. $datas['mod_edit_date'] . '</p>';
+        }
+         
+    ?>    
             
         <p class="posts">
             <?= substr($datas['content'], 0, 600) . "..." ?>
