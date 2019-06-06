@@ -1,6 +1,6 @@
 <?php
 require('model/Mfrontend.php');
-
+//gets all the post to display in listPostsView. duplicatede code with getLastPosts (except LIMIT values in Mfrontend.php and require here)
 function listPosts()
 {
     $posts = getPosts();
@@ -9,6 +9,7 @@ function listPosts()
 
 function post()
 {
+    $lastPosts = getLastPosts();
     $post = getPost($_GET['id']);
     $comments = getComments($_GET['id']);
     require('view/frontend/postView.php');
