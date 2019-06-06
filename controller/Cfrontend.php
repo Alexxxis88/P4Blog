@@ -1,10 +1,18 @@
 <?php
 require('model/Mfrontend.php');
-
+//gets all the post to display in listPostsView. duplicatede code with getLastPosts (except LIMIT values in Mfrontend.php and require here)
 function listPosts()
 {
     $posts = getPosts();
     require('view/frontend/listPostsView.php');
+}
+
+//gets last 3 posts to display in postView aside. duplicatede code with getLastPosts (except LIMIT values in Mfrontend.php require here)
+function listLastPosts()
+{
+    $lastPosts = getLastPosts();
+    require('view/frontend/lastPostsView.php');
+
 }
 
 function post()

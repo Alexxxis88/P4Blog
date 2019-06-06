@@ -1,4 +1,6 @@
 <?php
+
+//gets all the post to display in listPostsView. duplicatede code with getLastPosts (except LIMIT values)
 function getPosts()
 {
     $db = dbConnect();
@@ -6,6 +8,17 @@ function getPosts()
 
     return $req;
 }
+
+
+//gets last 3 posts to display in postView aside. duplicatede code with getLastPosts (except LIMIT values)
+function getLastPosts()
+{
+    $db = dbConnect();
+    $lastPost = $db->query('SELECT id, title, content, DATE_FORMAT(publish_date, \'%d/%m/%Y à %Hh%imin%ss\') AS mod_publish_date, DATE_FORMAT(edit_date, \'%d/%m/%Y à %Hh%imin%ss\') AS mod_edit_date FROM posts ORDER BY publish_date DESC LIMIT 0, 3');
+
+    return $lastPost;
+}
+
 
 function getPost($postId)
 {

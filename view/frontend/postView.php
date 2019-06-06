@@ -2,7 +2,8 @@
 
 <?php ob_start(); ?>
     <p><a href="index.php">Retour à la page d'accueil</a></p>
-    <div class="posts">
+ 
+    <div class="postsPostView"> <!-- edit class because div and <p> have same class name -->
         <h2><?= htmlspecialchars($post['title']) ?></h2>
 
     <?php //FIXME duplicate content (except $post instead of $data) with listPostsView. Worth factoring into a function ? 
@@ -16,20 +17,14 @@
         }
          
     ?>    
-        <p class="posts">
+        <p class="posts"> <!-- edit class because div and <p> have same class name -->
             <?= nl2br(htmlspecialchars($post['content'])) ?>
             
         </p>
         <button class="adminBtns"><a href="index.php?action=manageView&id=<?=$post['id']?>">Modifier</a></button>
         <button class="adminBtns"><a href="index.php?action=deletePost&amp;id=<?= $post['id'] ?>" onclick="return confirm('Etes vous sûr?')" >Supprimer</a></button>
     </div>
-    <aside>
-
     
-    <h3>Les derniers chapitres publiés</h3>
-    
-    </aside>
-
     <h2 id="commentsAnchor">Commentaires</h2>
 
     <form action="index.php?action=addComment&amp;id=<?= $post['id'] ?>#commentsAnchor" method="post">

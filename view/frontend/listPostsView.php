@@ -8,7 +8,7 @@ while($datas = $posts->fetch())
 $id = (int) $datas['id']; 
 ?>
 
-    <div class="posts">
+    <div class="posts"><!-- edit class because div and <p> have same class name -->
         <h2><?= htmlspecialchars($datas['title']) ?></h2>
         
         <?php //FIXME duplicate content (except $data instead of $post) with PostsView. Worth factoring into a function ? 
@@ -23,7 +23,7 @@ $id = (int) $datas['id'];
          
     ?>    
             
-        <p class="posts">
+        <p class="posts"><!-- edit class because div and <p> have same class name -->
             <?= substr($datas['content'], 0, 600) . "..." ?>
                 <button class="regularBtns"><a href="index.php?action=post&id=<?=$id?>">Lire la suite</a></button>
                 <button class="regularBtns"><a href="index.php?action=post&id=<?=$id?>#commentsAnchor">Commentaires</a></button>

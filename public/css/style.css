@@ -67,6 +67,17 @@ button a:hover{
     border-radius: 10px;
     width:70%;
 }
+
+.postsPostView{
+    color:black;
+    background: rgb(231, 231, 231);
+    transition: 0.3s;
+    padding:20px;
+    margin:20px auto 20px 50px;  
+    border-radius: 10px;
+    width:70%;
+}
+
 .posts:hover{
     color: #0085a1;
 }
@@ -91,4 +102,26 @@ button:hover{
     text-align: center;
     margin: 50px;
     padding: 20px;
+}
+
+
+.lastPosts{
+    position:absolute;
+    top: 22%;
+    right:15px;
+    text-align: center;
+    width: 20%;
+    height: auto;
+    background: lightblue;
+    border-radius: 10px;
+}
+
+.lastPostsP{
+    padding: 10px;
+    margin: 20px 20px 0 20px;
+    background: lightgrey;
+}
+
+h4{
+    border-top: 1px solid black;
 }
