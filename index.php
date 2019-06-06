@@ -70,6 +70,17 @@ try {
             // nbOfReportedComments(); NOT WORKING : display number of comments to manage 
         }
 
+
+
+
+        elseif ($_GET['action'] == 'deleteAllSelectedComments') {
+            deleteAllSelectedComments(implode(",",$_POST["supprimer"]));
+            echo $_POST["supprimer"];
+        }
+
+
+
+
         elseif ($_GET['action'] == 'manageComments') {
             listAllComments();
         }

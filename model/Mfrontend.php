@@ -36,7 +36,7 @@ function postComment($postId, $author, $comment)
     return $affectedLines;
 }
 
-
+//should be in backend
 function eraseComment($commentId)
 {
     $db = dbConnect();
@@ -52,7 +52,7 @@ function reportComment($commentId)
     $commentReport->execute(array($commentId));
 }
 
-
+//should be in backend
 function erasePost($postId) // est ce que ce $postId est le même que celui de postComment ? 
 {
     $db = dbConnect();

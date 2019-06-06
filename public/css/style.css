@@ -84,7 +84,7 @@ button:hover{
 
 }
 
-.reportedComments p:first-child{
+.commentHead{
     background: red;
     color: white;
 }

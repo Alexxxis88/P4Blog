@@ -16,6 +16,14 @@ function listAllComments()
 }
 
 
+function deleteAllSelectedComments($arrayCommentsIDs){
+    $deleteAllSelectedComments = eraseAllSelectedComments($arrayCommentsIDs);
+    // header('Location: ' . $_SERVER['HTTP_REFERER']);
+}
+
+
+
+
 
 function nbOfReportedComments() // NOT WORKING : display number of comments to manage 
 {

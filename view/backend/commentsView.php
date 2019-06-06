@@ -3,26 +3,53 @@
 <?php ob_start(); ?>
 
 <h2>Commentaires signalés</h2>
+<form action="index.php?action=deleteAllSelectedComments" method="post">
 <?php
     while ($datas = $reportedComments->fetch())
     {
     ?>
-        <div class="reportedComments">       
-                <p >Le <strong><?= htmlspecialchars($datas['author']) ?></strong> du <?= $datas['mod_comment_date'] ?>
-                a été signalé <strong> <?= $datas['flag'] ?></strong> fois </p>
-                <p><?= nl2br(htmlspecialchars($datas['comment'])) ?></p>
-                <p><a href="index.php?action=post&id=<?= $datas['post_id']?>">Voir l'article associé [<?= $datas['post_id'] ?>]</a> </p>
+        <div class="reportedComments">
+               
+
+                <p class="commentHead">Le <strong><?= htmlspecialchars($datas['author']) ?></strong> du <?= $datas['mod_comment_date'] ?>
+                        a été signalé <strong> <?= $datas['flag'] ?></strong> fois </p>
+                        <p><?= nl2br(htmlspecialchars($datas['comment'])) ?></p>
+                        <p><a href="index.php?action=post&id=<?= $datas['post_id']?>">Voir l'article associé [<?= $datas['post_id'] ?>]</a> </p>
+                
+                <input type="checkbox" name="supprimer[]" value="<?= $datas['id']?>">
+
+      
 
 
+                <!-- < ?= 
+                // $datas['id'];
+                // $a=array("");
+                // array_push($a, $datas['id']);
+                // implode(',', $a);
+                // echo $a[1];
+
+                
+                
+
+
+
+                 // je veux récupérer un tableau avec les valeurs de $datas['id'] en dehors de la boucle ? 
+                 
+                 ? > -->
+
+                
+ 
                 <!-- FIXME : edit class of the approve btn -->
-                <button class="userBtns"><a href="index.php?action=approveComment&amp;commentId=<?= $datas['id'] ?>"  onclick="return alert('Commentaire approuvé')" >Approuver</a></button>
+                <!-- <button class="userBtns"><a href="index.php?action=approveComment&amp;commentId=< ?= $datas['id'] ?>"  onclick="return alert('Commentaire approuvé')" >Approuver</a></button>
 
-                <button class="adminBtns"><a href="index.php?action=deleteComment&amp;id=<?= $datas['id'] ?>&amp;commentId=<?= $datas['id'] ?>" onclick="return confirm('Etes vous sûr?')">Supprimer</a></button>
+                <button class="adminBtns"><a href="index.php?action=deleteComment&amp;id=< ?= $datas['id'] ?>&amp;commentId=< ?= $datas['id'] ?>" onclick="return confirm('Etes vous sûr?')">Supprimer</a></button> -->
         </div>
     <?php
     }
-    
     ?>
+    <input type="submit" name="envoyer[]" value="Envoyer">
+
+</form>
 
     <!-- displays a message if no reported comments -->   
     <div class="noReportedComments">Il n'y a pas de commentaire signalé</div>
