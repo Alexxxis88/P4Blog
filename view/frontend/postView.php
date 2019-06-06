@@ -51,11 +51,11 @@
     while ($comment = $comments->fetch())
     {
     //display reported comments with a red background
-    if($comment['flag'] == 1)
+    if($comment['flag'] > 0)
     {
         echo '<div class="reportedComments">
-              <p>Commentaire signalé. En attente de modération.</p>';
-    }elseif($comment['flag'] == 0)
+              <p>Commentaire signalé <strong>' .$comment['flag'] . '</strong> fois En attente de modération.</p>';
+    }else
     {
         echo '<div>';
     }
@@ -64,15 +64,19 @@
         <p><strong><?= htmlspecialchars($comment['author']) ?></strong> le <?= $comment['mod_comment_date'] ?></p>
         <p><?= nl2br(htmlspecialchars($comment['comment'])) ?></p>
 
+    
+        <button class="userBtns"><a href="index.php?action=reportComment&amp;id=<?= $post['id'] ?>&amp;commentId=<?= $comment['id'] ?>" onclick="return alert('Commentaire signalé')">Signaler</a></button>
+
+
+    
     <?php 
-    //display report button only if comment not already reported
-    if($comment['flag'] == 0)
+    //display approve button only if comment already reported
+        if($comment['flag'] > 0)
     {
-        echo '<button class="userBtns"><a href="index.php?action=reportComment&amp;id=' . $post['id'] . '&amp;commentId='. $comment['id'] . '"  onclick="return alert(\'Commentaire signalé\')" >Signaler</a></button>' ;
+        //FIXME : change class of the approve button
+        echo '<button class="adminBtns"><a href="index.php?action=approveComment&amp;id=' . $post['id'] . '&amp;commentId='. $comment['id'] . '"  onclick="return alert(\'Commentaire approuvé\')" >Approuver</a></button>' ;
     }
-    else{//FIXME : change class of the approve button
-        echo '<button class="userBtns"><a href="index.php?action=approveComment&amp;id=' . $post['id'] . '&amp;commentId='. $comment['id'] . '"  onclick="return alert(\'Commentaire approuvé\')" >Approuver</a></button>' ;
-    }   
+            
     ?>    
 
         <!-- gets the commentId as a parameter in the URL of the comment to delete AND the post id to return on the same post after comment has been deleted-->

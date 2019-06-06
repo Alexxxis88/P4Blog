@@ -7,11 +7,11 @@ function getPostsAdmin()
     return $req;
 }
 
-//gets the Reported comments (where flag = 1)
+//gets the Reported comments (where flag >0 and sort them by number of time reported OR by date showing older first if reported the same nb of times)
 function getReportedComments()
 {
     $db = dbConnectAdmin();
-    $reportedComment = $db->query('SELECT id, post_id, author, comment, DATE_FORMAT(comment_date, \'%d/%m/%Y à %Hh%imin%ss\') AS mod_comment_date, flag FROM comments WHERE flag = 1 ORDER BY comment_date DESC');
+    $reportedComment = $db->query('SELECT id, post_id, author, comment, DATE_FORMAT(comment_date, \'%d/%m/%Y à %Hh%imin%ss\') AS mod_comment_date, flag FROM comments WHERE flag > 0 ORDER BY flag DESC, comment_date');
 
     return $reportedComment;
 }

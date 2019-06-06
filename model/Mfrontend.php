@@ -48,7 +48,7 @@ function eraseComment($commentId)
 function reportComment($commentId)
 {
     $db = dbConnect();
-    $commentReport = $db->prepare('UPDATE comments SET flag = 1 WHERE id = ?');
+    $commentReport = $db->prepare('UPDATE comments SET flag = flag + 1 WHERE id = ?');
     $commentReport->execute(array($commentId));
 }
 

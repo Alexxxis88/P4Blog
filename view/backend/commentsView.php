@@ -9,7 +9,8 @@
         
     ?>
                 <div class="reportedComments">       
-            <p ><strong><?= htmlspecialchars($datas['author']) ?></strong> le <?= $datas['mod_comment_date'] ?></p>
+            <p >Le <strong><?= htmlspecialchars($datas['author']) ?></strong> du <?= $datas['mod_comment_date'] ?>
+                a été signalé <strong> <?= $datas['flag'] ?></strong> fois </p>
             <p><?= nl2br(htmlspecialchars($datas['comment'])) ?></p>
             <p><a href="index.php?action=post&id=<?= $datas['post_id']?>">Voir l'article associé [<?= $datas['post_id'] ?>]</a> </p>
 
