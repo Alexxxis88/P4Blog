@@ -1,8 +1,6 @@
 <?php $title = 'Publier un nouveau chapitre'; ?>
-
 <?php ob_start(); ?>
 
-    
 <div class="posts"><!-- edit class because div and <p> have same class name -->
     <form action="index.php?action=publishChapter" method="post">
         <div>
@@ -11,7 +9,7 @@
         </div>
         <div>
             <label for="postContent">Contenu</label><br />
-            <textarea id="postContent" name="postContent" placeholder="Contenu du chapitre" required></textarea>
+            <textarea id="postContent" name="postContent">Contenu du chapitre</textarea>
         </div>
         <div>
             <input type="submit" value="Publier"/>

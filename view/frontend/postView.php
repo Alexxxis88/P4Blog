@@ -21,7 +21,7 @@
          
     ?>    
         <p class="posts"> <!-- edit class because div and <p> have same class name -->
-            <?= nl2br(htmlspecialchars($post['content'])) ?>
+            <?= nl2br($post['content']) ?>
             
         </p>
         <button class="adminBtns"><a href="index.php?action=manageView&id=<?=$post['id']?>">Modifier</a></button>

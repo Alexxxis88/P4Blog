@@ -1,5 +1,4 @@
 <?php $title = 'Editer les chapitres'; ?>
-
 <?php ob_start(); ?> 
     <div class="posts"><!-- edit class because div and <p> have same class name -->
         <form action="index.php?action=updatePost&amp;id=<?= $displayedPostToEdit['id']?>" method="post">
@@ -9,7 +8,7 @@
         </div>
         <div>
             <label for="postContent">Contenu</label><br />
-            <textarea id="postContent" name="postContent" required><?= nl2br(htmlspecialchars($displayedPostToEdit['content'])) ?></textarea>
+            <textarea id="postContent" name="postContent"><?= nl2br($displayedPostToEdit['content']) ?></textarea>
         </div>
         <div>
             <p>Publié le <?= $displayedPostToEdit['mod_publish_date'] ?></p>
@@ -21,3 +20,5 @@
 <?php $content = ob_get_clean(); ?>
 
 <?php require('backendTemplate.php'); ?>
+
+
