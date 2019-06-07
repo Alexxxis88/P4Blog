@@ -1,11 +1,39 @@
 <?php
 require('model/Mfrontend.php');
-//gets all the post to display in listPostsView. duplicatede code with getLastPosts (except LIMIT values in Mfrontend.php and require here)
+
+
+//gets all the post to display in listPostsView. 
 function listPosts()
 {
-    $posts = getPosts();
+//Pagination
+    $totalPages = getTotalPages();
+    $total=$totalPages['total_posts']; // total of posts in DB
+    $messagesPerPage=5;
+    $nbOfPages=ceil($total/$messagesPerPage);
+
+    if(isset($_GET['page']))
+    {
+        $currentPage=intval($_GET['page']); //intval gets the integer ( 4.2 = 4) value of a variable
+    
+        if($currentPage>$nbOfPages) // if a user puts the value of a page that doesnt exist, it redirects to the last page ($nbOfPages)
+        {
+            $currentPage=$nbOfPages;
+        }
+    }
+    else
+    {
+        $currentPage=1; 
+    }
+
+    $firstEntry=($currentPage-1)*$messagesPerPage; // first entry to read
+ 
+
+//Display post depending on pagination parameters
+    $posts = getPosts($firstEntry, $messagesPerPage);
+
     require('view/frontend/listPostsView.php');
 }
+
 
 function post()
 {

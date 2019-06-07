@@ -1,16 +1,28 @@
 <?php
 
-//gets all the post to display in listPostsView. duplicatede code with getLastPosts (except LIMIT values)
-function getPosts()
+//gets the last X posts to display in listPostsView. X depends on $messagesPerPage
+function getPosts($firstEntry, $messagesPerPage)
 {
     $db = dbConnect();
-    $req = $db->query('SELECT id, title, content, DATE_FORMAT(publish_date, \'%d/%m/%Y à %Hh%imin%ss\') AS mod_publish_date, DATE_FORMAT(edit_date, \'%d/%m/%Y à %Hh%imin%ss\') AS mod_edit_date FROM posts ORDER BY publish_date DESC LIMIT 0, 10');
-
+    $req = $db->prepare('SELECT id, title, content, DATE_FORMAT(publish_date, \'%d/%m/%Y à %Hh%imin%ss\') AS mod_publish_date, DATE_FORMAT(edit_date, \'%d/%m/%Y à %Hh%imin%ss\') AS mod_edit_date FROM posts ORDER BY publish_date DESC LIMIT ?, ?');
+    $req->bindValue(1, $firstEntry, PDO::PARAM_INT);
+    $req->bindValue(2, $messagesPerPage, PDO::PARAM_INT);
+    $req->execute();
     return $req;
 }
 
 
-//gets last 3 posts to display in postView aside. duplicatede code with getLastPosts (except LIMIT values)
+//Pagination
+function getTotalPages(){
+    $db = dbConnect();
+    $getTotalPages = $db->query('SELECT COUNT(*) AS total_posts FROM posts');
+    $returnTotalPages= $getTotalPages->fetch();
+
+    return $returnTotalPages;
+}
+
+
+//gets last 3 posts to display in postView aside. 
 function getLastPosts()
 {
     $db = dbConnect();
@@ -29,6 +41,16 @@ function getPost($postId)
 
     return $post;
 }
+
+
+
+
+
+
+
+
+
+
 
 function getComments($postId)
 {

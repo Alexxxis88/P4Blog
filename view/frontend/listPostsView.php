@@ -2,6 +2,26 @@
 
 <?php ob_start(); ?>
 
+<!-- Display Pagination -->
+<?php 
+echo '<p align="center">Page : '; //FIXME : remove CSS from here
+for($i=1; $i<=$nbOfPages; $i++)
+{
+     if($i==$currentPage)
+     {
+         echo ' [ '.$i.' ] '; 
+     }
+     else
+     {
+          echo ' <a href="index.php?page='.$i.'">'.$i.'</a> ';
+     }
+}
+echo '</p>';
+?>
+
+
+
+<!-- Display all posts -->
 <?php
 while($datas = $posts->fetch())
 {
@@ -10,7 +30,6 @@ $id = (int) $datas['id'];
 
     <div class="posts"><!-- edit class because div and <p> have same class name -->
         <h2><?= htmlspecialchars($datas['title']) ?></h2>
-        
         <?php //FIXME duplicate content (except $data instead of $post) with PostsView. Worth factoring into a function ? 
         if($datas['mod_publish_date'] ==  $datas['mod_edit_date'] )
         {
@@ -35,7 +54,13 @@ $id = (int) $datas['id'];
 <?php
 }  
 $posts->closeCursor();
-?>     
-<?php $content = ob_get_clean(); ?>
+?> 
 
+
+
+
+
+
+
+<?php $content = ob_get_clean(); ?>
 <?php require('template.php'); ?>
