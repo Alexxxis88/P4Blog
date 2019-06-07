@@ -1,11 +1,26 @@
 <?php
-function getPostsAdmin()
+
+//gets the last X posts to display in adminView. X depends on $messagesPerPage
+function getPostsAdmin($firstEntry, $messagesPerPage)
 {
     $db = dbConnectAdmin();
-    $req = $db->query('SELECT id, title, content, DATE_FORMAT(publish_date, \'%d/%m/%Y à %Hh%imin%ss\') AS mod_publish_date, DATE_FORMAT(edit_date, \'%d/%m/%Y à %Hh%imin%ss\') AS mod_edit_date FROM posts ORDER BY publish_date DESC LIMIT 0, 5');
-
+    $req = $db->prepare('SELECT id, title, content, DATE_FORMAT(publish_date, \'%d/%m/%Y à %Hh%imin%ss\') AS mod_publish_date, DATE_FORMAT(edit_date, \'%d/%m/%Y à %Hh%imin%ss\') AS mod_edit_date FROM posts ORDER BY publish_date DESC LIMIT ?, ?');
+    $req->bindValue(1, $firstEntry, PDO::PARAM_INT);
+    $req->bindValue(2, $messagesPerPage, PDO::PARAM_INT);
+    $req->execute();
     return $req;
 }
+
+
+//Pagination
+function getTotalPagesAdmin(){
+    $db = dbConnect();
+    $getTotalPagesAdmin = $db->query('SELECT COUNT(*) AS total_posts FROM posts');
+    $returnTotalPagesAdmin= $getTotalPagesAdmin->fetch();
+
+    return $returnTotalPagesAdmin;
+}
+
 
 //gets the Reported comments (where flag >0 and sort them by number of time reported OR by date showing older first if reported the same nb of times)
 function getReportedComments()

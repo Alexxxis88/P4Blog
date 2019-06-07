@@ -3,6 +3,9 @@
 <?php ob_start(); ?>
 
 
+<!-- Pagination -->
+<?php require('paginationFE.php'); ?>
+
 <!-- Display all posts -->
 <?php
 while($datas = $posts->fetch())
@@ -37,6 +40,9 @@ $id = (int) $datas['id'];
 }  
 $posts->closeCursor();
 ?> 
+
+<!-- Pagination -->
+<?php require('paginationFE.php'); ?>
 
 <?php $content = ob_get_clean(); ?>
 <?php require('template.php'); ?>

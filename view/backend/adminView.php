@@ -1,6 +1,13 @@
 <?php $title = 'Page d\'administration'; ?>
 
-<?php ob_start(); 
+
+
+<?php ob_start(); ?>
+
+<!-- Pagination -->
+<?php require('paginationBE.php'); ?>
+
+<?php
 while($datasAdmin = $postsAdmin->fetch())
 {
 $id = (int) $datasAdmin['id']; 
