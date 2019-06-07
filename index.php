@@ -104,7 +104,10 @@ try {
                             //testing if email is conform
                             if( preg_match("#^[a-z0-9._-]+@[a-z0-9._-]{2,}\.[a-z]{2,4}$#", $_POST['email']))
                             {
+                                //hash password (security feature)
+                                $_POST['pass'] = password_hash($_POST['pass'], PASSWORD_DEFAULT);
 
+                                //when all tests(if) are valid, the new member is added
                                 addNewMember($_POST['username'], $_POST['pass'], $_POST['email']);
                             }
                             else{
@@ -169,6 +172,24 @@ try {
     //Default behavior
     else {
         listPosts();
+
+        //Sing in confirmation message. FIXME create a signInConfirmationView for this ? but i don't want it displayed in a VIEW i want it displayed in the front office. Use template.php with a toggle display : none /block and create a modal box ? Z index etc jquerry 
+        if (isset($_GET['success'])) 
+            {
+            ?>
+            <div class="signInConfirmation">
+                <p>Votre inscription est validée!</p>
+                <p>Veuillez vous connecter avec votre identifiant et votre mot de passe.</p>
+            </div>
+            <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+            <script type="text/javascript" >
+            let delayConfirmationMsg = setTimeout(hideThanks, 1500);
+            function hideThanks(){
+        $(".signInConfirmation").fadeOut();
+        }
+            </script>
+            <?php    
+            }
     }
 }
 catch(Exception $e) {
@@ -176,3 +197,4 @@ catch(Exception $e) {
     require('view/errorView.php');
 
 }
+?>

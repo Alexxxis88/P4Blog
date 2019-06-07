@@ -92,7 +92,9 @@ function displaySingInView()
 function addNewMember($username, $pass, $email)
 {
     $newPost = insertMember($username, $pass, $email);
-    header('Location: index.php');
+
+    //success1 needed to display the confirmation message
+header('Location: index.php?success=1#header');
 }
 
 

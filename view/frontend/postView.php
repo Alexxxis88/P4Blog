@@ -114,9 +114,12 @@
         echo '<div>';
     }
     ?>
-     
+        <!-- transmor non html links in comments into clickable links -->
+        <?php $comment['comment'] = htmlspecialchars($comment['comment']);
+        $comment['comment'] = preg_replace('#http[s]?://[a-z0-9._/-]+#i', '<a href="$0">$0</a>', $comment['comment']); ?>
+
         <p><strong><?= htmlspecialchars($comment['author']) ?></strong> le <?= $comment['mod_comment_date'] ?></p>
-        <p><?= nl2br(htmlspecialchars($comment['comment'])) ?></p>
+        <p><?= nl2br($comment['comment']) ?></p>
 
     
         <button class="userBtns"><a href="index.php?action=reportComment&amp;id=<?= $post['id'] ?>&amp;commentId=<?= $comment['id'] ?>" onclick="return alert('Commentaire signalé')">Signaler</a></button>

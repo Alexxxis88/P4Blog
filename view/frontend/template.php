@@ -17,6 +17,7 @@
                     </form>
                 </div>
 
+                <!-- FIXME when bootstrap implementd, display in a modal box rather than a page / view -->
                 <div class="adminFields">
                     <form method="post" action ="index.php?action=singIn">
                         <input type="submit" name="singIn" value ="Inscription" /> 
