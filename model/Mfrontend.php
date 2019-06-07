@@ -45,21 +45,64 @@ function getPost($postId)
 
 
 
+//-----------------------------------------------------------------------------------------
+// NOT WORKING : show more / less comments
+// function getComments($postId, $commentsLimit)
+// {
+//     $db = dbConnect();
+//     $comments = $db->prepare('SELECT id, author, comment, DATE_FORMAT(comment_date, \'%d/%m/%Y à %Hh%imin%ss\') AS mod_comment_date, flag FROM comments WHERE post_id = ? ORDER BY comment_date LIMIT 0, ?');
+//     $comments->bindValue(1, $postId, PDO::PARAM_INT);
+//     $comments->bindValue(2, $commentsLimit, PDO::PARAM_INT);
+//     $comments->execute();
+
+//     return $comments;
+
+
+// }
 
 
 
+//original code to display comments before pagination for comments
+// function getComments($postId)
+// {
+//     $db = dbConnect();
+//     $comments = $db->prepare('SELECT id, author, comment, DATE_FORMAT(comment_date, \'%d/%m/%Y à %Hh%imin%ss\') AS mod_comment_date, flag FROM comments WHERE post_id = ? ORDER BY comment_date');
+//     $comments->execute(array($postId));
+
+//     return $comments;
+// }
 
 
 
-
-function getComments($postId)
+//WORKING : gets the last X comments to display in listPostsView. X depends on $messagesPerPage
+function getComments($postId, $firstComment, $commentsPerPage)
 {
     $db = dbConnect();
-    $comments = $db->prepare('SELECT id, author, comment, DATE_FORMAT(comment_date, \'%d/%m/%Y à %Hh%imin%ss\') AS mod_comment_date, flag FROM comments WHERE post_id = ? ORDER BY comment_date');
-    $comments->execute(array($postId));
-
+    $comments = $db->prepare('SELECT id, author, comment, DATE_FORMAT(comment_date, \'%d/%m/%Y à %Hh%imin%ss\') AS mod_comment_date, flag FROM comments WHERE post_id = ? ORDER BY comment_date LIMIT ?, ?');
+    $comments->bindValue(1, $postId, PDO::PARAM_INT);
+    $comments->bindValue(2, $firstComment, PDO::PARAM_INT);
+    $comments->bindValue(3, $commentsPerPage, PDO::PARAM_INT);
+    $comments->execute();
     return $comments;
 }
+
+//-----------------------------------------------------------------------------------------
+
+//Pagination comments
+function getTotalComments($postId){
+    $db = dbConnect();
+    $getTotalComments = $db->prepare('SELECT COUNT(*) AS total_comments FROM comments WHERE post_id = ?');
+    $getTotalComments->bindValue(1, $postId, PDO::PARAM_INT);
+    $getTotalComments->execute();
+
+    $returnTotalComments= $getTotalComments->fetch();
+
+    return $returnTotalComments;
+}
+
+
+
+
 
 
 function postComment($postId, $author, $comment)

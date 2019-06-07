@@ -35,13 +35,54 @@ function listPosts()
 }
 
 
+
+
+//-----------------------------------------------------------------------------------------
+// NOT WORKING : show more / less comments
+// function post($commentsLimit)
+// {
+//     $lastPosts = getLastPosts();
+//     $post = getPost($_GET['id']);
+//     $comments = getComments($_GET['id'], $commentsLimit);
+//     require('view/frontend/postView.php');
+// }
+
+
+//WORKING
 function post()
 {
+
+//Pagination for comments
+$totalComments = getTotalComments($_GET['id']);
+$totalCom=$totalComments['total_comments']; // total of posts in DB
+$commentsPerPage=4;
+$nbOfCommentsPages=ceil($totalCom/$commentsPerPage);
+
+if(isset($_GET['page']))
+{
+    $currentCommentPage=intval($_GET['page']); //intval gets the integer ( 4.2 = 4) value of a variable
+
+    if($currentCommentPage>$nbOfCommentsPages) // if a user puts the value of a page that doesnt exist, it redirects to the last page ($nbOfCommentsPages)
+    {
+        $currentCommentPage=$nbOfCommentsPages;
+    }
+}
+else
+{
+    $currentCommentPage=1; 
+}
+
+$firstComment=($currentCommentPage-1)*$commentsPerPage; // first comment to read
+
     $lastPosts = getLastPosts();
     $post = getPost($_GET['id']);
-    $comments = getComments($_GET['id']);
+    $comments = getComments($_GET['id'], $firstComment, $commentsPerPage);
     require('view/frontend/postView.php');
 }
+
+//-----------------------------------------------------------------------------------------
+
+
 
 function addComment($postId, $author, $comment)
 {

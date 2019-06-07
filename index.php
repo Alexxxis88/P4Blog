@@ -11,7 +11,16 @@ try {
 
         elseif ($_GET['action'] == 'post') {
             if (isset($_GET['id']) && $_GET['id'] > 0) {
+
                 post();
+
+                // NOT WORKING : show more / less comments
+            //    if (isset($_GET['showComments'])){ 
+            //     post($_GET['showComments']);
+            //    }
+            //    else{
+            //     post(2); 
+            //    }
             }
             else {
                 throw new Exception('Aucun identifiant de billet envoyé');
