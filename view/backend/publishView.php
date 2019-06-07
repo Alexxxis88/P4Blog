@@ -1,7 +1,7 @@
 <?php $title = 'Publier un nouveau chapitre'; ?>
 <?php ob_start(); ?>
 
-<div class="posts"><!-- edit class because div and <p> have same class name -->
+<div class="postsBlock">
     <form action="index.php?action=publishChapter" method="post">
         <div>
             <label for="title">Titre</label><br />

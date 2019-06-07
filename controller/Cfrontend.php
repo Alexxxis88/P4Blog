@@ -83,6 +83,21 @@ $firstComment=($currentCommentPage-1)*$commentsPerPage; // first comment to read
 //-----------------------------------------------------------------------------------------
 
 
+//SING IN, LOG IN, LOG OUT
+function displaySingInView()
+{
+    require('view/frontend/singInView.php');
+}
+
+function addNewMember($username, $pass, $email)
+{
+    $newPost = insertMember($username, $pass, $email);
+    header('Location: index.php');
+}
+
+
+
+//Comments
 
 function addComment($postId, $author, $comment)
 {

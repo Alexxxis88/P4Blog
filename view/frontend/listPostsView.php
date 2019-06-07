@@ -13,7 +13,7 @@ while($datas = $posts->fetch())
 $id = (int) $datas['id']; 
 ?>
 
-    <div class="postsBlock"><!-- edit class because div and <p> have same class name -->
+    <div class="postsBlock">
         <h2><?= htmlspecialchars($datas['title']) ?></h2>
         <?php //FIXME duplicate content (except $data instead of $post) with PostsView. Worth factoring into a function ? 
         if($datas['mod_publish_date'] ==  $datas['mod_edit_date'] )
@@ -27,7 +27,7 @@ $id = (int) $datas['id'];
          
     ?>    
             
-        <p class=""><!-- edit class because div and <p> have same class name -->
+        <p class="posts">
             <?= substr($datas['content'], 0, 600) . "..." ?>
                 <button class="regularBtns"><a href="index.php?action=post&id=<?=$id?>">Lire la suite</a></button>
                 <button class="regularBtns"><a href="index.php?action=post&id=<?=$id?>#commentsAnchor">Commentaires</a></button>

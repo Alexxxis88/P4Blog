@@ -1,7 +1,4 @@
 <?php $title = 'Page d\'administration'; ?>
-
-
-
 <?php ob_start(); ?>
 
 <!-- Pagination -->
@@ -13,12 +10,12 @@ while($datasAdmin = $postsAdmin->fetch())
 $id = (int) $datasAdmin['id']; 
 ?>
 
-    <div class="posts"><!-- edit class because div and <p> have same class name -->
+    <div class="postsBlock">
         <h2><?= htmlspecialchars($datasAdmin['title']) ?></h2>
         <p>Publié le <?= $datasAdmin['mod_publish_date'] ?></p>
         <p>Edité le <?= $datasAdmin['mod_edit_date'] ?></p>
     
-        <p class="posts"><!-- edit class because div and <p> have same class name -->
+        <p class="posts">
             <?= substr($datasAdmin['content'], 0, 600) . "..." ?>
                 <button class="regularBtns"><a href="index.php?action=post&id=<?=$id?>">Lire la suite</a></button>
                 <button class="regularBtns"><a href="index.php?action=post&id=<?=$id?>#commentsAnchor">Commentaires</a></button>

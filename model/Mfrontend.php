@@ -1,5 +1,8 @@
 <?php
 
+
+//POSTS
+
 //gets the last X posts to display in listPostsView. X depends on $messagesPerPage
 function getPosts($firstEntry, $messagesPerPage)
 {
@@ -60,6 +63,10 @@ function getPost($postId)
 
 // }
 
+
+
+
+//COMMENTS
 
 
 //original code to display comments before pagination for comments
@@ -145,6 +152,18 @@ function eraseAllComments($postId)
     $allComDelete = $db->prepare('DELETE FROM comments WHERE post_id = ?');
     $allComDelete->execute(array($postId));
 }
+
+
+
+//SING IN, LOG IN, LOG OUT
+function insertMember($username, $pass, $email)
+{
+    $db = dbConnect();
+    $newMember = $db->prepare('INSERT INTO members( username, pass, email, registration_date) VALUES(?, ?, ?, NOW())');
+    $newMember->execute(array($username, $pass, $email));
+}
+
+
 
 
 // General function to connect to database

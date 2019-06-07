@@ -72,6 +72,64 @@ try {
             }
         }
         
+        //SING IN, LOG IN, LOG OUT
+
+        elseif ($_GET['action'] == 'singIn') {
+            
+            displaySingInView();
+        }
+
+        elseif ($_GET['action'] == 'addNewMember') {
+
+           
+            //testing if all fields a filled
+            if (isset($_POST['username']) && isset($_POST['pass'])&& isset($_POST['passCheck']) && isset($_POST['email'])) {
+
+                //to avoid problems with inputs
+                $_POST['username'] = htmlspecialchars($_POST['username']);
+                $_POST['pass'] = htmlspecialchars($_POST['pass']);
+                $_POST['passCheck'] = htmlspecialchars($_POST['passCheck']);
+                $_POST['email'] = htmlspecialchars($_POST['email']);
+
+    
+                //testing if username only has authorised caracters   
+                if (preg_match("#^[a-z0-9]{4,}$#",$_POST['username']))
+                {
+                    //testing if passwords is conform
+                    if (preg_match("#^[a-z0-9._!?-]{8,}$#",$_POST['pass']) ){
+
+                        //testing if both passwords match
+                        if($_POST['pass'] == $_POST['passCheck']){
+                            
+                            //testing if email is conform
+                            if( preg_match("#^[a-z0-9._-]+@[a-z0-9._-]{2,}\.[a-z]{2,4}$#", $_POST['email']))
+                            {
+
+                                addNewMember($_POST['username'], $_POST['pass'], $_POST['email']);
+                            }
+                            else{
+                                throw new Exception('L\'adresse email n\'est pas conforme'); 
+                            } 
+                        }
+                        else{
+                            throw new Exception('Les deux mots de pass ne sont pas identiques');   
+                        }
+                    }
+                    else{
+                        throw new Exception('Le mot de passe n\'est pas conforme.');
+                    }    
+                }
+                else{
+                    throw new Exception('Le pseudo n\'est pas conforme.');
+                }
+            }
+            else {
+                throw new Exception('Il manque des informations.');
+            }   
+            
+        }
+
+        
 
 
         //Backend

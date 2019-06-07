@@ -1,6 +1,6 @@
 <?php $title = 'Editer les chapitres'; ?>
 <?php ob_start(); ?> 
-    <div class="posts"><!-- edit class because div and <p> have same class name -->
+    <div class="postsBlock">
         <form action="index.php?action=updatePost&amp;id=<?= $displayedPostToEdit['id']?>" method="post">
         <div>
             <label for="title">Titre</label><br />

@@ -6,7 +6,7 @@
 <section class="postAndlastPosts">
 
 <!-- displays the post -->
-    <div class="postsPostView"> <!-- edit class because div and <p> have same class name -->
+    <div class="postsPostView">
         <h2><?= htmlspecialchars($post['title']) ?></h2>
 
     <?php //FIXME duplicate content (except $post instead of $data) with listPostsView. Worth factoring into a function ? 
@@ -20,7 +20,7 @@
         }
          
     ?>    
-        <p class="posts"> <!-- edit class because div and <p> have same class name -->
+        <p class="posts">
             <?= nl2br($post['content']) ?>
             
         </p>
@@ -51,7 +51,7 @@
                 }
                 
             ?>    
-                    <p class="lastPostsP"><!-- edit class because div and <p> have same class name -->
+                    <p class="lastPostsP">
                         <?= substr($datas['content'], 0, 200) . "..." ?><br/>
                         <button class="regularBtns"><a href="index.php?action=post&id=<?=$id?>">Lire la suite</a></button>      
                     </p>

@@ -16,7 +16,14 @@
                         <input type="submit" name="login" value ="Connexion" /> 
                     </form>
                 </div>
-        </section>
+
+                <div class="adminFields">
+                    <form method="post" action ="index.php?action=singIn">
+                        <input type="submit" name="singIn" value ="Inscription" /> 
+                    </form>
+                </div>
+
+    </section>
         
         <?= $content ?>
 
