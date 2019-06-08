@@ -111,14 +111,20 @@ function checkLog($userName)
         throw new Exception('Vérifiez vos identifiants de connexion');
     }
     else
-    {
+    {   //if the password is Correct SESSION variables are created
         if ($isPasswordCorrect) {
-            
-        
             $_SESSION['id'] = $checkLogIn['id'];
             $_SESSION['username'] = $userName;
             $userNameSession = $_SESSION['username'];
             
+            //if the autolog checkbox is selected COOKIES are created
+            if(isset($_POST['autoLogIn']))
+            {
+                setcookie('login', $_POST['username'], time() + 365*24*3600, null, null, false, true);
+                setcookie('hash_pass', password_hash($_POST['pass'], PASSWORD_DEFAULT), time() + 365*24*3600, null, null, false, true);
+            }
+            
+           
             header('Location: index.php');
         }
         else {

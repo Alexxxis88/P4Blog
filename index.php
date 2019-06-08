@@ -83,7 +83,7 @@ try {
         elseif ($_GET['action'] == 'logInCheck') {
             if(isset($_POST['username']) && isset($_POST['pass'])){
                 checkLog($_POST['username']);
-
+                
                 //if there is a session open, displays a message        
                 if (isset($_SESSION['id']) AND isset($_SESSION['username']))
                 {
@@ -99,7 +99,15 @@ try {
         //LOG OUT
         elseif ($_GET['action'] == 'logOutCheck') {
             if(isset($_SESSION['id']) AND isset($_SESSION['username'])){
+                
+                // Delete session variables
+                $_SESSION = array();
                 session_destroy();
+
+                // Delete autologing cookies
+                setcookie('login', '', time() + 365*24*3600, null, null, false, true);
+                setcookie('hash_pass', '', time() + 365*24*3600, null, null, false, true);
+                
                 header('Location: index.php');
 
             }

@@ -9,11 +9,13 @@
         <section id="header">
                     <h1>Billet simple pour l'Alaska</h1>
 
-                    <?php 
-                    if(isset($_SESSION['id']) AND isset($_SESSION['username'])){
+                    
+                    <!-- FIXME: factoriser le code de display du bouton Deconnexion pour SESSION ou COOKIE -->
+                    <?php //if there is cookies, they are used to display user name
+                    if(isset($_COOKIE['login']) AND !empty($_COOKIE['login']) AND isset($_COOKIE['hash_pass']) AND !empty($_COOKIE['hash_pass'])){
                     ?>
-                    <p>Vous êtes connecté en tant que <strong><?= $_SESSION['username'] ?></strong></p>
-
+                    <p><strong style="color:red">COOKIE</strong> Vous êtes connecté en tant que <strong><?= $_COOKIE['login'] ?></strong></p>
+                        
                     <!-- Log Out button -->
                     <div class="adminFields">
                         <form method="post" action ="index.php?action=logOutCheck">
@@ -22,8 +24,23 @@
                     </div>    
                     
                     <?php
-                    }
-                    else{
+                    } //else if there is session information, it's used to display user name
+                    elseif(isset($_SESSION['id']) AND isset($_SESSION['username'])){
+                        ?>
+                        <p><strong style="color:red">SESSION</strong> Vous êtes connecté en tant que <strong><?= htmlspecialchars($_SESSION['username']) ?></strong></p>
+                            
+                        <!-- Log Out button -->
+                        <div class="adminFields">
+                            <form method="post" action ="index.php?action=logOutCheck">
+                                <input type="submit" name="logOut" value ="Deconnexion" /> 
+                            </form>
+                        </div>    
+                        
+                        <?php
+                        }
+                        //FIXME : factoriser le code ci dessus
+
+                    else{ //else user name not knwon, hence name not displayed
                     ?>
 
                     <!-- Log In button -->
