@@ -7,25 +7,7 @@
     </head>
         
     <body>
-    <section id="header">
-                <h1>Billet simple pour l'Alaska</h1>
-                <div class="adminFields">
-                    <form method="post" action ="index.php?action=listPostsAdmin">
-                        <input type="text" name="log" placeholder="votre pseudo" required />
-                        <input type="password" name="password" placeholder="votre password" required />
-                        <input type="submit" name="login" value ="Connexion" /> 
-                    </form>
-                </div>
-
-                <!-- FIXME when bootstrap implementd, display in a modal box rather than a page / view -->
-                <div class="adminFields">
-                    <form method="post" action ="index.php?action=singIn">
-                        <input type="submit" name="singIn" value ="Inscription" /> 
-                    </form>
-                </div>
-
-    </section>
-        
+    <?php require('view/frontend/menu.php') ?>  
         <?= $content ?>
 
         <section id="footer">

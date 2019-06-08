@@ -91,7 +91,7 @@ function displaySingInView()
 
 function addNewMember($username, $pass, $email)
 {
-    $newPost = insertMember($username, $pass, $email);
+    $newMember = insertMember($username, $pass, $email);
 
     //success1 needed to display the confirmation message
 header('Location: index.php?success=1#header');
@@ -99,7 +99,45 @@ header('Location: index.php?success=1#header');
 
 
 
-//Comments
+
+function checkLog($userName)
+{
+    $checkLogIn = checkLogIn($userName);
+
+    // Check is password matches the one registered in DB
+    $isPasswordCorrect = password_verify($_POST['pass'], $checkLogIn['pass']);
+    if (!$checkLogIn)
+    {
+        throw new Exception('Vérifiez vos identifiants de connexion');
+    }
+    else
+    {
+        if ($isPasswordCorrect) {
+            
+        
+            $_SESSION['id'] = $checkLogIn['id'];
+            $_SESSION['username'] = $userName;
+            $userNameSession = $_SESSION['username'];
+            
+            header('Location: index.php');
+        }
+        else {
+            throw new Exception('Vérifiez vos identifiants de connexion');
+        }
+
+        
+    }
+
+    
+}
+
+
+
+
+
+
+
+//COMMENTS
 
 function addComment($postId, $author, $comment)
 {

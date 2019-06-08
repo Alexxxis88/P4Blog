@@ -165,6 +165,17 @@ function insertMember($username, $pass, $email)
 
 
 
+function checkLogIn($userName)
+{
+    $db = dbConnect();
+    $check = $db->prepare('SELECT id, pass, group_id FROM members WHERE username = ?');
+    $check->execute(array($userName));
+    $checkLogIn = $check->fetch();
+
+    return $checkLogIn;
+}
+
+
 
 // General function to connect to database
 function dbConnect()

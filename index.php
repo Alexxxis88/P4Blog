@@ -1,11 +1,12 @@
 <?php
+session_start();
 require('controller/Cfrontend.php');
 require('controller/Cbackend.php');
 
 try {
     if (isset($_GET['action'])) {
     //Frontend    
-        if ($_GET['action'] == 'listPosts') {
+        if ($_GET['action'] == 'listPosts' OR $_GET['action'] == '') {
             listPosts();
         }
 
@@ -72,8 +73,50 @@ try {
             }
         }
         
-        //SING IN, LOG IN, LOG OUT
+    //SING IN, LOG IN, LOG OUT
 
+
+
+
+
+        //LOG IN
+        elseif ($_GET['action'] == 'logInCheck') {
+            if(isset($_POST['username']) && isset($_POST['pass'])){
+                checkLog($_POST['username']);
+
+                //if there is a session open, displays a message        
+                if (isset($_SESSION['id']) AND isset($_SESSION['username']))
+                {
+                    require('view/frontend/menu.php');
+
+                }  
+            }
+            else{
+                throw new Exception('Vérifiez vos identifiants de connexion');   
+            }
+        }
+
+        //LOG OUT
+        elseif ($_GET['action'] == 'logOutCheck') {
+            if(isset($_SESSION['id']) AND isset($_SESSION['username'])){
+                session_destroy();
+                header('Location: index.php');
+
+            }
+            else{
+                throw new Exception('Vous êtes déja déconnecté');   
+            }
+        }
+
+
+        
+
+
+
+
+
+
+        //SIGN IN
         elseif ($_GET['action'] == 'singIn') {
             
             displaySingInView();
@@ -83,7 +126,7 @@ try {
 
            
             //testing if all fields a filled
-            if (isset($_POST['username']) && isset($_POST['pass'])&& isset($_POST['passCheck']) && isset($_POST['email'])) {
+            if (isset($_POST['username']) && isset($_POST['pass']) && isset($_POST['passCheck']) && isset($_POST['email'])) {
 
                 //to avoid problems with inputs
                 $_POST['username'] = htmlspecialchars($_POST['username']);
@@ -91,18 +134,19 @@ try {
                 $_POST['passCheck'] = htmlspecialchars($_POST['passCheck']);
                 $_POST['email'] = htmlspecialchars($_POST['email']);
 
-    
+                $accentedCharacters = "àèìòùÀÈÌÒÙáéíóúýÁÉÍÓÚÝâêîôûÂÊÎÔÛãñõÃÑÕäëïöüÿÄËÏÖÜŸçÇßØøÅåÆæœ";
+                
                 //testing if username only has authorised caracters   
-                if (preg_match("#^[a-z0-9]{4,}$#",$_POST['username']))
+                if (preg_match("#^[a-z".$accentedCharacters ."0-9]{4,}$#i",$_POST['username']))
                 {
                     //testing if passwords is conform
-                    if (preg_match("#^[a-z0-9._!?-]{8,}$#",$_POST['pass']) ){
+                    if (preg_match("#^[a-z".$accentedCharacters ."0-9._!?-]{8,}$#i",$_POST['pass']) ){
 
                         //testing if both passwords match
                         if($_POST['pass'] == $_POST['passCheck']){
                             
                             //testing if email is conform
-                            if( preg_match("#^[a-z0-9._-]+@[a-z0-9._-]{2,}\.[a-z]{2,4}$#", $_POST['email']))
+                            if( preg_match("#^[a-z0-9._-]+@[a-z0-9._-]{2,}\.[a-z]{2,4}$#i", $_POST['email']))
                             {
                                 //hash password (security feature)
                                 $_POST['pass'] = password_hash($_POST['pass'], PASSWORD_DEFAULT);
