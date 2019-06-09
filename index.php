@@ -99,6 +99,8 @@ try {
         elseif ($_GET['action'] == 'logOutCheck') {
             if(isset($_SESSION['id']) AND isset($_SESSION['username'])){
                 
+
+                // FIXME : factoriser dans une fonction unique dans le controleur killSession() ? 
                 // Delete session variables
                 $_SESSION = array();
                 session_destroy();
@@ -118,6 +120,74 @@ try {
 
         
 
+        //UPDATE PASSWORD
+        elseif ($_GET['action'] == 'changePasswordView') {
+            if( (isset($_COOKIE['login']) AND $_COOKIE['login'] != '') OR  (isset($_SESSION['username']) AND $_SESSION['username'] != ''))
+            {
+                displaychangePasswordView();
+            }     
+            else {
+                throw new Exception('Vous devez être connecté pour accéder à cette page');
+            }    
+        }
+
+
+
+        elseif ($_GET['action'] == 'UpdatePass') 
+        {
+            if( (isset($_COOKIE['login']) AND $_COOKIE['login'] != '') OR  (isset($_SESSION['username']) AND $_SESSION['username'] != ''))
+            {
+                //to avoid problems with inputs
+                $_POST['currentPass'] = htmlspecialchars($_POST['currentPass']);
+                $_POST['newPass'] = htmlspecialchars($_POST['newPass']);
+               
+                $accentedCharactersNewPass = "àèìòùÀÈÌÒÙáéíóúýÁÉÍÓÚÝâêîôûÂÊÎÔÛãñõÃÑÕäëïöüÿÄËÏÖÜŸçÇßØøÅåÆæœ";
+
+                if(currentPassInDB($_POST['currentPass']) == false)
+                {
+                    if(preg_match("#^[a-z".$accentedCharactersNewPass ."0-9._!?-]{8,}$#i", $_POST['newPass']) )
+                    {
+                        //if the password is Correct check if current and new pass are the same
+                        if($_POST['currentPass'] != $_POST['newPass'])
+                        {
+                            //hash password (security feature)
+                            $_POST['newPass'] = password_hash($_POST['newPass'], PASSWORD_DEFAULT);
+                
+                            UpdatePassWord($_POST['newPass'], $_POST['id']);
+
+                            // FIXME : factoriser dans une fonction unique dans le controleur killSession() ? 
+                            // Delete session variables
+                            $_SESSION = array();
+                            session_destroy();
+
+                            // Delete autologing cookies
+                            setcookie('login', '', time() + 365*24*3600, null, null, false, true);
+                            setcookie('hash_pass', '', time() + 365*24*3600, null, null, false, true);
+
+                            //success2 needed to display the confirmation message
+                            header('Location: index.php?success=2#header');
+                            exit;
+                        }
+                        else
+                        {
+                            throw new Exception('Votre nouveau password est le même que l\'actuel');
+                        }
+                    }
+                    else
+                    {
+                        throw new Exception('Votre nouveau password n\'est pas conforme');
+                    }                    
+                }
+                else {
+                    throw new Exception('Votre password actuel n\'est pas le bon');
+                } 
+            }     
+            else {
+                throw new Exception('Vous devez être connecté pour accéder à cette page');
+            }
+
+            
+        }
 
 
 
@@ -239,10 +309,10 @@ try {
         listPosts();
 
         //Sing in confirmation message. FIXME create a signInConfirmationView for this ? but i don't want it displayed in a VIEW i want it displayed in the front office. Use template.php with a toggle display : none /block and create a modal box ? Z index etc jquerry 
-        if (isset($_GET['success'])) 
+        if (isset($_GET['success']) AND $_GET['success'] == 1) 
             {
             ?>
-            <div class="signInConfirmation">
+            <div class="signInConfirmation"> <!--FIXME : changer nom de la classe, un truc générique ? + update CSS  -->
                 <p>Votre inscription est validée!</p>
                 <p>Veuillez vous connecter avec votre identifiant et votre mot de passe.</p>
             </div>
@@ -255,6 +325,26 @@ try {
             </script>
             <?php    
             }
+        
+        //Sing in confirmation message. FIXME create a signInConfirmationView for this ? but i don't want it displayed in a VIEW i want it displayed in the front office. Use template.php with a toggle display : none /block and create a modal box ? Z index etc jquerry 
+        if (isset($_GET['success']) AND $_GET['success'] == 2) 
+            {
+            ?>
+            <div class="signInConfirmation"> <!--FIXME : changer nom de la classe, un truc générique ? + update CSS  -->
+                <p>Votre mot de pass à bien été mis à jour!</p>
+                <p>Veuillez vous reconnecter avec votre identifiant et votre nouveau mot de passe.</p>
+            </div>
+            <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+            <script type="text/javascript" >
+            let delayConfirmationMsg = setTimeout(hideThanks, 1500);
+            function hideThanks(){
+        $(".signInConfirmation").fadeOut();
+        }
+            </script>
+            <?php    
+            }
+
+
     }
 }
 catch(Exception $e) {

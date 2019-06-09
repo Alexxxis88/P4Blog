@@ -100,6 +100,38 @@ $firstComment=($currentCommentPage-1)*$commentsPerPage; // first comment to read
 
 
 //SING IN, LOG IN, LOG OUT
+
+// Update password
+function displaychangePasswordView()
+{
+    require('view/frontend/changePassView.php');
+}
+
+function UpdatePassWord($newpass, $id)
+{
+    $UpdatePassWord = UpdatePass($newpass, $id); 
+}
+
+
+function currentPassInDB($currentPass){
+
+    $currentPassInDB = currentPass($currentPass);
+
+    // FIXME ; factoriser la verif de pass entre checklog (C) et action'] == 'UpdatePass (R)
+    // Check is password matches the one registered in DB
+    $isCurrentPasswordCorrect = password_verify($_POST['newPass'], $currentPassInDB['pass']);
+    if (!$currentPassInDB)
+    {
+        return false;
+    }
+    else
+    {   
+        return true;
+    }
+}
+
+
+
 function displaySingInView()
 {
     require('view/frontend/singInView.php');
@@ -109,7 +141,7 @@ function addNewMember($username, $pass, $email)
 {
     $newMember = insertMember($username, $pass, $email);
 
-    //success1 needed to display the confirmation message
+    //success2 needed to display the confirmation message
 header('Location: index.php?success=1#header');
 exit;
 }
@@ -141,11 +173,16 @@ function checkEmailAvailability($email)
         }
 }
 
+
+
+
+
+
 function checkLog($userName)
 {
     $checkLogIn = checkLogIn($userName);
 
-
+    // FIXME ; factoriser la verif de pass entre checklog (C) et action'] == 'UpdatePass (R)
     // Check is password matches the one registered in DB
     $isPasswordCorrect = password_verify($_POST['pass'], $checkLogIn['pass']);
     if (!$checkLogIn)

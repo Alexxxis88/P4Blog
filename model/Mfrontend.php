@@ -163,6 +163,12 @@ function insertMember($username, $pass, $email)
     $newMember->execute(array($username, $pass, $email));
 }
 
+function UpdatePass($newpass, $id)
+{
+    $db = dbConnect();
+    $UpdatePass = $db->prepare('UPDATE members SET pass = ? WHERE id = ?');
+    $UpdatePass->execute(array($newpass,$id));
+}
 
 
 function checkLogIn($userName)
@@ -195,6 +201,16 @@ function checkEmail($email)
     $checkEmail = $check->fetch();
 
     return $checkEmail;
+}
+
+function currentPass($currentPass)
+{
+    $db = dbConnect();
+    $check = $db->prepare('SELECT pass FROM members WHERE pass = ?');
+    $check->execute(array($currentPass));
+    $currentPass = $check->fetch();
+
+    return $currentPass;
 }
 
 
