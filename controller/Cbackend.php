@@ -52,11 +52,13 @@ function nbOfReportedComments() // NOT WORKING : display number of comments to m
 function approveComments($commentId){
     $commentApproved = approveComment($commentId);
     header('Location: ' . $_SERVER['HTTP_REFERER']);
+    exit;
 }
 function newPost($title, $content)
 {
     $newPost = insertNewPost($title, $content);
     header('Location: index.php?action=listPostsAdmin');
+    exit;
 }
 
 function displayPublishView()
@@ -74,4 +76,5 @@ function displayPostToEdit($postId)
 function updatePost($title, $content, $postId){
     $updatedPost = editPost($title, $content, $postId);
     header('Location: index.php?action=post&id=' . $postId);
+    exit;
 }

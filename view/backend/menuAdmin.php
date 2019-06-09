@@ -16,6 +16,13 @@
             </form>
         </div>
 
+         <!-- Change Password button -->
+         <div class="adminFields">
+            <form method="post" action ="index.php?action=changePasswordView">
+                <input type="submit" name="changePass" value ="Changer de Password" /> 
+            </form>
+        </div>
+
         <div style="text-align:center">
             <button class="adminBtns"><a href="index.php">Tous les chapitre</a></button>
             <button class="adminBtns"><a href="index.php?action=displayPublishView">Publier un chapitre</a></button>

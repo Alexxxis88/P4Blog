@@ -12,8 +12,15 @@
 
         <?php 
         // TODO faire en sorte que le boutton "retourner à la page précédénte" renvoi bien à la page précédente et non pas à l'index"
-        // il faut récupérer le action="" de la page précédente ? 
+        // il faut récupérer le action="" de la page précédente ? le code JS ci dessous bug pour la page sign in
         ?>
-        <button><a href="index.php">Retourner à la page précédente</a></button>
+        <button><a href="index.php">Retourner à la page d'accueil</a></button>
+        <button onclick="goBack()">Retourner à la page précédente</button>
+        <script>
+        function goBack() {
+        window.history.back();
+        }
+        </script>
+
     </body>
 </html>

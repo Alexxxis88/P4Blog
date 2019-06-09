@@ -12,7 +12,6 @@ try {
 
         elseif ($_GET['action'] == 'post') {
             if (isset($_GET['id']) && $_GET['id'] > 0) {
-
                 post();
 
                 // NOT WORKING : show more / less comments
@@ -109,7 +108,7 @@ try {
                 setcookie('hash_pass', '', time() + 365*24*3600, null, null, false, true);
                 
                 header('Location: index.php');
-
+                exit;
             }
             else{
                 throw new Exception('Vous êtes déja déconnecté');   

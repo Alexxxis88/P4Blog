@@ -22,6 +22,15 @@
                             <input type="submit" name="logOut" value ="Deconnexion" /> 
                         </form>
                     </div>    
+
+                    <!-- Change Password button -->
+                    <div class="adminFields">
+                            <form method="post" action ="index.php?action=changePasswordView">
+                                <input type="submit" name="changePass" value ="Changer de Password" /> 
+                            </form>
+                    </div>
+
+                    
                     
                     <?php
                     } //else if there is session information, it's used to display user name
@@ -34,7 +43,14 @@
                             <form method="post" action ="index.php?action=logOutCheck">
                                 <input type="submit" name="logOut" value ="Deconnexion" /> 
                             </form>
-                        </div>    
+                        </div> 
+                        
+                         <!-- Change Password button -->
+                        <div class="adminFields">
+                            <form method="post" action ="index.php?action=changePasswordView">
+                                <input type="submit" name="changePass" value ="Changer de Password" /> 
+                            </form>
+                        </div>
                         
                         <?php
                         }

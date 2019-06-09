@@ -48,6 +48,9 @@ function listPosts()
 // }
 
 
+
+
+
 //WORKING
 function post()
 {
@@ -76,9 +79,22 @@ $firstComment=($currentCommentPage-1)*$commentsPerPage; // first comment to read
 
     $lastPosts = getLastPosts();
     $post = getPost($_GET['id']);
+
+    //check if post exists in DB
+    if($post == false)
+    {
+        throw new Exception('Ce chapitre n\'existe pas');
+    }
+
+    
     $comments = getComments($_GET['id'], $firstComment, $commentsPerPage);
     require('view/frontend/postView.php');
 }
+
+
+
+
+
 
 //-----------------------------------------------------------------------------------------
 
@@ -95,6 +111,7 @@ function addNewMember($username, $pass, $email)
 
     //success1 needed to display the confirmation message
 header('Location: index.php?success=1#header');
+exit;
 }
 
 
@@ -152,10 +169,12 @@ function checkLog($userName)
            //redirects on the right page depending on the user group (user / admin) 
            if($checkLogIn['group_id'] == 0){
             header('Location: index.php');
+            exit;
            }
 
            elseif($checkLogIn['group_id'] == 1){
             header('Location: index.php?action=listPostsAdmin');
+            exit;
            }
 
            
@@ -187,6 +206,7 @@ function addComment($postId, $author, $comment)
     }
     else {
         header('Location: index.php?action=post&id=' . $postId);
+        exit;
     }
 }
 
@@ -194,12 +214,14 @@ function deleteComment($commentId)
 {
     $comDelete = eraseComment($commentId);
     header('Location: ' . $_SERVER['HTTP_REFERER']); //FIXME : SQL injection issue ? 
+    exit;
 
 } 
 
 function reportComments($commentId){
     $commentReported = reportComment($commentId);
     header('Location: index.php?action=post&id=' . $_GET['id'] . '#commentsAnchor'); //FIXME : SQL injection issue ? 
+    exit;
 }
 
 
@@ -208,6 +230,7 @@ function deletePost($postId)
 {
     $postDelete = erasePost($postId);
     header('Location: ' . $_SERVER['HTTP_REFERER']); //FIXME problem = when delete button used on a specific post (BE), sends back to post that has just been deleted. + not good to use ? see : https://stackoverflow.com/questions/5285031/back-to-previous-page-with-header-location-in-php
+    exit;
 } 
 
 //erase all the comments related to a post when "delete post" action is done
@@ -215,4 +238,5 @@ function deleteAllComments($postId)
 {
     $AllcomsDelete = eraseAllComments($postId);
     header('Location: ' . $_SERVER['HTTP_REFERER']); //FIXME problem = when delete button used on a specific post (BE), sends back to post that has just been deleted.
+    exit;
 } 
