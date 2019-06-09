@@ -98,7 +98,31 @@ header('Location: index.php?success=1#header');
 }
 
 
+function checkUsernameAvailability($userName)
+{
+    $checkUsername = checkUsername($userName);
+    if($checkUsername)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+}
 
+function checkEmailAvailability($email)
+{
+    $checkEmail = checkEmail($email);
+    if($checkEmail)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+}
 
 function checkLog($userName)
 {

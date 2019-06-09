@@ -175,6 +175,28 @@ function checkLogIn($userName)
     return $checkLogIn;
 }
 
+//FIXME : factoriser avec la fonction checkLogIn ? 
+function checkUsername($userName)
+{
+    $db = dbConnect();
+    $check = $db->prepare('SELECT username FROM members WHERE username = ?');
+    $check->execute(array($userName));
+    $checkUsername = $check->fetch();
+
+    return $checkUsername;
+}
+
+//FIXME : factoriser avec la fonction checkLogIn ? 
+function checkEmail($email)
+{
+    $db = dbConnect();
+    $check = $db->prepare('SELECT email FROM members WHERE email = ?');
+    $check->execute(array($email));
+    $checkEmail = $check->fetch();
+
+    return $checkEmail;
+}
+
 
 
 // General function to connect to database

@@ -87,13 +87,12 @@
 
     
    
-
+<h2 id="commentsAnchor">Commentaires</h2>   
 <?php
         // FIXME: factoriser le code avec l'affichage ou non (1)du formulaire de commentaire (2) du bouton signaler (3) du reste de l'affichage des boutons / menus si loggé en admin / user / pas loggé
         if((isset($_COOKIE['login']) AND !empty($_COOKIE['login'])) OR (isset($_SESSION['username']) AND !empty($_SESSION['username'])))
         {           
-        ?>
-            <h2 id="commentsAnchor">Commentaires</h2>       
+        ?>    
             <form action="index.php?action=addComment&amp;id=<?= $post['id'] ?>#commentsAnchor" method="post">
             <div>
                 <input type="text" id="author" name="author" required hidden value="<?php

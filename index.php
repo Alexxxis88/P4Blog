@@ -159,8 +159,22 @@ try {
                                 //hash password (security feature)
                                 $_POST['pass'] = password_hash($_POST['pass'], PASSWORD_DEFAULT);
 
-                                //when all tests(if) are valid, the new member is added
-                                addNewMember($_POST['username'], $_POST['pass'], $_POST['email']);
+
+                                //check if username of email are already taken
+                                if(checkUsernameAvailability($_POST['username']) == false){
+                                    if(checkEmailAvailability($_POST['email']) == false){
+                                        addNewMember($_POST['username'], $_POST['pass'], $_POST['email']);
+                                    }
+                                    else
+                                     {
+                                         throw new Exception('Cette adresse email n\'est pas disponible'); 
+                                     }
+                                }
+                                else
+                                 {
+                                     throw new Exception('Ce pseudo n\'est pas disponible'); 
+                                 }
+   
                             }
                             else{
                                 throw new Exception('L\'adresse email n\'est pas conforme'); 
