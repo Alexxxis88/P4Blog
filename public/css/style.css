@@ -67,6 +67,7 @@ button a:hover{
     border-radius: 10px;
     width:70%;
     height:100%;
+    overflow-wrap: break-word;
 }
 
 .postsBlock:hover{
@@ -93,8 +94,10 @@ button a:hover{
     background: rgb(231, 231, 231);
     padding:20px;
     margin:20px;
+    width:70%;
     height:100%;
     border-radius: 10px;
+    overflow-wrap: break-word;
 }
 
 
@@ -106,10 +109,12 @@ button a:hover{
     background: lightblue;
     margin:20px;
     border-radius: 10px;
+    overflow-wrap: break-word;
 }
 
 .lastPostsP{
     margin: 20px 20px 0 20px;
+
 }
 
 h4{
@@ -120,8 +125,12 @@ button:hover{
     cursor: pointer;
 }
 
+.comments{
+    overflow-wrap: break-word;
+}
 .reportedComments{
     background:rgb(245, 176, 176) !important;
+    overflow-wrap: break-word;
 }
 
 .reportedComments p:first-child{

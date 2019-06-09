@@ -24,8 +24,17 @@
             <?= nl2br($post['content']) ?>
             
         </p>
+        
+        <?php
+    // FIXME: factoriser le code avec l'affichage ou non (1)des boutons modifier / supprimer sur listPostsView et PostView (2) des boutons approuver / supprimer des com sur PostView (3) l'affichage du menu admin de template.php
+    if( (isset($_COOKIE['login']) AND $_COOKIE['login'] == 'Admin') OR  (isset($_SESSION['username']) AND $_SESSION['username'] == 'Admin'))
+    { 
+    ?>       
         <button class="adminBtns"><a href="index.php?action=manageView&id=<?=$post['id']?>">Modifier</a></button>
         <button class="adminBtns"><a href="index.php?action=deletePost&amp;id=<?= $post['id'] ?>" onclick="return confirm('Etes vous sûr?')" >Supprimer</a></button>
+    <?php
+    }  
+    ?>      
     </div>
 
 
@@ -79,22 +88,41 @@
     
    
 
-
-    <h2 id="commentsAnchor">Commentaires</h2>       
-    <form action="index.php?action=addComment&amp;id=<?= $post['id'] ?>#commentsAnchor" method="post">
-    <div>
-        <label for="author">Auteur</label><br />
-        <input type="text" id="author" name="author" required/>
-    </div>
-    <div>
-        <label for="comment">Commentaire</label><br />
-        <textarea id="comment" name="comment" required></textarea>
-    </div>
-    <div>
-        <input type="submit" />
-    </div>
-</form>
-
+<?php
+        // FIXME: factoriser le code avec l'affichage ou non (1)du formulaire de commentaire (2) du bouton signaler (3) du reste de l'affichage des boutons / menus si loggé en admin / user / pas loggé
+        if((isset($_COOKIE['login']) AND !empty($_COOKIE['login'])) OR (isset($_SESSION['username']) AND !empty($_SESSION['username'])))
+        {           
+        ?>
+            <h2 id="commentsAnchor">Commentaires</h2>       
+            <form action="index.php?action=addComment&amp;id=<?= $post['id'] ?>#commentsAnchor" method="post">
+            <div>
+                <input type="text" id="author" name="author" required hidden value="<?php
+                //FIXME : coder une solution plus propre / optimisée
+                if((isset($_COOKIE['login']) AND !empty($_COOKIE['login']))){
+                    echo $_COOKIE['login'];
+                }
+                else{
+                    echo $_SESSION['username'];
+                }
+                
+                ?>"  />
+            </div>
+            <div>
+                <label for="comment">Commentaire</label><br />
+                <textarea id="comment" name="comment" required></textarea>
+            </div>
+            <div>
+                <input type="submit" />
+            </div>
+            </form>
+        <?php
+        }
+        else{
+        ?>
+        <p><strong>Vous devez être connecté pour commenter ce chapitre.</strong></p>
+        <?php
+        }
+        ?> 
 
 <!-- displays the comments -->
 
@@ -111,7 +139,7 @@
               <p>Commentaire signalé <strong>' .$comment['flag'] . '</strong> fois En attente de modération.</p>';
     }else
     {
-        echo '<div>';
+        echo '<div class="comments">';
     }
     ?>
         <!-- transmor non html links in comments into clickable links -->
@@ -121,25 +149,43 @@
         <p><strong><?= htmlspecialchars($comment['author']) ?></strong> le <?= $comment['mod_comment_date'] ?></p>
         <p><?= nl2br($comment['comment']) ?></p>
 
-    
+        
+        <?php
+        // FIXME: factoriser le code avec l'affichage ou non (1)du formulaire de commentaire (2) du bouton signaler (3) du reste de l'affichage des boutons / menus si loggé en admin / user / pas loggé
+        if((isset($_COOKIE['login']) AND !empty($_COOKIE['login'])) OR (isset($_SESSION['username']) AND !empty($_SESSION['username'])))
+        {           
+        ?>
         <button class="userBtns"><a href="index.php?action=reportComment&amp;id=<?= $post['id'] ?>&amp;commentId=<?= $comment['id'] ?>" onclick="return alert('Commentaire signalé')">Signaler</a></button>
 
+        <?php
+        }
+        ?> 
+
+
+        
+
 
     
-    <?php 
-    //display approve button only if comment already reported
-        if($comment['flag'] > 0)
-    {
-        //FIXME : change class of the approve button
-        echo '<button class="adminBtns"><a href="index.php?action=approveComment&amp;id=' . $post['id'] . '&amp;commentId='. $comment['id'] . '"  onclick="return alert(\'Commentaire approuvé\')" >Approuver</a></button>' ;
-    }
-            
-    ?>    
+            <?php
+            // FIXME: factoriser le code avec l'affichage ou non (1)des boutons modifier / supprimer sur listPostsView et PostView (2) des boutons approuver / supprimer des com sur PostView (3) l'affichage du menu admin de template.php 
+            if( (isset($_COOKIE['login']) AND $_COOKIE['login'] == 'Admin') OR  (isset($_SESSION['username']) AND $_SESSION['username'] == 'Admin'))
+            {  
+                //display approve button only if comment already reported
+                    if($comment['flag'] > 0)
+                {
+                    //FIXME : change class of the approve button
+                    echo '<button class="adminBtns"><a href="index.php?action=approveComment&amp;id=' . $post['id'] . '&amp;commentId='. $comment['id'] . '"  onclick="return alert(\'Commentaire approuvé\')" >Approuver</a></button>' ;
+                }
+                        
+            ?>    
 
-        <!-- gets the commentId as a parameter in the URL of the comment to delete AND the post id to return on the same post after comment has been deleted-->
-        <button class="adminBtns"><a href="index.php?action=deleteComment&amp;id=<?= $post['id'] ?>&amp;commentId=<?= $comment['id'] ?>" onclick="return confirm('Etes vous sûr?')">Supprimer</a></button>
-    </div>
-    <?php
+                    <!-- gets the commentId as a parameter in the URL of the comment to delete AND the post id to return on the same post after comment has been deleted-->
+                    <button class="adminBtns"><a href="index.php?action=deleteComment&amp;id=<?= $post['id'] ?>&amp;commentId=<?= $comment['id'] ?>" onclick="return confirm('Etes vous sûr?')">Supprimer</a></button>
+            <?php
+            }
+            ?>           
+        </div>
+        <?php
     }
     ?>
     

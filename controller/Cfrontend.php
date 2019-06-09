@@ -104,6 +104,7 @@ function checkLog($userName)
 {
     $checkLogIn = checkLogIn($userName);
 
+
     // Check is password matches the one registered in DB
     $isPasswordCorrect = password_verify($_POST['pass'], $checkLogIn['pass']);
     if (!$checkLogIn)
@@ -124,8 +125,17 @@ function checkLog($userName)
                 setcookie('hash_pass', password_hash($_POST['pass'], PASSWORD_DEFAULT), time() + 365*24*3600, null, null, false, true);
             }
             
-           
+           //redirects on the right page depending on the user group (user / admin) 
+           if($checkLogIn['group_id'] == 0){
             header('Location: index.php');
+           }
+
+           elseif($checkLogIn['group_id'] == 1){
+            header('Location: index.php?action=listPostsAdmin');
+           }
+
+           
+
         }
         else {
             throw new Exception('Vérifiez vos identifiants de connexion');
@@ -134,7 +144,6 @@ function checkLog($userName)
         
     }
 
-    
 }
 
 
