@@ -277,3 +277,73 @@ function deleteAllComments($postId)
     header('Location: ' . $_SERVER['HTTP_REFERER']); //FIXME problem = when delete button used on a specific post (BE), sends back to post that has just been deleted.
     exit;
 } 
+
+
+// About
+function displayAboutView()
+{
+    require('view/frontend/aboutView.php');
+}
+
+
+// Contact form
+function displayContactView()
+{
+    require('view/frontend/contactView.php');
+}
+
+function sendMessageTest(){
+    mail('caffeinated@example.com', 'Mon Sujet',' $message');
+}
+
+
+function sendMessage()
+{
+    // Plusieurs destinataires
+    $to  = 'alexisxgautier@gmail.com, straightandalertrecords@gmail.com'; // notez la virgule
+
+    // Sujet
+    $subject = 'Demande d\'informations';
+
+    // message
+    $message = '
+    <html>
+     <head>
+      <title>Demande d\'informations</title>
+     </head>
+     <body>
+      <p>Voici les anniversaires à venir au mois d\'Août !</p>
+      <table>
+       <tr>
+        <th>Personne</th><th>Jour</th><th>Mois</th><th>Année</th>
+       </tr>
+       <tr>
+        <td>Josiane</td><td>3</td><td>Août</td><td>1970</td>
+       </tr>
+       <tr>
+        <td>Emma</td><td>26</td><td>Août</td><td>1973</td>
+       </tr>
+      </table>
+     </body>
+    </html>
+    ';
+
+    // Pour envoyer un mail HTML, l'en-tête Content-type doit être défini
+    $headers[] = 'MIME-Version: 1.0';
+    $headers[] = 'Content-type: text/html; charset=iso-8859-1';
+
+    
+    // En-têtes additionnels
+    $headers[] = 'To: Alexis <alexisxgautier@gmail.com>, Alexis2 <straightandalertrecords@gmail.com>';
+    $headers[] = 'From: Anniversaire <anniversaire@example.com>';
+    $headers[] = 'Cc: alexis@straightandalert.com';
+
+    // Envoi
+    mail($to, $subject, $message, implode("\r\n", $headers));
+
+
+    //success3 needed to display the confirmation message
+header('Location: index.php?success=3#header');
+exit;
+    
+}

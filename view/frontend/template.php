@@ -27,8 +27,8 @@
         <?= $content ?>
 
         <section id="footer">
-            <a href="contact.php">Contact</a>
-            <a href="about.php">A propos de l'auteur</a>
+            <a href="index.php?action=contact">Contact</a>
+            <a href="index.php?action=about">A propos de l'auteur</a>
             <button><a href="#header">back to top</a></button>
         </section>  
     </body>

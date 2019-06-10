@@ -267,7 +267,21 @@ try {
             
         }
 
+        elseif ($_GET['action'] == 'about') {
+            displayAboutView();
+        }
         
+        elseif ($_GET['action'] == 'contact') {
+            displayContactView();
+        }
+
+        // elseif ($_GET['action'] == 'sendMessage') {
+        //     sendMessage($_POST['firstName'], $_POST['lastName'], $_POST['contactEmail'], $_POST['messageContent']);  
+        // }
+
+        elseif ($_GET['action'] == 'sendMessageTest') {
+            sendMessageTest();  
+        }
 
 
         //Backend
@@ -343,6 +357,26 @@ try {
             </script>
             <?php    
             }
+
+
+        //Message sent confirmation message. FIXME create a messageConfirmationView for this ? but i don't want it displayed in a VIEW i want it displayed in the front office. Use template.php with a toggle display : none /block and create a modal box ? Z index etc jquerry 
+        if (isset($_GET['success']) AND $_GET['success'] == 3) 
+        {
+        ?>
+        <div class="signInConfirmation"> <!--FIXME : changer nom de la classe, un truc générique ? + update CSS  -->
+            <p>Votre message à bien été envoyé.</p>
+            <p>Jean Forteroche vous répondra rapidement !</p>
+        </div>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+        <script type="text/javascript" >
+        let delayConfirmationMsg = setTimeout(hideThanks, 1500);
+        function hideThanks(){
+    $(".signInConfirmation").fadeOut();
+    }
+        </script>
+        <?php    
+        }
+    
 
 
     }
