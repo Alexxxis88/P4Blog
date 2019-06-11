@@ -72,17 +72,58 @@ try {
 
 
 
-        elseif ($_GET['action'] == 'deleteAllSelectedComments') {
-            deleteAllSelectedComments(implode(",",$_POST["supprimer"]));
-            echo $_POST["supprimer"];
-        }
+        // elseif ($_GET['action'] == 'deleteAllSelectedComments') {
+        //     deleteAllSelectedComments($comma_separated);
+        // }
 
 
+        // elseif ($_GET['action'] == 'deleteAllSelectedComments'){ //working
+        //     deleteAllSelectedComments($arrayCommentsIDs); 
+
+        //     // deleteAllSelectedComments(array(156, 164)); //working
+        //     // deleteAllSelectedComments(implode(",",$_POST["supprimer"]));
+
+        //     // deleteAllSelectedCommentsTEST(); //working
+        // }     
+
+
+
+        // elseif ($_GET['action'] == 'manageComments') {
+        //     listAllComments();
+        //    if ($_GET['action'] == 'deleteAllSelectedComments'){
+        //         deleteAllSelectedComments($arrayCommentsIDs); 
+        //    }
+            
+        // }
+
+
+        //dernier essai en date
+        // elseif ($_GET['action'] == 'manageComments') {
+        //     ManageComments($_POST['supprimer']); // j'essaie de récupérer le tableau de commentsView.php 
+            
+        // }
+
+        // elseif ($_GET['action'] == 'deleteAllSelectedComments') {
+        //     ManageComments($_POST['supprimer']); // j'essaie de récupérer le tableau de commentsView.php 
+            
+        // }
 
 
         elseif ($_GET['action'] == 'manageComments') {
-            listAllComments();
+            listAllComments(); 
+            
         }
+
+        elseif ($_GET['action'] == 'deleteAllSelectedComments') {
+            deleteAllSelectedComments($_POST['supprimer']); // j'essaie de récupérer le tableau de commentsView.php 
+            
+        }
+
+
+
+
+
+        
 
         elseif ($_GET['action'] == 'approveComment') {
             approveComments($_GET['commentId']);

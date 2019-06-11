@@ -26,13 +26,36 @@ function getNewComments()
 }
 
 
+
+
+
+
 //must receive an array of ids to delete all the comments at once. (?) = my array, see here https://www.tutorialspoint.com/mysql/mysql-in-clause.htm
 function eraseAllSelectedComments($arrayCommentsIDs) //NOT WORKING :
 {
-    $db = dbConnectAdmin();
-    $eraseAllSelectedComments = $db->prepare('DELETE FROM comments WHERE id IN (?)');
-    $eraseAllSelectedComments->execute(array($arrayCommentsIDs));
+        //on compte la longueur du tableau pour arrêter la boucle for au bon moment
+        $arrayLength = count($arrayCommentsIDs, COUNT_NORMAL);
+    //on fait une boucle pour injecter la VALEUR ENTIERE de chaque entrée du tableau en tant que paramètre ? de (IN)
+    for( $i = 0; $i < $arrayLength; $i++){
+        $id = $arrayCommentsIDs[$i];
+        $db = dbConnectAdmin();
+        $eraseAllSelectedComments = $db->prepare('DELETE FROM comments WHERE id IN (?)'); // je veux que ? soit les valeurs successives d'un tableau donc je dois faire une boucle
+        $eraseAllSelectedComments->execute(array($id));
+    }
+    
 }
+
+
+// function eraseAllSelectedCommentsTEST() //NOT WORKING :
+// {
+//     $db = dbConnectAdmin();
+//     $eraseAllSelectedComments = $db->exec('DELETE FROM comments WHERE id IN (150,153)'); //working
+//     // $eraseAllSelectedComments->execute(array($arrayCommentsIDs));
+// }
+
+
+
+
 
 
 function approveComment($commentId){

@@ -7,19 +7,59 @@ function listPostsAdmin()
     require('view/backend/adminView.php');
 }
 
+
+
+
+
+
+
+
+
+// function ManageComments($arrayCommentsIDs){
+//     $reportedComments = getReportedComments();
+//     $newComments = getNewComments();
+    
+    
+//     if(isset($arrayCommentsIDs) && !empty($arrayCommentsIDs)){
+//         $deleteAllSelectedComments = eraseAllSelectedComments($arrayCommentsIDs);
+//     }
+    
+//     require('view/backend/commentsView.php');
+
+// }
+
+
+
+
+
+
+
+
+
+//old code before grouping listAllComments and deleteAllSelectedComments in ManageComments()
 //display reported and new comments
 function listAllComments()
 {
     $reportedComments = getReportedComments();
     $newComments = getNewComments();
-    require('view/backend/commentsView.php');
+    include_once('view/backend/commentsView.php');
 }
 
 
-function deleteAllSelectedComments($arrayCommentsIDs){ // NOT WORKING : display number of comments to manage 
+function deleteAllSelectedComments($arrayCommentsIDs){ // NOT WORKING :
+    
+    // $arrayCommentsIDs = array(161, 162, 163, 164); //working
     $deleteAllSelectedComments = eraseAllSelectedComments($arrayCommentsIDs);
-    // header('Location: ' . $_SERVER['HTTP_REFERER']);
+    include_once('view/backend/commentsView.php');
+    header('Location: ' . $_SERVER['HTTP_REFERER']);
 }
+
+
+// function deleteAllSelectedCommentsTEST(){ // working
+//     $deleteAllSelectedCommentsTEST = eraseAllSelectedCommentsTEST();
+    
+//     // header('Location: ' . $_SERVER['HTTP_REFERER']);
+// }
 
 
 function approveComments($commentId){
