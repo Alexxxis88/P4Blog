@@ -292,58 +292,30 @@ function displayContactView()
     require('view/frontend/contactView.php');
 }
 
-function sendMessageTest(){
-    mail('caffeinated@example.com', 'Mon Sujet',' $message');
-}
-
-
-function sendMessage()
+function sendMessage($firstName, $lastName, $contactEmail, $topic, $messageContent)
 {
-    // Plusieurs destinataires
-    $to  = 'alexisxgautier@gmail.com, straightandalertrecords@gmail.com'; // notez la virgule
-
-    // Sujet
-    $subject = 'Demande d\'informations';
-
-    // message
+    $to  = 'alexisxgautier@gmail.com, jean-forteroche@jeanforteroche.com';
     $message = '
     <html>
-     <head>
-      <title>Demande d\'informations</title>
-     </head>
-     <body>
-      <p>Voici les anniversaires à venir au mois d\'Août !</p>
-      <table>
-       <tr>
-        <th>Personne</th><th>Jour</th><th>Mois</th><th>Année</th>
-       </tr>
-       <tr>
-        <td>Josiane</td><td>3</td><td>Août</td><td>1970</td>
-       </tr>
-       <tr>
-        <td>Emma</td><td>26</td><td>Août</td><td>1973</td>
-       </tr>
-      </table>
-     </body>
+        <body>
+            <p>' .  $messageContent . '</p>
+        </body>
     </html>
     ';
 
-    // Pour envoyer un mail HTML, l'en-tête Content-type doit être défini
+    // Headers Content-type must be defined to send an HTML email
     $headers[] = 'MIME-Version: 1.0';
     $headers[] = 'Content-type: text/html; charset=iso-8859-1';
 
     
-    // En-têtes additionnels
-    $headers[] = 'To: Alexis <alexisxgautier@gmail.com>, Alexis2 <straightandalertrecords@gmail.com>';
-    $headers[] = 'From: Anniversaire <anniversaire@example.com>';
-    $headers[] = 'Cc: alexis@straightandalert.com';
+    // Additional headers
+    $headers[] = 'To: Alexis <alexisxgautier@gmail.com>, Jean <jean-forteroche@jeanforteroche.com>';
+    $headers[] = 'From: ' . $firstName . ' '. $lastName . '<'. $contactEmail . '>';
 
-    // Envoi
-    mail($to, $subject, $message, implode("\r\n", $headers));
+    mail($to, $topic, $message, implode("\r\n", $headers));
 
 
     //success3 needed to display the confirmation message
-header('Location: index.php?success=3#header');
-exit;
-    
+    header('Location: index.php?success=3#header');
+    exit;  
 }

@@ -200,8 +200,7 @@ try {
         }
 
         elseif ($_GET['action'] == 'addNewMember') {
-
-           
+ 
             //testing if all fields a filled
             if (isset($_POST['username']) && isset($_POST['pass']) && isset($_POST['passCheck']) && isset($_POST['email'])) {
 
@@ -263,25 +262,87 @@ try {
             }
             else {
                 throw new Exception('Il manque des informations.');
-            }   
-            
+            }       
         }
 
         elseif ($_GET['action'] == 'about') {
             displayAboutView();
         }
         
+        //Contact page
         elseif ($_GET['action'] == 'contact') {
             displayContactView();
         }
 
-        // elseif ($_GET['action'] == 'sendMessage') {
-        //     sendMessage($_POST['firstName'], $_POST['lastName'], $_POST['contactEmail'], $_POST['messageContent']);  
-        // }
 
-        elseif ($_GET['action'] == 'sendMessageTest') {
-            sendMessageTest();  
-        }
+
+
+
+
+
+
+
+        elseif ($_GET['action'] == 'sendMessage') {
+   
+            //testing if all fields a filled
+            if (isset($_POST['firstName']) && isset($_POST['lastName']) && isset($_POST['contactEmail']) && isset($_POST['topic']) && isset($_POST['messageContent'])) 
+            {
+                //to avoid problems with inputs
+                $_POST['firstName'] = htmlspecialchars($_POST['firstName']);
+                $_POST['lastName'] = htmlspecialchars($_POST['lastName']);
+                $_POST['contactEmail'] = htmlspecialchars($_POST['contactEmail']);
+                $_POST['topic'] = htmlspecialchars($_POST['topic']);
+                $_POST['messageContent'] = htmlspecialchars($_POST['messageContent']);
+
+
+                $accentedCharacters = "àèìòùÀÈÌÒÙáéíóúýÁÉÍÓÚÝâêîôûÂÊÎÔÛãñõÃÑÕäëïöüÿÄËÏÖÜŸçÇßØøÅåÆæœ";
+                
+                //testing if firstName only has authorised caracters   
+                if (preg_match("#^[a-z". $accentedCharacters ."]+[' -]?[a-z". $accentedCharacters ."]+$#i",$_POST['firstName']))
+                {
+                    //testing if lastName only has authorised caracters
+                    if (preg_match("#^[a-z". $accentedCharacters ."]+[' -]?[a-z". $accentedCharacters ."]+$#i",$_POST['lastName']))
+                    {
+                        //testing if email is conform
+                        if( preg_match("#^[a-z0-9._-]+@[a-z0-9._-]{2,}\.[a-z]{2,4}$#i", $_POST['contactEmail']))
+                        { 
+                            //testing if topic is conform
+                            if (preg_match("#^[a-z". $accentedCharacters ."(' \-)*]+[a-z". $accentedCharacters ."]+$#i",$_POST['topic']))
+                            {
+                                sendMessage($_POST['firstName'], $_POST['lastName'], $_POST['contactEmail'], $_POST['topic'],  $_POST['messageContent']);
+                            }
+                            else{
+                                throw new Exception('L\'intitulé n\'est pas conforme'); 
+                            } 
+                        }
+                        else{
+                            throw new Exception('L\'adresse email n\'est pas conforme');   
+                        }
+                    }
+                    else{
+                        throw new Exception('Le nom n\'est pas conforme.');
+                    }    
+                }
+                else{
+                    throw new Exception('Le prénom n\'est pas conforme.');
+                }
+            }
+            else {
+                throw new Exception('Il manque des informations.');
+            }      
+        } 
+
+
+
+
+
+
+
+
+
+
+
+
 
 
         //Backend
