@@ -141,7 +141,7 @@
         echo '<div class="comments">';
     }
     ?>
-        <!-- transmor non html links in comments into clickable links -->
+        <!-- transform non html links in comments into clickable links -->
         <?php $comment['comment'] = htmlspecialchars($comment['comment']);
         $comment['comment'] = preg_replace('#http[s]?://[a-z0-9._/-]+#i', '<a href="$0">$0</a>', $comment['comment']); ?>
 
