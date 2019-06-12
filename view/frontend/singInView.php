@@ -46,11 +46,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['recaptcha']))
         <div class="singIn">
             <form action="index.php?action=addNewMember" method="post">
                 <div>
-                    <label for="username">Le pseudo doit faire 4 caractères minimum et peut contenir des lettres et des chiffres</label><br />
+                    <label for="username">Le pseudo doit faire 4 caractères minimum (20 maximum) et peut contenir des lettres et des chiffres</label><br />
                     <input type="text" id="username" name="username" placeholder="Votre Pseudo" required/>
                 </div>
                 <div>
-                    <label for="pass">Le password doit faire 8 caractères minimum et peut contenir des lettres, chiffres et caractères spéciaux authorisés ( . - _ ! ?)</label><br />
+                    <label for="pass">Le password doit faire 8 caractères minimum (20 maximum) et peut contenir des lettres, chiffres et caractères spéciaux authorisés ( . - _ ! ?)</label><br />
                     <input type="password" id="pass" name="pass" placeholder="Votre Password" required/>
                 </div>
                 <div>

@@ -107,9 +107,13 @@
                 ?>"  />
             </div>
             <div>
-                <label for="comment">Commentaire</label><br />
-                <textarea id="comment" name="comment" required></textarea>
+                <label for="comment">Commentaire (700 carac. max)</label><br />
+                <textarea id="comment" name="comment" cols="80" rows="5" maxlength="700" required onkeyup="textCounter(this,'counter',700);"></textarea>
             </div>
+
+            <!-- Used to count how many characters there is left -->
+            <input disabled  maxlength="3" size="3" value="700" id="counter">
+
             <div>
                 <input type="submit" />
             </div>
@@ -122,6 +126,27 @@
         <?php
         }
         ?> 
+
+
+<!-- Used to count how many characters there is left -->
+<!-- FIXME factoring needed with the same function in contactView.php and postView.php -->
+   
+<script>
+function textCounter(field,field2,maxlimit)
+{
+ let countfield = document.getElementById(field2);
+ if ( field.value.length > maxlimit ) {
+  field.value = field.value.substring( 0, maxlimit );
+  return false;
+ } else {
+  countfield.value = maxlimit - field.value.length;
+ }
+}
+</script>
+
+
+
+
 
 <!-- displays the comments -->
 

@@ -17,8 +17,8 @@
                     <input type="password" id="currentPass" name="currentPass" placeholder="Tapez votre Password actuel" required/>
                 </div>
                 <div>
-                    <label for="newPass">Votre nouveau password doit faire 8 caractères minimum et peut contenir des lettres, chiffres et caractères spéciaux authorisés ( . - _ ! ?)</label><br />
-                    <input type="password" id="newPass" name="newPass" placeholder="Votre nouveau password" required/>
+                    <label for="newPass">Votre nouveau password doit faire 8 caractères minimum (20 maximum) et peut contenir des lettres, chiffres et caractères spéciaux authorisés ( . - _ ! ?)</label><br />
+                    <input type="password" id="newPass" name="newPass" placeholder="Votre nouveau password" maxlength="20" required/>
                 </div>
                 <div>
                     <input type="submit" value="Mettre à jour le password"/>

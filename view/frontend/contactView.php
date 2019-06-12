@@ -10,11 +10,11 @@
             <form action="index.php?action=sendMessage" method="post">
                 <div>
                     <label for="firstName">Votre prénom</label><br />
-                    <input type="text" id="firstName" name="firstName" placeholder="Votre prénom" required/>
+                    <input type="text" id="firstName" name="firstName" placeholder="Votre prénom" maxlength="20" required/>
                 </div>
 				<div>
                     <label for="lastName">Votre nom</label><br />
-                    <input type="text" id="lastName" name="lastName" placeholder="Votre nom" required/>
+                    <input type="text" id="lastName" name="lastName" placeholder="Votre nom" maxlength="20" required/>
                 </div>
                 <div>
                     <label for="contactEmail">Votre adresse email</label><br />
@@ -22,13 +22,18 @@
                 </div>
                 <div>
 					<label for="topic">Intitulé de votre message</label><br />
-                    <input type="topic" id="topic" name="topic" placeholder="Intitulé de votre message" required/>
+                    <input type="topic" id="topic" name="topic" placeholder="Intitulé de votre message" maxlength="40"  required/>
        			</div>
                 <div>
                 <div>
-					<label for="messageContent">Votre message</label><br />
-					<textarea id="messageContent" name="messageContent" required>Votre message</textarea>
-       			</div>
+                    <label for="messageContent">Votre message</label><br />
+                    
+                    <textarea id="messageContent" name="messageContent" cols="100" rows="15" maxlength="1000" required onkeyup="textCounter(this,'counter',1000);">Votre message</textarea>
+                   </div>
+
+                   <!-- Used to count how many characters there is left -->
+                   <input disabled  maxlength="3" size="3" value="1000" id="counter">
+
                 <div>
 				<!-- FIXME ; rajouter le captcha -->
                 <!-- <input type="hidden" name="recaptcha" id="recaptcha">  -->
@@ -37,3 +42,19 @@
             </form>
         </div> 
         <p><a href="index.php">Retour à la page d'accueil</a></p>
+
+<!-- Used to count how many characters there is left -->
+<!-- FIXME factoring needed with the same function in contactView.php and postView.php -->
+   
+<script>
+function textCounter(field,field2,maxlimit)
+{
+ let countfield = document.getElementById(field2);
+ if ( field.value.length > maxlimit ) {
+  field.value = field.value.substring( 0, maxlimit );
+  return false;
+ } else {
+  countfield.value = maxlimit - field.value.length;
+ }
+}
+</script>

@@ -145,7 +145,7 @@ try {
 
                 if(currentPassInDB($_POST['currentPass']) == false)
                 {
-                    if(preg_match("#^[a-z".$accentedCharactersNewPass ."0-9._!?-]{8,}$#i", $_POST['newPass']) )
+                    if(preg_match("#^[a-z".$accentedCharactersNewPass ."0-9._!?-]{8,20}$#i", $_POST['newPass']) )
                     {
                         //if the password is Correct check if current and new pass are the same
                         if($_POST['currentPass'] != $_POST['newPass'])
@@ -212,11 +212,11 @@ try {
 
                 $accentedCharacters = "àèìòùÀÈÌÒÙáéíóúýÁÉÍÓÚÝâêîôûÂÊÎÔÛãñõÃÑÕäëïöüÿÄËÏÖÜŸçÇßØøÅåÆæœ";
                 
-                //testing if username only has authorised caracters   
-                if (preg_match("#^[a-z".$accentedCharacters ."0-9]{4,}$#i",$_POST['username']))
+                //testing if username only has authorised caracters and length  
+                if (preg_match("#^[a-z".$accentedCharacters ."0-9]{4,20}$#i",$_POST['username']))
                 {
                     //testing if passwords is conform
-                    if (preg_match("#^[a-z".$accentedCharacters ."0-9._!?-]{8,}$#i",$_POST['pass']) ){
+                    if (preg_match("#^[a-z".$accentedCharacters ."0-9._!?-]{8,20}$#i",$_POST['pass']) ){
 
                         //testing if both passwords match
                         if($_POST['pass'] == $_POST['passCheck']){
@@ -249,7 +249,7 @@ try {
                             } 
                         }
                         else{
-                            throw new Exception('Les deux mots de pass ne sont pas identiques');   
+                            throw new Exception('Les deux mots de passe ne sont pas identiques');   
                         }
                     }
                     else{
