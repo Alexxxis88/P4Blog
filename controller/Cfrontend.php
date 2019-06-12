@@ -242,7 +242,8 @@ function addComment($postId, $author, $comment)
         throw new Exception('Impossible d\'ajouter le commentaire !');
     }
     else {
-        header('Location: index.php?action=post&id=' . $postId);
+        //success4 needed to display the confirmation message
+        header('Location: index.php?action=post&id=' . $postId . '&success=4#commentsAnchor');
         exit;
     }
 }

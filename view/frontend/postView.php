@@ -93,7 +93,7 @@
         if((isset($_COOKIE['login']) AND !empty($_COOKIE['login'])) OR (isset($_SESSION['username']) AND !empty($_SESSION['username'])))
         {           
         ?>    
-            <form action="index.php?action=addComment&amp;id=<?= $post['id'] ?>#commentsAnchor" method="post">
+            <form action="index.php?action=addComment&amp;id=<?= $post['id'] ?>" method="post">
             <div>
                 <input type="text" id="author" name="author" required hidden value="<?php
                 //FIXME : coder une solution plus propre / optimisée
@@ -115,7 +115,7 @@
             <input disabled  maxlength="3" size="3" value="700" id="counter">
 
             <div>
-                <input type="submit" />
+            <input type="submit"/>
             </div>
             </form>
         <?php

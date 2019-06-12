@@ -172,6 +172,22 @@ button:hover{
     border-radius: 30px;
 }
 
+
+.commentConfirmation{
+    text-align: center;
+    background : lightgreen;
+    width : 200px;
+    height : 200px;
+    z-index : 2;
+    position: absolute;
+    top: 95vw;
+    right: 50vw;
+    left: 50vw;
+    bottom: 50vw;
+    border-radius: 30px;
+}
+
+
 .about{
     display:flex;
     align-items: center;

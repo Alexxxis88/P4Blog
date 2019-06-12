@@ -14,6 +14,24 @@ try {
             if (isset($_GET['id']) && $_GET['id'] > 0) {
                 post();
 
+                //Update pass confirmation message. FIXME create a View for this ? but i don't want it displayed in a VIEW i want it displayed in the front office. Use template.php with a toggle display : none /block and create a modal box ? Z index etc jquerry 
+        if (isset($_GET['success']) AND $_GET['success'] == 4) 
+        {
+        ?>
+        <div class="commentConfirmation"> <!--FIXME : changer nom de la classe, un truc générique ? + update CSS  -->
+            <p>Merci pour votre commentaire.</p>
+            <p>Il sera affiché après validation d'un modérateur.</p>
+        </div>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+        <script type="text/javascript" >
+        let delayConfirmationMsg = setTimeout(hideThanks, 1500);
+        function hideThanks(){
+    $(".commentConfirmation").fadeOut();
+    }
+        </script>
+        <?php    
+        }
+
                 // NOT WORKING : show more / less comments
             //    if (isset($_GET['showComments'])){ 
             //     post($_GET['showComments']);
@@ -423,7 +441,7 @@ try {
     else {
         listPosts();
 
-        //Sing in confirmation message. FIXME create a signInConfirmationView for this ? but i don't want it displayed in a VIEW i want it displayed in the front office. Use template.php with a toggle display : none /block and create a modal box ? Z index etc jquerry 
+        //Sing in confirmation message. FIXME create a View for this ? but i don't want it displayed in a VIEW i want it displayed in the front office. Use template.php with a toggle display : none /block and create a modal box ? Z index etc jquerry 
         if (isset($_GET['success']) AND $_GET['success'] == 1) 
             {
             ?>
@@ -441,7 +459,7 @@ try {
             <?php    
             }
         
-        //Sing in confirmation message. FIXME create a signInConfirmationView for this ? but i don't want it displayed in a VIEW i want it displayed in the front office. Use template.php with a toggle display : none /block and create a modal box ? Z index etc jquerry 
+        //Update pass confirmation message. FIXME create a View for this ? but i don't want it displayed in a VIEW i want it displayed in the front office. Use template.php with a toggle display : none /block and create a modal box ? Z index etc jquerry 
         if (isset($_GET['success']) AND $_GET['success'] == 2) 
             {
             ?>
@@ -460,7 +478,7 @@ try {
             }
 
 
-        //Message sent confirmation message. FIXME create a messageConfirmationView for this ? but i don't want it displayed in a VIEW i want it displayed in the front office. Use template.php with a toggle display : none /block and create a modal box ? Z index etc jquerry 
+        //Message sent confirmation message. FIXME create a View for this ? but i don't want it displayed in a VIEW i want it displayed in the front office. Use template.php with a toggle display : none /block and create a modal box ? Z index etc jquerry 
         if (isset($_GET['success']) AND $_GET['success'] == 3) 
         {
         ?>
