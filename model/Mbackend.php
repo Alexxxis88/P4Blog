@@ -27,6 +27,55 @@ function getTotalPagesAdmin(){
 
 
 //gets the Reported comments (where flag >0 and sort them by number of time reported OR by date showing older first if reported the same nb of times)
+function getAllUsers()
+{
+    $db = dbConnectAdmin();
+    $allUsers = $db->query('SELECT id, username, email, DATE_FORMAT(registration_date, \'%d/%m/%Y à %Hh%imin%ss\') AS mod_registration_date, group_id FROM members ORDER BY username');
+
+    return $allUsers;
+}
+
+
+
+//must receive an array of ids to delete all the users at once. (?) = my array, see here https://www.tutorialspoint.com/mysql/mysql-in-clause.htm
+function eraseAllSelectedUsers($arrayUsersIDs) //NOT WORKING :
+{
+    //on compte la longueur du tableau pour arrêter la boucle for au bon moment
+    $arrayLength = count($arrayUsersIDs, COUNT_NORMAL);
+    
+    //on fait une boucle pour injecter la VALEUR ENTIERE de chaque entrée du tableau $arrayUsersIDs en tant que paramètre ? de (IN)
+    for( $i = 0; $i < $arrayLength; $i++){
+        $id = $arrayUsersIDs[$i];
+        $db = dbConnectAdmin();
+        $eraseAllSelectedUsers = $db->prepare('DELETE FROM members WHERE id IN (?)'); // je veux que ? soit les valeurs successives d'un tableau donc je dois faire une boucle
+        $eraseAllSelectedUsers->execute(array($id));
+    }
+    
+}
+
+
+function eraseUser($userId)
+{
+    $db = dbConnect();
+    $useDelete = $db->prepare('DELETE FROM members WHERE id = ?');
+    $useDelete->execute(array($userId));
+}
+
+
+function updateRole($userRole, $userId)
+{
+    $db = dbConnect();
+    $userUpdate = $db->prepare('UPDATE members SET group_id = ? WHERE id = ?');
+    $userUpdate->execute(array($userRole, $userId));
+}
+
+
+
+
+
+
+
+//gets the Reported comments (where flag >0 and sort them by number of time reported OR by date showing older first if reported the same nb of times)
 function getReportedComments()
 {
     $db = dbConnectAdmin();
@@ -89,7 +138,6 @@ function getNbOfReportedComments() // NOT WORKING : display number of comments t
     $reportedCommentNb = $db->query('SELECT SUM(flag) AS flag_total FROM comments');
 
     return $reportedCommentNb;
-
 }
 
 

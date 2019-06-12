@@ -2,7 +2,12 @@
 
 <?php ob_start(); ?>
 
-<h2>Commentaires signalés</h2>
+<div class="manageComBtns">
+        <button class="manageComBtn"><a href="#reportedAnchor">Signalés</a></button>
+        <button class="manageComBtn"><a href="#publishdAnchor">A publier</a></button>
+</div>        
+
+<h2 id="reportedAnchor">Commentaires signalés</h2>
 <form action="index.php?action=manageAllSelectedComments" method="post"> 
         <input type="checkbox" id="checkAllReported" checked>
         <label for="checkAllReported"> Tout sélectionner / désélectionner </label>
@@ -79,7 +84,7 @@
                 }
        </script>   
 
-<h2>Commentaires à publier</h2>
+<h2 id="publishdAnchor">Commentaires à publier</h2>
 <form action="index.php?action=publishAllSelectedComments" method="post"> 
         <input type="checkbox" id="checkAllToPublish" checked>
         <label for="checkAllToPublish"> Tout sélectionner / désélectionner </label>

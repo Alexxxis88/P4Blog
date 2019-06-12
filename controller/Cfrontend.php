@@ -194,7 +194,7 @@ function checkLog($userName)
         if ($isPasswordCorrect) {
             $_SESSION['id'] = $checkLogIn['id'];
             $_SESSION['username'] = $userName;
-            $userNameSession = $_SESSION['username'];
+            $userNameSession = $_SESSION['username']; //FIXME : USELESS ? 
             
             //if the autolog checkbox is selected COOKIES are created
             if(isset($_POST['autoLogIn']))
@@ -267,7 +267,7 @@ function reportComments($commentId){
 function deletePost($postId)
 {
     $postDelete = erasePost($postId);
-    header('Location: ' . $_SERVER['HTTP_REFERER']); //FIXME problem = when delete button used on a specific post (BE), sends back to post that has just been deleted. + not good to use ? see : https://stackoverflow.com/questions/5285031/back-to-previous-page-with-header-location-in-php
+    header('Location: index.php');
     exit;
 } 
 
@@ -275,8 +275,6 @@ function deletePost($postId)
 function deleteAllComments($postId)
 {
     $AllcomsDelete = eraseAllComments($postId);
-    header('Location: ' . $_SERVER['HTTP_REFERER']); //FIXME problem = when delete button used on a specific post (BE), sends back to post that has just been deleted.
-    exit;
 } 
 
 

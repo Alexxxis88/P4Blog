@@ -82,8 +82,9 @@ try {
 
         elseif ($_GET['action'] == 'deletePost') {
             if (isset($_GET['id']) && $_GET['id'] > 0) {
-                deletePost($_GET['id']);
-                deleteAllComments($_GET['id']); //delete all the comments related to the post we're deleting with deletePost()
+                $postId = $_GET['id'];
+                deleteAllComments($postId); //delete all the comments related to the post we're deleting with deletePost()
+                deletePost($postId);
             }
             else {
                 throw new Exception('Aucun identifiant de billet envoyé');
@@ -368,6 +369,64 @@ try {
             listPostsAdmin();
             // nbOfReportedComments(); NOT WORKING : display number of comments working
         }
+
+
+
+
+
+
+
+
+
+
+        elseif ($_GET['action'] == 'manageUsers') {
+            listAllUsers();
+        }
+
+
+       
+
+
+
+        //to delete all selected users
+        elseif ($_GET['action'] == 'manageAllSelectedUsers') { //NOT WORKING
+            if(isset($_POST['deleteSelectedUsers'])){
+                deleteAllSelectedUsers($_POST['selectUsers']);  
+            }
+            else{
+                throw new Exception('Il y a une erreur');
+            }  
+        }
+
+
+         //to update role
+         elseif ($_GET['action'] == 'updateRole') { //NOT WORKING
+            if(isset($_GET['role'])){
+                updateUserRole($_GET['role'], $_GET['userID']);  
+            }
+            else{
+                throw new Exception('Il y a une erreur');
+            }  
+        }
+
+
+
+
+
+        //rajouter une fonction qui va etre liée a un bouton et qui va update le role de l'user
+
+
+        elseif ($_GET['action'] == 'deleteUser') { //WORKING
+            if (isset($_GET['userID']) && $_GET['userID'] > 0) {
+                deleteUser($_GET['userID']);
+            }
+            else {
+                throw new Exception('Aucun identifiant de billet envoyé');
+            }
+        }
+
+
+        
 
 
 

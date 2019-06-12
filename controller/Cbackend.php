@@ -44,6 +44,44 @@ function listPostsAdmin()
 
 
 
+
+
+
+//display all users
+function listAllUsers()
+{
+    $allUsers = getAllUsers();
+    require('view/backend/usersView.php');
+}
+
+
+function deleteAllSelectedUsers($arrayUsersIDs){
+    
+    // $arrayCommentsIDs = array(161, 162, 163, 164); //working FIXME : a supprimer
+    $deleteAllSelectedUsers = eraseAllSelectedUsers($arrayUsersIDs);
+    header('Location: ' . $_SERVER['HTTP_REFERER']);
+}
+
+
+function deleteUser($userId)
+{
+    $userDelete = eraseUser($userId);
+    header('Location: ' . $_SERVER['HTTP_REFERER']); //FIXME : SQL injection issue ? 
+    exit;
+
+} 
+
+
+function updateUserRole($userRole, $userId)
+{
+    $updateUserRole = updateRole($userRole, $userId);
+    header('Location: ' . $_SERVER['HTTP_REFERER']); //FIXME : SQL injection issue ? 
+    exit;
+}
+
+
+
+
 //display reported and new comments
 function listAllComments()
 {
@@ -73,7 +111,7 @@ function approveAllSelectedComments($arrayCommentsIDs){
 function nbOfReportedComments() // NOT WORKING : display number of comments to manage 
 {
     $nbOfReportedComments = getNbOfReportedComments();
-    require('view/backend/backendTemplate.php');
+    require('view/backend/menuAdmin.php');
 }
 
 

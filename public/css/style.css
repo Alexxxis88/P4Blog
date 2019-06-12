@@ -125,6 +125,30 @@ button:hover{
     cursor: pointer;
 }
 
+.adminMenu{
+    display:flex;
+    justify-content : center;
+}
+.comAlert{
+    display:block;
+    width:15px;
+    height:15px;
+    background:green;
+    border-radius:50%;
+}
+
+.manageComBtns{
+    display:flex;
+    position: fixed;
+    top: 0;
+    right: 0;
+}
+
+.manageComBtn{
+    background:orange;
+    margin:5px;
+}
+
 .comments{
     overflow-wrap: break-word;
 }
@@ -155,6 +179,18 @@ button:hover{
     text-align: center;
     margin: 50px;
     padding: 20px;
+}
+
+
+
+.usersDisplay{
+    background:lightgrey !important;
+    overflow-wrap: break-word;
+}
+
+.usersDisplay p:first-child{
+    background: grey;
+    color: white;
 }
 
 
