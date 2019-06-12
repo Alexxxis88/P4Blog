@@ -46,20 +46,26 @@ function listAllComments()
 }
 
 
-function deleteAllSelectedComments($arrayCommentsIDs){ // NOT WORKING :
+function deleteAllSelectedComments($arrayCommentsIDs){
     
-    // $arrayCommentsIDs = array(161, 162, 163, 164); //working
+    // $arrayCommentsIDs = array(161, 162, 163, 164); //working FIXME : a supprimer
     $deleteAllSelectedComments = eraseAllSelectedComments($arrayCommentsIDs);
     header('Location: ' . $_SERVER['HTTP_REFERER']);
 }
 
 
-function approveAllSelectedComments($arrayCommentsIDs){ // NOT WORKING :
+function approveAllSelectedComments($arrayCommentsIDs){
     
-    // $arrayCommentsIDs = array(161, 162, 163, 164); //working
     $approveAllSelectedComments = acceptAllSelectedComments($arrayCommentsIDs);
     header('Location: ' . $_SERVER['HTTP_REFERER']);
-}    
+}
+
+// FIXME a supprimer si ça fonctionne bien avec approveAllSelectedComments
+// function publishAllSelectedComments($arrayPublish){
+    
+//     $publishAllSelectedComments = postAllSelectedComments($arrayPublish);
+//     header('Location: ' . $_SERVER['HTTP_REFERER']);
+// }    
 
 
 // function deleteAllSelectedCommentsTEST(){ // working

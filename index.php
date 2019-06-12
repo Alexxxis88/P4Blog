@@ -114,6 +114,7 @@ try {
             
         }
 
+        //to approve or delete all reported comments
         elseif ($_GET['action'] == 'manageAllSelectedComments') {
             if(isset($_POST['deleteSelectedComments'])){
                 deleteAllSelectedComments($_POST['selectComments']); // j'essaie de récupérer le tableau de commentsView.php 
@@ -124,8 +125,21 @@ try {
             }
             else{
                 throw new Exception('Il y a une erreur');
+            }  
+        }
+
+        //to publish or delete all new comments
+        elseif ($_GET['action'] == 'publishAllSelectedComments') {
+            if(isset($_POST['deleteSelectedComments'])){
+                deleteAllSelectedComments($_POST['selectPublishComments']); // j'essaie de récupérer le tableau de commentsView.php 
             }
-            
+            elseif(isset($_POST['publishSelectedComments'])){
+                // publishAllSelectedComments($_POST['selectPublishComments']); FIXME a supprimer si ça fonctionne bien avec approveAllSelectedComments
+                approveAllSelectedComments($_POST['selectPublishComments']);
+            }
+            else{
+                throw new Exception('Il y a une erreur');
+            }  
         }
 
 

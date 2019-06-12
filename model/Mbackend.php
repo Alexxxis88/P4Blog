@@ -54,8 +54,8 @@ function eraseAllSelectedComments($arrayCommentsIDs) //NOT WORKING :
 //     // $eraseAllSelectedComments->execute(array($arrayCommentsIDs));
 // }
 
-
-function acceptAllSelectedComments($arrayCommentsIDs) //NOT WORKING :
+//accept all the selected reported comments
+function acceptAllSelectedComments($arrayCommentsIDs) 
 {
     //on compte la longueur du tableau pour arrêter la boucle for au bon moment
     $arrayLength = count($arrayCommentsIDs, COUNT_NORMAL);
@@ -69,6 +69,23 @@ function acceptAllSelectedComments($arrayCommentsIDs) //NOT WORKING :
     }
     
 }
+
+//publish all the selected to manage before publish comments
+// FIXME a supprimer si ça fonctionne bien avec approveAllSelectedComments
+// function postAllSelectedComments($arrayPublish) 
+// {
+//     //on compte la longueur du tableau pour arrêter la boucle for au bon moment
+//     $arrayPublishLength = count($arrayPublish, COUNT_NORMAL);
+    
+//     //on fait une boucle pour injecter la VALEUR ENTIERE de chaque entrée du tableau $arrayPublish en tant que paramètre ? de (IN)
+//     for( $i = 0; $i < $arrayPublishLength; $i++){
+//         $id = $arrayPublish[$i];
+//         $db = dbConnectAdmin();
+//         $postAllSelectedComments = $db->prepare('UPDATE comments SET flag = 0 WHERE id IN (?)'); // je veux que ? soit les valeurs successives d'un tableau donc je dois faire une boucle
+//         $postAllSelectedComments->execute(array($id));
+//     }
+    
+// }
 
 
 
