@@ -114,8 +114,17 @@ try {
             
         }
 
-        elseif ($_GET['action'] == 'deleteAllSelectedComments') {
-            deleteAllSelectedComments($_POST['supprimer']); // j'essaie de récupérer le tableau de commentsView.php 
+        elseif ($_GET['action'] == 'manageAllSelectedComments') {
+            if(isset($_POST['deleteSelectedComments'])){
+                deleteAllSelectedComments($_POST['selectComments']); // j'essaie de récupérer le tableau de commentsView.php 
+            }
+            elseif(isset($_POST['approveSelectedComments'])){
+                approveAllSelectedComments($_POST['selectComments']);
+
+            }
+            else{
+                throw new Exception('Il y a une erreur');
+            }
             
         }
 

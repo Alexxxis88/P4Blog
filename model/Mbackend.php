@@ -55,6 +55,21 @@ function eraseAllSelectedComments($arrayCommentsIDs) //NOT WORKING :
 // }
 
 
+function acceptAllSelectedComments($arrayCommentsIDs) //NOT WORKING :
+{
+    //on compte la longueur du tableau pour arrêter la boucle for au bon moment
+    $arrayLength = count($arrayCommentsIDs, COUNT_NORMAL);
+    
+    //on fait une boucle pour injecter la VALEUR ENTIERE de chaque entrée du tableau $arrayCommentsIDs en tant que paramètre ? de (IN)
+    for( $i = 0; $i < $arrayLength; $i++){
+        $id = $arrayCommentsIDs[$i];
+        $db = dbConnectAdmin();
+        $acceptAllSelectedComments = $db->prepare('UPDATE comments SET flag = 0 WHERE id IN (?)'); // je veux que ? soit les valeurs successives d'un tableau donc je dois faire une boucle
+        $acceptAllSelectedComments->execute(array($id));
+    }
+    
+}
+
 
 
 

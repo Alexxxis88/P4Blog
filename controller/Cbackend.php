@@ -54,6 +54,14 @@ function deleteAllSelectedComments($arrayCommentsIDs){ // NOT WORKING :
 }
 
 
+function approveAllSelectedComments($arrayCommentsIDs){ // NOT WORKING :
+    
+    // $arrayCommentsIDs = array(161, 162, 163, 164); //working
+    $approveAllSelectedComments = acceptAllSelectedComments($arrayCommentsIDs);
+    header('Location: ' . $_SERVER['HTTP_REFERER']);
+}    
+
+
 // function deleteAllSelectedCommentsTEST(){ // working
 //     $deleteAllSelectedCommentsTEST = eraseAllSelectedCommentsTEST();
     

@@ -3,7 +3,7 @@
 <?php ob_start(); ?>
 
 <h2>Commentaires signalés</h2>
-<form action="index.php?action=deleteAllSelectedComments" method="post">
+<form action="index.php?action=manageAllSelectedComments" method="post"> 
 <?php
 
 
@@ -20,13 +20,12 @@
                                 <p><a href="index.php?action=post&id=<?= $datas['post_id']?>">Voir l'article associé [<?= $datas['post_id'] ?>]</a> </p>
                         
                         <label for="commentID"> Id du commentaire : <?= $datas['id'] ?> </label>
-                        <input type="checkbox" id="commentID" name="supprimer[]" value="<?= $datas['id']?>" checked>
-                        <!-- FIXME changer le nom de supprimer[] en selectComments[] ici et partout ailleurs dans le code où j'en ai besoin -->
+                        <input type="checkbox" id="commentID" name="selectComments[]" value="<?= $datas['id']?>" checked >
         
                         <!-- FIXME : edit class of the approve btn -->
-                        <button class="userBtns"><a href="index.php?action=approveComment&amp;commentId=<?= $datas['id'] ?>"  onclick="return alert('Commentaire approuvé')" >BTN A SUPPRIMER : Approuver</a></button>
+                        <button class="userBtns"><a href="index.php?action=approveComment&amp;commentId=<?= $datas['id'] ?>"  onclick="return alert('Commentaire approuvé')" >Approuver</a></button>
 
-                        <button class="adminBtns"><a href="index.php?action=deleteComment&amp;id=<?= $datas['id'] ?>&amp;commentId=<?= $datas['id'] ?>" onclick="return confirm('Etes vous sûr?')">BTN A SUPPRIMER :Supprimer</a></button>
+                        <button class="adminBtns"><a href="index.php?action=deleteComment&amp;id=<?= $datas['id'] ?>&amp;commentId=<?= $datas['id'] ?>" onclick="return confirm('Etes vous sûr?')">Supprimer</a></button>
                 </div>
         <?php
         
@@ -48,8 +47,8 @@
         //FIN vérifications des infos qu'on génère ---------------------------------
 
 ?>
-        <input type="submit" name="envoyer[]" value="Envoyer">
-
+        <input type="submit" name="deleteSelectedComments[]" value="Supprimer" onclick="return confirm('Etes vous sûr?')">
+        <input type="submit" name="approveSelectedComments[]" value="Approuver" onclick="return alert('Commentaire(s) approuvé(s)')">
 </form>
 
 
