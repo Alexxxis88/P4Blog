@@ -20,13 +20,13 @@
                                 <p><a href="index.php?action=post&id=<?= $datas['post_id']?>">Voir l'article associé [<?= $datas['post_id'] ?>]</a> </p>
                         
                         <label for="commentID"> Id du commentaire : <?= $datas['id'] ?> </label>
-                        <input type="checkbox" id="commentID" name="supprimer[]" value="<?= $datas['id']?>">
-                        
+                        <input type="checkbox" id="commentID" name="supprimer[]" value="<?= $datas['id']?>" checked>
+                        <!-- FIXME changer le nom de supprimer[] en selectComments[] ici et partout ailleurs dans le code où j'en ai besoin -->
         
                         <!-- FIXME : edit class of the approve btn -->
-                        <button class="userBtns"><a href="index.php?action=approveComment&amp;commentId=< ?= $datas['id'] ?>"  onclick="return alert('Commentaire approuvé')" >BTN A SUPPRIMER : Approuver</a></button>
+                        <button class="userBtns"><a href="index.php?action=approveComment&amp;commentId=<?= $datas['id'] ?>"  onclick="return alert('Commentaire approuvé')" >BTN A SUPPRIMER : Approuver</a></button>
 
-                        <button class="adminBtns"><a href="index.php?action=deleteComment&amp;id=< ?= $datas['id'] ?>&amp;commentId=< ?= $datas['id'] ?>" onclick="return confirm('Etes vous sûr?')">BTN A SUPPRIMER :Supprimer</a></button>
+                        <button class="adminBtns"><a href="index.php?action=deleteComment&amp;id=<?= $datas['id'] ?>&amp;commentId=<?= $datas['id'] ?>" onclick="return confirm('Etes vous sûr?')">BTN A SUPPRIMER :Supprimer</a></button>
                 </div>
         <?php
         

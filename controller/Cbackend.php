@@ -42,7 +42,7 @@ function listAllComments()
 {
     $reportedComments = getReportedComments();
     $newComments = getNewComments();
-    include_once('view/backend/commentsView.php');
+    require('view/backend/commentsView.php');
 }
 
 
@@ -50,7 +50,6 @@ function deleteAllSelectedComments($arrayCommentsIDs){ // NOT WORKING :
     
     // $arrayCommentsIDs = array(161, 162, 163, 164); //working
     $deleteAllSelectedComments = eraseAllSelectedComments($arrayCommentsIDs);
-    include_once('view/backend/commentsView.php');
     header('Location: ' . $_SERVER['HTTP_REFERER']);
 }
 
