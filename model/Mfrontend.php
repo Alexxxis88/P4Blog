@@ -96,9 +96,10 @@ function getComments($postId, $firstComment, $commentsPerPage)
 //-----------------------------------------------------------------------------------------
 
 //Pagination comments
+    //AND NOT flag = 9999 added otherwise the number of page will include the comments to moderate before publish even if they are not displayed
 function getTotalComments($postId){
     $db = dbConnect();
-    $getTotalComments = $db->prepare('SELECT COUNT(*) AS total_comments FROM comments WHERE post_id = ?');
+    $getTotalComments = $db->prepare('SELECT COUNT(*) AS total_comments FROM comments WHERE post_id = ? AND NOT flag = 9999');
     $getTotalComments->bindValue(1, $postId, PDO::PARAM_INT);
     $getTotalComments->execute();
 

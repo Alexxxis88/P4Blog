@@ -138,7 +138,17 @@ button:hover{
     color: white;
 }
 
-.noCommentsToManage{
+.acceptDenyComments{
+    background:lightblue !important;
+    overflow-wrap: break-word;
+}
+
+.commentHead{
+    background: red;
+    color: white;
+}
+
+.noReportedComments, .noCommentsToManage{
     color: white;
     font-weight: bold;
     background: rgb(84, 212, 84);

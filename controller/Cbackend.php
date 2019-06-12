@@ -35,11 +35,39 @@ function listPostsAdmin()
 
 }
 
-function listResportedComments()
+// function listResportedComments() // FIXME : a supprimer quand manage comments marchera
+// {
+//     $reportedComments = getReportedComments();
+//     require('view/backend/commentsView.php');
+// }
+
+
+
+
+//display reported and new comments
+function listAllComments()
 {
     $reportedComments = getReportedComments();
+    $newComments = getNewComments();
     require('view/backend/commentsView.php');
 }
+
+
+function deleteAllSelectedComments($arrayCommentsIDs){
+    
+    // $arrayCommentsIDs = array(161, 162, 163, 164); //working FIXME : a supprimer
+    $deleteAllSelectedComments = eraseAllSelectedComments($arrayCommentsIDs);
+    header('Location: ' . $_SERVER['HTTP_REFERER']);
+}
+
+
+function approveAllSelectedComments($arrayCommentsIDs){
+    
+    $approveAllSelectedComments = acceptAllSelectedComments($arrayCommentsIDs);
+    header('Location: ' . $_SERVER['HTTP_REFERER']);
+}
+
+
 
 
 function nbOfReportedComments() // NOT WORKING : display number of comments to manage 

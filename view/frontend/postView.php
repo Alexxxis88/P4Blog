@@ -131,60 +131,64 @@
     <?php
     while ($comment = $comments->fetch())
     {
-    //display reported comments with a red background
-    if($comment['flag'] > 0)
-    {
-        echo '<div class="reportedComments">
-              <p>Commentaire signalé <strong>' .$comment['flag'] . '</strong> fois En attente de modération.</p>';
-    }else
-    {
-        echo '<div class="comments">';
-    }
-    ?>
-        <!-- transform non html links in comments into clickable links -->
-        <?php $comment['comment'] = htmlspecialchars($comment['comment']);
-        $comment['comment'] = preg_replace('#http[s]?://[a-z0-9._/-]+#i', '<a href="$0">$0</a>', $comment['comment']); ?>
-
-        <p><strong><?= htmlspecialchars($comment['author']) ?></strong> le <?= $comment['mod_comment_date'] ?></p>
-        <p><?= nl2br($comment['comment']) ?></p>
-
-        
-        <?php
-        // FIXME: factoriser le code avec l'affichage ou non (1)du formulaire de commentaire (2) du bouton signaler (3) du reste de l'affichage des boutons / menus si loggé en admin / user / pas loggé
-        if((isset($_COOKIE['login']) AND !empty($_COOKIE['login'])) OR (isset($_SESSION['username']) AND !empty($_SESSION['username'])))
-        {           
-        ?>
-        <button class="userBtns"><a href="index.php?action=reportComment&amp;id=<?= $post['id'] ?>&amp;commentId=<?= $comment['id'] ?>" onclick="return alert('Commentaire signalé')">Signaler</a></button>
-
-        <?php
-        }
-        ?> 
-
-
-        
-
-
-    
-            <?php
-            // FIXME: factoriser le code avec l'affichage ou non (1)des boutons modifier / supprimer sur listPostsView et PostView (2) des boutons approuver / supprimer des com sur PostView (3) l'affichage du menu admin de template.php 
-            if( (isset($_COOKIE['login']) AND $_COOKIE['login'] == 'Admin') OR  (isset($_SESSION['username']) AND $_SESSION['username'] == 'Admin'))
-            {  
-                //display approve button only if comment already reported
-                    if($comment['flag'] > 0)
-                {
-                    //FIXME : change class of the approve button
-                    echo '<button class="adminBtns"><a href="index.php?action=approveComment&amp;id=' . $post['id'] . '&amp;commentId='. $comment['id'] . '"  onclick="return alert(\'Commentaire approuvé\')" >Approuver</a></button>' ;
-                }
-                        
-            ?>    
-
-                    <!-- gets the commentId as a parameter in the URL of the comment to delete AND the post id to return on the same post after comment has been deleted-->
-                    <button class="adminBtns"><a href="index.php?action=deleteComment&amp;id=<?= $post['id'] ?>&amp;commentId=<?= $comment['id'] ?>" onclick="return confirm('Etes vous sûr?')">Supprimer</a></button>
-            <?php
+        if($comment['flag'] < 9999)
+        {
+            
+            //display reported comments with a red background
+            if($comment['flag'] > 0)
+            {
+                echo '<div class="reportedComments">
+                    <p>Commentaire signalé <strong>' .$comment['flag'] . '</strong> fois En attente de modération.</p>';
+            }else
+            {
+                echo '<div class="comments">';
             }
-            ?>           
-        </div>
-        <?php
+            ?>
+                <!-- transform non html links in comments into clickable links -->
+                <?php $comment['comment'] = htmlspecialchars($comment['comment']);
+                $comment['comment'] = preg_replace('#http[s]?://[a-z0-9._/-]+#i', '<a href="$0">$0</a>', $comment['comment']); ?>
+
+                <p><strong><?= htmlspecialchars($comment['author']) ?></strong> le <?= $comment['mod_comment_date'] ?></p> <p><?= nl2br(htmlspecialchars($comment['comment'])) ?></p>
+                <p>Id du commentaire: <?= $comment['id'] ?></p>
+
+                
+                <?php
+                // FIXME: factoriser le code avec l'affichage ou non (1)du formulaire de commentaire (2) du bouton signaler (3) du reste de l'affichage des boutons / menus si loggé en admin / user / pas loggé
+                if((isset($_COOKIE['login']) AND !empty($_COOKIE['login'])) OR (isset($_SESSION['username']) AND !empty($_SESSION['username'])))
+                {           
+                ?>
+                <button class="userBtns"><a href="index.php?action=reportComment&amp;id=<?= $post['id'] ?>&amp;commentId=<?= $comment['id'] ?>" onclick="return alert('Commentaire signalé')">Signaler</a></button>
+
+                <?php
+                }
+                ?> 
+
+
+                
+
+
+            
+                    <?php
+                    // FIXME: factoriser le code avec l'affichage ou non (1)des boutons modifier / supprimer sur listPostsView et PostView (2) des boutons approuver / supprimer des com sur PostView (3) l'affichage du menu admin de template.php 
+                    if( (isset($_COOKIE['login']) AND $_COOKIE['login'] == 'Admin') OR  (isset($_SESSION['username']) AND $_SESSION['username'] == 'Admin'))
+                    {  
+                        //display approve button only if comment already reported
+                            if($comment['flag'] > 0)
+                        {
+                            //FIXME : change class of the approve button
+                            echo '<button class="adminBtns"><a href="index.php?action=approveComment&amp;id=' . $post['id'] . '&amp;commentId='. $comment['id'] . '"  onclick="return alert(\'Commentaire approuvé\')" >Approuver</a></button>' ;
+                        }
+                                
+                    ?>    
+
+                            <!-- gets the commentId as a parameter in the URL of the comment to delete AND the post id to return on the same post after comment has been deleted-->
+                            <button class="adminBtns"><a href="index.php?action=deleteComment&amp;id=<?= $post['id'] ?>&amp;commentId=<?= $comment['id'] ?>" onclick="return confirm('Etes vous sûr?')">Supprimer</a></button>
+                    <?php
+                    }
+                    ?>           
+                </div>
+                <?php
+        }
     }
     ?>
     
