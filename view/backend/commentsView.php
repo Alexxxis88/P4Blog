@@ -4,6 +4,10 @@
 
 <h2>Commentaires signalés</h2>
 <form action="index.php?action=manageAllSelectedComments" method="post"> 
+        <input type="checkbox" id="checkAllReported" checked>
+        <label for="checkAllReported"> Tout sélectionner / désélectionner </label>
+        <input type="submit" name="deleteSelectedComments[]" value="Supprimer" onclick="return confirm('Etes vous sûr?')">
+        <input type="submit" name="approveSelectedComments[]" value="Approuver" onclick="return alert('Commentaire(s) approuvé(s)')">
 <?php
 
 
@@ -34,7 +38,7 @@
        
     }
 ?>
-<?php 
+<!-- <?php 
         //vérifications des infos qu'on génère ---------------------------------
         $comma_separated = implode(",", $arrayComments);
         echo '<br/><strong>tous les ids du tableau convertir en UNE CHAINE: ' . $comma_separated . '</strong>'; 
@@ -46,12 +50,16 @@
 
         //FIN vérifications des infos qu'on génère ---------------------------------
 
-?>
-        <input type="submit" name="deleteSelectedComments[]" value="Supprimer" onclick="return confirm('Etes vous sûr?')">
-        <input type="submit" name="approveSelectedComments[]" value="Approuver" onclick="return alert('Commentaire(s) approuvé(s)')">
+?> -->
+        
 </form>
 
-
+    <!-- Select / Deselect all checkboxes (for Reported comments)  -->   
+        <script>
+        $('#checkAllReported').change(function(){
+                $('input:checkbox').prop('checked', $(this).prop('checked'))
+        })
+        </script>
 
     <!-- displays a message if no reported comments -->   
     <div class="noReportedComments">Il n'y a pas de commentaire signalé</div>
