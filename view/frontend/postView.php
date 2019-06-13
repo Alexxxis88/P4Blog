@@ -74,17 +74,6 @@
 
 
 
-<!-- NOT WORKING : show more / less comments -->
-<!-- < ?php  $displayLimit =+ 5 ?>     -->
-
-<!-- displays the comment form -->
-    <!-- <h2 id="commentsAnchor">Commentaires</h2>
-    <form action="index.php?action=post&id=< ?=$id?>&showComments=< ?=$displayLimit?>#commentsAnchor" method="post"> <!-- je veux envoyer la valeur de showfive dans l'url-->
-        <!-- <input type="text" name="showFive" value="< ?=$displayLimit?>" />
-        <input type="submit" name="showFive" value="Afficher plus">
-    </form> -->
-
-
     
    
 <h2 id="commentsAnchor">Commentaires</h2>   

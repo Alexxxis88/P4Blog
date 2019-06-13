@@ -148,7 +148,24 @@ function approveAllSelectedComments($arrayCommentsIDs){
 function nbOfReportedComments() // NOT WORKING : display number of comments to manage 
 {
     $nbOfReportedComments = getNbOfReportedComments();
+
+    // if($nbOfReportedComments>0){
+    // ? >
+    // <!-- displays an alert icon if comments to manage -->   
+    //     <script>
+    //             if ( !$.trim($('.reportedComments').html() ).length ) 
+    //             {
+    //                     $('.comAlert').css("display", "none");
+    //             } else {
+    //                     $('.comAlert').css("display", "block");
+    //             }
+    //    </script> 
+    // <?php        
+    // }
+
+
     require('view/backend/menuAdmin.php');
+
 }
 
 

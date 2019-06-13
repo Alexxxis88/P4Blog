@@ -146,6 +146,18 @@ $arrayPublish = array();
                 }
        </script>    
         
+
+
+ <!-- displays a message if no new comments -->   
+        <script>
+                if ( !$.trim($('.reportedComments, .acceptDenyComments').html() ).length ) 
+                {
+                        $('.comAlert').css("display", "none");
+                } else {
+                        $('.comAlert').css("display", "block");
+                }
+       </script>    
+
    
 <?php $content = ob_get_clean(); ?>
 

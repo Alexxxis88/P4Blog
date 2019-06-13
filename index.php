@@ -390,7 +390,9 @@ try {
         //Backend
         elseif ($_GET['action'] == 'listPostsAdmin') {
             listPostsAdmin();
-            // nbOfReportedComments(); NOT WORKING : display number of comments working
+            nbOfReportedComments(); //NOT WORKING : display number of comments working
+
+            
         }
 
 

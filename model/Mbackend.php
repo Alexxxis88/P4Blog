@@ -151,7 +151,7 @@ function acceptAllSelectedComments($arrayCommentsIDs)
 
 
 
-function getNbOfReportedComments() // NOT WORKING : display number of comments to manage 
+function getNbOfReportedComments() // display number of comments to manage 
 {
     $db = dbConnectAdmin();
     $reportedCommentNb = $db->query('SELECT SUM(flag) AS flag_total FROM comments');

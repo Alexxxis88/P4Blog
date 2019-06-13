@@ -130,7 +130,7 @@ button:hover{
     justify-content : center;
 }
 .comAlert{
-    display:block;
+    /* display:none; */
     width:15px;
     height:15px;
     background:green;
@@ -182,6 +182,13 @@ button:hover{
 }
 
 
+
+.comAlert{
+    width:15px;
+    height:15px;
+    background:green;
+    border-radius:50%;
+}
 
 .usersDisplay{
     background:lightgrey !important;

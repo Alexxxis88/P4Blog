@@ -34,7 +34,11 @@
             <button class="adminBtns"><a href="index.php?action=manageUsers&page=1&sortBy=10">Utilisateurs</a></button>
             <button class="adminBtns"><a href="index.php?action=displayStatsView">Statistiques</a></button>
         </div>
+ <!-- displays an alert icon if comments to manage -->   
+ 
 
+  
         </section>
     </body>
 </html>
+
