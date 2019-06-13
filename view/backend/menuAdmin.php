@@ -31,7 +31,7 @@
             <!-- <p>test < ?= $nbOfReportedComments['flag_total'] ?></p>   -->
             <!-- NOT WORKING : display number of comments to manage  -->
             <div class="comAlert"></div>
-            <button class="adminBtns"><a href="index.php?action=manageUsers">Utilisateurs</a></button>
+            <button class="adminBtns"><a href="index.php?action=manageUsers&page=1&sortBy=10">Utilisateurs</a></button>
         </div>
 
         </section>

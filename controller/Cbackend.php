@@ -52,7 +52,14 @@ function listAllUsers()
     //Pagination
     $totalPages = getTotalPagesUsers();
     $total=$totalPages['total_users']; // total of users in DB
-    $usersPerPage=10;
+
+    if(isset($_GET['sortBy'])){
+        $usersPerPage = $_GET['sortBy'];
+    }
+    else
+    {
+        $usersPerPage = 10;
+    }
     $nbOfPages=ceil($total/$usersPerPage);
 
     if(isset($_GET['page']))

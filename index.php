@@ -373,7 +373,14 @@ try {
 
 
         elseif ($_GET['action'] == 'manageUsers') {
-            listAllUsers();
+            if(!isset($_GET['page']) OR !isset($_GET['sortBy']) OR $_GET['page']<1 OR $_GET['sortBy']<1)
+            { 
+                throw new Exception('Il y a une erreur');
+            }
+            else{
+                listAllUsers();
+            }
+            
         }
 
 
