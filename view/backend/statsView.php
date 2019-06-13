@@ -8,10 +8,19 @@
 <h3>Article le moins commenté</h3>
 
 <h3>Tous les articles</h3>
-<p>Article 1 : nombre de commentaires</p>
-<p>Article 2 : nombre de commentaires</p>
-<p>Article ... : nombre de commentaires</p>
-<p>Article X : nombre de commentaires</p>
+
+<?php 
+// while ($datas = $allPostsStats->fetch()) //NOT WORKING
+//     {       
+//     ?>
+<!-- //     <div class="reportedComments">
+//      <p>< ?= $datas['title'] ?></p><p> Nombre de commentaires< ?= $datas['nb_com'] ?></p>
+//      </div>
+//      < ?php  -->
+<!-- //      }    
+//      ? > -->
+
+
 
 <h2>Utilisateurs</h2>
 <h3>Utilisateurs le plus actif : XXX (nb de commentaires) : ? </h3>

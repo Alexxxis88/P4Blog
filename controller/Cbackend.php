@@ -184,7 +184,15 @@ function updatePost($title, $content, $postId){
 
 
 
-function displayStatsView()
-{
-    require('view/backend/statsView.php');
-}
+// //Statistics 
+
+// function displayStatsView()
+// {
+//     $allPostsStats = getPostStats();
+//     //gets the number of comments per post
+//     $comsPerPost = nbComPerPost();
+//     require('view/backend/statsView.php');
+// }
+
+
+

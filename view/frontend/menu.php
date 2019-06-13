@@ -12,7 +12,7 @@
         <?php //if there is cookies, they are used to display user name
         if(isset($_COOKIE['login']) AND !empty($_COOKIE['login']) AND isset($_COOKIE['hash_pass']) AND !empty($_COOKIE['hash_pass'])){
         ?>
-        <p><strong style="color:red">COOKIE</strong> Vous êtes connecté en tant que <strong><?= $_COOKIE['login'] ?></strong></p>
+        <p><strong style="color:red">COOKIE</strong> Vous êtes connecté en tant que <strong><?= htmlspecialchars($_COOKIE['login']) ?></strong> Id de cookie : <?= htmlspecialchars($_COOKIE['id']) ?> </p>
             
         <!-- Log Out button -->
         <div class="adminFields">
@@ -34,7 +34,7 @@
         } //else if there is session information, it's used to display user name
         elseif(isset($_SESSION['id']) AND isset($_SESSION['username'])){
             ?>
-            <p><strong style="color:red">SESSION</strong> Vous êtes connecté en tant que <strong><?= htmlspecialchars($_SESSION['username']) ?></strong></p>
+            <p><strong style="color:red">SESSION</strong> Vous êtes connecté en tant que <strong><?= htmlspecialchars($_SESSION['username']) ?></strong> Id de session : <?= htmlspecialchars($_SESSION['id']) ?></p>
                 
             <!-- Log Out button -->
             <div class="adminFields">

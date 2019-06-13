@@ -134,6 +134,7 @@ try {
                 session_destroy();
 
                 // Delete autologing cookies
+                setcookie('id', '', time() + 365*24*3600, null, null, false, true);
                 setcookie('login', '', time() + 365*24*3600, null, null, false, true);
                 setcookie('hash_pass', '', time() + 365*24*3600, null, null, false, true);
                 
@@ -189,6 +190,7 @@ try {
                             session_destroy();
 
                             // Delete autologing cookies
+                            setcookie('id', '', time() + 365*24*3600, null, null, false, true);
                             setcookie('login', '', time() + 365*24*3600, null, null, false, true);
                             setcookie('hash_pass', '', time() + 365*24*3600, null, null, false, true);
 
@@ -502,9 +504,9 @@ try {
             updatePost($_POST['title'], $_POST['postContent'], $_GET['id']);
         }
 
-        elseif ($_GET['action'] == 'displayStatsView') {
-            displayStatsView();
-        }
+        // elseif ($_GET['action'] == 'displayStatsView') {
+        //     displayStatsView();
+        // }
 
     }
 

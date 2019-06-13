@@ -206,6 +206,7 @@ function checkLog($userName)
             //if the autolog checkbox is selected COOKIES are created
             if(isset($_POST['autoLogIn']))
             {
+                setcookie('id', $checkLogIn['id'], time() + 365*24*3600, null, null, false, true);
                 setcookie('login', $_POST['username'], time() + 365*24*3600, null, null, false, true);
                 setcookie('hash_pass', password_hash($_POST['pass'], PASSWORD_DEFAULT), time() + 365*24*3600, null, null, false, true);
             }

@@ -1,5 +1,9 @@
 <?php
 
+
+
+
+
 //gets the last X posts to display in adminView. X depends on $messagesPerPage
 function getPostsAdmin($firstEntry, $messagesPerPage)
 {
@@ -192,6 +196,37 @@ function editPost($title, $content, $postId)
     $editedPost->execute(array($title, $content, $postId));
 
 }
+
+
+
+//Statistics 
+
+// //gets the number of comments per post
+// function nbComPerPost(){
+//     $db = dbConnectAdmin();
+//     $totalComPerPosts = $db->prepare(
+//         'SELECT COUNT(*) AS nb_com, p.id
+//             FROM posts p 
+//             INNER JOIN comments c 
+//             ON c.post_id = p.id
+//             WHERE p.id = 256
+//             ');
+//     $totalComPerPosts->execute(array());
+
+//     return $totalComPerPosts;
+// }
+
+// // //gets all the posts to display them in stats view
+// // function getPostStats()
+// // {
+// //     $db = dbConnectAdmin();
+// //     $postsStats = $db->query('SELECT id, title, content, DATE_FORMAT(publish_date, \'%d/%m/%Y à %Hh%imin%ss\') AS mod_publish_date, DATE_FORMAT(edit_date, \'%d/%m/%Y à %Hh%imin%ss\') AS mod_edit_date FROM posts ORDER BY publish_date DESC ');
+    
+// //     return $postsStats;
+// // }
+
+
+
 
 
 // General function to connect to database
