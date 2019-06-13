@@ -9,7 +9,7 @@ for($i=1; $i<=$nbOfPages; $i++)
      }
      else
      {
-          echo ' <a href="index.php?action=listPostsAdmin&page='.$i.'">'.$i.'</a> ';
+          echo ' <a href="index.php?action=' . $_GET['action'] . '&page='.$i.'">'.$i.'</a> ';
      }
 }
 echo '</p>';

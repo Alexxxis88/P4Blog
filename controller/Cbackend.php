@@ -46,13 +46,43 @@ function listPostsAdmin()
 
 
 
-
-//display all users
 function listAllUsers()
 {
-    $allUsers = getAllUsers();
+
+    //Pagination
+    $totalPages = getTotalPagesUsers();
+    $total=$totalPages['total_users']; // total of users in DB
+    $usersPerPage=10;
+    $nbOfPages=ceil($total/$usersPerPage);
+
+    if(isset($_GET['page']))
+    {
+        $currentPage=intval($_GET['page']); //intval gets the integer ( 4.2 = 4) value of a variable
+    
+        if($currentPage>$nbOfPages) // if a user puts the value of a page that doesnt exist, it redirects to the last page ($nbOfPages)
+        {
+            $currentPage=$nbOfPages;
+        }
+    }
+    else
+    {
+        $currentPage=1; 
+    }
+
+    $firstUser=($currentPage-1)*$usersPerPage; // first user to display
+ 
+
+//Display user depending on pagination parameters
+
+    $allUsers = getAllUsers($firstUser, $usersPerPage);
     require('view/backend/usersView.php');
+    
+
 }
+
+
+
+
 
 
 function deleteAllSelectedUsers($arrayUsersIDs){

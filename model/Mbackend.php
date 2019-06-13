@@ -26,14 +26,29 @@ function getTotalPagesAdmin(){
 
 
 
-//gets the Reported comments (where flag >0 and sort them by number of time reported OR by date showing older first if reported the same nb of times)
-function getAllUsers()
+//gets all the users
+function getAllUsers($firstUser, $usersPerPage)
 {
     $db = dbConnectAdmin();
-    $allUsers = $db->query('SELECT id, username, email, DATE_FORMAT(registration_date, \'%d/%m/%Y à %Hh%imin%ss\') AS mod_registration_date, group_id FROM members ORDER BY username');
-
+    $allUsers = $db->prepare('SELECT id, username, email, DATE_FORMAT(registration_date, \'%d/%m/%Y à %Hh%imin%ss\') AS mod_registration_date, group_id FROM members ORDER BY username LIMIT ?, ?');
+    $allUsers->bindValue(1, $firstUser, PDO::PARAM_INT);
+    $allUsers->bindValue(2, $usersPerPage, PDO::PARAM_INT);
+    $allUsers->execute();
     return $allUsers;
 }
+
+
+
+//Pagination
+function getTotalPagesUsers(){
+    $db = dbConnect();
+    $getTotalPagesUsers = $db->query('SELECT COUNT(*) AS total_users FROM members');
+    $returnTotalPagesUsers= $getTotalPagesUsers->fetch();
+
+    return $returnTotalPagesUsers;
+}
+
+
 
 
 

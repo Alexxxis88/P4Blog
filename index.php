@@ -372,13 +372,6 @@ try {
 
 
 
-
-
-
-
-
-
-
         elseif ($_GET['action'] == 'manageUsers') {
             listAllUsers();
         }

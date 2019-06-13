@@ -8,6 +8,9 @@
         <input type="checkbox" id="checkAllUsers" >
         <label for="checkAllUsers"> Tout sélectionner / désélectionner </label>
         <input type="submit" name="deleteSelectedUsers[]" value="Supprimer" onclick="return confirm('Etes vous sûr?')">
+
+<!-- Pagination -->
+<?php require('paginationBE.php'); ?>        
 <?php
 
 
