@@ -33,7 +33,7 @@
                       <p class="commentHead">Le <strong><?= htmlspecialchars($datas['author']) ?></strong> du <?= $datas['mod_comment_date'] ?>
                                 a été signalé <strong> <?= $datas['flag'] ?></strong> fois </p>
                                 <p><?= nl2br(htmlspecialchars($datas['comment'])) ?></p>
-                                <p><a href="index.php?action=post&id=<?= $datas['post_id']?>">Voir l'article associé [<?= $datas['post_id'] ?>]</a> </p>
+                                <p><a href="index.php?action=post&id=<?= $datas['post_id']?>&page=1&sortBy=5">Voir l'article associé [<?= $datas['post_id'] ?>]</a> </p>
 
                                 <!-- sends straight to the right comment using the comment id as an anchor -->
                                 <p><a href="index.php?action=post&id=<?= $datas['post_id']?>&page=1&sortBy=99999999999999999999#<?= $datas['id']?>">Voir le commentaire</a> </p>
@@ -104,7 +104,7 @@ $arrayPublish = array();
                 <div class="acceptDenyComments">
                     <p class="commentHead">Le <strong><?= htmlspecialchars($datasPublish['author']) ?></strong> posté le <?= $datasPublish['mod_comment_date'] ?>
                     <p><?= nl2br(htmlspecialchars($datasPublish['comment'])) ?></p>
-                    <p><a href="index.php?action=post&id=<?= $datasPublish['post_id']?>">Voir l'article associé [<?= $datasPublish['post_id'] ?>]</a> </p>
+                    <p><a href="index.php?action=post&id=<?= $datasPublish['post_id']?>&page=1&sortBy=5">Voir l'article associé [<?= $datasPublish['post_id'] ?>]</a> </p>
             
                         <label for="commentPublishID"> Id du commentaire : <?= $datasPublish['id'] ?> </label>
                         <input type="checkbox" id="commentPublishID" name="selectPublishComments[]" value="<?= $datasPublish['id']?>" checked >
