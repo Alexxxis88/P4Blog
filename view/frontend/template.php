@@ -10,7 +10,8 @@
     </head>
         
     <body>
-
+    <!-- Back to top button anchor -->
+    <div id="header"></div>
     <?php
 
     //display the right menu depending on the user role

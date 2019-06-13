@@ -178,6 +178,13 @@ function displayPostToEdit($postId)
 
 function updatePost($title, $content, $postId){
     $updatedPost = editPost($title, $content, $postId);
-    header('Location: index.php?action=post&id=' . $postId);
+    header('Location: index.php?action=post&id=' . $postId . '&page=1&sortBy=5');
     exit;
+}
+
+
+
+function displayStatsView()
+{
+    require('view/backend/statsView.php');
 }

@@ -265,7 +265,7 @@ function deleteComment($commentId)
 
 function reportComments($commentId){
     $commentReported = reportComment($commentId);
-    header('Location: index.php?action=post&id=' . $_GET['id'] . '#commentsAnchor'); //FIXME : SQL injection issue ? 
+    header('Location: ' . $_SERVER['HTTP_REFERER'] . '#commentsAnchor'); //FIXME : SQL injection issue ? 
     exit;
 }
 

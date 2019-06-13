@@ -32,6 +32,7 @@
             <!-- NOT WORKING : display number of comments to manage  -->
             <div class="comAlert"></div>
             <button class="adminBtns"><a href="index.php?action=manageUsers&page=1&sortBy=10">Utilisateurs</a></button>
+            <button class="adminBtns"><a href="index.php?action=displayStatsView">Statistiques</a></button>
         </div>
 
         </section>

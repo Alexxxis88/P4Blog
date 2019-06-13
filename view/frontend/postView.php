@@ -62,7 +62,7 @@
             ?>    
                     <p class="lastPostsP">
                         <?= substr($datas['content'], 0, 200) . "..." ?><br/>
-                        <button class="regularBtns"><a href="index.php?action=post&id=<?=$id?>">Lire la suite</a></button>      
+                        <button class="regularBtns"><a href="index.php?action=post&id=<?=$id?>&page=1&sortBy=5">Lire la suite</a></button>      
                     </p>
                     
         <?php

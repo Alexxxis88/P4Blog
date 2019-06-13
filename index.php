@@ -502,6 +502,10 @@ try {
             updatePost($_POST['title'], $_POST['postContent'], $_GET['id']);
         }
 
+        elseif ($_GET['action'] == 'displayStatsView') {
+            displayStatsView();
+        }
+
     }
 
 
