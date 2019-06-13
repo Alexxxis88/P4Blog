@@ -272,6 +272,40 @@ function reportComments($commentId){
 
 
 
+//add the reported comment in a new table called reported_comments that gathers the id of the member who reported it, the id of the reported comment and a flag set to 1
+function reportCommentsCheck($memberId, $repComId){
+    $newRepComPerUser = reportedCommentPerUser($memberId, $repComId);
+   
+}
+
+//check when a member reports a comment if he already reported it once
+function checkIfReported(){
+    $ifReportedCom = checkIfAlreadyReportedCom();
+
+    //we check wether the member is registered with COOKIE or SESSION
+    if(isset($_COOKIE['id'])){
+    $cookieOrSessionID = $_COOKIE['id'];
+    }
+    elseif(isset($_SESSION['id'])){
+        $cookieOrSessionID = $_SESSION['id'];
+    }
+
+    //we have to make a loop to make sure to check all entries of the DB, not only the last added one
+    while($datas = $ifReportedCom->fetch())
+    {    
+    //if the values of the reported comment matches the one in the reported_comment DB then he/she can't report again
+    if($cookieOrSessionID == $datas['memberId'] && $_GET['commentId'] == $datas['repComId'] && $datas['flagRep'] == 1 )
+                {
+                    throw new Exception('Vous avez déja signalé ce commentaire');
+                }
+    }            
+}
+
+
+
+
+
+
 function deletePost($postId)
 {
     $postDelete = erasePost($postId);

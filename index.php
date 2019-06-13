@@ -80,7 +80,19 @@ try {
 
         elseif ($_GET['action'] == 'reportComment') {
             if (isset($_GET['commentId']) && $_GET['commentId'] > 0) {
-                reportComments($_GET['commentId']);
+
+                //checks in the controler if the member already reported the same comment
+                checkIfReported();
+
+                if(isset($_COOKIE['id'])){
+                    $cookieOrSessionID = $_COOKIE['id'];
+                    }
+                    elseif(isset($_SESSION['id'])){
+                        $cookieOrSessionID = $_SESSION['id'];
+                    }
+
+                reportCommentsCheck($cookieOrSessionID, $_GET['commentId']); //the reported comment is registered into reported_comments DB
+                reportComments($_GET['commentId']);    //the reported comment is actually reported in comments DB and BE
             }
             else {
                 throw new Exception('Aucun identifiant de billet envoyé');

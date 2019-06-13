@@ -139,6 +139,27 @@ function reportComment($commentId)
 }
 
 
+//add the reported comment in a new table called reported_comments that gathers the id of the member who reported it, the id of the reported comment and a flag set to 1
+function reportedCommentPerUser($memberId, $repComId)
+{
+    $db = dbConnect();
+    $newRepCom = $db->prepare('INSERT INTO reported_comments( memberId, repComId, flagRep) VALUES(?, ?, 1)');
+    $newRepCom->execute(array($memberId, $repComId));
+}
+
+
+//check when a member reports a comment if he already reported it once
+function checkIfAlreadyReportedCom()
+{
+    $db = dbConnect();
+    $alreadyRep = $db->query('SELECT memberId, repComId, flagRep FROM reported_comments');
+    
+    return $alreadyRep;
+
+}
+
+
+
 function erasePost($postId) // est ce que ce $postId est le même que celui de postComment ? 
 {
     $db = dbConnect();

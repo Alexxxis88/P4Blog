@@ -183,7 +183,7 @@ function textCounter(field,field2,maxlimit)
                 if((isset($_COOKIE['login']) AND !empty($_COOKIE['login'])) OR (isset($_SESSION['username']) AND !empty($_SESSION['username'])))
                 {           
                 ?>
-                <button class="userBtns"><a href="index.php?action=reportComment&amp;id=<?= $post['id'] ?>&amp;commentId=<?= $comment['id'] ?>" onclick="return alert('Commentaire signalé')">Signaler</a></button>
+                <button class="userBtns"><a href="index.php?action=reportComment&amp;id=<?= $post['id'] ?>&amp;commentId=<?= $comment['id'] ?>" onclick="return confirm('Voulez vous vraiment signaler ce commentaire?')">Signaler</a></button>
 
                 <?php
                 }
