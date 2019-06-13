@@ -105,7 +105,6 @@ $arrayPublish = array();
                     <p class="commentHead">Le <strong><?= htmlspecialchars($datasPublish['author']) ?></strong> posté le <?= $datasPublish['mod_comment_date'] ?>
                     <p><?= nl2br(htmlspecialchars($datasPublish['comment'])) ?></p>
                     <p><a href="index.php?action=post&id=<?= $datasPublish['post_id']?>">Voir l'article associé [<?= $datasPublish['post_id'] ?>]</a> </p>
-                    <p><a href="index.php?action=post&id=<?= $datasPublish['post_id']?>&page=1&sortBy=99999999999999999999#<?= $datasPublish['id']?>">Voir le commentaire</a> </p>
             
                         <label for="commentPublishID"> Id du commentaire : <?= $datasPublish['id'] ?> </label>
                         <input type="checkbox" id="commentPublishID" name="selectPublishComments[]" value="<?= $datasPublish['id']?>" checked >
