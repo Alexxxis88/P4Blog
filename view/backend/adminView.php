@@ -17,8 +17,8 @@ $id = (int) $datasAdmin['id'];
     
         <p class="posts">
             <?= substr($datasAdmin['content'], 0, 600) . "..." ?>
-                <button class="regularBtns"><a href="index.php?action=post&id=<?=$id?>">Lire la suite</a></button>
-                <button class="regularBtns"><a href="index.php?action=post&id=<?=$id?>#commentsAnchor">Commentaires</a></button>
+                <button class="regularBtns"><a href="index.php?action=post&id=<?=$id?>&page=1&sortBy=5">Lire la suite</a></button>
+                <button class="regularBtns"><a href="index.php?action=post&id=<?=$id?>&page=1&sortBy=5#commentsAnchor">Commentaires</a></button>
         </p>
         <button class="adminBtns"><a href="index.php?action=manageView&id=<?=$id?>">Modifier</a></button>
         <button class="adminBtns"><a href="index.php?action=deletePost&amp;id=<?= $id?>" onclick="return confirm('Etes vous sûr?')">Supprimer</a></button>

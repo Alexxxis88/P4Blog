@@ -29,8 +29,8 @@ $id = (int) $datas['id'];
             
         <p class="posts">
             <?= substr($datas['content'], 0, 600) . "..." ?>
-                <button class="regularBtns"><a href="index.php?action=post&id=<?=$id?>">Lire la suite</a></button>
-                <button class="regularBtns"><a href="index.php?action=post&id=<?=$id?>#commentsAnchor">Commentaires</a></button>
+                <button class="regularBtns"><a href="index.php?action=post&id=<?=$id?>&page=1&sortBy=5">Lire la suite</a></button>
+                <button class="regularBtns"><a href="index.php?action=post&id=<?=$id?>&page=1&sortBy=5#commentsAnchor">Commentaires</a></button>
 
         </p>
         

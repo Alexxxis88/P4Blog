@@ -152,7 +152,7 @@ function textCounter(field,field2,maxlimit)
 
 <!-- Comments Pagination -->
 <?php require('paginationCommentsFE.php') ?>
-
+<p>Afficher par <button><a href="index.php?action=post&page=<?= $_GET['page'] ?>&id=<?= $_GET['id'] ?>&sortBy=5#commentsAnchor">5</a></button> <button><a href="index.php?action=post&page=<?= $_GET['page'] ?>&id=<?= $_GET['id'] ?>&sortBy=15#commentsAnchor">15</a></button> <button><a href="index.php?action=post&page=<?= $_GET['page'] ?>&id=<?= $_GET['id'] ?>&sortBy=99999999999999999999#commentsAnchor">Tous</a></button></p>  
     <?php
     while ($comment = $comments->fetch())
     {
@@ -173,7 +173,8 @@ function textCounter(field,field2,maxlimit)
                 <?php $comment['comment'] = htmlspecialchars($comment['comment']);
                 $comment['comment'] = preg_replace('#http[s]?://[a-z0-9._/-]+#i', '<a href="$0">$0</a>', $comment['comment']); ?>
 
-                <p><strong><?= htmlspecialchars($comment['author']) ?></strong> le <?= $comment['mod_comment_date'] ?></p> <p><?= nl2br(htmlspecialchars($comment['comment'])) ?></p>
+                <!-- id= $comment['id'] used to create an anchor on the comment position to be able to display the right comment directly when selected in manageCommentsView.php (be)-->
+                <p id="<?= $comment['id'] ?>"><strong><?= htmlspecialchars($comment['author']) ?></strong> le <?= $comment['mod_comment_date'] ?></p> <p><?= nl2br(htmlspecialchars($comment['comment'])) ?></p>
                 <p>Id du commentaire: <?= $comment['id'] ?></p>
 
                 

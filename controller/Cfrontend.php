@@ -58,7 +58,14 @@ function post()
 //Pagination for comments
 $totalComments = getTotalComments($_GET['id']);
 $totalCom=$totalComments['total_comments']; // total of posts in DB
-$commentsPerPage=4;
+
+if(isset($_GET['sortBy'])){
+    $commentsPerPage = $_GET['sortBy'];
+}
+else
+{
+    $commentsPerPage = 5;
+}
 $nbOfCommentsPages=ceil($totalCom/$commentsPerPage);
 
 if(isset($_GET['page']))
@@ -243,7 +250,7 @@ function addComment($postId, $author, $comment)
     }
     else {
         //success4 needed to display the confirmation message
-        header('Location: index.php?action=post&id=' . $postId . '&success=4#commentsAnchor');
+        header('Location: index.php?action=post&id=' . $postId . '&success=4&page=1&sortBy=5#commentsAnchor');
         exit;
     }
 }

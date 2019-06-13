@@ -11,38 +11,47 @@ try {
         }
 
         elseif ($_GET['action'] == 'post') {
-            if (isset($_GET['id']) && $_GET['id'] > 0) {
-                post();
+                if (isset($_GET['id']) && $_GET['id'] > 0) {
 
-                //Update pass confirmation message. FIXME create a View for this ? but i don't want it displayed in a VIEW i want it displayed in the front office. Use template.php with a toggle display : none /block and create a modal box ? Z index etc jquerry 
-        if (isset($_GET['success']) AND $_GET['success'] == 4) 
-        {
-        ?>
-        <div class="commentConfirmation"> <!--FIXME : changer nom de la classe, un truc générique ? + update CSS  -->
-            <p>Merci pour votre commentaire.</p>
-            <p>Il sera affiché après validation d'un modérateur.</p>
-        </div>
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
-        <script type="text/javascript" >
-        let delayConfirmationMsg = setTimeout(hideThanks, 1500);
-        function hideThanks(){
-    $(".commentConfirmation").fadeOut();
-    }
-        </script>
-        <?php    
+                    if(!isset($_GET['page']) OR !isset($_GET['id']) OR !isset($_GET['sortBy']) OR $_GET['page']<1 OR $_GET['id']<1 OR $_GET['sortBy']<1)
+                        { 
+                            throw new Exception('Il manque le numéro de page, du billet ou la classement des commentaires');
+                        }
+                        else{
+                            post();
+                        }
+                    
+                   
+
+                    //Update pass confirmation message. FIXME create a View for this ? but i don't want it displayed in a VIEW i want it displayed in the front office. Use template.php with a toggle display : none /block and create a modal box ? Z index etc jquerry 
+            if (isset($_GET['success']) AND $_GET['success'] == 4) 
+            {
+            ?>
+            <div class="commentConfirmation"> <!--FIXME : changer nom de la classe, un truc générique ? + update CSS  -->
+                <p>Merci pour votre commentaire.</p>
+                <p>Il sera affiché après validation d'un modérateur.</p>
+            </div>
+            <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+            <script type="text/javascript" >
+            let delayConfirmationMsg = setTimeout(hideThanks, 1500);
+            function hideThanks(){
+        $(".commentConfirmation").fadeOut();
         }
+            </script>
+            <?php    
+            }
 
-                // NOT WORKING : show more / less comments
-            //    if (isset($_GET['showComments'])){ 
-            //     post($_GET['showComments']);
-            //    }
-            //    else{
-            //     post(2); 
-            //    }
-            }
-            else {
-                throw new Exception('Aucun identifiant de billet envoyé');
-            }
+                    // NOT WORKING : show more / less comments
+                //    if (isset($_GET['showComments'])){ 
+                //     post($_GET['showComments']);
+                //    }
+                //    else{
+                //     post(2); 
+                //    }
+                }
+                else {
+                    throw new Exception('Aucun identifiant de billet envoyé');
+                }
         }
 
         elseif ($_GET['action'] == 'addComment') {
@@ -375,7 +384,7 @@ try {
         elseif ($_GET['action'] == 'manageUsers') {
             if(!isset($_GET['page']) OR !isset($_GET['sortBy']) OR $_GET['page']<1 OR $_GET['sortBy']<1)
             { 
-                throw new Exception('Il y a une erreur');
+                throw new Exception('Il manque le numéro de page ou le classement des utilisateurs');
             }
             else{
                 listAllUsers();
