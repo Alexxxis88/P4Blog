@@ -9,7 +9,7 @@ for($i=1; $i<=$nbOfCommentsPages; $i++)
      }
      else
      {
-          echo ' <a href="index.php?action=' . $_GET['action'] . '&id=' . $_GET['id']. '&page='.$i. '&sortBy=' . $_GET['sortBy'] .' #commentsAnchor">'.$i.'</a> ';
+          echo ' <a href="index.php?action=' . $_GET['action'] . '&id=' . $_GET['id']. '&page='.$i. '&sortBy=' . $_GET['sortBy'] . '#commentsAnchor">'.$i.'</a> ';
      }
 }
 echo '</p>';
