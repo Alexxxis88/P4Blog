@@ -170,9 +170,9 @@ function approveComments($commentId){
     header('Location: ' . $_SERVER['HTTP_REFERER']);
     exit;
 }
-function newPost($title, $content)
+function newPost($chapter, $title, $content)
 {
-    $newPost = insertNewPost($title, $content);
+    $newPost = insertNewPost($chapter, $title, $content);
     header('Location: index.php?action=listPostsAdmin');
     exit;
 }
@@ -189,8 +189,8 @@ function displayPostToEdit($postId)
     require('view/backend/manageView.php');
 }
 
-function updatePost($title, $content, $postId){
-    $updatedPost = editPost($title, $content, $postId);
+function updatePost($chapter, $title, $content, $postId){
+    $updatedPost = editPost($chapter, $title, $content, $postId);
     header('Location: index.php?action=post&id=' . $postId . '&page=1&sortBy=5');
     exit;
 }
@@ -212,7 +212,7 @@ function displayStatsView()
     // $totalComments = getTotalComments($_GET['id']);
     // $totalCom=$totalComments['total_comments']; //NOT WORKING
 
-
+    $exec = statsPosts();
     $rankingBestPost = rankingBest();
     $rankingWorstPost = rankingWorst();
     $oldestUserRegistered = oldestUser();

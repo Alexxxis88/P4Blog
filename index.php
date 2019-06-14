@@ -538,7 +538,7 @@ try {
             approveComments($_GET['commentId']);
         }
         elseif ($_GET['action'] == 'publishChapter') {
-            newPost($_POST['title'], $_POST['postContent']);
+            newPost($_POST['chapter'], $_POST['title'], $_POST['postContent']);
         }
 
         elseif ($_GET['action'] == 'displayPublishView') {
@@ -551,7 +551,7 @@ try {
         }
         
         elseif ($_GET['action'] == 'updatePost') {
-            updatePost($_POST['title'], $_POST['postContent'], $_GET['id']);
+            updatePost($_POST['chapter'], $_POST['title'], $_POST['postContent'], $_GET['id']);
         }
 
         elseif ($_GET['action'] == 'displayStatsView') {

@@ -14,6 +14,7 @@ $id = (int) $datas['id'];
 ?>
 
     <div class="postsBlock">
+        <h3><?= htmlspecialchars($datas['chapter_nb']) ?></h3>
         <h2><?= htmlspecialchars($datas['title']) ?></h2>
         <?php //FIXME duplicate content (except $data instead of $post) with PostsView. Worth factoring into a function ? 
         if($datas['mod_publish_date'] ==  $datas['mod_edit_date'] )

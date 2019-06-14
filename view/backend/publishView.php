@@ -4,6 +4,11 @@
 <div class="postsBlock">
     <form action="index.php?action=publishChapter" method="post">
         <div>
+            <label for="chapter">Chapitre n°</label><br />
+            <input type="text" id="chapter" name="chapter" placeholder="Chapitre n°" required/>
+        </div>
+        <div>
+        <div>
             <label for="title">Titre</label><br />
             <input type="text" id="title" name="title" placeholder="Titre du chapitre" required/>
         </div>

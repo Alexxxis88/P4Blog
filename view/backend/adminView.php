@@ -11,6 +11,7 @@ $id = (int) $datasAdmin['id'];
 ?>
 
     <div class="postsBlock">
+        <h3><?= htmlspecialchars($datasAdmin['chapter_nb']) ?></h3>
         <h2><?= htmlspecialchars($datasAdmin['title']) ?></h2>
         <p>Publié le <?= $datasAdmin['mod_publish_date'] ?></p>
         <p>Edité le <?= $datasAdmin['mod_edit_date'] ?></p>

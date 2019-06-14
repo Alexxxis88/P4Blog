@@ -7,6 +7,7 @@
 
 <!-- displays the post -->
     <div class="postsPostView">
+        <h3><?= htmlspecialchars($post['chapter_nb']) ?></h3>
         <h2><?= htmlspecialchars($post['title']) ?></h2>
 
     <?php //FIXME duplicate content (except $post instead of $data) with listPostsView. Worth factoring into a function ? 
@@ -46,8 +47,8 @@
         while($datas = $lastPosts->fetch())
         {
         $id = (int) $datas['id']; 
-        ?>
-                <h4><?= htmlspecialchars($datas['title']) ?></h4>
+        ?>       
+                <h4><?= htmlspecialchars($datas['chapter_nb']) ?> : <?= htmlspecialchars($datas['title']) ?></h4>
                 
                 <?php //FIXME duplicate content (except $data instead of $post) with PostsView. Worth factoring into a function ? 
                 if($datas['mod_publish_date'] ==  $datas['mod_edit_date'] )

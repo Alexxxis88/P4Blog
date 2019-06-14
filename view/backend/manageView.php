@@ -3,6 +3,10 @@
     <div class="postsBlock">
         <form action="index.php?action=updatePost&amp;id=<?= $displayedPostToEdit['id']?>" method="post">
         <div>
+            <label for="chapter">Chapitre n°</label><br />
+            <input type="text" id="chapter" name="chapter" value="<?= htmlspecialchars($displayedPostToEdit['chapter_nb']) ?>" required/>
+        </div>
+        <div>
             <label for="title">Titre</label><br />
             <input type="text" id="title" name="title" value="<?= htmlspecialchars($displayedPostToEdit['title']) ?>" required/>
         </div>

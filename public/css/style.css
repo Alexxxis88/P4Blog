@@ -262,3 +262,15 @@ button:hover{
 .textAbout{
     margin:150px;
 }
+
+/* Statistics */
+
+.chapterStatsContainer{
+    display: flex;
+}
+
+.chapterStats{
+    height: 250px;
+    margin: 60px 20px;
+    border: 1px solid darkgrey;
+}

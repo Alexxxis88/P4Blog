@@ -8,7 +8,7 @@
 function getPostsAdmin($firstEntry, $messagesPerPage)
 {
     $db = dbConnectAdmin();
-    $req = $db->prepare('SELECT id, title, content, DATE_FORMAT(publish_date, \'%d/%m/%Y à %Hh%imin%ss\') AS mod_publish_date, DATE_FORMAT(edit_date, \'%d/%m/%Y à %Hh%imin%ss\') AS mod_edit_date FROM posts ORDER BY publish_date DESC LIMIT ?, ?');
+    $req = $db->prepare('SELECT id, chapter_nb, title, content, DATE_FORMAT(publish_date, \'%d/%m/%Y à %Hh%imin%ss\') AS mod_publish_date, DATE_FORMAT(edit_date, \'%d/%m/%Y à %Hh%imin%ss\') AS mod_edit_date FROM posts ORDER BY publish_date DESC LIMIT ?, ?');
     $req->bindValue(1, $firstEntry, PDO::PARAM_INT);
     $req->bindValue(2, $messagesPerPage, PDO::PARAM_INT);
     $req->execute();
@@ -172,28 +172,28 @@ function approveComment($commentId){
     $commentApprove->execute(array($commentId));
 }
  
-function insertNewPost($title, $content)
+function insertNewPost($chapter, $title, $content)
 {
     $db = dbConnectAdmin();
-    $newPostDb = $db->prepare('INSERT INTO posts( title, content, publish_date, edit_date) VALUES(?, ?, NOW(), NOW())');
-    $newPostDb->execute(array($title, $content));
+    $newPostDb = $db->prepare('INSERT INTO posts( chapter_nb, title, content, publish_date, edit_date) VALUES(?, ?, ?, NOW(), NOW())');
+    $newPostDb->execute(array($chapter, $title, $content));
 }
 
 function getPostToEdit($postId)
 {
     $db = dbConnectAdmin();
-    $req = $db->prepare('SELECT id, title, content, DATE_FORMAT(publish_date, \'%d/%m/%Y à %Hh%imin%ss\') AS mod_publish_date, DATE_FORMAT(edit_date, \'%d/%m/%Y à %Hh%imin%ss\') AS mod_edit_date FROM posts WHERE id = ?');
+    $req = $db->prepare('SELECT id, chapter_nb, title, content, DATE_FORMAT(publish_date, \'%d/%m/%Y à %Hh%imin%ss\') AS mod_publish_date, DATE_FORMAT(edit_date, \'%d/%m/%Y à %Hh%imin%ss\') AS mod_edit_date FROM posts WHERE id = ?');
     $req->execute(array($postId));
     $postToEdit = $req->fetch();
 
     return $postToEdit;
 }
 
-function editPost($title, $content, $postId)
+function editPost($chapter, $title, $content, $postId)
 {
     $db = dbConnectAdmin();
-    $editedPost = $db->prepare('UPDATE posts SET title = ?, content = ?, edit_date = NOW() WHERE id = ?');
-    $editedPost->execute(array($title, $content, $postId));
+    $editedPost = $db->prepare('UPDATE posts SET chapter_nb = ?, title = ?, content = ?, edit_date = NOW() WHERE id = ?');
+    $editedPost->execute(array($chapter, $title, $content, $postId));
 
 }
 
@@ -217,19 +217,28 @@ function nbComPerPost($postId){
 }
 
 // //gets all the posts to display them in stats view
-function getPostStats()
+function getPostStats() //FIXME : remove this function in favor of the next one ? 
 {
     $db = dbConnectAdmin();
-    $postsStats = $db->query('SELECT id, title, content, DATE_FORMAT(publish_date, \'%d/%m/%Y à %Hh%imin%ss\') AS mod_publish_date, DATE_FORMAT(edit_date, \'%d/%m/%Y à %Hh%imin%ss\') AS mod_edit_date, comment_count FROM posts ORDER BY publish_date DESC ');
+    $postsStats = $db->query('SELECT id, chapter_nb, title, content, DATE_FORMAT(publish_date, \'%d/%m/%Y à %Hh%imin%ss\') AS mod_publish_date, DATE_FORMAT(edit_date, \'%d/%m/%Y à %Hh%imin%ss\') AS mod_edit_date, comment_count FROM posts ORDER BY publish_date DESC ');
     
     return $postsStats;
+}
+
+function statsPosts() 
+{
+    $db = mysqli_connect('localhost','root','','p4blog');
+    $query = "SELECT * from posts";
+    $exec = mysqli_query($db,$query);
+
+    return $exec;
 }
 
 
 function rankingBest(){
 
     $db = dbConnectAdmin();
-    $req = $db->query('SELECT id, title, content, DATE_FORMAT(publish_date, \'%d/%m/%Y à %Hh%imin%ss\') AS mod_publish_date, comment_count FROM posts ORDER BY comment_count DESC, publish_date DESC  LIMIT 1 ');
+    $req = $db->query('SELECT id, chapter_nb, title, content, DATE_FORMAT(publish_date, \'%d/%m/%Y à %Hh%imin%ss\') AS mod_publish_date, comment_count FROM posts ORDER BY comment_count DESC, publish_date DESC  LIMIT 1 ');
     $rankingBest = $req->fetch();
     return $rankingBest;
 }
@@ -237,7 +246,7 @@ function rankingBest(){
 function rankingWorst(){
 
     $db = dbConnectAdmin();
-    $req = $db->query('SELECT id, title, content, DATE_FORMAT(publish_date, \'%d/%m/%Y à %Hh%imin%ss\') AS mod_publish_date, comment_count FROM posts ORDER BY comment_count, publish_date LIMIT 1 ');
+    $req = $db->query('SELECT id, chapter_nb, title, content, DATE_FORMAT(publish_date, \'%d/%m/%Y à %Hh%imin%ss\') AS mod_publish_date, comment_count FROM posts ORDER BY comment_count, publish_date LIMIT 1 ');
     $rankingWorst = $req->fetch();
     return $rankingWorst;
 }
