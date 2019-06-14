@@ -66,7 +66,15 @@ try {
         elseif ($_GET['action'] == 'addComment') {
             if (isset($_GET['id']) && $_GET['id'] > 0) {
                 if (!empty($_POST['author']) && !empty($_POST['comment'])) {
-                    addComment($_GET['id'], $_POST['author'], $_POST['comment'], $_GET['id']);
+
+                    if(isset($_COOKIE['id'])){
+                        $cookieOrSessionID = $_COOKIE['id'];
+                        }
+                        elseif(isset($_SESSION['id'])){
+                            $cookieOrSessionID = $_SESSION['id'];
+                        }
+
+                    addComment($_GET['id'], $_POST['author'], $_POST['comment'], $_GET['id'], $cookieOrSessionID);
                 }
                 else {
                     throw new Exception('Tous les champs ne sont pas remplis !');
@@ -79,7 +87,15 @@ try {
 
         elseif ($_GET['action'] == 'deleteComment') {
             if (isset($_GET['commentId']) && $_GET['commentId'] > 0) {
-                deleteComment($_GET['commentId'], $_GET['id']);
+
+                if(isset($_COOKIE['id'])){
+                    $cookieOrSessionID = $_COOKIE['id'];
+                    }
+                    elseif(isset($_SESSION['id'])){
+                        $cookieOrSessionID = $_SESSION['id'];
+                    }
+
+                deleteComment($_GET['commentId'], $_GET['id'], $cookieOrSessionID);
             }
             else {
                 throw new Exception('Aucun identifiant de billet envoyé');

@@ -16,10 +16,16 @@
     </head>
         
     <body>
+    <!-- Back to top button anchor -->
+    <div id="header"></div>
     <?php require('view/backend/menuAdmin.php') ?>  
         
         <?= $content ?>
 
-        
+        <section id="footer">
+            <a href="index.php?action=contact">Contact</a>
+            <a href="index.php?action=about">A propos de l'auteur</a>
+            <button><a href="#header">back to top</a></button>
+        </section>         
     </body>
 </html>

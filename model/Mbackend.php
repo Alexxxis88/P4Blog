@@ -258,6 +258,23 @@ function newestUser(){
     return $newestUser;
 }
 
+function mostComUser(){
+
+    $db = dbConnectAdmin();
+    $req = $db->query('SELECT id, username, user_com_count, DATE_FORMAT(registration_date, \'%d/%m/%Y à %Hh%imin%ss\') AS mod_registration_date FROM members ORDER BY user_com_count DESC, registration_date DESC  LIMIT 1 ');
+    $mostComUser = $req->fetch();
+    return $mostComUser;
+}
+
+function leastComUser(){
+
+    $db = dbConnectAdmin();
+    $req = $db->query('SELECT id, username, user_com_count, DATE_FORMAT(registration_date, \'%d/%m/%Y à %Hh%imin%ss\') AS mod_registration_date FROM members ORDER BY user_com_count, registration_date LIMIT 1 ');
+    $leastComUser = $req->fetch();
+    return $leastComUser;
+}
+
+
 
 //me ressort le nombre max de com
 // SELECT MAX(bestPost) 

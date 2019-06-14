@@ -12,7 +12,7 @@
             <textarea id="postContent" name="postContent">Contenu du chapitre</textarea>
         </div>
         <div>
-            <input type="submit" value="Publier"/>
+            <input type="submit" onclick="return confirm('Publier le chapitre?')" value="Publier"/>
         </div>
     </form>
 </div> 

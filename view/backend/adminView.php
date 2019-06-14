@@ -27,7 +27,8 @@ $id = (int) $datasAdmin['id'];
 }  
 $postsAdmin->closeCursor();
 ?>     
-   
+<?php require('paginationBE.php'); ?>
+
 <?php $content = ob_get_clean(); ?>
 
 <?php require('backendTemplate.php'); ?>

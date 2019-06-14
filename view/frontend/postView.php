@@ -105,7 +105,7 @@
             <input disabled  maxlength="3" size="3" value="700" id="counter">
 
             <div>
-            <input type="submit"/>
+            <input type="submit" onclick="return confirm('Poster ce commentaire?')" value="Commenter"/>
             </div>
             </form>
         <?php
@@ -216,7 +216,7 @@ function textCounter(field,field2,maxlimit)
                     <!-- form only displayed and used to edit an existing comment -->
                     <!-- i add the $comment['id'] in the class name to display only the form on the selected comment -->
                     <div class="editCommentForm<?=$comment['id'] ?>">
-                        <form action="index.php?action=updateComment&amp;commentId=<?= $comment['id'] ?>" method="post">
+                        <form action="index.php?action=updateComment&amp;id=<?= $post['id'] ?>&amp;commentId=<?= $comment['id'] ?>" method="post">
                                 <!-- <div>
                                 <input type="text" id="author" name="author" required hidden value="< ?php $cookieOrSessionUserNAme ?>"/> 
                             </div> -->

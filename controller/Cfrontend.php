@@ -241,9 +241,9 @@ function checkLog($userName)
 
 //COMMENTS
 
-function addComment($postId, $author, $comment, $postIdComCounts)
+function addComment($postId, $author, $comment, $postIdComCounts, $userIdComCounts)
 {
-    $affectedLines = postComment($postId, $author, $comment,$postIdComCounts);
+    $affectedLines = postComment($postId, $author, $comment,$postIdComCounts, $userIdComCounts);
 
     if ($affectedLines === false) {
         throw new Exception('Impossible d\'ajouter le commentaire !');
@@ -255,9 +255,9 @@ function addComment($postId, $author, $comment, $postIdComCounts)
     }
 }
 
-function deleteComment($commentId,  $postIdComCounts)
+function deleteComment($commentId,  $postIdComCounts, $userIdComCounts)
 {
-    $comDelete = eraseComment($commentId, $postIdComCounts);
+    $comDelete = eraseComment($commentId, $postIdComCounts, $userIdComCounts);
     header('Location: ' . $_SERVER['HTTP_REFERER']); //FIXME : SQL injection issue ? 
     exit;
 
@@ -271,7 +271,7 @@ function reportComments($commentId){
 
 function updateComment($comment, $commentId){
     $commentUpdated = updateCom($comment, $commentId);
-    header('Location: ' . $_SERVER['HTTP_REFERER'] . '&success=5#commentsAnchor'); //FIXME : SQL injection issue ? 
+    header('Location: index.php?action=post&id=' . $_GET['id'] . '&success=5&page=1&sortBy=99999999999999999999#' . $_GET['commentId'] .''); //FIXME : SQL injection issue ? 
     exit;
 }
 

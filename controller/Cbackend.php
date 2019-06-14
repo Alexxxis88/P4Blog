@@ -162,10 +162,6 @@ function nbOfReportedComments() // NOT WORKING : display number of comments to m
     //    </script> 
     // <?php        
     // }
-
-
-    require('view/backend/menuAdmin.php');
-
 }
 
 
@@ -221,7 +217,8 @@ function displayStatsView()
     $rankingWorstPost = rankingWorst();
     $oldestUserRegistered = oldestUser();
     $newestUserRegistered = newestUser();
-    
+    $bestContributor = mostComUser();
+    $worstContributor = leastComUser();
     require('view/backend/statsView.php');
 }
 
