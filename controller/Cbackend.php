@@ -205,6 +205,7 @@ function displayStatsView()
 
     
     $allPostsStats = getPostStats();
+    $usersStats = getUsersStats(); 
     //gets the number of comments per post 
     // $comsPerPost = nbComPerPost($_GET['id']); //NOT WORKING
 

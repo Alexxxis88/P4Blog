@@ -251,6 +251,17 @@ function rankingWorst(){
     return $rankingWorst;
 }
 
+
+
+// //gets all the users to display them in stats view
+function getUsersStats() //FIXME : remove this function in favor of the next one ? 
+{
+    $db = dbConnectAdmin();
+    $usersStats = $db->query('SELECT id, username, DATE_FORMAT(registration_date, \'%d/%m/%Y à %Hh%imin%ss\') AS mod_registration_date, user_com_count FROM members ORDER BY user_com_count DESC LIMIT 0, 10 ');
+    
+    return $usersStats;
+}
+
 function oldestUser(){
 
     $db = dbConnectAdmin();

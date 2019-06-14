@@ -265,12 +265,34 @@ button:hover{
 
 /* Statistics */
 
-.chapterStatsContainer{
+.chapterStatsContainer, .userStatsContainer{
     display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 
 .chapterStats{
     height: 250px;
-    margin: 60px 20px;
+    width: 500px;
+    margin: 0 20px 0 50px;
     border: 1px solid darkgrey;
 }
+
+.top10block{
+    text-align: center;
+    background:lightblue;
+    border: 1px solid grey;
+    margin-right: 200px;
+    height:400px;
+    width:700px;
+}
+
+.topLines{
+    padding: 1px;
+    border-top: 1px solid grey;
+}
+
+.usersBlock{
+    height: 350px;
+    margin: 0 20px 0 50px;
+    border: 1px solid darkgrey;

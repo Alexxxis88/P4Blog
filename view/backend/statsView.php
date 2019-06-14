@@ -82,15 +82,33 @@
 
 
 <h2>Utilisateurs</h2>
-<h3>Utilisateurs le plus actif : </h3>
-<p><?= $bestContributor['username'] ?> avec <?= $bestContributor['user_com_count'] ?> commentaires publiés inscrit le <?= $bestContributor['mod_registration_date'] ?> </p></p>
-<h3>Utilisateurs le moins actif : </h3>
-<p><?= $worstContributor['username'] ?> avec <?= $worstContributor['user_com_count'] ?> commentaires publiés inscrit le <?= $worstContributor['mod_registration_date'] ?> </p>
+<div class="userStatsContainer">
+    <div class="usersBlock">
+        <h3>Utilisateurs le plus actif : </h3>
+        <p><?= $bestContributor['username'] ?> avec <?= $bestContributor['user_com_count'] ?> commentaires publiés inscrit le <?= $bestContributor['mod_registration_date'] ?> </p></p>
+        <h3>Utilisateurs le moins actif : </h3>
+        <p><?= $worstContributor['username'] ?> avec <?= $worstContributor['user_com_count'] ?> commentaires publiés inscrit le <?= $worstContributor['mod_registration_date'] ?> </p>
 
-<h3>Utilisateurs le plus ancien : </h3>
-<p><?= $oldestUserRegistered['username'] ?> inscrit le <?= $oldestUserRegistered['mod_registration_date'] ?></p>
-<h3>Utilisateurs le plus récent : </h3>
-<p><?= $newestUserRegistered['username'] ?> inscrit le <?= $newestUserRegistered['mod_registration_date'] ?></p>
+        <h3>Utilisateurs le plus ancien : </h3>
+        <p><?= $oldestUserRegistered['username'] ?> inscrit le <?= $oldestUserRegistered['mod_registration_date'] ?></p>
+        <h3>Utilisateurs le plus récent : </h3>
+        <p><?= $newestUserRegistered['username'] ?> inscrit le <?= $newestUserRegistered['mod_registration_date'] ?></p>
+    </div>
+    
+    <div class="top10block">
+        <h3>Top 10 des meilleurs contributeurs </h3>
+        <?php 
+        for ($i = 0; $i<10 ; $i++)
+            { $datasUsers = $usersStats->fetch()     
+        ?>
+            <div class="topLines">
+                <p><strong><?= $i+1 ?> . <?= $datasUsers['username'] ?> </strong>inscrit le <?= $datasUsers['mod_registration_date'] ?>. Nombre de commentaires postés : <strong> <?= $datasUsers['user_com_count'] ?></strong></p>
+            </div>     
+            <?php  
+            }    
+            ?> 
+    </div>        
+</div>
 
 </body>
 </html>
