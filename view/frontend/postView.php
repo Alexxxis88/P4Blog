@@ -213,7 +213,8 @@ function textCounter(field,field2,maxlimit)
                     {           
                     ?>
                     <!-- form only displayed and used to edit an existing comment -->
-                    <div class="editCommentForm">
+                    <!-- i add the $comment['id'] in the class name to display only the form on the selected comment -->
+                    <div class="editCommentForm<?=$comment['id'] ?>">
                         <form action="index.php?action=updateComment&amp;commentId=<?= $comment['id'] ?>" method="post">
                                 <!-- <div>
                                 <input type="text" id="author" name="author" required hidden value="< ?php $cookieOrSessionUserNAme ?>"/> 
@@ -234,12 +235,11 @@ function textCounter(field,field2,maxlimit)
 
                     <button class="editBtns"><a href="index.php?action=deleteComment&amp;id=<?= $post['id'] ?>&amp;commentId=<?= $comment['id'] ?>" onclick="return confirm('Etes vous sûr?')">Supprimer mon commentaire</a></button>
                     
-                    <button class="editBtns editCommentBtn">Modifier mon commentaire</button>
+                    <button class="editBtns<?=$comment['id'] ?> editCommentBtn<?=$comment['id'] ?>">Modifier mon commentaire</button>
                     <script>
-                    $(".editBtns").on("click", function(){
-                        $(".editCommentForm, .editCommentBtn").toggle("slow")
+                    $(".editBtns<?=$comment['id'] ?>").on("click", function(){
+                        $(".editCommentForm<?=$comment['id']?>, .editCommentBtn<?=$comment['id'] ?>").toggle("slow")
                     })
-                    
                     </script>
 
                     

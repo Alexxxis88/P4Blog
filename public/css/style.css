@@ -24,7 +24,7 @@ button a:hover{
     margin-right:30px;
 }
 
-.adminFields input, .adminBtns, .userBtns, .regularBtns, .editBtns{
+.adminFields input, .adminBtns, .userBtns, .regularBtns, [class*="editBtns"]{
     border-radius: 4px;
     border:1px solid grey;
     padding:5px;
@@ -47,13 +47,15 @@ button a:hover{
     margin-top: 20px;
 }
 
-.editBtns{
+[class*="editBtns"]{
     background:rgb(212, 0, 255);
+    color:white;
 }
 
-.editCommentForm{
+[class*="editCommentForm"]{
     display:none;
 }
+
 .adminFields input[type="submit"]{
     color: white;
     background:black;
