@@ -84,7 +84,7 @@
         ?>    
             <form action="index.php?action=addComment&amp;id=<?= $post['id'] ?>" method="post">
             <div>
-                <input type="text" id="author" name="author" required hidden value="<?php
+                <input type="text" id="author" name="author" required  value="<?php
                 //FIXME : coder une solution plus propre / optimisée
                 if((isset($_COOKIE['login']) AND !empty($_COOKIE['login']))){
                     echo $_COOKIE['login'];
@@ -163,20 +163,97 @@ function textCounter(field,field2,maxlimit)
                 $comment['comment'] = preg_replace('#http[s]?://[a-z0-9._/-]+#i', '<a href="$0">$0</a>', $comment['comment']); ?>
 
                 <!-- id= $comment['id'] used to create an anchor on the comment position to be able to display the right comment directly when selected in manageCommentsView.php (be)-->
-                <p id="<?= $comment['id'] ?>"><strong><?= htmlspecialchars($comment['author']) ?></strong> le <?= $comment['mod_comment_date'] ?></p> <p><?= nl2br(htmlspecialchars($comment['comment'])) ?></p>
+                <p id="<?= $comment['id'] ?>"><strong><?= htmlspecialchars($comment['author']) ?></strong> publié le <?= $comment['mod_comment_date'] ?>
+
+                <?php
+                //also display update_date if comment has been updated by author
+                if ($comment['mod_comment_date'] != $comment['mod_update_date'])
+                { echo ' et modifié le ' . $comment['mod_update_date'];
+
+                }  ?></p> <p><?= nl2br(htmlspecialchars($comment['comment'])) ?></p>
                 <p>Id du commentaire: <?= $comment['id'] ?></p>
 
+
+
+               
+               
+                
+
+                
+
+                
                 
                 <?php
                 // FIXME: factoriser le code avec l'affichage ou non (1)du formulaire de commentaire (2) du bouton signaler (3) du reste de l'affichage des boutons / menus si loggé en admin / user / pas loggé
-                if((isset($_COOKIE['login']) AND !empty($_COOKIE['login'])) OR (isset($_SESSION['username']) AND !empty($_SESSION['username'])))
-                {           
-                ?>
-                <button class="userBtns"><a href="index.php?action=reportComment&amp;id=<?= $post['id'] ?>&amp;commentId=<?= $comment['id'] ?>" onclick="return confirm('Voulez vous vraiment signaler ce commentaire?')">Signaler</a></button>
 
-                <?php
+                if($comment['flag'] == 0)
+                {
+
+                    if((isset($_COOKIE['login']) AND !empty($_COOKIE['login'])) OR (isset($_SESSION['username']) AND !empty($_SESSION['username'])))
+                    {           
+                    ?>
+                    <button class="userBtns"><a href="index.php?action=reportComment&amp;id=<?= $post['id'] ?>&amp;commentId=<?= $comment['id'] ?>" onclick="return confirm('Voulez vous vraiment signaler ce commentaire?')">Signaler</a></button>
+
+                    <?php
+                    }
+                    ?> 
+
+
+                    <?php
+                    // allows the author to edit / delete his comments only if it has not been reported and pending for management
+
+                    if(isset($_COOKIE['login'])){
+                        $cookieOrSessionUserNAme = $_COOKIE['login'];
+                        }
+                        elseif(isset($_SESSION['username'])){
+                            $cookieOrSessionUserNAme = $_SESSION['username'];
+                        }
+                        
+                    if(isset($cookieOrSessionUserNAme) AND !empty($cookieOrSessionUserNAme) AND  $cookieOrSessionUserNAme == $comment['author'])
+                    {           
+                    ?>
+                    <!-- form only displayed and used to edit an existing comment -->
+                    <div class="editCommentForm">
+                        <form action="index.php?action=updateComment&amp;commentId=<?= $comment['id'] ?>" method="post">
+                                <!-- <div>
+                                <input type="text" id="author" name="author" required hidden value="< ?php $cookieOrSessionUserNAme ?>"/> 
+                            </div> -->
+                            <div>
+                                <label for="comment">Commentaire (700 carac. max)</label><br />
+                                <textarea id="comment" name="comment" cols="80" rows="5" maxlength="700" required onkeyup="textCounter(this,'counter',700);"><?= $comment['comment'] ?> </textarea>
+                            </div>
+
+                            <!-- Used to count how many characters there is left -->
+                            <input disabled  maxlength="3" size="3" value="700" id="counter">
+
+                            <div>
+                            <input type="submit" class="editBtns" value="Sauvegarder mon commentaire"/>
+                            </div>
+                        </form>
+                    </div> 
+
+                    <button class="editBtns"><a href="index.php?action=deleteComment&amp;id=<?= $post['id'] ?>&amp;commentId=<?= $comment['id'] ?>" onclick="return confirm('Etes vous sûr?')">Supprimer mon commentaire</a></button>
+                    
+                    <button class="editBtns editCommentBtn">Modifier mon commentaire</button>
+                    <script>
+                    $(".editBtns").on("click", function(){
+                        $(".editCommentForm, .editCommentBtn").toggle("slow")
+                    })
+                    
+                    </script>
+
+                    
+
+
+
+
+                    <?php
+                    }
                 }
                 ?> 
+
+
+                    
 
 
                 

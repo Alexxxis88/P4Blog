@@ -270,6 +270,12 @@ function reportComments($commentId){
     exit;
 }
 
+function updateComment($comment, $commentId){
+    $commentUpdated = updateCom($comment, $commentId);
+    header('Location: ' . $_SERVER['HTTP_REFERER'] . '&success=5#commentsAnchor'); //FIXME : SQL injection issue ? 
+    exit;
+}
+
 
 
 //add the reported comment in a new table called reported_comments that gathers the id of the member who reported it, the id of the reported comment and a flag set to 1

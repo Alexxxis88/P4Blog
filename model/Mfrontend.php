@@ -85,7 +85,7 @@ function getPost($postId)
 function getComments($postId, $firstComment, $commentsPerPage)
 {
     $db = dbConnect();
-    $comments = $db->prepare('SELECT id, author, comment, DATE_FORMAT(comment_date, \'%d/%m/%Y à %Hh%imin%ss\') AS mod_comment_date, flag FROM comments WHERE post_id = ? ORDER BY comment_date LIMIT ?, ?');
+    $comments = $db->prepare('SELECT id, author, comment, DATE_FORMAT(comment_date, \'%d/%m/%Y à %Hh%imin%ss\') AS mod_comment_date, DATE_FORMAT(update_date, \'%d/%m/%Y à %Hh%imin%ss\') AS mod_update_date, flag FROM comments WHERE post_id = ? ORDER BY comment_date LIMIT ?, ?');
     $comments->bindValue(1, $postId, PDO::PARAM_INT);
     $comments->bindValue(2, $firstComment, PDO::PARAM_INT);
     $comments->bindValue(3, $commentsPerPage, PDO::PARAM_INT);
@@ -116,7 +116,7 @@ function getTotalComments($postId){
 function postComment($postId, $author, $comment)
 {
     $db = dbConnect();
-    $comments = $db->prepare('INSERT INTO comments(post_id, author, comment, comment_date) VALUES(?, ?, ?, NOW())');
+    $comments = $db->prepare('INSERT INTO comments(post_id, author, comment, comment_date, update_date) VALUES(?, ?, ?, NOW(), NOW())');
     $affectedLines = $comments->execute(array($postId, $author, $comment));
 
     return $affectedLines;
@@ -158,6 +158,12 @@ function checkIfAlreadyReportedCom()
 
 }
 
+function updateCom($comment, $commentId)
+{
+    $db = dbConnect();
+    $updateCom = $db->prepare('UPDATE comments SET comment = ?, update_date = NOW()  WHERE id = ?');
+    $updateCom->execute(array($comment, $commentId));
+}
 
 
 function erasePost($postId) // est ce que ce $postId est le même que celui de postComment ? 
