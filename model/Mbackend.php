@@ -220,20 +220,44 @@ function nbComPerPost($postId){
 function getPostStats()
 {
     $db = dbConnectAdmin();
-    $postsStats = $db->query('SELECT id, title, content, DATE_FORMAT(publish_date, \'%d/%m/%Y à %Hh%imin%ss\') AS mod_publish_date, DATE_FORMAT(edit_date, \'%d/%m/%Y à %Hh%imin%ss\') AS mod_edit_date FROM posts ORDER BY publish_date DESC ');
+    $postsStats = $db->query('SELECT id, title, content, DATE_FORMAT(publish_date, \'%d/%m/%Y à %Hh%imin%ss\') AS mod_publish_date, DATE_FORMAT(edit_date, \'%d/%m/%Y à %Hh%imin%ss\') AS mod_edit_date, comment_count FROM posts ORDER BY publish_date DESC ');
     
     return $postsStats;
 }
 
 
-function rankingCommentsPerPost(){
+function rankingBest(){
 
     $db = dbConnectAdmin();
-    $rankingCom = $db->query('SELECT post_Id, COUNT(post_Id) AS Total FROM comments GROUP BY post_Id ORDER BY Total DESC ');
-    
-    return $rankingCom;
-
+    $req = $db->query('SELECT id, title, content, DATE_FORMAT(publish_date, \'%d/%m/%Y à %Hh%imin%ss\') AS mod_publish_date, comment_count FROM posts ORDER BY comment_count DESC, publish_date DESC  LIMIT 1 ');
+    $rankingBest = $req->fetch();
+    return $rankingBest;
 }
+
+function rankingWorst(){
+
+    $db = dbConnectAdmin();
+    $req = $db->query('SELECT id, title, content, DATE_FORMAT(publish_date, \'%d/%m/%Y à %Hh%imin%ss\') AS mod_publish_date, comment_count FROM posts ORDER BY comment_count, publish_date LIMIT 1 ');
+    $rankingWorst = $req->fetch();
+    return $rankingWorst;
+}
+
+function oldestUser(){
+
+    $db = dbConnectAdmin();
+    $req = $db->query('SELECT id, username, DATE_FORMAT(registration_date, \'%d/%m/%Y à %Hh%imin%ss\') AS mod_registration_date FROM members ORDER BY registration_date  LIMIT 1 ');
+    $oldestUser = $req->fetch();
+    return $oldestUser;
+}
+
+function newestUser(){
+
+    $db = dbConnectAdmin();
+    $req = $db->query('SELECT id, username, DATE_FORMAT(registration_date, \'%d/%m/%Y à %Hh%imin%ss\') AS mod_registration_date FROM members ORDER BY registration_date DESC  LIMIT 1 ');
+    $newestUser = $req->fetch();
+    return $newestUser;
+}
+
 
 //me ressort le nombre max de com
 // SELECT MAX(bestPost) 

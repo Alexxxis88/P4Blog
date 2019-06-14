@@ -213,8 +213,14 @@ function displayStatsView()
     // $comsPerPost = nbComPerPost($_GET['id']); //NOT WORKING
 
     
-    $totalComments = getTotalComments($_GET['id']);
-    $totalCom=$totalComments['total_comments']; //NOT WORKING
+    // $totalComments = getTotalComments($_GET['id']);
+    // $totalCom=$totalComments['total_comments']; //NOT WORKING
+
+
+    $rankingBestPost = rankingBest();
+    $rankingWorstPost = rankingWorst();
+    $oldestUserRegistered = oldestUser();
+    $newestUserRegistered = newestUser();
     
     require('view/backend/statsView.php');
 }
