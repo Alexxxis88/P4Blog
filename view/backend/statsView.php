@@ -10,15 +10,15 @@
 <h3>Tous les articles</h3>
 
 <?php 
-// while ($datas = $allPostsStats->fetch()) //NOT WORKING
-//     {       
-//     ?>
-<!-- //     <div class="reportedComments">
-//      <p>< ?= $datas['title'] ?></p><p> Nombre de commentaires< ?= $datas['nb_com'] ?></p>
-//      </div>
-//      < ?php  -->
-<!-- //      }    
-//      ? > -->
+while ($datas = $allPostsStats->fetch()) //NOT WORKING
+    {       
+ ?>
+<div class="reportedComments">
+ <p>Article n° <?= $datas['id'] ?> <?= $datas['title'] ?></p><p> Nombre de commentaires <?= $totalCom ?></p>
+</div>
+ <?php  
+}    
+  ?>
 
 
 

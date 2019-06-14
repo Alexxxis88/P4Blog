@@ -51,7 +51,6 @@ function listPosts()
 
 
 
-//WORKING
 function post()
 {
 
@@ -242,9 +241,9 @@ function checkLog($userName)
 
 //COMMENTS
 
-function addComment($postId, $author, $comment)
+function addComment($postId, $author, $comment, $postIdComCounts)
 {
-    $affectedLines = postComment($postId, $author, $comment);
+    $affectedLines = postComment($postId, $author, $comment,$postIdComCounts);
 
     if ($affectedLines === false) {
         throw new Exception('Impossible d\'ajouter le commentaire !');
@@ -256,9 +255,9 @@ function addComment($postId, $author, $comment)
     }
 }
 
-function deleteComment($commentId)
+function deleteComment($commentId,  $postIdComCounts)
 {
-    $comDelete = eraseComment($commentId);
+    $comDelete = eraseComment($commentId, $postIdComCounts);
     header('Location: ' . $_SERVER['HTTP_REFERER']); //FIXME : SQL injection issue ? 
     exit;
 

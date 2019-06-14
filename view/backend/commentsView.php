@@ -44,7 +44,7 @@
                         <!-- FIXME : edit class of the approve btn -->
                         <button class="userBtns"><a href="index.php?action=approveComment&amp;commentId=<?= $datas['id'] ?>"  onclick="return alert('Commentaire approuvé')" >Approuver</a></button>
 
-                        <button class="adminBtns"><a href="index.php?action=deleteComment&amp;id=<?= $datas['id'] ?>&amp;commentId=<?= $datas['id'] ?>" onclick="return confirm('Etes vous sûr?')">Supprimer</a></button>
+                        <button class="adminBtns"><a href="index.php?action=deleteComment&amp;id=<?= $datas['post_id'] ?>&amp;commentId=<?= $datas['id'] ?>" onclick="return confirm('Etes vous sûr?')">Supprimer</a></button>
                 </div>
         <?php
         
@@ -112,7 +112,7 @@ $arrayPublish = array();
                         <!-- FIXME : edit class of the approve btn -->
                         <button class="userBtns"><a href="index.php?action=approveComment&amp;commentId=<?= $datasPublish['id'] ?>"  onclick="return alert('Commentaire publié')" >Publier</a></button>
 
-                        <button class="adminBtns"><a href="index.php?action=deleteComment&amp;id=<?= $datasPublish['id'] ?>&amp;commentId=<?= $datasPublish['id'] ?>" onclick="return confirm('Etes vous sûr?')">Supprimer</a></button>
+                        <button class="adminBtns"><a href="index.php?action=deleteComment&amp;id=<?= $datasPublish['post_id'] ?>&amp;commentId=<?= $datasPublish['id'] ?>" onclick="return confirm('Etes vous sûr?')">Supprimer</a></button>
                 </div>
         <?php
         

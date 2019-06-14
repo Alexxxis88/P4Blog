@@ -201,33 +201,51 @@ function editPost($title, $content, $postId)
 
 //Statistics 
 
-// //gets the number of comments per post
-// function nbComPerPost(){
-//     $db = dbConnectAdmin();
-//     $totalComPerPosts = $db->prepare(
-//         'SELECT COUNT(*) AS nb_com, p.id
-//             FROM posts p 
-//             INNER JOIN comments c 
-//             ON c.post_id = p.id
-//             WHERE p.id = 256
-//             ');
-//     $totalComPerPosts->execute(array());
+//gets the number of comments per post
+function nbComPerPost($postId){
+    $db = dbConnectAdmin();
+    $totalComPerPosts = $db->prepare(
+        'SELECT COUNT(*) AS nb_com, p.id
+            FROM posts p 
+            INNER JOIN comments c 
+            ON c.post_id = p.id
+            WHERE p.id = ?
+            ');
+    $totalComPerPosts->execute(array($postId));
 
-//     return $totalComPerPosts;
-// }
+    return $totalComPerPosts;
+}
 
-// // //gets all the posts to display them in stats view
-// // function getPostStats()
-// // {
-// //     $db = dbConnectAdmin();
-// //     $postsStats = $db->query('SELECT id, title, content, DATE_FORMAT(publish_date, \'%d/%m/%Y à %Hh%imin%ss\') AS mod_publish_date, DATE_FORMAT(edit_date, \'%d/%m/%Y à %Hh%imin%ss\') AS mod_edit_date FROM posts ORDER BY publish_date DESC ');
+// //gets all the posts to display them in stats view
+function getPostStats()
+{
+    $db = dbConnectAdmin();
+    $postsStats = $db->query('SELECT id, title, content, DATE_FORMAT(publish_date, \'%d/%m/%Y à %Hh%imin%ss\') AS mod_publish_date, DATE_FORMAT(edit_date, \'%d/%m/%Y à %Hh%imin%ss\') AS mod_edit_date FROM posts ORDER BY publish_date DESC ');
     
-// //     return $postsStats;
-// // }
+    return $postsStats;
+}
 
 
+function rankingCommentsPerPost(){
+
+    $db = dbConnectAdmin();
+    $rankingCom = $db->query('SELECT post_Id, COUNT(post_Id) AS Total FROM comments GROUP BY post_Id ORDER BY Total DESC ');
+    
+    return $rankingCom;
+
+}
+
+//me ressort le nombre max de com
+// SELECT MAX(bestPost) 
+// FROM (SELECT post_id,COUNT(*) bestPost 
+// FROM comments 
+// GROUP BY post_id) AS c;	
 
 
+// SELECT MAX (mycount) 
+// FROM (SELECT agent_code,COUNT(agent_code) mycount 
+// FROM orders 
+// GROUP BY agent_code);
 
 // General function to connect to database
 function dbConnectAdmin()

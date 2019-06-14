@@ -201,15 +201,23 @@ function updatePost($title, $content, $postId){
 
 
 
-// //Statistics 
+//Statistics 
 
-// function displayStatsView()
-// {
-//     $allPostsStats = getPostStats();
-//     //gets the number of comments per post
-//     $comsPerPost = nbComPerPost();
-//     require('view/backend/statsView.php');
-// }
+function displayStatsView()
+{
+
+
+    
+    $allPostsStats = getPostStats();
+    //gets the number of comments per post 
+    // $comsPerPost = nbComPerPost($_GET['id']); //NOT WORKING
+
+    
+    $totalComments = getTotalComments($_GET['id']);
+    $totalCom=$totalComments['total_comments']; //NOT WORKING
+    
+    require('view/backend/statsView.php');
+}
 
 
 

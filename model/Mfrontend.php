@@ -113,21 +113,31 @@ function getTotalComments($postId){
 
 
 
-function postComment($postId, $author, $comment)
+function postComment($postId, $author, $comment,$postIdComCounts)
 {
     $db = dbConnect();
     $comments = $db->prepare('INSERT INTO comments(post_id, author, comment, comment_date, update_date) VALUES(?, ?, ?, NOW(), NOW())');
     $affectedLines = $comments->execute(array($postId, $author, $comment));
 
+    //updates the comment counter +1 to know how much comments have been posted on a post
+    $db = dbConnect();
+    $commentCount = $db->prepare('UPDATE posts SET comment_count = comment_count + 1 WHERE id = ?');
+    $commentCount ->execute(array($postIdComCounts));
+
     return $affectedLines;
 }
 
 
-function eraseComment($commentId)
+function eraseComment($commentId, $postIdComCounts)
 {
     $db = dbConnect();
     $comDelete = $db->prepare('DELETE FROM comments WHERE id = ?');
     $comDelete->execute(array($commentId));
+
+    //updates the comment counter +1 to know how much comments have been posted on a post
+    $db = dbConnect();
+    $commentCount = $db->prepare('UPDATE posts SET comment_count = comment_count - 1 WHERE id = ?');
+    $commentCount ->execute(array($postIdComCounts));
 }
 
 
