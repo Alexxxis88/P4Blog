@@ -176,15 +176,7 @@ try {
             if(isset($_SESSION['id']) AND isset($_SESSION['username'])){
                 
 
-                // FIXME : factoriser dans une fonction unique dans le controleur killSession() ? 
-                // Delete session variables
-                $_SESSION = array();
-                session_destroy();
-
-                // Delete autologing cookies
-                setcookie('id', '', time() + 365*24*3600, null, null, false, true);
-                setcookie('login', '', time() + 365*24*3600, null, null, false, true);
-                setcookie('hash_pass', '', time() + 365*24*3600, null, null, false, true);
+                killSession();
                 
                 header('Location: index.php');
                 exit;
@@ -240,15 +232,7 @@ try {
                 
                             UpdatePassWord($_POST['newPass'], $_POST['id']);
 
-                            // FIXME : factoriser dans une fonction unique dans le controleur killSession() ? 
-                            // Delete session variables
-                            $_SESSION = array();
-                            session_destroy();
-
-                            // Delete autologing cookies
-                            setcookie('id', '', time() + 365*24*3600, null, null, false, true);
-                            setcookie('login', '', time() + 365*24*3600, null, null, false, true);
-                            setcookie('hash_pass', '', time() + 365*24*3600, null, null, false, true);
+                            killSession();
 
                             //success2 needed to display the confirmation message
                             header('Location: index.php?success=2#header');
@@ -503,7 +487,6 @@ try {
 
         elseif ($_GET['action'] == 'manageComments') {
             listAllComments();
-            // listResportedComments(); FIXME : a supprimer quand manage comments marchera
         }
         
         //to approve or delete all reported comments
@@ -526,7 +509,6 @@ try {
                 deleteAllSelectedComments($_POST['selectPublishComments']); // j'essaie de récupérer le tableau de commentsView.php 
             }
             elseif(isset($_POST['publishSelectedComments'])){
-                // publishAllSelectedComments($_POST['selectPublishComments']); FIXME a supprimer si ça fonctionne bien avec approveAllSelectedComments
                 approveAllSelectedComments($_POST['selectPublishComments']);
             }
             else{

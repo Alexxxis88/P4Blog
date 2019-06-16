@@ -197,7 +197,6 @@ function checkLog($userName)
         if ($isPasswordCorrect) {
             $_SESSION['id'] = $checkLogIn['id'];
             $_SESSION['username'] = $userName;
-            $userNameSession = $_SESSION['username']; //FIXME : USELESS ? 
             
             //if the autolog checkbox is selected COOKIES are created
             if(isset($_POST['autoLogIn']))
@@ -231,6 +230,18 @@ function checkLog($userName)
 }
 
 
+function killSession(){
+// Delete session variables
+$_SESSION = array();
+session_destroy();
+
+// Delete autologing cookies
+setcookie('id', '', time() + 365*24*3600, null, null, false, true);
+setcookie('login', '', time() + 365*24*3600, null, null, false, true);
+setcookie('hash_pass', '', time() + 365*24*3600, null, null, false, true);
+
+
+}
 
 
 

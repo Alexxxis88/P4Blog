@@ -65,11 +65,11 @@
     </div>
 </div>
 
- <!-- FIXME : supprimer ci dessous ?  -->
+ <!-- FIXME voir allPostsStats(C et M, a virer aussi) : supprimer ci dessous ?  -->
 <!-- <h3>Tous les Chapitre</h3>
 
 < ? php 
-// while ($datas = $allPostsStats->fetch()) //NOT WORKING
+// while ($datas = $allPostsStats->fetch())
     // {       
  ? >
 <div class="reportedComments">

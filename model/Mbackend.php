@@ -217,13 +217,14 @@ function nbComPerPost($postId){
 }
 
 // //gets all the posts to display them in stats view
-function getPostStats() //FIXME : remove this function in favor of the next one ? 
-{
-    $db = dbConnectAdmin();
-    $postsStats = $db->query('SELECT id, chapter_nb, title, content, DATE_FORMAT(publish_date, \'%d/%m/%Y à %Hh%imin%ss\') AS mod_publish_date, DATE_FORMAT(edit_date, \'%d/%m/%Y à %Hh%imin%ss\') AS mod_edit_date, comment_count FROM posts ORDER BY publish_date DESC ');
+
+// function getPostStats() //FIXME : remove this function in favor of the next one ? voir allPostsStats(statsView.php et C, a virer aussi)
+// {
+//     $db = dbConnectAdmin();
+//     $postsStats = $db->query('SELECT id, chapter_nb, title, content, DATE_FORMAT(publish_date, \'%d/%m/%Y à %Hh%imin%ss\') AS mod_publish_date, DATE_FORMAT(edit_date, \'%d/%m/%Y à %Hh%imin%ss\') AS mod_edit_date, comment_count FROM posts ORDER BY publish_date DESC ');
     
-    return $postsStats;
-}
+//     return $postsStats;
+// }
 
 function statsPosts() 
 {
@@ -253,8 +254,8 @@ function rankingWorst(){
 
 
 
-// //gets all the users to display them in stats view
-function getUsersStats() //FIXME : remove this function in favor of the next one ? 
+//gets all the users to display them in stats view
+function getUsersStats()
 {
     $db = dbConnectAdmin();
     $usersStats = $db->query('SELECT id, username, DATE_FORMAT(registration_date, \'%d/%m/%Y à %Hh%imin%ss\') AS mod_registration_date, user_com_count FROM members ORDER BY user_com_count DESC LIMIT 0, 10 ');

@@ -31,16 +31,7 @@ function listPostsAdmin()
 
     $postsAdmin = getPostsAdmin($firstEntry, $messagesPerPage);
     require('view/backend/adminView.php');
-    
-
 }
-
-// function listResportedComments() // FIXME : a supprimer quand manage comments marchera
-// {
-//     $reportedComments = getReportedComments();
-//     require('view/backend/commentsView.php');
-// }
-
 
 
 
@@ -94,7 +85,6 @@ function listAllUsers()
 
 function deleteAllSelectedUsers($arrayUsersIDs){
     
-    // $arrayCommentsIDs = array(161, 162, 163, 164); //working FIXME : a supprimer
     $deleteAllSelectedUsers = eraseAllSelectedUsers($arrayUsersIDs);
     header('Location: ' . $_SERVER['HTTP_REFERER']);
 }
@@ -130,7 +120,6 @@ function listAllComments()
 
 function deleteAllSelectedComments($arrayCommentsIDs){
     
-    // $arrayCommentsIDs = array(161, 162, 163, 164); //working FIXME : a supprimer
     $deleteAllSelectedComments = eraseAllSelectedComments($arrayCommentsIDs);
     header('Location: ' . $_SERVER['HTTP_REFERER']);
 }
@@ -201,18 +190,8 @@ function updatePost($chapter, $title, $content, $postId){
 
 function displayStatsView()
 {
-
-
-    
-    $allPostsStats = getPostStats();
-    $usersStats = getUsersStats(); 
-    //gets the number of comments per post 
-    // $comsPerPost = nbComPerPost($_GET['id']); //NOT WORKING
-
-    
-    // $totalComments = getTotalComments($_GET['id']);
-    // $totalCom=$totalComments['total_comments']; //NOT WORKING
-
+    // $allPostsStats = getPostStats(); // FIXME voir allPostsStats(statsView.php et M, a virer aussi)
+    $usersStats = getUsersStats();
     $exec = statsPosts();
     $rankingBestPost = rankingBest();
     $rankingWorstPost = rankingWorst();
@@ -220,6 +199,7 @@ function displayStatsView()
     $newestUserRegistered = newestUser();
     $bestContributor = mostComUser();
     $worstContributor = leastComUser();
+
     require('view/backend/statsView.php');
 }
 
