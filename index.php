@@ -83,7 +83,8 @@ try {
                 if (!empty($_POST['author']) && !empty($_POST['comment'])) {
 
                 //needed to update the user_com_counter in members table
-                $cookieOrSessionID = checkSession();
+                $sessionManager = new SessionManager();
+                $cookieOrSessionID = $sessionManager->checkSession();
 
                     addComment($_GET['id'], $_POST['author'], $_POST['comment'], $_GET['id'], $cookieOrSessionID);
                 }
@@ -100,7 +101,8 @@ try {
             if (isset($_GET['commentId']) && $_GET['commentId'] > 0) {
 
                 //needed to update the user_com_counter in members table
-                $cookieOrSessionID = checkSession();
+                $sessionManager = new SessionManager();
+                $cookieOrSessionID = $sessionManager->checkSession();
 
                 deleteComment($_GET['commentId'], $_GET['id'], $cookieOrSessionID);
             }
@@ -117,7 +119,8 @@ try {
                 checkIfReported();
 
                 //needed to checks in the controler if the member already reported the same comment
-                $cookieOrSessionID = checkSession();
+                $sessionManager = new SessionManager();
+                $cookieOrSessionID = $sessionManager->checkSession();
 
                 reportCommentsCheck($cookieOrSessionID, $_GET['commentId']); //the reported comment is registered into reported_comments DB
                 reportComments($_GET['commentId']);    //the reported comment is actually reported in comments DB and BE
@@ -263,7 +266,8 @@ try {
                 $accentedCharactersNewPass = "àèìòùÀÈÌÒÙáéíóúýÁÉÍÓÚÝâêîôûÂÊÎÔÛãñõÃÑÕäëïöüÿÄËÏÖÜŸçÇßØøÅåÆæœ";
 
                 //needed to check the current pass in DB from the right user (id) 
-                $cookieOrSessionID = checkSession();
+                $sessionManager = new SessionManager();
+                $cookieOrSessionID = $sessionManager->checkSession();
 
 
                 if(checkCurrentPass($cookieOrSessionID) == true)   

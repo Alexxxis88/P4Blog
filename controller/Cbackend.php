@@ -1,13 +1,17 @@
 <?php
-require('model/Mbackend.php');
-
+require_once('model/PostManager.php');
+require_once('model/CommentManager.php');
+require_once('model/UserManager.php');
+require_once('model/StatsManager.php');
 
 //POSTS
 function listPostsAdmin()
 {
 
+    $postManager = new PostManager();
+
     //Pagination
-    $totalPages = getTotalPagesAdmin();
+    $totalPages = $postManager->getTotalPagesAdmin();
     $total=$totalPages['total_posts']; // total of posts in DB
     $messagesPerPage=5;
     $nbOfPages=ceil($total/$messagesPerPage);
@@ -30,7 +34,7 @@ function listPostsAdmin()
  
 //Display post depending on pagination parameters
 
-    $postsAdmin = getPostsAdmin($firstEntry, $messagesPerPage);
+    $postsAdmin = $postManager->getPostsAdmin($firstEntry, $messagesPerPage);
     require('view/backend/adminView.php');
 }
 
@@ -41,8 +45,10 @@ function displayPublishView()
 }
 
 function newPost($chapter, $title, $content)
-{
-    $newPost = insertNewPost($chapter, $title, $content);
+{   
+    $postManager = new PostManager();
+
+    $newPost = $postManager->insertNewPost($chapter, $title, $content);
     header('Location: index.php?action=listPostsAdmin');
     exit;
 }
@@ -50,13 +56,18 @@ function newPost($chapter, $title, $content)
 
 
 function displayPostToEdit($postId)
-{
-    $displayedPostToEdit = getPostToEdit($postId);
+{   
+    $postManager = new PostManager();
+
+    $displayedPostToEdit = $postManager->getPostToEdit($postId);
     require('view/backend/manageView.php');
 }
 
-function updatePost($chapter, $title, $content, $postId){
-    $updatedPost = editPost($chapter, $title, $content, $postId);
+function updatePost($chapter, $title, $content, $postId)
+{
+    $postManager = new PostManager();
+
+    $updatedPost = $postManager->editPost($chapter, $title, $content, $postId);
     header('Location: index.php?action=post&id=' . $postId . '&page=1&sortBy=5');
     exit;
 }
@@ -66,9 +77,10 @@ function updatePost($chapter, $title, $content, $postId){
 //USERS
 function listAllUsers()
 {
-
+    $userManager = new UserManager();
+    
     //Pagination
-    $totalPages = getTotalPagesUsers();
+    $totalPages = $userManager->getTotalPagesUsers();
     $total=$totalPages['total_users']; // total of users in DB
 
     if(isset($_GET['sortBy'])){
@@ -99,7 +111,7 @@ function listAllUsers()
 
 //Display user depending on pagination parameters
 
-    $allUsers = getAllUsers($firstUser, $usersPerPage);
+    $allUsers = $userManager->getAllUsers($firstUser, $usersPerPage);
     require('view/backend/usersView.php');
 }
 
@@ -107,7 +119,9 @@ function listAllUsers()
 
 function deleteAllSelectedUsers($arrayUsersIDs){
     
-    $deleteAllSelectedUsers = eraseAllSelectedUsers($arrayUsersIDs);
+    $userManager = new UserManager();
+
+    $deleteAllSelectedUsers = $userManager->eraseAllSelectedUsers($arrayUsersIDs);
     header('Location: ' . $_SERVER['HTTP_REFERER']);
     exit;
 }
@@ -115,7 +129,9 @@ function deleteAllSelectedUsers($arrayUsersIDs){
 
 function deleteUser($userId)
 {
-    $userDelete = eraseUser($userId);
+    $userManager = new UserManager();
+
+    $userDelete = $userManager->eraseUser($userId);
     header('Location: ' . $_SERVER['HTTP_REFERER']); //FIXME : SQL injection issue ? 
     exit;
 } 
@@ -123,7 +139,9 @@ function deleteUser($userId)
 
 function updateUserRole($userRole, $userId)
 {
-    $updateUserRole = updateRole($userRole, $userId);
+    $userManager = new UserManager();
+
+    $updateUserRole = $userManager->updateRole($userRole, $userId);
     header('Location: ' . $_SERVER['HTTP_REFERER']); //FIXME : SQL injection issue ? 
     exit;
 }
@@ -135,23 +153,29 @@ function updateUserRole($userRole, $userId)
 //display reported and new comments
 function listAllComments()
 {
-    $reportedComments = getReportedComments();
-    $newComments = getNewComments();
+    $commentManager = new CommentManager();
+
+    $reportedComments = $commentManager->getReportedComments();
+    $newComments = $commentManager->getNewComments();
     require('view/backend/commentsView.php');
 }
 
 
-function deleteAllSelectedComments($arrayCommentsIDs){
+function deleteAllSelectedComments($arrayCommentsIDs)
+{
+    $commentManager = new CommentManager();
     
-    $deleteAllSelectedComments = eraseAllSelectedComments($arrayCommentsIDs);
+    $deleteAllSelectedComments = $commentManager->eraseAllSelectedComments($arrayCommentsIDs);
     header('Location: ' . $_SERVER['HTTP_REFERER']);
     exit;
 }
 
 
-function approveAllSelectedComments($arrayCommentsIDs){
-    
-    $approveAllSelectedComments = acceptAllSelectedComments($arrayCommentsIDs);
+function approveAllSelectedComments($arrayCommentsIDs)
+{
+    $commentManager = new CommentManager();
+
+    $approveAllSelectedComments = $commentManager->acceptAllSelectedComments($arrayCommentsIDs);
     header('Location: ' . $_SERVER['HTTP_REFERER']);
     exit;
 }
@@ -160,8 +184,10 @@ function approveAllSelectedComments($arrayCommentsIDs){
 
 
 function nbOfReportedComments() // NOT WORKING : display number of comments to manage 
-{
-    $nbOfReportedComments = getNbOfReportedComments();
+{   
+    $commentManager = new CommentManager();
+
+    $nbOfReportedComments = $commentManager->getNbOfReportedComments();
 
     // if($nbOfReportedComments>0){
     // ? >
@@ -180,7 +206,10 @@ function nbOfReportedComments() // NOT WORKING : display number of comments to m
 
 
 function approveComments($commentId){
-    $commentApproved = approveComment($commentId);
+    
+    $commentManager = new CommentManager();
+
+    $commentApproved =  $commentManager->approveComment($commentId);
     header('Location: ' . $_SERVER['HTTP_REFERER']);
     exit;
 }
@@ -191,15 +220,17 @@ function approveComments($commentId){
 
 function displayStatsView()
 {
+    $statsManager = new StatsManager();
+
     // $allPostsStats = getPostStats(); // FIXME voir allPostsStats(statsView.php et M, a virer aussi)
-    $usersStats = getUsersStats();
-    $exec = statsPosts();
-    $rankingBestPost = rankingBest();
-    $rankingWorstPost = rankingWorst();
-    $oldestUserRegistered = oldestUser();
-    $newestUserRegistered = newestUser();
-    $bestContributor = mostComUser();
-    $worstContributor = leastComUser();
+    $usersStats = $statsManager->getUsersStats();
+    $exec =  $statsManager->statsPosts();
+    $rankingBestPost =  $statsManager->rankingBest();
+    $rankingWorstPost =  $statsManager->rankingWorst();
+    $oldestUserRegistered =  $statsManager->oldestUser();
+    $newestUserRegistered =  $statsManager->newestUser();
+    $bestContributor =  $statsManager->mostComUser();
+    $worstContributor =  $statsManager->leastComUser();
 
     require('view/backend/statsView.php');
 }

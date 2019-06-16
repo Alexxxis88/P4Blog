@@ -1,6 +1,7 @@
 <?php
-require('model/Mfrontend.php');
-
+require_once('model/PostManager.php');
+require_once('model/CommentManager.php');
+require_once('model/SessionManager.php');
 
 
 //POSTS
@@ -8,8 +9,11 @@ require('model/Mfrontend.php');
 //gets all the post to display in listPostsView. 
 function listPosts()
 {
+
+    $postManager = new PostManager();
+
 //Pagination
-    $totalPages = getTotalPages();
+    $totalPages = $postManager->getTotalPages();
     $total=$totalPages['total_posts']; // total of posts in DB
     $messagesPerPage=5;
     $nbOfPages=ceil($total/$messagesPerPage);
@@ -32,40 +36,30 @@ function listPosts()
  
 
 //Display post depending on pagination parameters
-    $posts = getPosts($firstEntry, $messagesPerPage);
+    $posts = $postManager->getPosts($firstEntry, $messagesPerPage);
 
     require('view/frontend/listPostsView.php');
 }
 
 
 function deletePost($postId)
-{
-    $postDelete = erasePost($postId);
+{   
+    $postManager = new PostManager();
+
+    $postDelete = $postManager->erasePost($postId);
     header('Location: index.php');
     exit;
 } 
 
 
 
-//-----------------------------------------------------------------------------------------
-// NOT WORKING : show more / less comments
-// function post($commentsLimit)
-// {
-//     $lastPosts = getLastPosts();
-//     $post = getPost($_GET['id']);
-//     $comments = getComments($_GET['id'], $commentsLimit);
-//     require('view/frontend/postView.php');
-// }
 
-
-
-
-//COMMENTS
 function post()
 {
-
+    $postManager = new PostManager();
+    $commentManager = new CommentManager();
 //Pagination for comments
-$totalComments = getTotalComments($_GET['id']);
+$totalComments = $commentManager->getTotalComments($_GET['id']);
 $totalCom=$totalComments['total_comments']; // total of posts in DB
 
 if(isset($_GET['sortBy'])){
@@ -93,8 +87,8 @@ else
 
 $firstComment=($currentCommentPage-1)*$commentsPerPage; // first comment to read
 
-    $lastPosts = getLastPosts();
-    $post = getPost($_GET['id']);
+    $lastPosts = $postManager->getLastPosts();
+    $post = $postManager->getPost($_GET['id']);
 
     //check if post exists in DB
     if($post == false)
@@ -103,7 +97,7 @@ $firstComment=($currentCommentPage-1)*$commentsPerPage; // first comment to read
     }
 
     
-    $comments = getComments($_GET['id'], $firstComment, $commentsPerPage);
+    $comments = $commentManager->getComments($_GET['id'], $firstComment, $commentsPerPage);
     require('view/frontend/postView.php');
 }
 
@@ -119,7 +113,8 @@ function displaySingInView()
 
 function addNewMember($username, $pass, $email)
 {
-    $newMember = insertMember($username, $pass, $email);
+    $sessionManager = new SessionManager();
+    $newMember = $sessionManager->insertMember($username, $pass, $email);
 
     //success2 needed to display the confirmation message
     header('Location: index.php?success=1#header');
@@ -128,8 +123,9 @@ function addNewMember($username, $pass, $email)
 
 
 function checkUsernameAvailability($userName)
-{
-    $checkUsername = checkUsername($userName);
+{   
+    $sessionManager = new SessionManager();
+    $checkUsername = $sessionManager->checkUsername($userName);
     if($checkUsername)
         {
             return true;
@@ -142,7 +138,8 @@ function checkUsernameAvailability($userName)
 
 function checkEmailAvailability($email)
 {
-    $checkEmail = checkEmail($email);
+    $sessionManager = new SessionManager();
+    $checkEmail = $sessionManager->checkEmail($email);
     if($checkEmail)
         {
             return true;
@@ -156,7 +153,8 @@ function checkEmailAvailability($email)
 
 function checkLog($userName)
 {
-    $checkLogIn = checkLogIn($userName);
+    $sessionManager = new SessionManager();
+    $checkLogIn = $sessionManager->checkLogIn($userName);
 
     // FIXME ; factoriser la verif de pass entre checklog (C) et action'] == 'UpdatePass (R)
     // Check is password matches the one registered in DB
@@ -200,19 +198,22 @@ function checkLog($userName)
 // Update password
 function displaychangePasswordView()
 {
-    $cookieOrSessionID = checkSession();
+    $sessionManager = new SessionManager();
+    $cookieOrSessionID = $sessionManager->checkSession();
     require('view/frontend/changePassView.php');
 }
 
 function UpdatePassWord($newpass, $id)
 {
-    $UpdatePassWord = UpdatePass($newpass, $id); 
+    $sessionManager = new SessionManager();
+    $UpdatePassWord = $sessionManager->UpdatePass($newpass, $id); 
 }
 
 
 function checkCurrentPass($userID)
 {
-    $checkCurrentPass = checkPass($userID);
+    $sessionManager = new SessionManager();
+    $checkCurrentPass = $sessionManager->checkPass($userID);
 
     $isPasswordCorrect = password_verify($_POST['currentPass'], $checkCurrentPass['pass']);
    
@@ -226,7 +227,7 @@ function checkCurrentPass($userID)
 
 
 function killSession()
-{
+{   
     // Delete session variables
     $_SESSION = array();
     session_destroy();
@@ -239,11 +240,14 @@ function killSession()
 
 
 
+
+
 //COMMENTS
 
 function addComment($postId, $author, $comment, $postIdComCounts, $userIdComCounts)
-{
-    $affectedLines = postComment($postId, $author, $comment,$postIdComCounts, $userIdComCounts);
+{   
+    $commentManager = new CommentManager();
+    $affectedLines = $commentManager->postComment($postId, $author, $comment,$postIdComCounts, $userIdComCounts);
 
     if ($affectedLines === false) {
         throw new Exception('Impossible d\'ajouter le commentaire !');
@@ -256,21 +260,26 @@ function addComment($postId, $author, $comment, $postIdComCounts, $userIdComCoun
 }
 
 function deleteComment($commentId,  $postIdComCounts, $userIdComCounts)
-{
-    $comDelete = eraseComment($commentId, $postIdComCounts, $userIdComCounts);
+{   
+    $commentManager = new CommentManager();
+    $comDelete = $commentManager->eraseComment($commentId, $postIdComCounts, $userIdComCounts);
     header('Location: ' . $_SERVER['HTTP_REFERER']); //FIXME : SQL injection issue ? 
     exit;
 
 } 
 
 function reportComments($commentId){
-    $commentReported = reportComment($commentId);
+
+    $commentManager = new CommentManager();
+    $commentReported = $commentManager->reportComment($commentId);
     header('Location: ' . $_SERVER['HTTP_REFERER'] . '#commentsAnchor'); //FIXME : SQL injection issue ? 
     exit;
 }
 
 function updateComment($comment, $commentId){
-    $commentUpdated = updateCom($comment, $commentId);
+
+    $commentManager = new CommentManager();
+    $commentUpdated = $commentManager->updateCom($comment, $commentId);
     header('Location: index.php?action=post&id=' . $_GET['id'] . '&success=5&page=1&sortBy=99999999999999999999#' . $_GET['commentId'] .''); //FIXME : SQL injection issue ? 
     exit;
 }
@@ -279,15 +288,20 @@ function updateComment($comment, $commentId){
 
 //add the reported comment in a new table called reported_comments that gathers the id of the member who reported it, the id of the reported comment and a flag set to 1
 function reportCommentsCheck($memberId, $repComId){
-    $newRepComPerUser = reportedCommentPerUser($memberId, $repComId);
+
+    $commentManager = new CommentManager();
+    $newRepComPerUser = $commentManager->reportedCommentPerUser($memberId, $repComId);
    
 }
 
 //check when a member reports a comment if he already reported it once
 function checkIfReported(){
-    $ifReportedCom = checkIfAlreadyReportedCom();
 
-    $cookieOrSessionID = checkSession();
+    $commentManager = new CommentManager();
+    $sessionManager = new SessionManager();
+    $ifReportedCom = $commentManager->checkIfAlreadyReportedCom();
+
+    $cookieOrSessionID = $sessionManager->checkSession();
 
     //we have to make a loop to make sure to check all entries of the DB, not only the last added one
     while($datas = $ifReportedCom->fetch())
@@ -303,8 +317,9 @@ function checkIfReported(){
 
 //erase all the comments related to a post when "delete post" action is done
 function deleteAllComments($postId)
-{
-    $AllcomsDelete = eraseAllComments($postId);
+{   
+    $commentManager = new CommentManager();
+    $AllcomsDelete = $commentManager->eraseAllComments($postId);
 } 
 
 
