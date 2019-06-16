@@ -110,9 +110,6 @@ function getTotalComments($postId){
 
 
 
-
-
-
 function postComment($postId, $author, $comment,$postIdComCounts, $userIdComCounts)
 {
     $db = dbConnect();
@@ -206,7 +203,6 @@ function eraseAllComments($postId)
 
 //SING IN, LOG IN, LOG OUT
 
-
 function checkSession(){
     //we check wether the member is registered with COOKIE or SESSION
     if(isset($_COOKIE['id'])){
@@ -217,8 +213,6 @@ function checkSession(){
         }
     return $cookieOrSessionID;
 }
-
-
 
 function insertMember($username, $pass, $email)
 {

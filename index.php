@@ -5,7 +5,9 @@ require('controller/Cbackend.php');
 
 try {
     if (isset($_GET['action'])) {
-    //Frontend    
+    //FRONTEND
+    
+        //POSTS
         if ($_GET['action'] == 'listPosts' OR $_GET['action'] == '') {
             listPosts();
         }
@@ -63,6 +65,19 @@ try {
             }
         }
 
+        elseif ($_GET['action'] == 'deletePost') {
+            if (isset($_GET['id']) && $_GET['id'] > 0) {
+                $postId = $_GET['id'];
+                deleteAllComments($postId); //delete all the comments related to the post we're deleting with deletePost()
+                deletePost($postId);
+            }
+            else {
+                throw new Exception('Aucun identifiant de billet envoyé');
+            }
+        }
+
+
+        //COMMENTS
         elseif ($_GET['action'] == 'addComment') {
             if (isset($_GET['id']) && $_GET['id'] > 0) {
                 if (!empty($_POST['author']) && !empty($_POST['comment'])) {
@@ -122,25 +137,77 @@ try {
             }
         }
         
+        //SING IN, LOG IN, LOG OUT
 
+        //SIGN IN
+        elseif ($_GET['action'] == 'singIn') {
+            displaySingInView();
+        }
 
+        elseif ($_GET['action'] == 'addNewMember') {
 
-        elseif ($_GET['action'] == 'deletePost') {
-            if (isset($_GET['id']) && $_GET['id'] > 0) {
-                $postId = $_GET['id'];
-                deleteAllComments($postId); //delete all the comments related to the post we're deleting with deletePost()
-                deletePost($postId);
+            //testing if all fields a filled
+            if (isset($_POST['username']) && isset($_POST['pass']) && isset($_POST['passCheck']) && isset($_POST['email'])) {
+
+                //to avoid problems with inputs
+                $_POST['username'] = htmlspecialchars($_POST['username']);
+                $_POST['pass'] = htmlspecialchars($_POST['pass']);
+                $_POST['passCheck'] = htmlspecialchars($_POST['passCheck']);
+                $_POST['email'] = htmlspecialchars($_POST['email']);
+
+                $accentedCharacters = "àèìòùÀÈÌÒÙáéíóúýÁÉÍÓÚÝâêîôûÂÊÎÔÛãñõÃÑÕäëïöüÿÄËÏÖÜŸçÇßØøÅåÆæœ";
+                
+                //testing if username only has authorised caracters and length  
+                if (preg_match("#^[a-z".$accentedCharacters ."0-9]{4,20}$#i",$_POST['username']))
+                {
+                    //testing if passwords is conform
+                    if (preg_match("#^[a-z".$accentedCharacters ."0-9._!?-]{8,20}$#i",$_POST['pass']) ){
+
+                        //testing if both passwords match
+                        if($_POST['pass'] == $_POST['passCheck']){
+                            
+                            //testing if email is conform
+                            if( preg_match("#^[a-z0-9._-]+@[a-z0-9._-]{2,}\.[a-z]{2,4}$#i", $_POST['email']))
+                            {
+                                //hash password (security feature)
+                                $_POST['pass'] = password_hash($_POST['pass'], PASSWORD_DEFAULT);
+
+                                //check if username of email are already taken
+                                if(checkUsernameAvailability($_POST['username']) == false){
+                                    if(checkEmailAvailability($_POST['email']) == false){
+                                        addNewMember($_POST['username'], $_POST['pass'], $_POST['email']);
+                                    }
+                                    else
+                                     {
+                                         throw new Exception('Cette adresse email n\'est pas disponible'); 
+                                     }
+                                }
+                                else
+                                 {
+                                     throw new Exception('Ce pseudo n\'est pas disponible'); 
+                                 }
+   
+                            }
+                            else{
+                                throw new Exception('L\'adresse email n\'est pas conforme'); 
+                            } 
+                        }
+                        else{
+                            throw new Exception('Les deux mots de passe ne sont pas identiques');   
+                        }
+                    }
+                    else{
+                        throw new Exception('Le mot de passe n\'est pas conforme.');
+                    }    
+                }
+                else{
+                    throw new Exception('Le pseudo n\'est pas conforme.');
+                }
             }
             else {
-                throw new Exception('Aucun identifiant de billet envoyé');
-            }
+                throw new Exception('Il manque des informations.');
+            }       
         }
-        
-    //SING IN, LOG IN, LOG OUT
-
-
-
-
 
         //LOG IN
         elseif ($_GET['action'] == 'logInCheck') {
@@ -174,9 +241,6 @@ try {
             }
         }
 
-
-        
-
         //UPDATE PASSWORD
         elseif ($_GET['action'] == 'changePasswordView') {
             if( (isset($_COOKIE['login']) AND $_COOKIE['login'] != '') OR  (isset($_SESSION['username']) AND $_SESSION['username'] != ''))
@@ -187,8 +251,6 @@ try {
                 throw new Exception('Vous devez être connecté pour accéder à cette page');
             }    
         }
-
-
 
         elseif ($_GET['action'] == 'UpdatePass') 
         {
@@ -238,87 +300,11 @@ try {
             }     
             else {
                 throw new Exception('Vous devez être connecté pour accéder à cette page');
-            }
-
-            
+            }   
         }
 
 
-
-
-
-        //SIGN IN
-        elseif ($_GET['action'] == 'singIn') {
-            
-            displaySingInView();
-        }
-
-        elseif ($_GET['action'] == 'addNewMember') {
- 
-            //testing if all fields a filled
-            if (isset($_POST['username']) && isset($_POST['pass']) && isset($_POST['passCheck']) && isset($_POST['email'])) {
-
-                //to avoid problems with inputs
-                $_POST['username'] = htmlspecialchars($_POST['username']);
-                $_POST['pass'] = htmlspecialchars($_POST['pass']);
-                $_POST['passCheck'] = htmlspecialchars($_POST['passCheck']);
-                $_POST['email'] = htmlspecialchars($_POST['email']);
-
-                $accentedCharacters = "àèìòùÀÈÌÒÙáéíóúýÁÉÍÓÚÝâêîôûÂÊÎÔÛãñõÃÑÕäëïöüÿÄËÏÖÜŸçÇßØøÅåÆæœ";
-                
-                //testing if username only has authorised caracters and length  
-                if (preg_match("#^[a-z".$accentedCharacters ."0-9]{4,20}$#i",$_POST['username']))
-                {
-                    //testing if passwords is conform
-                    if (preg_match("#^[a-z".$accentedCharacters ."0-9._!?-]{8,20}$#i",$_POST['pass']) ){
-
-                        //testing if both passwords match
-                        if($_POST['pass'] == $_POST['passCheck']){
-                            
-                            //testing if email is conform
-                            if( preg_match("#^[a-z0-9._-]+@[a-z0-9._-]{2,}\.[a-z]{2,4}$#i", $_POST['email']))
-                            {
-                                //hash password (security feature)
-                                $_POST['pass'] = password_hash($_POST['pass'], PASSWORD_DEFAULT);
-
-
-                                //check if username of email are already taken
-                                if(checkUsernameAvailability($_POST['username']) == false){
-                                    if(checkEmailAvailability($_POST['email']) == false){
-                                        addNewMember($_POST['username'], $_POST['pass'], $_POST['email']);
-                                    }
-                                    else
-                                     {
-                                         throw new Exception('Cette adresse email n\'est pas disponible'); 
-                                     }
-                                }
-                                else
-                                 {
-                                     throw new Exception('Ce pseudo n\'est pas disponible'); 
-                                 }
-   
-                            }
-                            else{
-                                throw new Exception('L\'adresse email n\'est pas conforme'); 
-                            } 
-                        }
-                        else{
-                            throw new Exception('Les deux mots de passe ne sont pas identiques');   
-                        }
-                    }
-                    else{
-                        throw new Exception('Le mot de passe n\'est pas conforme.');
-                    }    
-                }
-                else{
-                    throw new Exception('Le pseudo n\'est pas conforme.');
-                }
-            }
-            else {
-                throw new Exception('Il manque des informations.');
-            }       
-        }
-
+        //OTHERS
         elseif ($_GET['action'] == 'about') {
             displayAboutView();
         }
@@ -327,14 +313,6 @@ try {
         elseif ($_GET['action'] == 'contact') {
             displayContactView();
         }
-
-
-
-
-
-
-
-
 
         elseif ($_GET['action'] == 'sendMessage') {
    
@@ -388,27 +366,31 @@ try {
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-        //Backend
+    //BACKEND
+        //POSTS
         elseif ($_GET['action'] == 'listPostsAdmin') {
             listPostsAdmin();
-            nbOfReportedComments(); //NOT WORKING : display number of comments working
+            nbOfReportedComments(); //NOT WORKING : display number of comments working  
+        }
 
-            
+        elseif ($_GET['action'] == 'displayPublishView') {
+            displayPublishView();
+        }
+
+        elseif ($_GET['action'] == 'publishChapter') {
+            newPost($_POST['chapter'], $_POST['title'], $_POST['postContent']);
+        }
+
+        elseif ($_GET['action'] == 'manageView') {
+            displayPostToEdit($_GET['id']); 
+        }
+    
+        elseif ($_GET['action'] == 'updatePost') {
+            updatePost($_POST['chapter'], $_POST['title'], $_POST['postContent'], $_GET['id']);
         }
 
 
-
+        //USERS
         elseif ($_GET['action'] == 'manageUsers') {
             if(!isset($_GET['page']) OR !isset($_GET['sortBy']) OR $_GET['page']<1 OR $_GET['sortBy']<1)
             { 
@@ -416,14 +398,8 @@ try {
             }
             else{
                 listAllUsers();
-            }
-            
+            }   
         }
-
-
-       
-
-
 
         //to delete all selected users
         elseif ($_GET['action'] == 'manageAllSelectedUsers') { //NOT WORKING
@@ -436,8 +412,8 @@ try {
         }
 
 
-         //to update role
-         elseif ($_GET['action'] == 'updateRole') { //NOT WORKING
+        //to update role
+        elseif ($_GET['action'] == 'updateRole') {
             if(isset($_GET['role'])){
                 updateUserRole($_GET['role'], $_GET['userID']);  
             }
@@ -446,14 +422,7 @@ try {
             }  
         }
 
-
-
-
-
-        //rajouter une fonction qui va etre liée a un bouton et qui va update le role de l'user
-
-
-        elseif ($_GET['action'] == 'deleteUser') { //WORKING
+        elseif ($_GET['action'] == 'deleteUser') {
             if (isset($_GET['userID']) && $_GET['userID'] > 0) {
                 deleteUser($_GET['userID']);
             }
@@ -463,12 +432,7 @@ try {
         }
 
 
-        
-
-
-
-
-
+        //COMMENTS
         elseif ($_GET['action'] == 'manageComments') {
             listAllComments();
         }
@@ -499,45 +463,21 @@ try {
                 throw new Exception('Il y a une erreur');
             }  
         }
-
-
-
-
-
-
-        
-
-        
+    
         elseif ($_GET['action'] == 'approveComment') {
             approveComments($_GET['commentId']);
         }
-        elseif ($_GET['action'] == 'publishChapter') {
-            newPost($_POST['chapter'], $_POST['title'], $_POST['postContent']);
-        }
 
-        elseif ($_GET['action'] == 'displayPublishView') {
-            displayPublishView();
-        }
-
-        elseif ($_GET['action'] == 'manageView') {
-            displayPostToEdit($_GET['id']);
-            
-        }
         
-        elseif ($_GET['action'] == 'updatePost') {
-            updatePost($_POST['chapter'], $_POST['title'], $_POST['postContent'], $_GET['id']);
-        }
-
+        //STATISTICS
         elseif ($_GET['action'] == 'displayStatsView') {
 
-         
             displayStatsView();
         }
-
     }
 
 
-    //Default behavior
+    //DEFAULT BEHAVIOR
     else {
         listPosts();
 
@@ -595,11 +535,10 @@ try {
         </script>
         <?php    
         }
-    
-
-
     }
 }
+
+//ERROR BEHAVIOR
 catch(Exception $e) {
     $errorMessage = $e->getMessage();
     require('view/errorView.php');

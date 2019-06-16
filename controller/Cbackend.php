@@ -1,6 +1,8 @@
 <?php
 require('model/Mbackend.php');
 
+
+//POSTS
 function listPostsAdmin()
 {
 
@@ -26,7 +28,6 @@ function listPostsAdmin()
 
     $firstEntry=($currentPage-1)*$messagesPerPage; // first entry to read
  
-
 //Display post depending on pagination parameters
 
     $postsAdmin = getPostsAdmin($firstEntry, $messagesPerPage);
@@ -34,9 +35,35 @@ function listPostsAdmin()
 }
 
 
+function displayPublishView()
+{
+    require('view/backend/publishView.php');
+}
+
+function newPost($chapter, $title, $content)
+{
+    $newPost = insertNewPost($chapter, $title, $content);
+    header('Location: index.php?action=listPostsAdmin');
+    exit;
+}
 
 
 
+function displayPostToEdit($postId)
+{
+    $displayedPostToEdit = getPostToEdit($postId);
+    require('view/backend/manageView.php');
+}
+
+function updatePost($chapter, $title, $content, $postId){
+    $updatedPost = editPost($chapter, $title, $content, $postId);
+    header('Location: index.php?action=post&id=' . $postId . '&page=1&sortBy=5');
+    exit;
+}
+
+
+
+//USERS
 function listAllUsers()
 {
 
@@ -74,12 +101,7 @@ function listAllUsers()
 
     $allUsers = getAllUsers($firstUser, $usersPerPage);
     require('view/backend/usersView.php');
-    
-
 }
-
-
-
 
 
 
@@ -87,6 +109,7 @@ function deleteAllSelectedUsers($arrayUsersIDs){
     
     $deleteAllSelectedUsers = eraseAllSelectedUsers($arrayUsersIDs);
     header('Location: ' . $_SERVER['HTTP_REFERER']);
+    exit;
 }
 
 
@@ -95,7 +118,6 @@ function deleteUser($userId)
     $userDelete = eraseUser($userId);
     header('Location: ' . $_SERVER['HTTP_REFERER']); //FIXME : SQL injection issue ? 
     exit;
-
 } 
 
 
@@ -108,6 +130,7 @@ function updateUserRole($userRole, $userId)
 
 
 
+//COMMENTS
 
 //display reported and new comments
 function listAllComments()
@@ -122,6 +145,7 @@ function deleteAllSelectedComments($arrayCommentsIDs){
     
     $deleteAllSelectedComments = eraseAllSelectedComments($arrayCommentsIDs);
     header('Location: ' . $_SERVER['HTTP_REFERER']);
+    exit;
 }
 
 
@@ -129,6 +153,7 @@ function approveAllSelectedComments($arrayCommentsIDs){
     
     $approveAllSelectedComments = acceptAllSelectedComments($arrayCommentsIDs);
     header('Location: ' . $_SERVER['HTTP_REFERER']);
+    exit;
 }
 
 
@@ -159,34 +184,10 @@ function approveComments($commentId){
     header('Location: ' . $_SERVER['HTTP_REFERER']);
     exit;
 }
-function newPost($chapter, $title, $content)
-{
-    $newPost = insertNewPost($chapter, $title, $content);
-    header('Location: index.php?action=listPostsAdmin');
-    exit;
-}
-
-function displayPublishView()
-{
-    require('view/backend/publishView.php');
-}
-
-
-function displayPostToEdit($postId)
-{
-    $displayedPostToEdit = getPostToEdit($postId);
-    require('view/backend/manageView.php');
-}
-
-function updatePost($chapter, $title, $content, $postId){
-    $updatedPost = editPost($chapter, $title, $content, $postId);
-    header('Location: index.php?action=post&id=' . $postId . '&page=1&sortBy=5');
-    exit;
-}
 
 
 
-//Statistics 
+//STATISTICS 
 
 function displayStatsView()
 {

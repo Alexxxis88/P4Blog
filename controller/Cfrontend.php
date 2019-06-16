@@ -3,7 +3,7 @@ require('model/Mfrontend.php');
 
 
 
-
+//POSTS
 
 //gets all the post to display in listPostsView. 
 function listPosts()
@@ -38,6 +38,13 @@ function listPosts()
 }
 
 
+function deletePost($postId)
+{
+    $postDelete = erasePost($postId);
+    header('Location: index.php');
+    exit;
+} 
+
 
 
 //-----------------------------------------------------------------------------------------
@@ -53,7 +60,7 @@ function listPosts()
 
 
 
-
+//COMMENTS
 function post()
 {
 
@@ -103,41 +110,7 @@ $firstComment=($currentCommentPage-1)*$commentsPerPage; // first comment to read
 
 
 
-
-
-//-----------------------------------------------------------------------------------------
-
-
 //SING IN, LOG IN, LOG OUT
-
-// Update password
-function displaychangePasswordView()
-{
-    $cookieOrSessionID = checkSession();
-    require('view/frontend/changePassView.php');
-}
-
-function UpdatePassWord($newpass, $id)
-{
-    $UpdatePassWord = UpdatePass($newpass, $id); 
-}
-
-
-function checkCurrentPass($userID)
-{
-    $checkCurrentPass = checkPass($userID);
-
-    $isPasswordCorrect = password_verify($_POST['currentPass'], $checkCurrentPass['pass']);
-   
-        if ($isPasswordCorrect) {
-            return true;
-        }
-        else {
-            return false;
-        }
-}
-
-
 
 function displaySingInView()
 {
@@ -149,8 +122,8 @@ function addNewMember($username, $pass, $email)
     $newMember = insertMember($username, $pass, $email);
 
     //success2 needed to display the confirmation message
-header('Location: index.php?success=1#header');
-exit;
+    header('Location: index.php?success=1#header');
+    exit;
 }
 
 
@@ -179,10 +152,6 @@ function checkEmailAvailability($email)
             return false;
         }
 }
-
-
-
-
 
 
 function checkLog($userName)
@@ -220,34 +189,53 @@ function checkLog($userName)
             header('Location: index.php?action=listPostsAdmin');
             exit;
            }
-
-           
-
         }
         else {
             throw new Exception('Vérifiez vos identifiants de connexion');
-        }
-
-        
+        }       
     }
-
 }
 
 
-function killSession(){
-// Delete session variables
-$_SESSION = array();
-session_destroy();
+// Update password
+function displaychangePasswordView()
+{
+    $cookieOrSessionID = checkSession();
+    require('view/frontend/changePassView.php');
+}
 
-// Delete autologing cookies
-setcookie('id', '', time() + 365*24*3600, null, null, false, true);
-setcookie('login', '', time() + 365*24*3600, null, null, false, true);
-setcookie('hash_pass', '', time() + 365*24*3600, null, null, false, true);
-
-
+function UpdatePassWord($newpass, $id)
+{
+    $UpdatePassWord = UpdatePass($newpass, $id); 
 }
 
 
+function checkCurrentPass($userID)
+{
+    $checkCurrentPass = checkPass($userID);
+
+    $isPasswordCorrect = password_verify($_POST['currentPass'], $checkCurrentPass['pass']);
+   
+        if ($isPasswordCorrect) {
+            return true;
+        }
+        else {
+            return false;
+        }
+}
+
+
+function killSession()
+{
+    // Delete session variables
+    $_SESSION = array();
+    session_destroy();
+
+    // Delete autologing cookies
+    setcookie('id', '', time() + 365*24*3600, null, null, false, true);
+    setcookie('login', '', time() + 365*24*3600, null, null, false, true);
+    setcookie('hash_pass', '', time() + 365*24*3600, null, null, false, true);
+}
 
 
 
@@ -313,17 +301,6 @@ function checkIfReported(){
 }
 
 
-
-
-
-
-function deletePost($postId)
-{
-    $postDelete = erasePost($postId);
-    header('Location: index.php');
-    exit;
-} 
-
 //erase all the comments related to a post when "delete post" action is done
 function deleteAllComments($postId)
 {
@@ -331,6 +308,7 @@ function deleteAllComments($postId)
 } 
 
 
+//OTHERS
 // About
 function displayAboutView()
 {
