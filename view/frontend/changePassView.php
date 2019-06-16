@@ -10,14 +10,7 @@
         <div class="passChange">
             <form action="index.php?action=UpdatePass" method="post">
                 <div>
-                    <input type="text" id="id" name="id" value="<?php
-                    if(isset($_COOKIE['id'])){
-                        $cookieOrSessionID = $_COOKIE['id'];
-                        }
-                        elseif(isset($_SESSION['id'])){
-                            $cookieOrSessionID = $_SESSION['id'];
-                        }
-                         echo $cookieOrSessionID ?>" hidden required/>
+                    <input type="text" id="id" name="id" value="<?php echo $cookieOrSessionID ?>"  hidden required/>
                 </div>
                 <div>
                     <label for="currentPass">Votre password actuel</label><br />

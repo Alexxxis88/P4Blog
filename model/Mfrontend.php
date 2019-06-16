@@ -205,6 +205,21 @@ function eraseAllComments($postId)
 
 
 //SING IN, LOG IN, LOG OUT
+
+
+function checkSession(){
+    //we check wether the member is registered with COOKIE or SESSION
+    if(isset($_COOKIE['id'])){
+        $cookieOrSessionID = $_COOKIE['id'];
+        }
+        elseif(isset($_SESSION['id'])){
+            $cookieOrSessionID = $_SESSION['id'];
+        }
+    return $cookieOrSessionID;
+}
+
+
+
 function insertMember($username, $pass, $email)
 {
     $db = dbConnect();

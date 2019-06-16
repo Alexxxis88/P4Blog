@@ -67,12 +67,8 @@ try {
             if (isset($_GET['id']) && $_GET['id'] > 0) {
                 if (!empty($_POST['author']) && !empty($_POST['comment'])) {
 
-                    if(isset($_COOKIE['id'])){
-                        $cookieOrSessionID = $_COOKIE['id'];
-                        }
-                        elseif(isset($_SESSION['id'])){
-                            $cookieOrSessionID = $_SESSION['id'];
-                        }
+                //needed to update the user_com_counter in members table
+                $cookieOrSessionID = checkSession();
 
                     addComment($_GET['id'], $_POST['author'], $_POST['comment'], $_GET['id'], $cookieOrSessionID);
                 }
@@ -88,12 +84,8 @@ try {
         elseif ($_GET['action'] == 'deleteComment') {
             if (isset($_GET['commentId']) && $_GET['commentId'] > 0) {
 
-                if(isset($_COOKIE['id'])){
-                    $cookieOrSessionID = $_COOKIE['id'];
-                    }
-                    elseif(isset($_SESSION['id'])){
-                        $cookieOrSessionID = $_SESSION['id'];
-                    }
+                //needed to update the user_com_counter in members table
+                $cookieOrSessionID = checkSession();
 
                 deleteComment($_GET['commentId'], $_GET['id'], $cookieOrSessionID);
             }
@@ -109,12 +101,8 @@ try {
                 //checks in the controler if the member already reported the same comment
                 checkIfReported();
 
-                if(isset($_COOKIE['id'])){
-                    $cookieOrSessionID = $_COOKIE['id'];
-                    }
-                    elseif(isset($_SESSION['id'])){
-                        $cookieOrSessionID = $_SESSION['id'];
-                    }
+                //needed to checks in the controler if the member already reported the same comment
+                $cookieOrSessionID = checkSession();
 
                 reportCommentsCheck($cookieOrSessionID, $_GET['commentId']); //the reported comment is registered into reported_comments DB
                 reportComments($_GET['commentId']);    //the reported comment is actually reported in comments DB and BE
@@ -212,12 +200,8 @@ try {
                
                 $accentedCharactersNewPass = "àèìòùÀÈÌÒÙáéíóúýÁÉÍÓÚÝâêîôûÂÊÎÔÛãñõÃÑÕäëïöüÿÄËÏÖÜŸçÇßØøÅåÆæœ";
 
-                if(isset($_COOKIE['id'])){
-                    $cookieOrSessionID = $_COOKIE['id'];
-                    }
-                    elseif(isset($_SESSION['id'])){
-                        $cookieOrSessionID = $_SESSION['id'];
-                    }
+                //needed to check the current pass in DB from the right user (id) 
+                $cookieOrSessionID = checkSession();
 
 
                 if(checkCurrentPass($cookieOrSessionID) == true)   

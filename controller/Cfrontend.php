@@ -2,6 +2,9 @@
 require('model/Mfrontend.php');
 
 
+
+
+
 //gets all the post to display in listPostsView. 
 function listPosts()
 {
@@ -110,6 +113,7 @@ $firstComment=($currentCommentPage-1)*$commentsPerPage; // first comment to read
 // Update password
 function displaychangePasswordView()
 {
+    $cookieOrSessionID = checkSession();
     require('view/frontend/changePassView.php');
 }
 
@@ -295,13 +299,7 @@ function reportCommentsCheck($memberId, $repComId){
 function checkIfReported(){
     $ifReportedCom = checkIfAlreadyReportedCom();
 
-    //we check wether the member is registered with COOKIE or SESSION
-    if(isset($_COOKIE['id'])){
-    $cookieOrSessionID = $_COOKIE['id'];
-    }
-    elseif(isset($_SESSION['id'])){
-        $cookieOrSessionID = $_SESSION['id'];
-    }
+    $cookieOrSessionID = checkSession();
 
     //we have to make a loop to make sure to check all entries of the DB, not only the last added one
     while($datas = $ifReportedCom->fetch())
