@@ -32,7 +32,7 @@
     { 
     ?>       
         <button class="adminBtns"><a href="index.php?action=manageView&id=<?=$post['id']?>">Modifier</a></button>
-        <button class="adminBtns"><a href="index.php?action=deletePost&amp;id=<?= $post['id'] ?>" onclick="return confirm('Etes vous sûr?')" >Supprimer</a></button>
+        <button class="adminBtns"><a href="index.php?action=deletePost&amp;id=<?= $post['id'] ?>" onclick="return confirm('Etes-vous sûr?')" >Supprimer</a></button>
     <?php
     }  
     ?>      
@@ -119,21 +119,7 @@
         ?> 
 
 
-<!-- Used to count how many characters there is left -->
-<!-- FIXME factoring needed with the same function in contactView.php and postView.php -->
-   
-<script>
-function textCounter(field,field2,maxlimit)
-{
- let countfield = document.getElementById(field2);
- if ( field.value.length > maxlimit ) {
-  field.value = field.value.substring( 0, maxlimit );
-  return false;
- } else {
-  countfield.value = maxlimit - field.value.length;
- }
-}
-</script>
+
 
 
 
@@ -175,15 +161,6 @@ function textCounter(field,field2,maxlimit)
                 }  ?></p> <p><?= nl2br(htmlspecialchars($comment['comment'])) ?></p>
                 <p>Id du commentaire: <?= $comment['id'] ?></p>
 
-
-
-               
-               
-                
-
-                
-
-                
                 
                 <?php
                 // FIXME: factoriser le code avec l'affichage ou non (1)du formulaire de commentaire (2) du bouton signaler (3) du reste de l'affichage des boutons / menus si loggé en admin / user / pas loggé
@@ -235,7 +212,7 @@ function textCounter(field,field2,maxlimit)
                         </form>
                     </div> 
 
-                    <button class="editBtns"><a href="index.php?action=deleteComment&amp;id=<?= $post['id'] ?>&amp;commentId=<?= $comment['id'] ?>" onclick="return confirm('Etes vous sûr?')">Supprimer mon commentaire</a></button>
+                    <button class="editBtns"><a href="index.php?action=deleteComment&amp;id=<?= $post['id'] ?>&amp;commentId=<?= $comment['id'] ?>" onclick="return confirm('Etes-vous sûr?')">Supprimer mon commentaire</a></button>
                     
                     <button class="editBtns<?=$comment['id'] ?> editCommentBtn<?=$comment['id'] ?>">Modifier mon commentaire</button>
                     <script>
@@ -243,25 +220,11 @@ function textCounter(field,field2,maxlimit)
                         $(".editCommentForm<?=$comment['id']?>, .editCommentBtn<?=$comment['id'] ?>").toggle("slow")
                     })
                     </script>
-
-                    
-
-
-
-
                     <?php
                     }
                 }
                 ?> 
 
-
-                    
-
-
-                
-
-
-            
                     <?php
                     // FIXME: factoriser le code avec l'affichage ou non (1)des boutons modifier / supprimer sur listPostsView et PostView (2) des boutons approuver / supprimer des com sur PostView (3) l'affichage du menu admin de template.php 
                     if( (isset($_COOKIE['login']) AND $_COOKIE['login'] == 'Admin') OR  (isset($_SESSION['username']) AND $_SESSION['username'] == 'Admin'))
@@ -274,9 +237,8 @@ function textCounter(field,field2,maxlimit)
                         }
                                 
                     ?>    
-
-                            <!-- gets the commentId as a parameter in the URL of the comment to delete AND the post id to return on the same post after comment has been deleted-->
-                            <button class="adminBtns"><a href="index.php?action=deleteComment&amp;id=<?= $post['id'] ?>&amp;commentId=<?= $comment['id'] ?>" onclick="return confirm('Etes vous sûr?')">Supprimer</a></button>
+                        <!-- gets the commentId as a parameter in the URL of the comment to delete AND the post id to return on the same post after comment has been deleted-->
+                        <button class="adminBtns"><a href="index.php?action=deleteComment&amp;id=<?= $post['id'] ?>&amp;commentId=<?= $comment['id'] ?>" onclick="return confirm('Etes-vous sûr?')">Supprimer</a></button>
                     <?php
                     }
                     ?>           

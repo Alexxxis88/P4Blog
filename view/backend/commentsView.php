@@ -11,7 +11,7 @@
 <form action="index.php?action=manageAllSelectedComments" method="post"> 
         <input type="checkbox" id="checkAllReported" checked>
         <label for="checkAllReported"> Tout sélectionner / désélectionner </label>
-        <input type="submit" name="deleteSelectedComments[]" value="Supprimer" onclick="return confirm('Etes vous sûr?')">
+        <input type="submit" name="deleteSelectedComments[]" value="Supprimer" onclick="return confirm('Etes-vous sûr?')">
         <input type="submit" name="approveSelectedComments[]" value="Approuver" onclick="return alert('Commentaire(s) approuvé(s)')">
 <?php
 
@@ -44,7 +44,7 @@
                         <!-- FIXME : edit class of the approve btn -->
                         <button class="userBtns"><a href="index.php?action=approveComment&amp;commentId=<?= $datas['id'] ?>"  onclick="return alert('Commentaire approuvé')" >Approuver</a></button>
 
-                        <button class="adminBtns"><a href="index.php?action=deleteComment&amp;id=<?= $datas['post_id'] ?>&amp;commentId=<?= $datas['id'] ?>" onclick="return confirm('Etes vous sûr?')">Supprimer</a></button>
+                        <button class="adminBtns"><a href="index.php?action=deleteComment&amp;id=<?= $datas['post_id'] ?>&amp;commentId=<?= $datas['id'] ?>" onclick="return confirm('Etes-vous sûr?')">Supprimer</a></button>
                 </div>
         <?php
         
@@ -91,7 +91,7 @@
 <form action="index.php?action=publishAllSelectedComments" method="post"> 
         <input type="checkbox" id="checkAllToPublish" checked>
         <label for="checkAllToPublish"> Tout sélectionner / désélectionner </label>
-        <input type="submit" name="deleteSelectedComments[]" value="Supprimer" onclick="return confirm('Etes vous sûr?')">
+        <input type="submit" name="deleteSelectedComments[]" value="Supprimer" onclick="return confirm('Etes-vous sûr?')">
         <input type="submit" name="publishSelectedComments[]" value="Publier" onclick="return alert('Commentaire(s) publié(s)')">
 <?php
 
@@ -112,7 +112,7 @@ $arrayPublish = array();
                         <!-- FIXME : edit class of the approve btn -->
                         <button class="userBtns"><a href="index.php?action=approveComment&amp;commentId=<?= $datasPublish['id'] ?>"  onclick="return alert('Commentaire publié')" >Publier</a></button>
 
-                        <button class="adminBtns"><a href="index.php?action=deleteComment&amp;id=<?= $datasPublish['post_id'] ?>&amp;commentId=<?= $datasPublish['id'] ?>" onclick="return confirm('Etes vous sûr?')">Supprimer</a></button>
+                        <button class="adminBtns"><a href="index.php?action=deleteComment&amp;id=<?= $datasPublish['post_id'] ?>&amp;commentId=<?= $datasPublish['id'] ?>" onclick="return confirm('Etes-vous sûr?')">Supprimer</a></button>
                 </div>
         <?php
         

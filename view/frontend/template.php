@@ -41,8 +41,13 @@
             <a href="index.php?action=contact">Contact</a>
             <a href="index.php?action=about">A propos de l'auteur</a>
             <button><a href="#header">back to top</a></button>
-        </section>  
+        </section> 
+
+    <!-- My JS scripts -->
+    <script src="public/js/displayFunctions.js"></script>
+
     </body>
 </html>
+
 
 

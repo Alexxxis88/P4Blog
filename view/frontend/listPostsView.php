@@ -41,7 +41,7 @@ $id = (int) $datas['id'];
     { 
     ?>       
         <button class="adminBtns"><a href="index.php?action=manageView&id=<?=$id?>">Modifier</a></button>
-        <button class="adminBtns"><a href="index.php?action=deletePost&amp;id=<?= $id?>" onclick="return confirm('Etes vous sûr?')">Supprimer</a></button>
+        <button class="adminBtns"><a href="index.php?action=deletePost&amp;id=<?= $id?>" onclick="return confirm('Etes-vous sûr?')">Supprimer</a></button>
     <?php
     }  
     ?>     
