@@ -81,4 +81,4 @@
 
 <?php $content = ob_get_clean(); ?>
 
-<?php require('backendTemplate.php'); ?>
+<?php require('view/frontend/template.php'); ?>
