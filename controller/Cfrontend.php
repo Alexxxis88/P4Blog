@@ -119,21 +119,18 @@ function UpdatePassWord($newpass, $id)
 }
 
 
-function currentPassInDB($currentPass){
+function checkCurrentPass($userID)
+{
+    $checkCurrentPass = checkPass($userID);
 
-    $currentPassInDB = currentPass($currentPass);
-
-    // FIXME ; factoriser la verif de pass entre checklog (C) et action'] == 'UpdatePass (R)
-    // Check is password matches the one registered in DB
-    $isCurrentPasswordCorrect = password_verify($_POST['newPass'], $currentPassInDB['pass']);
-    if (!$currentPassInDB)
-    {
-        return false;
-    }
-    else
-    {   
-        return true;
-    }
+    $isPasswordCorrect = password_verify($_POST['currentPass'], $checkCurrentPass['pass']);
+   
+        if ($isPasswordCorrect) {
+            return true;
+        }
+        else {
+            return false;
+        }
 }
 
 

@@ -220,7 +220,15 @@ try {
                
                 $accentedCharactersNewPass = "àèìòùÀÈÌÒÙáéíóúýÁÉÍÓÚÝâêîôûÂÊÎÔÛãñõÃÑÕäëïöüÿÄËÏÖÜŸçÇßØøÅåÆæœ";
 
-                if(currentPassInDB($_POST['currentPass']) == false)
+                if(isset($_COOKIE['id'])){
+                    $cookieOrSessionID = $_COOKIE['id'];
+                    }
+                    elseif(isset($_SESSION['id'])){
+                        $cookieOrSessionID = $_SESSION['id'];
+                    }
+
+
+                if(checkCurrentPass($cookieOrSessionID) == true)   
                 {
                     if(preg_match("#^[a-z".$accentedCharactersNewPass ."0-9._!?-]{8,20}$#i", $_POST['newPass']) )
                     {

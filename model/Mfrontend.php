@@ -252,16 +252,15 @@ function checkEmail($email)
     return $checkEmail;
 }
 
-function currentPass($currentPass)
+function checkPass($userID)
 {
     $db = dbConnect();
-    $check = $db->prepare('SELECT pass FROM members WHERE pass = ?');
-    $check->execute(array($currentPass));
-    $currentPass = $check->fetch();
+    $check = $db->prepare('SELECT pass FROM members WHERE id = ?');
+    $check->execute(array($userID));
+    $checkPass = $check->fetch();
 
-    return $currentPass;
+    return $checkPass;
 }
-
 
 
 // General function to connect to database
