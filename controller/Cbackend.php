@@ -1,8 +1,13 @@
 <?php
-require_once('model/PostManager.php');
-require_once('model/CommentManager.php');
-require_once('model/UserManager.php');
-require_once('model/StatsManager.php');
+
+//AUTOLOAD
+function classAutoLoad($class)
+{
+  require 'model/' . $class . '.php'; 
+}
+
+spl_autoload_register('classAutoLoad');
+
 
 //POSTS
 function listPostsAdmin()
