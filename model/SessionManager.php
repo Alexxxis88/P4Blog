@@ -1,15 +1,19 @@
 <?php
-class SessionManager
+
+require_once("model/Manager.php");
+
+class SessionManager extends Manager
 {
-    public function checkSession(){
-        //we check wether the member is registered with COOKIE or SESSION
-        if(isset($_COOKIE['id'])){
-            $cookieOrSessionID = $_COOKIE['id'];
-            }
-            elseif(isset($_SESSION['id'])){
-                $cookieOrSessionID = $_SESSION['id'];
-            }
-        return $cookieOrSessionID;
+    public function checkSession()
+    {
+    //we check wether the member is registered with COOKIE or SESSION
+    if(isset($_COOKIE['id'])){
+        $cookieOrSessionID = $_COOKIE['id'];
+        }
+        elseif(isset($_SESSION['id'])){
+            $cookieOrSessionID = $_SESSION['id'];
+        }
+    return $cookieOrSessionID;
     }
     
     public function insertMember($username, $pass, $email)
@@ -59,6 +63,7 @@ class SessionManager
         return $checkEmail;
     }
     
+    //FIXME : factoriser avec la fonction checkLogIn ? 
     public function checkPass($userID)
     {
         $db = $this->dbConnect();
@@ -68,11 +73,5 @@ class SessionManager
     
         return $checkPass;
     }
-    
-    // General public function to connect to database
-    private function dbConnect()
-    {
-        $db = new PDO('mysql:host=localhost;dbname=p4blog;charset=utf8', 'root', '');
-        return $db;
-    }
+
 }

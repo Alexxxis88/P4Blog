@@ -1,5 +1,8 @@
 <?php
-class CommentManager
+
+require_once("model/Manager.php");
+
+class CommentManager extends Manager
 {   
     //FRONTEND
     public function getComments($postId, $firstComment, $commentsPerPage)
@@ -15,7 +18,8 @@ class CommentManager
 
     //Pagination comments
         //AND NOT flag = 9999 added otherwise the number of page will include the comments to moderate before publish even if they are not displayed
-    public function getTotalComments($postId){
+    public function getTotalComments($postId)
+    {
         $db = $this->dbConnect();
         $getTotalComments = $db->prepare('SELECT COUNT(*) AS total_comments FROM comments WHERE post_id = ? AND NOT flag = 9999');
         $getTotalComments->bindValue(1, $postId, PDO::PARAM_INT);
@@ -35,12 +39,10 @@ class CommentManager
         $affectedLines = $comments->execute(array($postId, $author, $comment));
 
         //updates the comment counter +1 to know how much comments have been posted on a post
-        $db = $this->dbConnect();
         $commentCount = $db->prepare('UPDATE posts SET comment_count = comment_count + 1 WHERE id = ?');
         $commentCount ->execute(array($postIdComCounts));
 
         //updates the user comment counter +1 to know how much comments the user has posted
-        $db = $this->dbConnect();
         $userCommentCount = $db->prepare('UPDATE members SET user_com_count = user_com_count + 1 WHERE id = ?');
         $userCommentCount ->execute(array($userIdComCounts));
 
@@ -55,15 +57,12 @@ class CommentManager
         $comDelete->execute(array($commentId));
 
         //updates the comment counter +1 to know how much comments have been posted on a post
-       $db = $this->dbConnect();
         $commentCount = $db->prepare('UPDATE posts SET comment_count = comment_count - 1 WHERE id = ?');
         $commentCount ->execute(array($postIdComCounts));
 
         //updates the user comment counter +1 to know how much comments the user has posted
-        $db = $this->dbConnect();
         $userCommentCount = $db->prepare('UPDATE members SET user_com_count = user_com_count - 1 WHERE id = ?');
         $userCommentCount ->execute(array($userIdComCounts));
-
     }
 
 
@@ -142,7 +141,7 @@ class CommentManager
         //on fait une boucle pour injecter la VALEUR ENTIERE de chaque entrée du tableau $arrayCommentsIDs en tant que paramètre ? de (IN)
         for( $i = 0; $i < $arrayLength; $i++){
             $id = $arrayCommentsIDs[$i];
-           $db = $this->dbConnect();
+            $db = $this->dbConnect();
             $eraseAllSelectedComments = $db->prepare('DELETE FROM comments WHERE id IN (?)'); // je veux que ? soit les valeurs successives d'un tableau donc je dois faire une boucle
             $eraseAllSelectedComments->execute(array($id));
         }
@@ -158,7 +157,7 @@ class CommentManager
         //on fait une boucle pour injecter la VALEUR ENTIERE de chaque entrée du tableau $arrayCommentsIDs en tant que paramètre ? de (IN)
         for( $i = 0; $i < $arrayLength; $i++){
             $id = $arrayCommentsIDs[$i];
-           $db = $this->dbConnect();
+            $db = $this->dbConnect();
             $acceptAllSelectedComments = $db->prepare('UPDATE comments SET flag = 0 WHERE id IN (?)'); // je veux que ? soit les valeurs successives d'un tableau donc je dois faire une boucle
             $acceptAllSelectedComments->execute(array($id));
         }
@@ -175,19 +174,10 @@ class CommentManager
     }
 
 
-
-    public function approveComment($commentId){
+    public function approveComment($commentId)
+    {
         $db = $this->dbConnect();
         $commentApprove = $db->prepare('UPDATE comments SET flag = 0 WHERE id = ?');
         $commentApprove->execute(array($commentId));
     }
-
-
-     // General function to connect to database
-     private function dbConnect()
-     {
-         $db = new PDO('mysql:host=localhost;dbname=p4blog;charset=utf8', 'root', '');
-         return $db;
-     }
-
 }

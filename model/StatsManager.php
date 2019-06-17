@@ -1,5 +1,8 @@
 <?php
-class StatsManager
+
+require_once("model/Manager.php");
+
+class StatsManager extends Manager
 {
     //gets the number of comments per post
     public function nbComPerPost($postId){
@@ -36,9 +39,9 @@ class StatsManager
     }
 
 
-    public function rankingBest(){
-
-       $db = $this->dbConnect();
+    public function rankingBest()
+    {
+        $db = $this->dbConnect();
         $req = $db->query('SELECT id, chapter_nb, title, content, DATE_FORMAT(publish_date, \'%d/%m/%Y à %Hh%imin%ss\') AS mod_publish_date, comment_count FROM posts ORDER BY comment_count DESC, publish_date DESC  LIMIT 1 ');
         $rankingBest = $req->fetch();
         return $rankingBest;
@@ -53,7 +56,6 @@ class StatsManager
     }
 
 
-
     //gets all the users to display them in stats view
     public function getUsersStats()
     {
@@ -63,38 +65,37 @@ class StatsManager
         return $usersStats;
     }
 
-    public function oldestUser(){
-
+    public function oldestUser()
+    {
         $db = $this->dbConnect();
         $req = $db->query('SELECT id, username, DATE_FORMAT(registration_date, \'%d/%m/%Y à %Hh%imin%ss\') AS mod_registration_date FROM members ORDER BY registration_date  LIMIT 1 ');
         $oldestUser = $req->fetch();
         return $oldestUser;
     }
 
-    public function newestUser(){
-
+    public function newestUser()
+    {
         $db = $this->dbConnect();
         $req = $db->query('SELECT id, username, DATE_FORMAT(registration_date, \'%d/%m/%Y à %Hh%imin%ss\') AS mod_registration_date FROM members ORDER BY registration_date DESC  LIMIT 1 ');
         $newestUser = $req->fetch();
         return $newestUser;
     }
 
-    public function mostComUser(){
-
+    public function mostComUser()
+    {
         $db = $this->dbConnect();
         $req = $db->query('SELECT id, username, user_com_count, DATE_FORMAT(registration_date, \'%d/%m/%Y à %Hh%imin%ss\') AS mod_registration_date FROM members ORDER BY user_com_count DESC, registration_date DESC  LIMIT 1 ');
         $mostComUser = $req->fetch();
         return $mostComUser;
     }
 
-    public function leastComUser(){
-
+    public function leastComUser()
+    {
         $db = $this->dbConnect();
         $req = $db->query('SELECT id, username, user_com_count, DATE_FORMAT(registration_date, \'%d/%m/%Y à %Hh%imin%ss\') AS mod_registration_date FROM members ORDER BY user_com_count, registration_date LIMIT 1 ');
         $leastComUser = $req->fetch();
         return $leastComUser;
     }
-
 
 
     //me ressort le nombre max de com
@@ -108,13 +109,5 @@ class StatsManager
     // FROM (SELECT agent_code,COUNT(agent_code) mycount 
     // FROM orders 
     // GROUP BY agent_code);
-
-    
-    // General public function to connect to database
-    private function dbConnect()
-    {
-        $db = new PDO('mysql:host=localhost;dbname=p4blog;charset=utf8', 'root', '');
-        return $db;
-    }
 
 }

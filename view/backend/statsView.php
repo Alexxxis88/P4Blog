@@ -98,15 +98,17 @@
     <div class="top10block">
         <h3>Top 10 des meilleurs contributeurs </h3>
         <?php 
-        for ($i = 0; $i<10 ; $i++)
-            { $datasUsers = $usersStats->fetch()     
+
+        $i = 1;
+        while ($datasUsers = $usersStats->fetch())
+        {  
         ?>
             <div class="topLines">
-                <p><strong><?= $i+1 ?> . <?= $datasUsers['username'] ?> </strong>inscrit le <?= $datasUsers['mod_registration_date'] ?>. Nombre de commentaires postés : <strong> <?= $datasUsers['user_com_count'] ?></strong></p>
+                <p><strong><?= $i++ ?> . <?= $datasUsers['username'] ?> </strong>inscrit le <?= $datasUsers['mod_registration_date'] ?>. Nombre de commentaires postés : <strong> <?= $datasUsers['user_com_count'] ?></strong></p>
             </div>     
-            <?php  
-            }    
-            ?> 
+        <?php  
+        }    
+        ?> 
     </div>        
 </div>
 

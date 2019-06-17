@@ -1,7 +1,9 @@
 <?php
-class PostManager
-{
 
+require_once("model/Manager.php");
+
+class PostManager extends Manager
+{
     //FRONTEND
             //gets the last X posts to display in listPostsView. X depends on $messagesPerPage
     public function getPosts($firstEntry, $messagesPerPage)
@@ -15,8 +17,7 @@ class PostManager
         return $req;
     }
 
-
-        //Pagination
+    //Pagination
     public function getTotalPages(){
         $db = $this->dbConnect();
         $getTotalPages = $db->query('SELECT COUNT(*) AS total_posts FROM posts');
@@ -24,7 +25,6 @@ class PostManager
 
         return $returnTotalPages;
     }
-
 
     //gets last 3 posts to display in postView aside. 
     public function getLastPosts()
@@ -59,7 +59,7 @@ class PostManager
     //gets the last X posts to display in adminView. X depends on $messagesPerPage
     public function getPostsAdmin($firstEntry, $messagesPerPage)
     {
-       $db = $this->dbConnect();
+        $db = $this->dbConnect();
         $req = $db->prepare('SELECT id, chapter_nb, title, content, DATE_FORMAT(publish_date, \'%d/%m/%Y à %Hh%imin%ss\') AS mod_publish_date, DATE_FORMAT(edit_date, \'%d/%m/%Y à %Hh%imin%ss\') AS mod_edit_date FROM posts ORDER BY publish_date DESC LIMIT ?, ?');
         $req->bindValue(1, $firstEntry, PDO::PARAM_INT);
         $req->bindValue(2, $messagesPerPage, PDO::PARAM_INT);
@@ -100,17 +100,4 @@ class PostManager
         $editedPost->execute(array($chapter, $title, $content, $postId));
 
     }
-
-
-
-        // General function to connect to database
-    private function dbConnect()
-    {
-        $db = new PDO('mysql:host=localhost;dbname=p4blog;charset=utf8', 'root', '');
-        return $db;
-    }
-
-
-
-
 }

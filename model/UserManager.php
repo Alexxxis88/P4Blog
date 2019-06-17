@@ -1,5 +1,8 @@
 <?php
-class UserManager
+
+require_once("model/Manager.php");
+
+class UserManager extends Manager
 {
     //gets all the users
     public function getAllUsers($firstUser, $usersPerPage)
@@ -14,14 +17,14 @@ class UserManager
 
 
     //Pagination
-    public function getTotalPagesUsers(){
+    public function getTotalPagesUsers()
+    {
         $db = $this->dbConnect();
         $getTotalPagesUsers = $db->query('SELECT COUNT(*) AS total_users FROM members');
         $returnTotalPagesUsers= $getTotalPagesUsers->fetch();
 
         return $returnTotalPagesUsers;
     }
-
 
     //must receive an array of ids to delete all the users at once. (?) = my array, see here https://www.tutorialspoint.com/mysql/mysql-in-clause.htm
     public function eraseAllSelectedUsers($arrayUsersIDs) //NOT WORKING :
@@ -36,7 +39,6 @@ class UserManager
             $eraseAllSelectedUsers = $db->prepare('DELETE FROM members WHERE id IN (?)'); // je veux que ? soit les valeurs successives d'un tableau donc je dois faire une boucle
             $eraseAllSelectedUsers->execute(array($id));
         }
-        
     }
 
 
@@ -54,16 +56,4 @@ class UserManager
         $userUpdate = $db->prepare('UPDATE members SET group_id = ? WHERE id = ?');
         $userUpdate->execute(array($userRole, $userId));
     }
-
-
-
-
-
-   // General public function to connect to database
-    private function dbConnect()
-    {
-        $db = new PDO('mysql:host=localhost;dbname=p4blog;charset=utf8', 'root', '');
-        return $db;
-    }
-
 }
