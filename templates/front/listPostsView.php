@@ -5,6 +5,7 @@
 
 <!-- Display all posts -->
 <?php 
+// var_dump($post) //FIXME remove me
 
 for ($i = 0 ; $i < sizeof($posts) ; $i++)
 {
