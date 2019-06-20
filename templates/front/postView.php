@@ -38,6 +38,45 @@
     }  
     ?>      
     </div>
+
+
+    <!-- displays the last 3 posts -->
+    <div class="lastPosts">
+    <h3>Les derniers chapitres publiés</h3>
+
+
+        <?php
+        for ($i = 0 ; $i < 3 ; $i++)
+        {
+            $id = $lastPosts[$i]->id(); //gets the id of the post to use in buttons "read more" & "comments" urls
+
+        ?>       
+            <h4><?= htmlspecialchars($lastPosts[$i]->chapterNb()) ?> : <?= htmlspecialchars($lastPosts[$i]->title()) ?></h4>
+            
+            <?php //FIXME duplicate content (except $data instead of $post) with PostsView. Worth factoring into a function ? 
+            if($lastPosts[$i]->publishDate() ==  $lastPosts[$i]->editDate() )
+            {
+            echo '<p>Publié le '. $lastPosts[$i]->publishDate() . '</p>';
+            }
+            else
+            {
+                echo '<p>Edité le '. $lastPosts[$i]->editDate() . '</p>';
+            }
+            
+        ?>    
+                <p class="lastPostsP">
+                    <?= substr($lastPosts[$i]->content(), 0, 200) . "..." ?><br/>
+                    <button class="regularBtns"><a href="index.php?action=post&id=<?=$id?>&page=1&sortBy=5">Lire la suite</a></button>      
+                </p>
+                    
+        <?php
+        }  
+        ?>
+        </div>     
+</section>
+
     
 <?php $content = ob_get_clean(); ?>
+<!-- < ?php var_dump($lastPosts) //FIXME remove me?>  -->
+
 <?php require('templates/base.php'); ?>

@@ -31,6 +31,8 @@ class PostController{
       {
           throw new Exception('Ce chapitre n\'existe pas');
       }
+
+      $lastPosts = $postManager->getPosts(); // passer en paramètre à cette méthodes le nombre de post que je veux display sur le coté
       
       require('templates/front/postView.php');
   }
