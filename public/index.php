@@ -1,12 +1,12 @@
 <?php
 session_start();
-require('src/controller/SessionController.php');
-require('src/controller/PostController.php');
-require('src/controller/CommentController.php');
-require('src/controller/UserController.php');
-require('src/controller/StatsController.php');
-require('src/controller/GeneralController.php');
-require('src/controller/FormController.php');
+require_once('src/controller/SessionController.php');
+require_once('src/controller/PostController.php');
+require_once('src/controller/CommentController.php');
+require_once('src/controller/UserController.php');
+require_once('src/controller/StatsController.php');
+require_once('src/controller/GeneralController.php');
+require_once('src/controller/FormController.php');
 
 
 
@@ -16,8 +16,15 @@ try {
     //POSTS
         //FRONTEND
         if ($_GET['action'] == 'listPosts' OR $_GET['action'] == '') {
-            $postController = new PostController;
-            $listPosts = $postController->listPosts();
+            if (isset($_GET['page']) && $_GET['page'] <= 0) 
+            {
+                throw new Exception('Cette page n\'existe pas');
+               
+            }
+            else {
+                $postController = new PostController;
+                $listPosts = $postController->listPosts();
+            }    
         }
 
         elseif ($_GET['action'] == 'post') 
@@ -25,13 +32,14 @@ try {
             if (isset($_GET['id']) && $_GET['id'] > 0) 
             {
                 if(!isset($_GET['page']) OR !isset($_GET['id']) OR !isset($_GET['sortBy']) OR $_GET['page']<1 OR $_GET['id']<1 OR $_GET['sortBy']<1)
-                    { 
-                        throw new Exception('Il manque le numéro de page, du billet ou la classement des commentaires');
-                    }
-                    else{
-                        $postController = new PostController;
-                        $post = $postController->post();
-                    }
+                { 
+                    throw new Exception('Il manque le numéro de page, du billet ou la classement des commentaires');
+                }
+                else{
+                    $postController = new PostController;
+                    $post = $postController->post();
+                    
+                }
                     
             }
             else {
@@ -164,7 +172,7 @@ try {
                 throw new Exception('Il y a une erreur');
             }  
         }
-        
+
         //to publish or delete all new comments
         elseif ($_GET['action'] == 'publishAllSelectedComments') {
             if(isset($_POST['deleteSelectedComments'])){
@@ -471,8 +479,15 @@ try {
 
 //DEFAULT BEHAVIOR
     else {
-        $postController = new PostController;
-        $listPosts = $postController->listPosts();
+        if (isset($_GET['page']) && $_GET['page'] <= 0) 
+            {
+                throw new Exception('Cette page n\'existe pas');
+               
+            }
+            else {
+                $postController = new PostController;
+                $listPosts = $postController->listPosts();
+            }   
     }
 }
 

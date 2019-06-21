@@ -46,7 +46,7 @@
 
 
         <?php
-        for ($i = 0 ; $i < 3 ; $i++)
+        for ($i = 0 ; $i < sizeof($lastPosts) ; $i++)
         {
             $id = $lastPosts[$i]->id(); //gets the id of the post to use in buttons "read more" & "comments" urls
 
@@ -128,7 +128,7 @@
 <!-- displays the comments -->
 
 <!-- Comments Pagination -->
-<!-- < ?php require('paginationCommentsFE.php') ?> -->
+<?php require('templates/pagination.php'); ?>
 <p>Afficher par <button><a href="index.php?action=post&page=<?= $_GET['page'] ?>&id=<?= $_GET['id'] ?>&sortBy=5#commentsAnchor">5</a></button> <button><a href="index.php?action=post&page=<?= $_GET['page'] ?>&id=<?= $_GET['id'] ?>&sortBy=15#commentsAnchor">15</a></button> <button><a href="index.php?action=post&page=<?= $_GET['page'] ?>&id=<?= $_GET['id'] ?>&sortBy=99999999999999999999#commentsAnchor">Tous</a></button></p>  
     <?php
 

@@ -3,12 +3,14 @@ class CommentManager extends Manager
 {
 
     //FRONTEND
-    public function getComments($postId)
+    public function getComments($postId, $firstEntry, $messagesPerPage)
     {
-        $req = $this->_db->prepare('SELECT id, author, comment, DATE_FORMAT(commentDate, \'%d/%m/%Y à %Hh%imin%ss\') AS modCommentDate, DATE_FORMAT(updateDate, \'%d/%m/%Y à %Hh%imin%ss\') AS modUpdateDate, flag FROM comments WHERE postId = ? ORDER BY commentDate LIMIT 0, 15');
+        $req = $this->_db->prepare('SELECT id, author, comment, DATE_FORMAT(commentDate, \'%d/%m/%Y à %Hh%imin%ss\') AS modCommentDate, DATE_FORMAT(updateDate, \'%d/%m/%Y à %Hh%imin%ss\') AS modUpdateDate, flag FROM comments WHERE postId = ? ORDER BY commentDate LIMIT ?,?');
         $req->bindValue(1, $postId, PDO::PARAM_INT);
-
+        $req->bindValue(2, $firstEntry, PDO::PARAM_INT);
+        $req->bindValue(3, $messagesPerPage, PDO::PARAM_INT);
         $req->execute();
+
         while ($datasComments = $req->fetch(PDO::FETCH_ASSOC))
         {           
             $comments[] = new Comment($datasComments);

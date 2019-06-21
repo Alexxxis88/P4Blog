@@ -15,7 +15,7 @@
             $this->hydrate($datas);
         }
 
-        public function hydrate(array $datas) // ne fonctionne pas avec les champs qui ont une Majuscule au milieu
+        public function hydrate(array $datas) // ne fonctionne pas avec les champs qui ont un tiret au milieu
         {
             foreach ($datas as $key => $value)
             {

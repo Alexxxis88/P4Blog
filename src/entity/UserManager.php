@@ -2,10 +2,13 @@
 class UserManager extends Manager
 {
 
-    public function getAllUsers()
+    public function getAllUsers($firstUser, $usersPerPage)
     {
-        $req = $this->_db->query('SELECT id, username, email, DATE_FORMAT(registrationDate, \'%d/%m/%Y à %Hh%imin%ss\') AS modRegistrationDate, groupId FROM members ORDER BY username LIMIT 0, 50');
-        
+        $req = $this->_db->prepare('SELECT id, username, email, DATE_FORMAT(registrationDate, \'%d/%m/%Y à %Hh%imin%ss\') AS modRegistrationDate, groupId FROM members ORDER BY username LIMIT ?,?');
+        $req->bindValue(1, $firstUser, PDO::PARAM_INT);
+        $req->bindValue(2, $usersPerPage, PDO::PARAM_INT);
+        $req->execute();
+
         while ($userDatas = $req->fetch(PDO::FETCH_ASSOC))
         {           
             $users[] = new User($userDatas);
@@ -16,6 +19,16 @@ class UserManager extends Manager
             return $users;
         }
     }
+
+    //Pagination
+    public function getTotalPagesUsers()
+    {
+        $req = $this->_db->query('SELECT COUNT(*) AS total_users FROM members');
+        $returnTotalPagesUsers= $req->fetch();
+        return $returnTotalPagesUsers;
+    }
+
+
 
     public function eraseUser($userId)
     {

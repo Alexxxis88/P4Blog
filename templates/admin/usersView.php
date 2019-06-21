@@ -1,7 +1,8 @@
 <?php $title = 'Gestion des utilisateurs'; ?>
 
 <?php ob_start(); ?>
- 
+<?php require('templates/pagination.php'); ?>
+<p>Afficher par <button><a href="index.php?action=manageUsers&page=<?= $_GET['page'] ?>&sortBy=10">10</a></button> <button><a href="index.php?action=manageUsers&page=<?= $_GET['page'] ?>&sortBy=20">20</a></button> <button><a href="index.php?action=manageUsers&page=<?= $_GET['page'] ?>&sortBy=99999999999999999999">Tous</a></button></p>     
 
 <h2>Utilisateurs</h2>
 <form action="index.php?action=manageAllSelectedUsers" method="post"> 

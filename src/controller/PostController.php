@@ -14,9 +14,31 @@ class PostController{
     public function listPosts()
     {
         $postManager = new PostManager();
-  
+    
+    //Pagitation     
+        $totalPages = $postManager->getTotalPages();
+        $total = $totalPages['total_posts']; // total of posts in DB
+        $messagesPerPage = 5;
+        $nbOfPages = ceil($total/$messagesPerPage);
+        if(isset($_GET['page']))
+        {
+            $currentPage = intval($_GET['page']); //intval gets the integer ( 4.2 = 4) value of a variable
+        
+            if($currentPage>$nbOfPages) // if a user puts the value of a page that doesnt exist, it redirects to the last page ($nbOfPages)
+            {
+                $currentPage=$nbOfPages;
+            }
+        }
+        else
+        {
+            $currentPage = 1; 
+        }
+        $firstEntry = ($currentPage-1)*$messagesPerPage; // first entry to read
+        
+        $currentView = "listPost"; //to display the correct Pagination View
+        
   //Display post depending on pagination parameters
-        $posts = $postManager->getPosts();
+        $posts = $postManager->getPosts($firstEntry, $messagesPerPage);
         require('templates/front/listPostsView.php');
     }
 
@@ -26,10 +48,36 @@ class PostController{
         $postManager = new PostManager();
         $commentManager = new CommentManager();
 
+    //Pagination for comments
         $totalComments = $commentManager->getTotalComments($_GET['id']);
         $totalCom=$totalComments['total_comments']; // total of posts in DB
 
+        if(isset($_GET['sortBy'])){
+            $messagesPerPage = $_GET['sortBy'];
+        }
+        else
+        {
+            $messagesPerPage = 5;
+        }
+        $nbOfPages=ceil($totalCom/$messagesPerPage);
+        if(isset($_GET['page']))
+        {
+            $currentPage=intval($_GET['page']); //intval gets the integer ( 4.2 = 4) value of a variable
+            if($currentPage>$nbOfPages) // if a user puts the value of a page that doesnt exist, it redirects to the last page ($nbOfPages)
+            {
+                $currentPage=$nbOfPages;
+            }
+        }
+        else
+        {
+            $currentPage=1; 
+        }
+        $firstEntry=($currentPage-1)*$messagesPerPage; // first comment to read
+        $comments = $commentManager->getComments($_GET['id'], $firstEntry, $messagesPerPage);
 
+        $currentView = "comments";
+
+        
         $post = $postManager->getPost($_GET['id']);
         //check if post exists in DB
         if($post == false)
@@ -37,9 +85,8 @@ class PostController{
             throw new Exception('Ce chapitre n\'existe pas');
         }
 
-        $lastPosts = $postManager->getPosts(); // passer en paramètre à cette méthodes le nombre de post que je veux display sur le coté
+        $lastPosts = $postManager->getPosts(0,3); // 0,3 = the last 3 posts published
 
-        $comments = $commentManager->getComments($_GET['id']);
         require('templates/front/postView.php');
     }
 

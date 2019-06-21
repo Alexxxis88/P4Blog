@@ -2,6 +2,8 @@
 
 <?php ob_start(); ?>
 
+<!-- Pagination -->
+<?php require('templates/pagination.php'); ?>
 
 <!-- Display all posts -->
 <?php 
@@ -55,6 +57,8 @@ if(!empty($posts)) //needed otherwise gives an error on the listPostsView.php wh
 ?>
 
 
+<!-- Pagination -->
+<?php require('templates/pagination.php'); ?>
 
 <?php $content = ob_get_clean(); ?>
 <?php require('templates/base.php'); ?>
