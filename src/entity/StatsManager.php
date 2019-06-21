@@ -13,14 +13,8 @@ class StatsManager extends Manager
         $totalComPerPosts->execute(array($postId));
         return $totalComPerPosts;
     }
-    // //gets all the posts to display them in stats view
-    // function getPostStats() //FIXME : remove this function in favor of the next one ? voir allPostsStats(statsView.php et C, a virer aussi)
-    // {
-    //     $db = dbConnectAdmin();
-    //     $postsStats = $db->query('SELECT id, chapter_nb, title, content, DATE_FORMAT(publishDate, \'%d/%m/%Y à %Hh%imin%ss\') AS mod_publishDate, DATE_FORMAT(edit_date, \'%d/%m/%Y à %Hh%imin%ss\') AS mod_edit_date, commentCount FROM posts ORDER BY publishDate DESC ');
-        
-    //     return $postsStats;
-    // }
+ 
+    
     public function statsPosts() 
     {
         $db = mysqli_connect('localhost','root','','p4blog'); // passer en PDO / objet

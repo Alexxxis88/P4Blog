@@ -11,7 +11,10 @@ class UserManager extends Manager
             $users[] = new User($userDatas);
         }
         
-        return $users;
+        if(!empty($users)) //needed otherwise gives an error on the usersView.php when no users in DB
+        {
+            return $users;
+        }
     }
 
     public function eraseUser($userId)

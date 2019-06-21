@@ -11,7 +11,10 @@ class PostManager extends Manager
         {           
             $posts[] = new Post($datas);
         }
-        return $posts;
+        if(!empty($posts)) //needed otherwise gives an error on the listPostView.php when no posts in DB
+        {
+            return $posts;
+        } 
     }
 
 
@@ -47,8 +50,4 @@ class PostManager extends Manager
         $editedPost = $this->_db->prepare('UPDATE posts SET chapterNb = ?, title = ?, content = ?, editDate = NOW() WHERE id = ?');
         $editedPost->execute(array($chapter, $title, $content, $postId));
     }
-
- 
-
-
 }

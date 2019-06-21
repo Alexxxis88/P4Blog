@@ -13,6 +13,9 @@
 <?php
     //je déclare un tableau vide qui va me servir a stocker tous les ids des utilisateurs
     $arrayUsersIDs = array();
+ 
+if(!empty($allUsers)) //needed otherwise gives an error on the usersView.php when no users in DB
+{    
     for ($i = 0 ; $i < sizeof($allUsers) ; $i++)
     {
     ?>
@@ -21,7 +24,7 @@
                         enregistré le <strong> <?= $allUsers[$i]->modRegistrationDate() ?></strong> 
                 
                         
-                        <!-- FIXME : a supprimer car je ne peux me co en admin qu'avec le log in 'Admin' et pas en fonction du group_id -->
+                        <!-- FIXME : a supprimer car je ne peux me co en admin qu'avec le log in 'Admin' et pas en fonction du groupId -->
                         <!-- <p>role : 
                         <?php 
                         if($allUsers[$i]->groupId() == 0)
@@ -51,6 +54,7 @@
         //pour chaque utilisateur, je rajoute son id dans le tableau $arrayUsersIDs
         array_push($arrayUsersIDs, $allUsers[$i]->id());    
     }
+}    
     ?>    
 </form>
 

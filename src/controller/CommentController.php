@@ -16,6 +16,14 @@ class CommentController{
         }
     }
 
+    public function approveComments($commentId){
+        
+        $commentManager = new CommentManager();
+        $commentApproved =  $commentManager->approveComment($commentId);
+        header('Location: ' . $_SERVER['HTTP_REFERER']);
+        exit;
+    }
+
     public function deleteComment($commentId,  $postIdComCounts, $userIdComCounts)
     {   
         $commentManager = new CommentManager();
@@ -68,6 +76,53 @@ class CommentController{
         $commentManager = new CommentManager();
         $AllcomsDelete = $commentManager->eraseAllComments($postId);
     } 
+    
+
+    //display reported and new comments
+    public function listAllComments()
+    {
+        $commentManager = new CommentManager();
+        $reportedComments = $commentManager->getReportedComments();
+        $newComments = $commentManager->getNewComments();
+        require('templates/admin/commentsView.php');
+    }
+
+    public function deleteAllSelectedComments($arrayCommentsIDs)
+    {
+        $commentManager = new CommentManager();
+        
+        $deleteAllSelectedComments = $commentManager->eraseAllSelectedComments($arrayCommentsIDs);
+        header('Location: ' . $_SERVER['HTTP_REFERER']);
+        exit;
+    }
+
+    public function approveAllSelectedComments($arrayCommentsIDs)
+    {
+        $commentManager = new CommentManager();
+        $approveAllSelectedComments = $commentManager->acceptAllSelectedComments($arrayCommentsIDs);
+        header('Location: ' . $_SERVER['HTTP_REFERER']);
+        exit;
+    }
+
+    public function nbOfReportedComments() // NOT WORKING : display number of comments to manage 
+    {   
+        $commentManager = new CommentManager();
+        $nbOfReportedComments = $commentManager->getNbOfReportedComments();
+        // if($nbOfReportedComments>0){
+        // ? >
+        // <!-- displays an alert icon if comments to manage -->   
+        //     <script>
+        //             if ( !$.trim($('.reportedComments').html() ).length ) 
+        //             {
+        //                     $('.comAlert').css("display", "none");
+        //             } else {
+        //                     $('.comAlert').css("display", "block");
+        //             }
+        //    </script> 
+        // <?php        
+        // }
+    }
+    
     
 
    

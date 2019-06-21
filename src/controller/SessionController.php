@@ -7,6 +7,7 @@ class SessionController{
         require('templates/front/singInView.php');
     }
 
+    
     public function checkSession()
     {
     //we check wether the member is registered with COOKIE or SESSION
@@ -28,6 +29,8 @@ class SessionController{
         header('Location: index.php?success=1#header');
         exit;
     }
+
+
     public function checkUsernameAvailability($userName)
     {   
         $sessionManager = new SessionManager();
@@ -41,6 +44,8 @@ class SessionController{
                 return false;
             }
     }
+
+
     public function checkEmailAvailability($email)
     {
         $sessionManager = new SessionManager();
@@ -54,6 +59,8 @@ class SessionController{
                 return false;
             }
     }
+
+
     public function checkLog($userName)
     {
         $sessionManager = new SessionManager();
@@ -80,12 +87,12 @@ class SessionController{
                 }
                 
             //redirects on the right page depending on the user group (user / admin) 
-            if($checkLogIn['group_id'] == 0){
+            if($checkLogIn['groupId'] == 0){
                 header('Location: index.php');
                 exit;
             }
-            elseif($checkLogIn['group_id'] == 1){
-                header('Location: index.php?action=listPostsAdmin');
+            elseif($checkLogIn['groupId'] == 1){
+                header('Location: index.php?action=listPosts');
                 exit;
             }
             }
@@ -94,19 +101,22 @@ class SessionController{
             }       
         }
     }
-    // Update password
+
+
     public function displaychangePasswordView()
     {
-        
         $cookieOrSessionID = $this->checkSession();
         require('templates/front/changePassView.php');
     }
+
+
     public function UpdatePassWord($newpass, $id)
     {
         $sessionManager = new SessionManager();
         $UpdatePassWord = $sessionManager->UpdatePass($newpass, $id); 
     }
     
+
     public function checkCurrentPass($userID)
     {
         $sessionManager = new SessionManager();
@@ -120,6 +130,8 @@ class SessionController{
                 return false;
             }
     }
+
+
     public function killSession()
     {   
         // Delete session variables
@@ -130,11 +142,4 @@ class SessionController{
         setcookie('login', '', time() + 365*24*3600, null, null, false, true);
         setcookie('hash_pass', '', time() + 365*24*3600, null, null, false, true);
     }
-
-
-   
-
-
-
-
 }

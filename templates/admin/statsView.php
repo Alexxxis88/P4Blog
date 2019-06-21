@@ -63,21 +63,6 @@
     </div>
 </div>
 
- <!-- FIXME voir allPostsStats(C et M, a virer aussi) : supprimer ci dessous ?  -->
-<!-- <h3>Tous les Chapitre</h3>
-< ? php 
-// while ($datas = $allPostsStats->fetch())
-    // {       
- ? >
-<div class="reportedComments">
- <p>< ?= $datas['title'] ?></p><p> Nombre de commentaires < ?= $datas['comment_count'] ?></p>
-</div>
- < ?php  
-}    
-  ?> -->
-
-
-
 <h2>Utilisateurs</h2>
 <div class="userStatsContainer">
 <div class="usersBlock">

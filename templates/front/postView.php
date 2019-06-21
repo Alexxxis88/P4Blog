@@ -131,6 +131,9 @@
 <!-- < ?php require('paginationCommentsFE.php') ?> -->
 <p>Afficher par <button><a href="index.php?action=post&page=<?= $_GET['page'] ?>&id=<?= $_GET['id'] ?>&sortBy=5#commentsAnchor">5</a></button> <button><a href="index.php?action=post&page=<?= $_GET['page'] ?>&id=<?= $_GET['id'] ?>&sortBy=15#commentsAnchor">15</a></button> <button><a href="index.php?action=post&page=<?= $_GET['page'] ?>&id=<?= $_GET['id'] ?>&sortBy=99999999999999999999#commentsAnchor">Tous</a></button></p>  
     <?php
+
+if(!empty($comments)) //needed otherwise gives an error on the postView.php when no comments on the related post
+{   
     for ($i = 0 ; $i < sizeof($comments) ; $i++)
     {
         if($comments[$i]->flag() < 9999)
@@ -242,6 +245,7 @@
                 <?php
         }
     }
+}    
     ?>
     
 <?php $content = ob_get_clean(); ?>

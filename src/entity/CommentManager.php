@@ -1,18 +1,6 @@
 <?php
 class CommentManager extends Manager
 {
-//FRONTEND
-    //gets the last X posts to display in listPostsView. X depends on $messagesPerPage
-    // public function getPosts()
-    // {
-    //     $req = $this->_db->query('SELECT id, chapterNb, title, content, DATE_FORMAT(publishDate, \'%d/%m/%Y à %Hh%imin%ss\') AS modPublishDate, DATE_FORMAT(editDate, \'%d/%m/%Y à %Hh%imin%ss\') AS modEditDate, commentCount FROM posts ORDER BY modPublishDate DESC LIMIT 0, 15');
-        
-    //     while ($datas = $req->fetch(PDO::FETCH_ASSOC))
-    //     {           
-    //         $posts[] = new Post($datas);
-    //     }
-    //     return $posts;
-    // }
 
     //FRONTEND
     public function getComments($postId)
@@ -25,8 +13,12 @@ class CommentManager extends Manager
         {           
             $comments[] = new Comment($datasComments);
         }
-        return $comments;
+        if(!empty($comments)) //needed otherwise gives an error on the postView.php when no comments on the related post
+        {
+            return $comments;
+        } 
     }
+
     //Pagination comments
         //AND NOT flag = 9999 added otherwise the number of page will include the comments to moderate before publish even if they are not displayed
     public function getTotalComments($postId)
@@ -37,6 +29,7 @@ class CommentManager extends Manager
         $returnTotalComments= $getTotalComments->fetch();
         return $returnTotalComments;
     }
+
     public function postComment($postId, $author, $comment,$postIdComCounts, $userIdComCounts)
     {
         $comments = $this->_db->prepare('INSERT INTO comments(postId, author, comment, commentDate, updateDate) VALUES(?, ?, ?, NOW(), NOW())');
@@ -49,6 +42,7 @@ class CommentManager extends Manager
         $userCommentCount ->execute(array($userIdComCounts));
         return $affectedLines;
     }
+
     public function eraseComment($commentId, $postIdComCounts, $userIdComCounts)
     {
         $comDelete = $this->_db->prepare('DELETE FROM comments WHERE id = ?');
@@ -61,17 +55,20 @@ class CommentManager extends Manager
         $userCommentCount = $this->_db->prepare('UPDATE members SET userComCount = userComCount - 1 WHERE id = ?');
         $userCommentCount ->execute(array($userIdComCounts));
     }
+
     public function reportComment($commentId)
     {
         $commentReport = $this->_db->prepare('UPDATE comments SET flag = flag + 1 WHERE id = ?');
         $commentReport->execute(array($commentId));
     }
+
     //add the reported comment in a new table called reported_comments that gathers the id of the member who reported it, the id of the reported comment and a flag set to 1
     public function reportedCommentPerUser($memberId, $repComId)
     {
         $newRepCom = $this->_db->prepare('INSERT INTO reported_comments( memberId, repComId, flagRep) VALUES(?, ?, 1)');
         $newRepCom->execute(array($memberId, $repComId));
     }
+
     //check when a member reports a comment if he already reported it once
     public function checkIfAlreadyReportedCom()
     {
@@ -79,6 +76,7 @@ class CommentManager extends Manager
         
         return $alreadyRep;
     }
+
     public function updateCom($comment, $commentId)
     {
         $updateCom = $this->_db->prepare('UPDATE comments SET comment = ?, updateDate = NOW()  WHERE id = ?');
@@ -92,19 +90,44 @@ class CommentManager extends Manager
         $allComDelete->execute(array($postId));
     }
 
+    public function approveComment($commentId)
+    {
+        $commentApprove = $this->_db->prepare('UPDATE comments SET flag = 0 WHERE id = ?');
+        $commentApprove->execute(array($commentId));
+    }
+    
 
+
+
+   
     //BACKEND
     //gets the Reported comments (where flag >0 and sort them by number of time reported OR by date showing older first if reported the same nb of times)
     public function getReportedComments()
     {
-        $reportedComment = $this->_db->query('SELECT id, postId, author, comment, DATE_FORMAT(commentDate, \'%d/%m/%Y à %Hh%imin%ss\') AS modCommentDate, flag FROM comments WHERE flag > 0 AND flag < 9999 ORDER BY flag DESC, commentDate');
-        return $reportedComment;
+        $req = $this->_db->query('SELECT id, postId, author, comment, DATE_FORMAT(commentDate, \'%d/%m/%Y à %Hh%imin%ss\') AS modCommentDate, flag FROM comments WHERE flag > 0 AND flag < 9999 ORDER BY flag DESC, commentDate');
+        while ($datasReportedComments = $req->fetch(PDO::FETCH_ASSOC))
+        {           
+            $reportedComments[] = new Comment($datasReportedComments);
+        }
+        if(!empty($reportedComments)) //needed otherwise gives an error on the commentsView.php when no comments reported
+        {
+            return $reportedComments;
+        } 
     }
+
     //get new comments (flag value = 9999 by default)
     public function getNewComments()
     {
-        $newComment = $this->_db->query('SELECT id, postId, author, comment, DATE_FORMAT(commentDate, \'%d/%m/%Y à %Hh%imin%ss\') AS modCommentDate, flag FROM comments WHERE flag = 9999 ORDER BY commentDate');
-        return $newComment;
+        $req = $this->_db->query('SELECT id, postId, author, comment, DATE_FORMAT(commentDate, \'%d/%m/%Y à %Hh%imin%ss\') AS modCommentDate, flag FROM comments WHERE flag = 9999 ORDER BY commentDate');
+        while ($datasNewComments = $req->fetch(PDO::FETCH_ASSOC))
+        {           
+            $newComments[] = new Comment($datasNewComments);
+        }
+
+        if(!empty($newComments)) //needed otherwise gives an error on the commentsView.php when no new comments to manage
+        {
+            return $newComments;
+        } 
     }
 
     //must receive an array of ids to delete all the comments at once. (?) = my array, see here https://www.tutorialspoint.com/mysql/mysql-in-clause.htm
@@ -121,6 +144,7 @@ class CommentManager extends Manager
         }
         
     }
+
     //accept all the selected reported comments
     public function acceptAllSelectedComments($arrayCommentsIDs) 
     {
@@ -135,17 +159,14 @@ class CommentManager extends Manager
         }
         
     }
+
     public function getNbOfReportedComments() // display number of comments to manage 
     {
         $reportedCommentNb = $this->_db->query('SELECT SUM(flag) AS flagTotal FROM comments');
         return $reportedCommentNb;
     }
-    public function approveComment($commentId)
-    {
-        $commentApprove = $this->_db->prepare('UPDATE comments SET flag = 0 WHERE id = ?');
-        $commentApprove->execute(array($commentId));
-    }
-    
+
+  
  
 
 
