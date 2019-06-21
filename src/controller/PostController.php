@@ -24,7 +24,12 @@ class PostController{
     public function post()
     {
         $postManager = new PostManager();
-    
+        $commentManager = new CommentManager();
+
+        $totalComments = $commentManager->getTotalComments($_GET['id']);
+        $totalCom=$totalComments['total_comments']; // total of posts in DB
+
+
         $post = $postManager->getPost($_GET['id']);
         //check if post exists in DB
         if($post == false)
@@ -33,6 +38,8 @@ class PostController{
         }
 
         $lastPosts = $postManager->getPosts(); // passer en paramètre à cette méthodes le nombre de post que je veux display sur le coté
+
+        $comments = $commentManager->getComments($_GET['id']);
         require('templates/front/postView.php');
     }
 

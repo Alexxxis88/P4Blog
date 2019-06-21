@@ -1,6 +1,7 @@
 <?php
 session_start();
 require('src/controller/PostController.php');
+require('src/controller/CommentController.php');
 require('src/controller/UserController.php');
 require('src/controller/StatsController.php');
 
@@ -39,9 +40,10 @@ try {
         elseif ($_GET['action'] == 'deletePost') {
             if (isset($_GET['id']) && $_GET['id'] > 0) {
                 $PostController = new PostController;
+                $CommentController = new CommentController;
 
                 $postId = $_GET['id']; // pas utile de factoriser ? 
-                // deleteAllComments($postId); //delete all the comments related to the post we're deleting with deletePost()
+                $deleteAllComments =  $CommentController->deleteAllComments($postId); //delete all the comments related to the post we're deleting with deletePost()
                 $deletePost = $PostController->deletePost($postId);
             }
             else {
@@ -49,6 +51,24 @@ try {
             }
         }
 
+
+        //COMMENTS
+        elseif ($_GET['action'] == 'deleteComment') {
+            if (isset($_GET['commentId']) && $_GET['commentId'] > 0) {
+
+                //needed to update the userComCounter in members table
+                // $sessionManager = new SessionManager();
+                // $cookieOrSessionID = $sessionManager->checkSession();
+
+                $CommentController = new CommentController;
+                $deleteComment = $CommentController->deleteComment($_GET['commentId'], $_GET['id']
+                //, $cookieOrSessionID
+            );
+            }
+            else {
+                throw new Exception('Aucun identifiant de billet envoyé');
+            }
+        }
 
 
      //BACKEND
