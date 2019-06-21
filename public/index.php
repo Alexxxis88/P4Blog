@@ -1,6 +1,9 @@
 <?php
 session_start();
 require('src/controller/PostController.php');
+require('src/controller/UserController.php');
+
+
 
 try {
     if (isset($_GET['action'])) {
@@ -67,6 +70,50 @@ try {
         elseif ($_GET['action'] == 'updatePost') {
             $PostController = new PostController;
             $updatePost = $PostController->updatePost($_POST['chapter'], $_POST['title'], $_POST['postContent'], $_GET['id']);
+        }
+
+
+
+        //USERS
+        elseif ($_GET['action'] == 'manageUsers') {
+            if(!isset($_GET['page']) OR !isset($_GET['sortBy']) OR $_GET['page']<1 OR $_GET['sortBy']<1)
+            { 
+                throw new Exception('Il manque le numéro de page ou le classement des utilisateurs');
+            }
+            else{
+                $UserController = new UserController;
+                $listAllUsers = $UserController->listAllUsers();
+            }   
+        }
+
+        //to delete all selected users
+        elseif ($_GET['action'] == 'manageAllSelectedUsers') {
+            if(isset($_POST['deleteSelectedUsers'])){
+                $UserController = new UserController;
+                $deleteAllSelectedUsers = $UserController->deleteAllSelectedUsers($_POST['selectUsers']);  
+            }
+            else{
+                throw new Exception('Il y a une erreur');
+            }  
+        }
+        //to update role
+        elseif ($_GET['action'] == 'updateRole') {
+            if(isset($_GET['role'])){
+                $UserController = new UserController;
+                $updateUserRole = $UserController->updateUserRole($_GET['role'], $_GET['userID']);  
+            }
+            else{
+                throw new Exception('Il y a une erreur');
+            }  
+        }
+        elseif ($_GET['action'] == 'deleteUser') {
+            if (isset($_GET['userID']) && $_GET['userID'] > 0) {
+                $UserController = new UserController;
+                $deleteUser = $UserController->deleteUser($_GET['userID']);
+            }
+            else {
+                throw new Exception('Aucun identifiant de billet envoyé');
+            }
         }
 
     }    
