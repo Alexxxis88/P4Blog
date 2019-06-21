@@ -13,28 +13,34 @@
 if(!empty($posts)) //needed otherwise gives an error on the listPostsView.php when no posts in DB
 {    
     for ($i = 0 ; $i < sizeof($posts) ; $i++)
-    {
+    {   
         $id = $posts[$i]->id(); //gets the id of the post to use in buttons "read more" & "comments" urls
+        $chapter = $posts[$i]->chapterNb();
+        $content = $posts[$i]->content();
+        $title = $posts[$i]->title();
+        $editDate = $posts[$i]->modEditDate();
+        $publishDate = $posts[$i]->modPublishDate();
+
 
         ?>
 
         <div class="postsBlock">
-        <h3><?= htmlspecialchars($posts[$i]->chapterNb()) ?></h3>
-        <h2><?= htmlspecialchars($posts[$i]->title()) ?></h2>
+        <h3><?= htmlspecialchars($chapter) ?></h3>
+        <h2><?= htmlspecialchars($title) ?></h2>
         <?php 
-        if($posts[$i]->modPublishDate() ==  $posts[$i]->modEditDate() )
+        if($publishDate ==  $editDate)
         {
-        echo '<p>Publié le '. $posts[$i]->modPublishDate() . '</p>';
+        echo '<p>Publié le '.  $publishDate . '</p>';
         }
         else
         {
-            echo '<p>Edité le '. $posts[$i]->modEditDate() . '</p>';
+            echo '<p>Edité le '. $editDate . '</p>';
         }
         
         ?>   
             
         <p class="posts">
-            <?= substr($posts[$i]->content(), 0, 600) . "..." ?>
+            <?= substr($content, 0, 600) . "..." ?>
                 <button class="regularBtns"><a href="index.php?action=post&id=<?=$id?>&page=1&sortBy=5">Lire la suite</a></button>
                 <button class="regularBtns"><a href="index.php?action=post&id=<?=$id?>&page=1&sortBy=5#commentsAnchor">Commentaires</a></button> 
         </p>

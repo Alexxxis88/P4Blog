@@ -20,6 +20,15 @@ if(!empty($reportedComments)) //needed otherwise gives an error on the commentsV
 {       
     for ($i = 0 ; $i < sizeof($reportedComments) ; $i++)
     {
+
+        $idComment = $reportedComments[$i]->id(); //gets the id of the post to use in buttons "read more" & "comments" urls
+        $postId = $reportedComments[$i]->postId();
+        $author = $reportedComments[$i]->author();
+        $comment = $reportedComments[$i]->comment();
+        $commentDate = $reportedComments[$i]->modCommentDate();
+        $updateDate = $reportedComments[$i]->modUpdateDate();
+        $flag = $reportedComments[$i]->flag();
+
         
     ?>
         <!-- FIXME transform non html links in comments into clickable links
@@ -28,26 +37,26 @@ if(!empty($reportedComments)) //needed otherwise gives an error on the commentsV
 
 
                 <div class="reportedComments">
-                      <p class="commentHead">Le <strong><?= htmlspecialchars($reportedComments[$i]->author()) ?></strong> du <?= $reportedComments[$i]->modCommentDate() ?>
-                                a été signalé <strong> <?= $reportedComments[$i]->flag() ?></strong> fois </p>
-                                <p><?= nl2br(htmlspecialchars($reportedComments[$i]->comment())) ?></p>
-                                <p><a href="index.php?action=post&id=<?= $reportedComments[$i]->postId()?>&page=1&sortBy=5">Voir l'article associé [<?= $reportedComments[$i]->postId() ?>]</a> </p>
+                      <p class="commentHead">Le <strong><?= htmlspecialchars($author) ?></strong> du <?= $commentDate ?>
+                                a été signalé <strong> <?= $flag ?></strong> fois </p>
+                                <p><?= nl2br(htmlspecialchars($comment)) ?></p>
+                                <p><a href="index.php?action=post&id=<?= $postId?>&page=1&sortBy=5">Voir l'article associé [<?= $postId ?>]</a> </p>
 
                                 <!-- sends straight to the right comment using the comment id as an anchor -->
-                                <p><a href="index.php?action=post&id=<?= $reportedComments[$i]->postId()?>&page=1&sortBy=99999999999999999999#<?= $reportedComments[$i]->id()?>">Voir le commentaire</a> </p>
+                                <p><a href="index.php?action=post&id=<?= $postId?>&page=1&sortBy=99999999999999999999#<?= $idComment?>">Voir le commentaire</a> </p>
                         
-                        <label for="commentID"> Id du commentaire : <?= $reportedComments[$i]->id() ?> </label>
-                        <input type="checkbox" id="commentID" name="selectComments[]" value="<?= $reportedComments[$i]->id()?>" checked >
+                        <label for="commentID"> Id du commentaire : <?= $idComment ?> </label>
+                        <input type="checkbox" id="commentID" name="selectComments[]" value="<?= $idComment?>" checked >
         
                         <!-- FIXME : edit class of the approve btn -->
-                        <button class="userBtns"><a href="index.php?action=approveComment&amp;commentId=<?= $reportedComments[$i]->id() ?>"  onclick="return alert('Commentaire approuvé')" >Approuver</a></button>
+                        <button class="userBtns"><a href="index.php?action=approveComment&amp;commentId=<?= $idComment ?>"  onclick="return alert('Commentaire approuvé')" >Approuver</a></button>
 
-                        <button class="adminBtns"><a href="index.php?action=deleteComment&amp;id=<?= $reportedComments[$i]->postId() ?>&amp;commentId=<?= $reportedComments[$i]->id() ?>" onclick="return confirm('Etes-vous sûr?')">Supprimer</a></button>
+                        <button class="adminBtns"><a href="index.php?action=deleteComment&amp;id=<?= $postId ?>&amp;commentId=<?= $idComment ?>" onclick="return confirm('Etes-vous sûr?')">Supprimer</a></button>
                 </div>
         <?php
         
         //pour chaque commentaire, je rajoute son id dans le tableau $arrayComments
-        array_push($arrayComments, $reportedComments[$i]->id());
+        array_push($arrayComments, $idComment);
        
     }
 }
@@ -85,25 +94,30 @@ $arrayPublish = array();
 if(!empty($newComments)) //needed otherwise gives an error on the commentsView.php when no new comments to manage
 {
     for ($i2 = 0 ; $i2 < sizeof($newComments) ; $i2++)
-    {          
+    { 
+        $idComment = $newComments[$i2]->id(); //gets the id of the post to use in buttons "read more" & "comments" urls
+        $postId = $newComments[$i2]->postId();
+        $author = $newComments[$i2]->author();
+        $comment = $newComments[$i2]->comment();
+        $commentDate = $newComments[$i2]->modCommentDate();
     ?>
                 <div class="acceptDenyComments">
-                    <p class="commentHead">Le <strong><?= htmlspecialchars($newComments[$i2]->author()) ?></strong> posté le <?= $newComments[$i2]->modCommentDate() ?>
-                    <p><?= nl2br(htmlspecialchars($newComments[$i2]->comment())) ?></p>
-                    <p><a href="index.php?action=post&id=<?= $newComments[$i2]->postId()?>&page=1&sortBy=5">Voir l'article associé [<?= $newComments[$i2]->postId() ?>]</a> </p>
+                    <p class="commentHead">Le <strong><?= htmlspecialchars($author) ?></strong> posté le <?= $commentDate ?>
+                    <p><?= nl2br(htmlspecialchars($comment)) ?></p>
+                    <p><a href="index.php?action=post&id=<?= $postId?>&page=1&sortBy=5">Voir l'article associé [<?= $postId ?>]</a> </p>
             
-                        <label for="commentPublishID"> Id du commentaire : <?= $newComments[$i2]->id() ?> </label>
-                        <input type="checkbox" id="commentPublishID" name="selectPublishComments[]" value="<?= $newComments[$i2]->id()?>" checked >
+                        <label for="commentPublishID"> Id du commentaire : <?= $idComment ?> </label>
+                        <input type="checkbox" id="commentPublishID" name="selectPublishComments[]" value="<?= $idComment?>" checked >
         
                         <!-- FIXME : edit class of the approve btn -->
-                        <button class="userBtns"><a href="index.php?action=approveComment&amp;commentId=<?= $newComments[$i2]->id() ?>"  onclick="return alert('Commentaire publié')" >Publier</a></button>
+                        <button class="userBtns"><a href="index.php?action=approveComment&amp;commentId=<?= $idComment ?>"  onclick="return alert('Commentaire publié')" >Publier</a></button>
 
-                        <button class="adminBtns"><a href="index.php?action=deleteComment&amp;id=<?= $newComments[$i2]->postId() ?>&amp;commentId=<?= $newComments[$i2]->id() ?>" onclick="return confirm('Etes-vous sûr?')">Supprimer</a></button>
+                        <button class="adminBtns"><a href="index.php?action=deleteComment&amp;id=<?= $postId ?>&amp;commentId=<?= $idComment ?>" onclick="return confirm('Etes-vous sûr?')">Supprimer</a></button>
                 </div>
         <?php
         
         //pour chaque commentaire à publier, je rajoute son id dans le tableau $arrayPublish
-        array_push($arrayPublish, $newComments[$i2]->id());
+        array_push($arrayPublish, $idComment);
        
     }
 }    

@@ -19,41 +19,47 @@ if(!empty($allUsers)) //needed otherwise gives an error on the usersView.php whe
 {    
     for ($i = 0 ; $i < sizeof($allUsers) ; $i++)
     {
+        $userid = $allUsers[$i]->id(); 
+        $username = $allUsers[$i]->username();
+        $email = $allUsers[$i]->email();
+        $registrationDate = $allUsers[$i]->modRegistrationDate();
+        $group = $allUsers[$i]->groupId();
+
     ?>
         <div class="usersDisplay">
-                <p class=""><strong><?= htmlspecialchars($allUsers[$i]->username()) ?></strong> <?= $allUsers[$i]->email() ?>
-                        enregistré le <strong> <?= $allUsers[$i]->modRegistrationDate() ?></strong> 
+                <p class=""><strong><?= htmlspecialchars($username) ?></strong> <?= $email ?>
+                        enregistré le <strong> <?= $registrationDate ?></strong> 
                 
                         
                         <!-- FIXME : a supprimer car je ne peux me co en admin qu'avec le log in 'Admin' et pas en fonction du groupId -->
                         <!-- <p>role : 
                         <?php 
-                        if($allUsers[$i]->groupId() == 0)
+                        if( $group == 0)
                             { 
                                 echo  'Utilisateur';
                                 ?>
-                                <button class="adminBtns"><a href="index.php?action=updateRole&amp;userID=<?= $allUsers[$i]->id() ?>&amp;role=1" onclick="return confirm('Etes-vous sûr?')">Passer en Admin</a></button>
+                                <button class="adminBtns"><a href="index.php?action=updateRole&amp;userID=<?= $userid ?>&amp;role=1" onclick="return confirm('Etes-vous sûr?')">Passer en Admin</a></button>
                                 <?php
                                 
                             }
-                        elseif($allUsers[$i]->groupId() == 1)
+                        elseif( $group == 1)
                         { 
                             echo '<strong>Admin</strong>';
                             ?>
-                            <button class="adminBtns"><a href="index.php?action=updateRole&amp;userID=<?= $allUsers[$i]->id() ?>&amp;role=0" onclick="return confirm('Etes-vous sûr?')">Passer en Utilisateur</a></button>
+                            <button class="adminBtns"><a href="index.php?action=updateRole&amp;userID=<?= $userid ?>&amp;role=0" onclick="return confirm('Etes-vous sûr?')">Passer en Utilisateur</a></button>
                             <?php
                         }      
                         ?></p> -->
 
                 
-                <input type="checkbox" id="userID" name="selectUsers[]" value="<?= $allUsers[$i]->id()?>" >
+                <input type="checkbox" id="userID" name="selectUsers[]" value="<?= $userid?>" >
 
-                <button class="adminBtns"><a href="index.php?action=deleteUser&amp;userID=<?= $allUsers[$i]->id() ?>" onclick="return confirm('Etes-vous sûr?')">Supprimer</a></button>
+                <button class="adminBtns"><a href="index.php?action=deleteUser&amp;userID=<?= $userid ?>" onclick="return confirm('Etes-vous sûr?')">Supprimer</a></button>
         </div>
     <?php
         
         //pour chaque utilisateur, je rajoute son id dans le tableau $arrayUsersIDs
-        array_push($arrayUsersIDs, $allUsers[$i]->id());    
+        array_push($arrayUsersIDs, $userid);    
     }
 }    
     ?>    
