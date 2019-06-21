@@ -1,0 +1,4 @@
+AuthName "Page d'administration protégée"
+AuthType Basic
+AuthUserFile "D:/wamp64/www/OPENCLASSROOMS/PHP/P4Blog/src.htpasswd"
+Require valid-user
