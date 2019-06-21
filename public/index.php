@@ -2,6 +2,7 @@
 session_start();
 require('src/controller/PostController.php');
 require('src/controller/UserController.php');
+require('src/controller/StatsController.php');
 
 
 
@@ -114,6 +115,12 @@ try {
             else {
                 throw new Exception('Aucun identifiant de billet envoyé');
             }
+        }
+
+        //STATISTICS
+        elseif ($_GET['action'] == 'displayStatsView') {
+            $StatsController = new StatsController;
+            $displayStatsView = $StatsController->displayStatsView();
         }
 
     }    

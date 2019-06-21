@@ -5,7 +5,7 @@
         private $_username ;
         private $_pass ;
         private $_email ;
-        private $_registrationDate ;
+        private $_modRegistrationDate ;
         private $_groupId ;
         private $_userComCount ;
 
@@ -34,7 +34,7 @@
         public function username() { return $this->_username; }
         public function pass() { return $this->_pass; }
         public function email() { return $this->_email; }
-        public function registrationDate() { return $this->_registrationDate; }
+        public function modRegistrationDate() { return $this->_modRegistrationDate; }
         public function groupId() { return $this->_groupId; }
         public function userComCount() { return $this->_userComCount; }
 
@@ -74,9 +74,9 @@
             }
         }
 
-        public function setRegistrationDate($registrationDate)
+        public function setModRegistrationDate($modRegistrationDate)
         {
-            $this->_registrationDate = $registrationDate;
+            $this->_modRegistrationDate = $modRegistrationDate;
         }
 
         public function setGroupId($groupId)

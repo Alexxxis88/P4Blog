@@ -18,7 +18,7 @@
     ?>
         <div class="usersDisplay">
                 <p class=""><strong><?= htmlspecialchars($allUsers[$i]->username()) ?></strong> <?= $allUsers[$i]->email() ?>
-                        enregistré le <strong> <?= $allUsers[$i]->registrationDate() ?></strong> 
+                        enregistré le <strong> <?= $allUsers[$i]->modRegistrationDate() ?></strong> 
                 
                         
                         <!-- FIXME : a supprimer car je ne peux me co en admin qu'avec le log in 'Admin' et pas en fonction du group_id -->

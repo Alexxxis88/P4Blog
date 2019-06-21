@@ -5,8 +5,8 @@
         private $_chapterNb ;
         private $_title ;
         private $_content ;
-        private $_publishDate ;
-        private $_editDate ;
+        private $_modPublishDate ;
+        private $_modEditDate ;
         private $_commentCount ;
 
 
@@ -36,8 +36,8 @@
         public function chapterNb() { return $this->_chapterNb; }
         public function title() { return $this->_title; }
         public function content() { return $this->_content; }
-        public function publishDate() { return $this->_publishDate; }
-        public function editDate() { return $this->_editDate; }
+        public function modPublishDate() { return $this->_modPublishDate; }
+        public function modEditDate() { return $this->_modEditDate; }
         public function commentCount() { return $this->_commentCount; }
 
 
@@ -76,14 +76,14 @@
             }
         }
 
-        public function setPublishDate($publishDate)
+        public function setModPublishDate($modPublishDate)
         {
-            $this->_publishDate = $publishDate;
+            $this->_modPublishDate = $modPublishDate;
         }
 
-        public function setEditDate($editDate)
+        public function setModEditDate($modEditDate)
         {
-            $this->_editDate = $editDate;
+            $this->_modEditDate = $modEditDate;
         }
 
         public function setCommentCount($commentCount)

@@ -12,13 +12,13 @@
         <h2><?= htmlspecialchars($post->title()) ?></h2>
 
     <?php //FIXME duplicate content (except $post instead of $data) with listPostsView. Worth factoring into a function ? 
-        if($post->publishDate() ==  $post->editDate() )
+        if($post->modPublishDate() ==  $post->modEditDate() )
         {
-           echo '<p>Publié le '. $post->publishDate() . '</p>';
+           echo '<p>Publié le '. $post->modPublishDate() . '</p>';
         }
         else
         {
-            echo '<p>Edité le '. $post->editDate() . '</p>';
+            echo '<p>Edité le '. $post->modEditDate() . '</p>';
         }
          
     ?>    
@@ -54,13 +54,13 @@
             <h4><?= htmlspecialchars($lastPosts[$i]->chapterNb()) ?> : <?= htmlspecialchars($lastPosts[$i]->title()) ?></h4>
             
             <?php //FIXME duplicate content (except $data instead of $post) with PostsView. Worth factoring into a function ? 
-            if($lastPosts[$i]->publishDate() ==  $lastPosts[$i]->editDate() )
+            if($lastPosts[$i]->modPublishDate() ==  $lastPosts[$i]->modEditDate() )
             {
-            echo '<p>Publié le '. $lastPosts[$i]->publishDate() . '</p>';
+            echo '<p>Publié le '. $lastPosts[$i]->modPublishDate() . '</p>';
             }
             else
             {
-                echo '<p>Edité le '. $lastPosts[$i]->editDate() . '</p>';
+                echo '<p>Edité le '. $lastPosts[$i]->modEditDate() . '</p>';
             }
             
         ?>    

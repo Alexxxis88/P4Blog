@@ -5,7 +5,7 @@ class PostManager extends Manager
     //gets the last X posts to display in listPostsView. X depends on $messagesPerPage
     public function getPosts()
     {
-        $req = $this->_db->query('SELECT id, chapterNb, title, content, publishDate, editDate, commentCount FROM posts ORDER BY publishDate DESC LIMIT 0, 15');
+        $req = $this->_db->query('SELECT id, chapterNb, title, content, DATE_FORMAT(publishDate, \'%d/%m/%Y à %Hh%imin%ss\') AS modPublishDate, DATE_FORMAT(editDate, \'%d/%m/%Y à %Hh%imin%ss\') AS modEditDate, commentCount FROM posts ORDER BY modPublishDate DESC LIMIT 0, 15');
         
         while ($datas = $req->fetch(PDO::FETCH_ASSOC))
         {           
@@ -17,7 +17,7 @@ class PostManager extends Manager
 
     public function getPost($postId)
     {
-        $req = $this->_db->prepare('SELECT id, chapterNb, title, content, publishDate, editDate, commentCount FROM posts WHERE id = ?');
+        $req = $this->_db->prepare('SELECT id, chapterNb, title, content, DATE_FORMAT(publishDate, \'%d/%m/%Y à %Hh%imin%ss\') AS modPublishDate, DATE_FORMAT(editDate, \'%d/%m/%Y à %Hh%imin%ss\') AS modEditDate, commentCount FROM posts WHERE id = ?');
         $req->execute(array($postId));
         $datas = $req->fetch();
         $post = new Post($datas);

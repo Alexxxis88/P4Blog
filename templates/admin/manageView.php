@@ -15,8 +15,8 @@
             <textarea id="postContent" name="postContent"><?= nl2br($displayedPostToEdit->content()) ?></textarea>
         </div>
         <div>
-            <p>Publié le <?= $displayedPostToEdit->publishDate() ?></p>
-            <p>Edité le <?= $displayedPostToEdit->editDate() ?></p>
+            <p>Publié le <?= $displayedPostToEdit->modPublishDate() ?></p>
+            <p>Edité le <?= $displayedPostToEdit->modEditDate() ?></p>
             <input type="submit" onclick="return confirm('Sauvegarder les changements?')" value="Sauvegarder" />
         </div>
         </form>

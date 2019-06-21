@@ -17,13 +17,13 @@ for ($i = 0 ; $i < sizeof($posts) ; $i++)
     <h3><?= htmlspecialchars($posts[$i]->chapterNb()) ?></h3>
     <h2><?= htmlspecialchars($posts[$i]->title()) ?></h2>
     <?php 
-    if($posts[$i]->publishDate() ==  $posts[$i]->editDate() )
+    if($posts[$i]->modPublishDate() ==  $posts[$i]->modEditDate() )
     {
-    echo '<p>Publié le '. $posts[$i]->publishDate() . '</p>';
+    echo '<p>Publié le '. $posts[$i]->modPublishDate() . '</p>';
     }
     else
     {
-        echo '<p>Edité le '. $posts[$i]->editDate() . '</p>';
+        echo '<p>Edité le '. $posts[$i]->modEditDate() . '</p>';
     }
     
     ?>   

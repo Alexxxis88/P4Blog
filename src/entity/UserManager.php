@@ -4,7 +4,7 @@ class UserManager extends Manager
 
     public function getAllUsers()
     {
-        $req = $this->_db->query('SELECT * FROM members ORDER BY username LIMIT 0, 50');
+        $req = $this->_db->query('SELECT id, username, email, DATE_FORMAT(registrationDate, \'%d/%m/%Y à %Hh%imin%ss\') AS modRegistrationDate, groupId FROM members ORDER BY username LIMIT 0, 50');
         
         while ($userDatas = $req->fetch(PDO::FETCH_ASSOC))
         {           
