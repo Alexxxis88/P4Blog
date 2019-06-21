@@ -49,9 +49,7 @@ class CommentManager extends Manager
         $userCommentCount ->execute(array($userIdComCounts));
         return $affectedLines;
     }
-    public function eraseComment($commentId, $postIdComCounts
-    //, $userIdComCounts
-    )
+    public function eraseComment($commentId, $postIdComCounts, $userIdComCounts)
     {
         $comDelete = $this->_db->prepare('DELETE FROM comments WHERE id = ?');
         $comDelete->execute(array($commentId));
@@ -60,8 +58,8 @@ class CommentManager extends Manager
         $commentCount ->execute(array($postIdComCounts));
 
         // //updates the user comment counter +1 to know how much comments the user has posted
-        // $userCommentCount = $this->_db->prepare('UPDATE members SET userComCount = userComCount - 1 WHERE id = ?');
-        // $userCommentCount ->execute(array($userIdComCounts));
+        $userCommentCount = $this->_db->prepare('UPDATE members SET userComCount = userComCount - 1 WHERE id = ?');
+        $userCommentCount ->execute(array($userIdComCounts));
     }
     public function reportComment($commentId)
     {

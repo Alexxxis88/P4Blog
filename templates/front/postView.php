@@ -84,7 +84,7 @@
         if((isset($_COOKIE['login']) AND !empty($_COOKIE['login'])) OR (isset($_SESSION['username']) AND !empty($_SESSION['username'])))
         {           
         ?>    
-            <form action="index.php?action=addComment&amp;id=<?= $post['id'] ?>" method="post">
+            <form action="index.php?action=addComment&amp;id=<?= $post->id() ?>" method="post">
             <div>
                 <input type="text" id="author" name="author" required hidden value="<?php
                 //FIXME : coder une solution plus propre / optimisée
@@ -229,12 +229,12 @@
                             if($comments[$i]->flag() > 0)
                         {
                             //FIXME : change class of the approve button
-                            echo '<button class="adminBtns"><a href="index.php?action=approveComment&amp;id=' . $post->id . '&amp;commentId='. $comments[$i]->id() . '"  onclick="return alert(\'Commentaire approuvé\')" >Approuver</a></button>' ;
+                            echo '<button class="adminBtns"><a href="index.php?action=approveComment&amp;id=' . $post->id() . '&amp;commentId='. $comments[$i]->id() . '"  onclick="return alert(\'Commentaire approuvé\')" >Approuver</a></button>' ;
                         }
                                 
                     ?>    
                         <!-- gets the commentId as a parameter in the URL of the comment to delete AND the post id to return on the same post after comment has been deleted-->
-                        <button class="adminBtns"><a href="index.php?action=deleteComment&amp;id=<?= $post->id ?>&amp;commentId=<?= $comments[$i]->id() ?>" onclick="return confirm('Etes-vous sûr?')">Supprimer</a></button>
+                        <button class="adminBtns"><a href="index.php?action=deleteComment&amp;id=<?= $post->id() ?>&amp;commentId=<?= $comments[$i]->id() ?>" onclick="return confirm('Etes-vous sûr?')">Supprimer</a></button>
                     <?php
                     }
                     ?>           

@@ -2,7 +2,7 @@
 
 class CommentController{
 
-    function addComment($postId, $author, $comment, $postIdComCounts, $userIdComCounts)
+    public function addComment($postId, $author, $comment, $postIdComCounts, $userIdComCounts)
     {   
         $commentManager = new CommentManager();
         $affectedLines = $commentManager->postComment($postId, $author, $comment,$postIdComCounts, $userIdComCounts);
@@ -16,26 +16,22 @@ class CommentController{
         }
     }
 
-    function deleteComment($commentId,  $postIdComCounts
-    //, $userIdComCounts
-    )
+    public function deleteComment($commentId,  $postIdComCounts, $userIdComCounts)
     {   
         $commentManager = new CommentManager();
-        $comDelete = $commentManager->eraseComment($commentId, $postIdComCounts
-        //, $userIdComCounts
-        );
+        $comDelete = $commentManager->eraseComment($commentId, $postIdComCounts, $userIdComCounts);
         header('Location: ' . $_SERVER['HTTP_REFERER']); //FIXME : SQL injection issue ? 
         exit;
     } 
 
-    function reportComments($commentId){
+    public function reportComments($commentId){
         $commentManager = new CommentManager();
         $commentReported = $commentManager->reportComment($commentId);
         header('Location: ' . $_SERVER['HTTP_REFERER'] . '#commentsAnchor'); //FIXME : SQL injection issue ? 
         exit;
     }
 
-    function updateComment($comment, $commentId){
+    public function updateComment($comment, $commentId){
         $commentManager = new CommentManager();
         $commentUpdated = $commentManager->updateCom($comment, $commentId);
         header('Location: index.php?action=post&id=' . $_GET['id'] . '&success=5&page=1&sortBy=99999999999999999999#' . $_GET['commentId'] .''); //FIXME : SQL injection issue ? 
@@ -43,18 +39,18 @@ class CommentController{
     }
 
     //add the reported comment in a new table called reported_comments that gathers the id of the member who reported it, the id of the reported comment and a flag set to 1
-    function reportCommentsCheck($memberId, $repComId){
+    public function reportCommentsCheck($memberId, $repComId){
         $commentManager = new CommentManager();
         $newRepComPerUser = $commentManager->reportedCommentPerUser($memberId, $repComId);
        
     }
 
     //check when a member reports a comment if he already reported it once
-    function checkIfReported(){
+    public function checkIfReported(){
         $commentManager = new CommentManager();
-        $sessionManager = new SessionManager();
+        $sessionController = new sessionController();
         $ifReportedCom = $commentManager->checkIfAlreadyReportedCom();
-        $cookieOrSessionID = $sessionManager->checkSession();
+        $cookieOrSessionID = $sessionController->checkSession();
         //we have to make a loop to make sure to check all entries of the DB, not only the last added one
         while($datas = $ifReportedCom->fetch())
         {    
@@ -67,7 +63,7 @@ class CommentController{
     }
 
     //erase all the comments related to a post when "delete post" action is done
-    function deleteAllComments($postId)
+    public function deleteAllComments($postId)
     {   
         $commentManager = new CommentManager();
         $AllcomsDelete = $commentManager->eraseAllComments($postId);
