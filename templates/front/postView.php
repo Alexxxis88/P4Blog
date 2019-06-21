@@ -167,10 +167,7 @@ if(!empty($comments)) //needed otherwise gives an error on the postView.php when
             {
                 echo '<div class="comments">';
             }
-            ?>
-                <!-- transform non html links in comments into clickable links FIXME : NOT WORKING--> 
-                <!-- < ?php $comments[$i]->comment() = htmlspecialchars($comments[$i]->comment()); 
-                $comments[$i]->comment() = preg_replace('#http[s]?://[a-z0-9._/-]+#i', '<a href="$0">$0</a>', $comments[$i]->comment()); ?>-->
+            ?>            
 
                 <!-- id= $comment['id'] used to create an anchor on the comment position to be able to display the right comment directly when selected in manageCommentsView.php (be)-->
                 <p id="<?= $id ?>"><strong><?= htmlspecialchars($author) ?></strong> publié le <?= $commentDate ?>
@@ -179,7 +176,10 @@ if(!empty($comments)) //needed otherwise gives an error on the postView.php when
                 //also display update_date if comment has been updated by author
                 if ($commentDate != $updateDate)
                 { echo ' et modifié le ' . $updateDate;
-                }  ?></p> <p><?= nl2br(htmlspecialchars($comment)) ?></p>
+                }  ?></p> 
+                
+                <!-- transform non html links in comments into clickable links--> 
+                <p><?= nl2br($comment = preg_replace('#http[s]?://[a-z0-9._/-]+#i', '<a href="$0">$0</a>', htmlspecialchars($comment))) ?></p>
                 <p>Id du commentaire: <?= $idComment ?></p>
 
                 

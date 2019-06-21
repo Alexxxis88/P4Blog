@@ -101,9 +101,14 @@ if(!empty($newComments)) //needed otherwise gives an error on the commentsView.p
         $comment = $newComments[$i2]->comment();
         $commentDate = $newComments[$i2]->modCommentDate();
     ?>
+
+              
                 <div class="acceptDenyComments">
                     <p class="commentHead">Le <strong><?= htmlspecialchars($author) ?></strong> posté le <?= $commentDate ?>
-                    <p><?= nl2br(htmlspecialchars($comment)) ?></p>
+                    
+                    <!-- transform non html links in comments into clickable links--> 
+                    <p><?= nl2br($comment = preg_replace('#http[s]?://[a-z0-9._/-]+#i', '<a href="$0">$0</a>', htmlspecialchars($comment))) ?></p>
+                    
                     <p><a href="index.php?action=post&id=<?= $postId?>&page=1&sortBy=5">Voir l'article associé [<?= $postId ?>]</a> </p>
             
                         <label for="commentPublishID"> Id du commentaire : <?= $idComment ?> </label>
