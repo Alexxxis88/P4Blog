@@ -6,53 +6,40 @@
         <link href="public/css/style.css" rel="stylesheet" /> 
     </head>
     <body>
-        <h1>Billet simple pour l'Alaska</h1>
 
-        <!-- FIXME: factoriser le code de display du bouton Deconnexion pour SESSION ou COOKIE -->
-        <?php //if there is cookies, they are used to display user name
-        if(isset($_COOKIE['login']) AND !empty($_COOKIE['login']) AND isset($_COOKIE['hash_pass']) AND !empty($_COOKIE['hash_pass'])){
+        <?php //if there is cookies or session information, they are used to display user name
+        if(isset($_COOKIE['login']) OR isset($_SESSION['id']))
+        { 
+            if(isset($_COOKIE['login']))
+            {
+                $username = $_COOKIE['login'];
+                $logedAs = 'COOKIE'; //FIXME : delete me
+            }
+            elseif(isset($_SESSION['username']))
+            {
+                $username = $_SESSION['username'];
+                $logedAs = 'SESSION'; //FIXME : delete me
+            }
         ?>
-        <p><strong style="color:red">COOKIE</strong> Vous êtes connecté en tant que <strong><?= htmlspecialchars($_COOKIE['login']) ?></strong> Id de cookie : <?= htmlspecialchars($_COOKIE['id']) ?> </p>
-            
-        <!-- Log Out button -->
-        <div class="adminFields">
-            <form method="post" action ="index.php?action=logOutCheck">
-                <input type="submit" name="logOut" value ="Deconnexion" /> 
-            </form>
-        </div>    
-
-        <!-- Change Password button -->
-        <div class="adminFields">
-                <form method="post" action ="index.php?action=changePasswordView">
-                    <input type="submit" name="changePass" value ="Changer de Password" /> 
-                </form>
-        </div>
-
-        
-        
-        <?php
-        } //else if there is session information, it's used to display user name
-        elseif(isset($_SESSION['id']) AND isset($_SESSION['username'])){
-            ?>
-            <p><strong style="color:red">SESSION</strong> Vous êtes connecté en tant que <strong><?= htmlspecialchars($_SESSION['username']) ?></strong> Id de session : <?= htmlspecialchars($_SESSION['id']) ?></p>
+           <p><strong style="color:red"><?= $logedAs ?></strong>  <!-- FIXME : delete me -->
+            Vous êtes connecté en tant que <strong><?= htmlspecialchars($username) ?></strong> </p>
                 
             <!-- Log Out button -->
             <div class="adminFields">
                 <form method="post" action ="index.php?action=logOutCheck">
                     <input type="submit" name="logOut" value ="Deconnexion" /> 
                 </form>
-            </div> 
-            
-                <!-- Change Password button -->
+            </div>    
+
+            <!-- Change Password button -->
             <div class="adminFields">
-                <form method="post" action ="index.php?action=changePasswordView">
-                    <input type="submit" name="changePass" value ="Changer de Password" /> 
-                </form>
+                    <form method="post" action ="index.php?action=changePasswordView">
+                        <input type="submit" name="changePass" value ="Changer de Password" /> 
+                    </form>
             </div>
-            
-            <?php
-            }
-            //FIXME : factoriser le code ci dessus
+        <?php
+        } 
+        
         else{ //else user name not knwon, hence name not displayed
         ?>
 
@@ -73,7 +60,7 @@
         </div>
     
 
-        <!-- Sin In button -->
+        <!-- Sing In button -->
         <!-- FIXME when bootstrap implementd, display in a modal box rather than a page / view -->
         <div class="adminFields">
             <form method="post" action ="index.php?action=singIn">

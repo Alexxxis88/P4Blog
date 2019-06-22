@@ -1,52 +1,7 @@
-<!DOCTYPE HTML>
-<html>
-<head>
- <meta charset="utf-8">
- <?php $title = 'Statistiques du site'; ?>
- <script type="text/javascript" src="https://www.google.com/jsapi"></script>
-  <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
- <script type="text/javascript">
- google.load("visualization", "1", {packages:["corechart"]});
- google.setOnLoadCallback(drawChart);
- function drawChart() {
- var data = google.visualization.arrayToDataTable([
- ['chapterNb','Nb de commentaires'],
- <?php 
-			
-			 while($row = mysqli_fetch_array($exec)){
-            
-			 echo "['".$row['chapterNb']."',".$row['commentCount']."],";
-			 }
-			 ?> 
- 
- ]);
- var options = {
- title: 'Nombre de commentaires par chapitre',
- 
- BarChart: {
-            color: 'black',
-          },
-          legend: 'none'
- };
- var chart = new google.visualization.ColumnChart(document.getElementById("columnchart12"));
- chart.draw(data,options);
- }
-	
-    </script>
 
-</head>
+<?php $title = 'Statistiques du site'; 
+ob_start(); ?>
 
-
-
-
-<?php ob_start(); ?>
- 
-<body>
- 
- 
 <h2>Chapitres</h2>
 <div class="chapterStatsContainer">
     <div class=chapterStats>
@@ -93,8 +48,6 @@
     </div>           
 </div>
 
-</body>
-</html>
 
 <?php $content = ob_get_clean(); ?>
 

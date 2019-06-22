@@ -12,6 +12,9 @@ require_once('src/controller/FormController.php');
 
 try {
     if (isset($_GET['action'])) {
+
+        $sessionController = new SessionController();
+        $cookieOrSessionID = $sessionController->checkSession();
     
     //POSTS
         //FRONTEND
@@ -91,9 +94,9 @@ try {
                 if (!empty($_POST['author']) && !empty($_POST['comment'])) {
                 //needed to update the user_com_counter in members table
                 $sessionController = new SessionController();
-                $commentController = new commentController();
-
                 $cookieOrSessionID = $sessionController->checkSession();
+
+                $commentController = new commentController();
                 $commentController->addComment($_GET['id'], $_POST['author'], $_POST['comment'], $_GET['id'], $cookieOrSessionID);
                 }
                 else {
@@ -363,6 +366,8 @@ try {
 
     //USERS
         elseif ($_GET['action'] == 'manageUsers') {
+
+            
             if(!isset($_GET['page']) OR !isset($_GET['sortBy']) OR $_GET['page']<1 OR $_GET['sortBy']<1)
             { 
                 throw new Exception('Il manque le numéro de page ou le classement des utilisateurs');

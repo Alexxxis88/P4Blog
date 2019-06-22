@@ -39,12 +39,21 @@ class PostController{
         
   //Display post depending on pagination parameters
         $posts = $postManager->getPosts($firstEntry, $messagesPerPage);
+
+
+    //check the role of the logged in user to display or not Admin features
+        $sessionController = new SessionController;
+        $checkUserRole = $sessionController->checkUserRole();
+        
         require('templates/front/listPostsView.php');
     }
 
 
     public function post()
-    {
+    {   
+        $sessionController = new SessionController;
+        $checkUserRole = $sessionController->checkUserRole();
+
         $postManager = new PostManager();
         $commentManager = new CommentManager();
 
@@ -92,7 +101,13 @@ class PostController{
 
 
     public function displayPublishView()
-    {
+    {   
+        $sessionController = new SessionController;
+        $checkUserRole = $sessionController->checkUserRole();
+        if($checkUserRole['groupId'] != 1)
+        {
+            throw new Exception('Vous n\'avez pas accès à cette page');
+        }
         require('templates/admin/publishView.php');
     }
 
@@ -117,6 +132,13 @@ class PostController{
 
     public function displayPostToEdit($postId)
     {   
+        $sessionController = new SessionController;
+        $checkUserRole = $sessionController->checkUserRole();
+        if($checkUserRole['groupId'] != 1)
+        {
+            throw new Exception('Vous n\'avez pas accès à cette page');
+        }
+        
         $postManager = new PostManager();
         $displayedPostToEdit = $postManager->getPost($postId);
         require('templates/admin/manageView.php');

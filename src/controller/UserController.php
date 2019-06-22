@@ -4,6 +4,14 @@ class UserController{
 
   public function listAllUsers()
   {
+
+    $sessionController = new SessionController;
+    $checkUserRole = $sessionController->checkUserRole();
+    if($checkUserRole['groupId'] != 1)
+    {
+        throw new Exception('Vous n\'avez pas accès à cette page');
+    }
+        
     $userManager = new UserManager();
     
     //Pagination

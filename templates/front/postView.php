@@ -2,11 +2,13 @@
 $id = $post->id(); //gets the id of the post to use in buttons "read more" & "comments" urls
 $chapter = $post->chapterNb();
 $content = $post->content();
-$title = $post->title();
+$postTitle = $post->title();
 $editDate = $post->modEditDate();
 $publishDate = $post->modPublishDate(); 
 
 
+
+$title = ""; //needed to NOT display any title on postView.php
 
 ob_start(); ?>
     <p><a href="index.php">Retour à la page d'accueil</a></p>
@@ -17,7 +19,7 @@ ob_start(); ?>
 <!-- displays the post -->
     <div class="postsPostView">
         <h3><?= htmlspecialchars($chapter) ?></h3>
-        <h2><?= htmlspecialchars($title) ?></h2>
+        <h2><?= htmlspecialchars($postTitle) ?></h2>
 
     <?php //FIXME duplicate content (except $post instead of $data) with listPostsView. Worth factoring into a function ? 
         if($publishDate ==  $editDate )
@@ -37,7 +39,7 @@ ob_start(); ?>
         
         <?php
     // FIXME: factoriser le code avec l'affichage ou non (1)des boutons modifier / supprimer sur listPostsView et PostView (2) des boutons approuver / supprimer des com sur PostView (3) l'affichage du menu admin de template.php
-    if( (isset($_COOKIE['login']) AND $_COOKIE['login'] == 'Admin') OR  (isset($_SESSION['username']) AND $_SESSION['username'] == 'Admin'))
+    if(isset($checkUserRole['groupId']) && $checkUserRole['groupId'] == 1)
     { 
     ?>       
         <button class="adminBtns"><a href="index.php?action=manageView&id=<?=$post->id()?>">Modifier</a></button>
@@ -59,11 +61,11 @@ ob_start(); ?>
             $id = $lastPosts[$i]->id(); //gets the id of the post to use in buttons "read more" & "comments" urls
             $chapter = $lastPosts[$i]->chapterNb();
             $content = $lastPosts[$i]->content();
-            $title = $lastPosts[$i]->title();
+            $lastPostTitle = $lastPosts[$i]->title();
             $editDate = $lastPosts[$i]->modEditDate();
             $publishDate = $lastPosts[$i]->modPublishDate();
         ?>       
-            <h4><?= htmlspecialchars($chapter) ?> : <?= htmlspecialchars($title) ?></h4>
+            <h4><?= htmlspecialchars($chapter) ?> : <?= htmlspecialchars($lastPostTitle) ?></h4>
             
             <?php //FIXME duplicate content (except $data instead of $post) with PostsView. Worth factoring into a function ? 
             if($publishDate ==  $editDate )
@@ -245,7 +247,7 @@ if(!empty($comments)) //needed otherwise gives an error on the postView.php when
 
                     <?php
                     // FIXME: factoriser le code avec l'affichage ou non (1)des boutons modifier / supprimer sur listPostsView et PostView (2) des boutons approuver / supprimer des com sur PostView (3) l'affichage du menu admin de template.php 
-                    if( (isset($_COOKIE['login']) AND $_COOKIE['login'] == 'Admin') OR  (isset($_SESSION['username']) AND $_SESSION['username'] == 'Admin'))
+                    if(isset($checkUserRole['groupId']) && $checkUserRole['groupId'] == 1)
                     {  
                         //display approve button only if comment already reported
                             if($flag > 0)

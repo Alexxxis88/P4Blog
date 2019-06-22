@@ -18,17 +18,25 @@
         language: 'fr_FR'
         });
         </script>
-        
+
+
+        <!-- Google Charts -->
+        <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+        <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+        <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"> FIXME : delete ? change l'apparence du menu. Une fois le design fini voir si le fait de l'enlever /rajouter change un truc--> 
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+        <?php require('templates/admin/statsCharts.php'); ?>
     </head>
         
     <body>
     <!-- Back to top button anchor -->
     <div id="header"></div>
-    
+
     <?php
     //display the right menu depending on the user role
     // FIXME: factoriser le code avec l'affichage ou non (1)des boutons modifier / supprimer sur listPostsView et PostView (2) des boutons approuver / supprimer des com sur PostView (3) l'affichage du menu admin de template.php
-    if( (isset($_COOKIE['login']) AND $_COOKIE['login'] == 'Admin') OR  (isset($_SESSION['username']) AND $_SESSION['username'] == 'Admin'))
+    if(isset($checkUserRole['groupId']) && $checkUserRole['groupId'] == 1)
     {
         require('admin/menuAdmin.php');
     }
@@ -36,7 +44,7 @@
         require('front/menu.php');
     }
     ?>
-    
+        <h1><?= $title ?></h1>
         <?= $content ?>
 
         <section id="footer">

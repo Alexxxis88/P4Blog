@@ -7,7 +7,7 @@
     <body>
         <section id="headerAdmin">
                     
-        <h1><?= $title ?></h1>
+        
         <!-- Log Out button -->
         <div class="adminFields">
             <form method="post" action ="index.php?action=logOutCheck">
@@ -34,8 +34,6 @@
         </div>
  <!-- displays an alert icon if comments to manage -->   
  
-
-  
         </section>
     </body>
 </html>

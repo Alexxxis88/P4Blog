@@ -17,7 +17,7 @@ if(!empty($posts)) //needed otherwise gives an error on the listPostsView.php wh
         $id = $posts[$i]->id(); //gets the id of the post to use in buttons "read more" & "comments" urls
         $chapter = $posts[$i]->chapterNb();
         $content = $posts[$i]->content();
-        $title = $posts[$i]->title();
+        $postTitle = $posts[$i]->title();
         $editDate = $posts[$i]->modEditDate();
         $publishDate = $posts[$i]->modPublishDate();
 
@@ -26,7 +26,7 @@ if(!empty($posts)) //needed otherwise gives an error on the listPostsView.php wh
 
         <div class="postsBlock">
         <h3><?= htmlspecialchars($chapter) ?></h3>
-        <h2><?= htmlspecialchars($title) ?></h2>
+        <h2><?= htmlspecialchars($postTitle) ?></h2>
         <?php 
         if($publishDate ==  $editDate)
         {
@@ -47,14 +47,14 @@ if(!empty($posts)) //needed otherwise gives an error on the listPostsView.php wh
 
         <?php
         // FIXME: factoriser le code avec l'affichage ou non (1)des boutons modifier / supprimer sur listPostsView et PostView (2) des boutons approuver / supprimer des com sur PostView (3) l'affichage du menu admin de template.php
-        // if( (isset($_COOKIE['login']) AND $_COOKIE['login'] == 'Admin') OR  (isset($_SESSION['username']) AND $_SESSION['username'] == 'Admin'))
-        // { 
-        // ?>       
+        if( isset($checkUserRole['groupId']) && $checkUserRole['groupId'] == 1)
+        { 
+        ?>       
             <button class="adminBtns"><a href="index.php?action=manageView&id=<?=$id?>">Modifier</a></button>
             <button class="adminBtns"><a href="index.php?action=deletePost&amp;id=<?= $id?>" onclick="return confirm('Etes-vous sûr?')">Supprimer</a></button>
-        <!-- < ?php
+        <?php
         }  
-        ?>      -->
+        ?>     
         
         </div>
     <?php

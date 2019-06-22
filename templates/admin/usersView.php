@@ -30,9 +30,7 @@ if(!empty($allUsers)) //needed otherwise gives an error on the usersView.php whe
                 <p class=""><strong><?= htmlspecialchars($username) ?></strong> <?= $email ?>
                         enregistré le <strong> <?= $registrationDate ?></strong> 
                 
-                        
-                        <!-- FIXME : a supprimer car je ne peux me co en admin qu'avec le log in 'Admin' et pas en fonction du groupId -->
-                        <!-- <p>role : 
+                        <p>role : 
                         <?php 
                         if( $group == 0)
                             { 
@@ -49,7 +47,7 @@ if(!empty($allUsers)) //needed otherwise gives an error on the usersView.php whe
                             <button class="adminBtns"><a href="index.php?action=updateRole&amp;userID=<?= $userid ?>&amp;role=0" onclick="return confirm('Etes-vous sûr?')">Passer en Utilisateur</a></button>
                             <?php
                         }      
-                        ?></p> -->
+                        ?></p>
 
                 
                 <input type="checkbox" id="userID" name="selectUsers[]" value="<?= $userid?>" >

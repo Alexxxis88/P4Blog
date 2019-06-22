@@ -80,7 +80,15 @@ class CommentController{
 
     //display reported and new comments
     public function listAllComments()
-    {
+    {   
+        //check the role of the logged in user to display or not Admin features
+        $sessionController = new SessionController;
+        $checkUserRole = $sessionController->checkUserRole();
+        if($checkUserRole['groupId'] != 1)
+        {
+            throw new Exception('Vous n\'avez pas accès à cette page');
+        }
+
         $commentManager = new CommentManager();
         $reportedComments = $commentManager->getReportedComments();
         $newComments = $commentManager->getNewComments();

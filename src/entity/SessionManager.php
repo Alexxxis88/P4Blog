@@ -25,6 +25,16 @@ class SessionManager extends Manager
         return $checkLogIn;
     }
     
+     //FIXME : factoriser avec la fonction checkLogIn ? 
+     public function checkRole($userID)
+     {
+         $req = $this->_db->prepare('SELECT groupId FROM members WHERE id = ?');
+         $req->execute(array($userID));
+         $checkRole = $req->fetch();
+     
+         return $checkRole;
+     }
+
     //FIXME : factoriser avec la fonction checkLogIn ? 
     public function checkUsername($userName)
     {

@@ -11,13 +11,38 @@ class SessionController{
     public function checkSession()
     {
     //we check wether the member is registered with COOKIE or SESSION
-    if(isset($_COOKIE['id'])){
-        $cookieOrSessionID = $_COOKIE['id'];
+        if(isset($_COOKIE['id']))
+        {
+            $cookieOrSessionID = $_COOKIE['id'];
+            return $cookieOrSessionID;
         }
-        elseif(isset($_SESSION['id'])){
-            $cookieOrSessionID = $_SESSION['id'];
+        elseif(isset($_SESSION['id']))
+        {
+                $cookieOrSessionID = $_SESSION['id'];
+                return $cookieOrSessionID;
         }
-    return $cookieOrSessionID;
+    }
+
+
+    //check the role of the logged in user to display or not Admin features
+    public function checkUserRole()
+    {
+        if(isset($_COOKIE['id']))
+        {
+            $cookieOrSessionID = $_COOKIE['id'];
+            $sessionManager = new SessionManager;
+            $checkRole = $sessionManager->checkRole($cookieOrSessionID);
+
+            return $checkRole;
+        }
+        elseif(isset($_SESSION['id']))
+        {
+                $cookieOrSessionID = $_SESSION['id'];
+                $sessionManager = new SessionManager;
+                $checkRole = $sessionManager->checkRole($cookieOrSessionID);
+
+                return $checkRole;
+        }
     }
  
     

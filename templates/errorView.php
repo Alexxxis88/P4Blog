@@ -15,6 +15,7 @@
         window.history.back();
         }
         </script>
+        <button><a href="index.php">Retourner à la page d'accueil</a></button>
 
     </body>
 </html>
