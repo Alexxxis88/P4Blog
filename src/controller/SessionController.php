@@ -50,7 +50,7 @@ class SessionController{
     {
         $sessionManager = new SessionManager();
         $newMember = $sessionManager->insertMember($username, $pass, $email);
-        //success2 needed to display the confirmation message
+        //success1 needed to display the confirmation message
         header('Location: index.php?success=1#header');
         exit;
     }

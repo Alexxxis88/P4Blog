@@ -41,7 +41,18 @@ try {
                 else{
                     $postController = new PostController;
                     $post = $postController->post();
-                    
+                }
+
+                //Confirmation message when posting a comment
+                if (isset($_GET['success']) AND $_GET['success'] == 4) 
+                {
+                    include('js/success4.js');
+                }
+                
+                //Confirmation message when updating a comment
+                if (isset($_GET['success']) AND $_GET['success'] == 5) 
+                {
+                    include('js/success5.js');
                 }
                     
             }
@@ -485,14 +496,31 @@ try {
 //DEFAULT BEHAVIOR
     else {
         if (isset($_GET['page']) && $_GET['page'] <= 0) 
+        {
+            throw new Exception('Cette page n\'existe pas');  
+        }
+        else {
+            $postController = new PostController;
+            $listPosts = $postController->listPosts();
+
+            //Confirmation message when singin in
+            if (isset($_GET['success']) AND $_GET['success'] == 1) 
             {
-                throw new Exception('Cette page n\'existe pas');
-               
+                include('js/success1.js');
             }
-            else {
-                $postController = new PostController;
-                $listPosts = $postController->listPosts();
-            }   
+
+            //Confirmation message when password updated
+            if (isset($_GET['success']) AND $_GET['success'] == 2) 
+            {
+                include('js/success2.js');
+            }
+
+            //Confirmation message when message sent through contact page
+            if (isset($_GET['success']) AND $_GET['success'] == 3) 
+            {
+                include('js/success3.js');
+            }
+        }   
     }
 }
 
