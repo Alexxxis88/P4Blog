@@ -8,6 +8,12 @@ require_once('src/controller/StatsController.php');
 require_once('src/controller/GeneralController.php');
 require_once('src/controller/FormController.php');
 
+//AUTOLOAD
+function classAutoLoad($class)
+{
+  require 'src/entity/' . $class . '.php'; 
+}
+spl_autoload_register('classAutoLoad');
 
 
 try {

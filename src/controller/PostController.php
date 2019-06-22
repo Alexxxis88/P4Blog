@@ -1,10 +1,5 @@
 <?php
-    //AUTOLOAD
-    function classAutoLoad($class)
-    {
-      require 'src/entity/' . $class . '.php'; 
-    }
-    spl_autoload_register('classAutoLoad');
+    
 
 
 
