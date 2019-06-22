@@ -20,7 +20,7 @@ try {
     if (isset($_GET['action'])) {
 
         $sessionController = new SessionController();
-        $cookieOrSessionID = $sessionController->checkSession();
+        $sessionController->checkSession();
     
     //POSTS
         //FRONTEND
@@ -32,7 +32,7 @@ try {
             }
             else {
                 $postController = new PostController;
-                $listPosts = $postController->listPosts();
+                $postController->listPosts();
             }    
         }
 
@@ -46,7 +46,7 @@ try {
                 }
                 else{
                     $postController = new PostController;
-                    $post = $postController->post();
+                    $postController->post();
                 }
 
                 //Confirmation message when posting a comment
@@ -74,8 +74,8 @@ try {
                 $commentController = new CommentController;
 
                 $postId = $_GET['id']; // pas utile de factoriser ? 
-                $deleteAllComments =  $commentController->deleteAllComments($postId); //delete all the comments related to the post we're deleting with deletePost()
-                $deletePost = $postController->deletePost($postId);
+                $commentController->deleteAllComments($postId); //delete all the comments related to the post we're deleting with deletePost()
+                $postController->deletePost($postId);
             }
             else {
                 throw new Exception('Aucun identifiant de billet envoyé');
@@ -85,22 +85,22 @@ try {
         //BACKEND
         elseif ($_GET['action'] == 'displayPublishView') {
             $postController = new PostController;
-            $displayPublish = $postController->displayPublishView();
+            $postController->displayPublishView();
         }     
 
         elseif ($_GET['action'] == 'publishChapter') {
             $postController = new PostController;
-            $newPost = $postController->newPost($_POST['chapter'], $_POST['title'], $_POST['postContent']);
+            $postController->newPost($_POST['chapter'], $_POST['title'], $_POST['postContent']);
         }
 
         elseif ($_GET['action'] == 'manageView') {
             $postController = new PostController;
-            $displayPostToEdit = $postController->displayPostToEdit($_GET['id']); 
+            $postController->displayPostToEdit($_GET['id']); 
         }
     
         elseif ($_GET['action'] == 'updatePost') {
             $postController = new PostController;
-            $updatePost = $postController->updatePost($_POST['chapter'], $_POST['title'], $_POST['postContent'], $_GET['id']);
+            $postController->updatePost($_POST['chapter'], $_POST['title'], $_POST['postContent'], $_GET['id']);
         }
 
 
@@ -111,7 +111,7 @@ try {
                 if (!empty($_POST['author']) && !empty($_POST['comment'])) {
                 //needed to update the user_com_counter in members table
                 $sessionController = new SessionController();
-                $cookieOrSessionID = $sessionController->checkSession();
+                $sessionController->checkSession();
 
                 $commentController = new commentController();
                 $commentController->addComment($_GET['id'], $_POST['author'], $_POST['comment'], $_GET['id'], $cookieOrSessionID);
@@ -131,10 +131,10 @@ try {
 
                 //needed to update the userComCounter in members table
                 $sessionController = new SessionController();
-                $cookieOrSessionID =  $sessionController->checkSession();
+                $sessionController->checkSession();
 
                 $commentController = new CommentController;
-                $deleteComment = $commentController->deleteComment($_GET['commentId'], $_GET['id'], $cookieOrSessionID);
+                $commentController->deleteComment($_GET['commentId'], $_GET['id'], $cookieOrSessionID);
             }
             else {
                 throw new Exception('Aucun identifiant de billet envoyé');
@@ -148,11 +148,11 @@ try {
                 $sessionController = new sessionController();
                 
                 //checks in the controler if the member already reported the same comment
-                $checkIfReported = $commentController->checkIfReported();
+                $commentController->checkIfReported();
                 //needed to checks in the controler if the member already reported the same comment
-                $cookieOrSessionID = $sessionController->checkSession();
-                $reportCommentsCheck = $commentController->reportCommentsCheck($cookieOrSessionID, $_GET['commentId']); //the reported comment is registered into reported_comments DB
-                $reportComments = $commentController->reportComments($_GET['commentId']);    //the reported comment is actually reported in comments DB and BE
+                $sessionController->checkSession();
+                $commentController->reportCommentsCheck($cookieOrSessionID, $_GET['commentId']); //the reported comment is registered into reported_comments DB
+                $commentController->reportComments($_GET['commentId']);    //the reported comment is actually reported in comments DB and BE
             }
             else {
                 throw new Exception('Aucun identifiant de commentaire envoyé');
@@ -164,7 +164,7 @@ try {
             if (isset($_GET['commentId']) && $_GET['commentId'] > 0) {
 
                 $commentController = new commentController();
-                $updateComment = $commentController->updateComment($_POST['comment'],$_GET['commentId']);
+                $commentController->updateComment($_POST['comment'],$_GET['commentId']);
             }
             else {
                 throw new Exception('Aucun identifiant de commentaire envoyé');
@@ -220,7 +220,7 @@ try {
         //SIGN IN
         elseif ($_GET['action'] == 'singIn') {
             $sessionController = new SessionController;
-            $displaySingInView = $sessionController->displaySingInView();
+            $sessionController->displaySingInView();
         }
 
         elseif ($_GET['action'] == 'addNewMember') {
@@ -250,11 +250,11 @@ try {
 
                                 $sessionController = new SessionController;
 
-                                if( $checkUsernameAvailability = $sessionController->checkUsernameAvailability($_POST['username']) == false){
-                                    if($checkEmailAvailability = $sessionController->checkEmailAvailability($_POST['email']) == false){
+                                if( $sessionController->checkUsernameAvailability($_POST['username']) == false){
+                                    if($sessionController->checkEmailAvailability($_POST['email']) == false){
 
                                        
-                                        $addNewMember = $sessionController->addNewMember($_POST['username'], $_POST['pass'], $_POST['email']);
+                                       $sessionController->addNewMember($_POST['username'], $_POST['pass'], $_POST['email']);
                                     }
                                     else
                                      {
@@ -292,7 +292,7 @@ try {
         elseif ($_GET['action'] == 'logInCheck') {
             if(isset($_POST['username']) && isset($_POST['pass'])){
                 $sessionController = new SessionController;
-                $checkLog = $sessionController->checkLog($_POST['username']);
+                $sessionController->checkLog($_POST['username']);
                 
                 //if there is a session open, displays a message        
                 if (isset($_SESSION['id']) AND isset($_SESSION['username']))
@@ -310,7 +310,7 @@ try {
             if(isset($_SESSION['id']) AND isset($_SESSION['username'])){
                 
                 $sessionController = new SessionController;
-                $killSession = $sessionController->killSession();
+                $sessionController->killSession();
                 
                 header('Location: index.php');
                 exit;
@@ -325,7 +325,7 @@ try {
             if( (isset($_COOKIE['login']) AND $_COOKIE['login'] != '') OR  (isset($_SESSION['username']) AND $_SESSION['username'] != ''))
             {
                 $sessionController = new SessionController;
-                $displaychangePasswordView = $sessionController->displaychangePasswordView();
+                $sessionController->displaychangePasswordView();
             }     
             else {
                 throw new Exception('Vous devez être connecté pour accéder à cette page');
@@ -342,8 +342,8 @@ try {
                 $accentedCharactersNewPass = "àèìòùÀÈÌÒÙáéíóúýÁÉÍÓÚÝâêîôûÂÊÎÔÛãñõÃÑÕäëïöüÿÄËÏÖÜŸçÇßØøÅåÆæœ";
                 //needed to check the current pass in DB from the right user (id) 
                 $sessionController = new SessionController();
-                $cookieOrSessionID = $sessionController->checkSession();
-                if($checkCurrentPass = $sessionController->checkCurrentPass($cookieOrSessionID) == true)   
+                $sessionController->checkSession();
+                if($sessionController->checkCurrentPass($cookieOrSessionID) == true)   
                 {
                     if(preg_match("#^[a-z".$accentedCharactersNewPass ."0-9._!?-]{8,20}$#i", $_POST['newPass']) )
                     {
@@ -354,8 +354,8 @@ try {
                             $_POST['newPass'] = password_hash($_POST['newPass'], PASSWORD_DEFAULT);
                 
                             $sessionController = new SessionController;
-                            $UpdatePassWord = $sessionController->UpdatePassWord($_POST['newPass'], $_POST['id']);
-                            $killSession = $sessionController->killSession();
+                            $sessionController->UpdatePassWord($_POST['newPass'], $_POST['id']);
+                            $sessionController->killSession();
                             //success2 needed to display the confirmation message
                             header('Location: index.php?success=2#header');
                             exit;
@@ -391,7 +391,7 @@ try {
             }
             else{
                 $userController = new UserController;
-                $listAllUsers = $userController->listAllUsers();
+                $userController->listAllUsers();
             }   
         }
 
@@ -399,7 +399,7 @@ try {
         elseif ($_GET['action'] == 'manageAllSelectedUsers') {
             if(isset($_POST['deleteSelectedUsers'])){
                 $userController = new UserController;
-                $deleteAllSelectedUsers = $userController->deleteAllSelectedUsers($_POST['selectUsers']);  
+                $userController->deleteAllSelectedUsers($_POST['selectUsers']);  
             }
             else{
                 throw new Exception('Il y a une erreur');
@@ -410,7 +410,7 @@ try {
         elseif ($_GET['action'] == 'updateRole') {
             if(isset($_GET['role'])){
                 $userController = new UserController;
-                $updateUserRole = $userController->updateUserRole($_GET['role'], $_GET['userID']);  
+                $userController->updateUserRole($_GET['role'], $_GET['userID']);  
             }
             else{
                 throw new Exception('Il y a une erreur');
@@ -420,7 +420,7 @@ try {
         elseif ($_GET['action'] == 'deleteUser') {
             if (isset($_GET['userID']) && $_GET['userID'] > 0) {
                 $userController = new UserController;
-                $deleteUser = $userController->deleteUser($_GET['userID']);
+                $userController->deleteUser($_GET['userID']);
             }
             else {
                 throw new Exception('Aucun identifiant de billet envoyé');
@@ -432,7 +432,7 @@ try {
     //STATISTICS
         elseif ($_GET['action'] == 'displayStatsView') {
             $statsController = new StatsController;
-            $displayStatsView = $statsController->displayStatsView();
+            $statsController->displayStatsView();
         }
 
 
@@ -507,7 +507,7 @@ try {
         }
         else {
             $postController = new PostController;
-            $listPosts = $postController->listPosts();
+            $postController->listPosts();
 
             //Confirmation message when singin in
             if (isset($_GET['success']) AND $_GET['success'] == 1) 
