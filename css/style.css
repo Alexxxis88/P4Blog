@@ -8,8 +8,8 @@
 
 
 
-/* My CSS RULES FIXME */
- h1,h2 {
+/* My CSS RULES FIXME */ 
+ /* h1,h2 {
     font-family: 'Open Sans','Helvetica Neue',Helvetica,Arial,sans-serif;
 }
 
@@ -59,9 +59,8 @@ button a:hover{
 }
 
 [class*="editBtns"]{
-    background: none !important;
-    color:none !important;
-    border: none;
+    background:rgb(212, 0, 255);
+    color:white;
 }
 
 [class*="editCommentForm"]{
@@ -93,18 +92,18 @@ button a:hover{
 
 .postsBlock:hover{
     color: #0085a1;
-}
+} */
 
 /* Publish View */
-#postContent{
+/* #postContent{
     width: 100%;
     height: 800px;
     margin:auto;
-}
+} */
 
 
 /* Post View */
-.postAndlastPosts{
+/* .postAndlastPosts{
     display:flex;
     justify-content: flex-start;
 }
@@ -150,9 +149,9 @@ button:hover{
     display:flex;
     justify-content : center;
 }
-.comAlert{
+.comAlert{ */
     /* display:none; */
-    width:15px;
+    /* width:15px;
     height:15px;
     background:green;
     border-radius:50%;
@@ -170,16 +169,22 @@ button:hover{
 .comments{
     overflow-wrap: break-word;
 }
+*/
 .reportedComments{
     background:rgb(245, 176, 176) !important;
     overflow-wrap: break-word;
+    border-radius: 3px;
+    padding-left:10px;
 }
 
 .reportedComments p:first-child{
     background: red;
     color: white;
+    margin-left:-10px;
+    padding-left:10px;
+    
 }
-
+/*
 .acceptDenyComments{
     background:lightblue !important;
     overflow-wrap: break-word;
@@ -269,11 +274,11 @@ button:hover{
 }
 
 .textAbout{
-    margin:150px;
-}
+    margin:150px; */
+/* } */
 
 /* Statistics */
-
+/* 
 .chapterStatsContainer, .userStatsContainer{
     display: flex;
     justify-content: space-between;
@@ -451,6 +456,24 @@ textarea.input {
     color: #fff;
     opacity: 0.9;
 }
+
+.btn-success{
+    padding: 9px 45px;
+    border: none;
+    text-transform: uppercase;
+    font-size: 13px;
+    color: #fff;
+    -webkit-transition: 0.2s opacity;
+    transition: 0.2s opacity;
+    margin:10px 0 10px 0;
+    border-radius : 5px;
+}
+
+.btn-success:hover,.btn-success:focus {
+    color: #fff;
+    opacity: 0.9;
+}
+
 .section {
     padding-top: 40px;
 }
@@ -830,6 +853,7 @@ textarea.input {
 }
 .post .post-img > img {
     width: 100%;
+    border-radius: 50%;
 }
 .post .post-meta {
     margin-top: 15px;
@@ -1046,6 +1070,7 @@ textarea.input {
 .post-comments .media {
     padding-top: 15px;
     border-top: 1px solid #eceef2;
+    margin-top : 20px;
 }
 .post-comments .media:nth-child(1) {
     padding-top: 0px;
@@ -1075,6 +1100,42 @@ textarea.input {
 .post-comments .media .media-body .media-heading .reply:hover, .post-comments .media .media-body .media-heading .reply:focus {
     color: #212631;
     text-decoration: none;
+}
+
+.fa-exclamation-triangle, .fa-trash{
+    color:red;
+    font-size:20px;
+    margin-bottom: 10px;
+}
+
+.fa-check-circle{
+    color:green;
+    font-size:20px;
+    margin-bottom: 10px;
+}
+
+.fa-edit, .fa-trash-alt{
+    font-size:20px;
+    margin-bottom: 10px;
+}
+
+.adminIcon{
+    font-size : 25px;
+    float:right;
+    margin-left:10px;
+}
+
+.reportBtn{
+    font-family: Arial;
+    font-size:10px;
+}
+
+.commentsBtn
+{
+    text-align: right;
+}
+.section-title{
+    margin-top:100px !important;
 }
 /*=========================================================
    Aside

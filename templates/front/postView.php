@@ -11,188 +11,138 @@ $publishDate = $post->modPublishDate();
 $title = ""; //needed to NOT display any title on postView.php
 
 ob_start(); ?>
-    <p><a href="index.php">Retour à la page d'accueil</a></p>
- 
-<section class="postAndlastPosts">
+	<body>
+			<!-- Page Header -->
+			<div id="post-header" class="page-header">
+				<div class="background-img" style="background-image: url('public/img/post-<?= $id?>.jpg');"></div>
+				<div class="container">
+					<div class="row">
+						<div class="col-md-10">
+							<h1><?= htmlspecialchars($postTitle) ?></h1>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- /Page Header -->
+		</header>
+		<!-- /Header -->
+           
+		<!-- section -->
+		<div class="section">
+			<!-- container -->
+			<div class="container">
+				<!-- row -->
+				<div class="row">
+					<!-- Post content -->
+					<div class="col-md-8">
+						<div class="section-row sticky-container">
+							<div class="main-post">
+							<div class="post-meta">
+								<span class="post-date">
+								<?php 
+								if($publishDate ==  $editDate )
+								{
+								echo '<p>Publié le '. $publishDate . '</p>';
+								}
+								else
+								{
+									echo '<p>Edité le '. $editDate . '</p>';
+								}
+								?>
+								</span>
+							</div>
+								<h3><?= htmlspecialchars($chapter) ?></h3>
+								<p><?= nl2br($content) ?></p>
+								<figure class="figure-img">
+									<img class="img-responsive" src="./public/img/post-<?= $id?>.jpg" alt="">
+								</figure>
+								<?php
+								// FIXME: factoriser le code avec l'affichage ou non (1)des boutons modifier / supprimer sur listPostsView et PostView (2) des boutons approuver / supprimer des com sur PostView (3) l'affichage du menu admin de template.php
+								if(isset($checkUserRole['groupId']) && $checkUserRole['groupId'] == 1)
+								{ 
+								?>       
+									<button class="adminBtns"><a href="index.php?action=manageView&id=<?=$post->id()?>">Modifier</a></button>
+									<button class="adminBtns"><a href="index.php?action=deletePost&amp;id=<?= $post->id() ?>" onclick="return confirm('Etes-vous sûr?')" >Supprimer</a></button>
+								<?php
+								}  
+								?>   	
+							</div>
+							
+						</div>
 
-<!-- < ?php var_dump($post) //FIXME remove me?> -->
-<!-- displays the post -->
-    <div class="postsPostView">
-        <h3><?= htmlspecialchars($chapter) ?></h3>
-        <h2><?= htmlspecialchars($postTitle) ?></h2>
+						<!-- comments -->
+						<div class="section-row">
+							<div class="section-title">
+								<h2 id="commentsAnchor"><?= $totalCom ?> commentaires</h2>
+							</div>
+							<!-- Comments Pagination -->
+							<?php require('templates/pagination.php'); ?>
+							<p>Afficher par <button><a href="index.php?action=post&page=<?= $_GET['page'] ?>&id=<?= $_GET['id'] ?>&sortBy=5#commentsAnchor">5</a></button> <button><a href="index.php?action=post&page=<?= $_GET['page'] ?>&id=<?= $_GET['id'] ?>&sortBy=15#commentsAnchor">15</a></button> <button><a href="index.php?action=post&page=<?= $_GET['page'] ?>&id=<?= $_GET['id'] ?>&sortBy=99999999999999999999#commentsAnchor">Tous</a></button></p>
 
-    <?php //FIXME duplicate content (except $post instead of $data) with listPostsView. Worth factoring into a function ? 
-        if($publishDate ==  $editDate )
-        {
-           echo '<p>Publié le '. $publishDate . '</p>';
-        }
-        else
-        {
-            echo '<p>Edité le '. $editDate . '</p>';
-        }
-         
-    ?>    
-        <p class="posts">
-            <?= nl2br($content) ?>
-            
-        </p>
-        
-        <?php
-    // FIXME: factoriser le code avec l'affichage ou non (1)des boutons modifier / supprimer sur listPostsView et PostView (2) des boutons approuver / supprimer des com sur PostView (3) l'affichage du menu admin de template.php
-    if(isset($checkUserRole['groupId']) && $checkUserRole['groupId'] == 1)
-    { 
-    ?>       
-        <button class="adminBtns"><a href="index.php?action=manageView&id=<?=$post->id()?>">Modifier</a></button>
-        <button class="adminBtns"><a href="index.php?action=deletePost&amp;id=<?= $post->id() ?>" onclick="return confirm('Etes-vous sûr?')" >Supprimer</a></button>
-    <?php
-    }  
-    ?>      
-    </div>
+							<!-- displays the comments -->
+				<?php
+				if(!empty($comments)) //needed otherwise gives an error on the postView.php when no comments on the related post
+				{   
+					for ($i = 0 ; $i < sizeof($comments) ; $i++)
+					{
+						$idComment = $comments[$i]->id(); //gets the id of the post to use in buttons "read more" & "comments" urls
+						$author = $comments[$i]->author();
+						$comment = $comments[$i]->comment();
+						$commentDate = $comments[$i]->modCommentDate();
+						$updateDate = $comments[$i]->modUpdateDate();
+						$flag = $comments[$i]->flag();
 
-
-    <!-- displays the last 3 posts -->
-    <div class="lastPosts">
-    <h3>Les derniers chapitres publiés</h3>
-
-
-        <?php
-        for ($i = 0 ; $i < sizeof($lastPosts) ; $i++)
-        {
-            $id = $lastPosts[$i]->id(); //gets the id of the post to use in buttons "read more" & "comments" urls
-            $chapter = $lastPosts[$i]->chapterNb();
-            $content = $lastPosts[$i]->content();
-            $lastPostTitle = $lastPosts[$i]->title();
-            $editDate = $lastPosts[$i]->modEditDate();
-            $publishDate = $lastPosts[$i]->modPublishDate();
-        ?>       
-            <h4><?= htmlspecialchars($chapter) ?> : <?= htmlspecialchars($lastPostTitle) ?></h4>
-            
-            <?php //FIXME duplicate content (except $data instead of $post) with PostsView. Worth factoring into a function ? 
-            if($publishDate ==  $editDate )
-            {
-            echo '<p>Publié le '. $publishDate . '</p>';
-            }
-            else
-            {
-                echo '<p>Edité le '. $editDate . '</p>';
-            }
-            
-        ?>    
-                <p class="lastPostsP">
-                    <?= substr($content, 0, 200) . "..." ?><br/>
-                    <button class="regularBtns"><a href="index.php?action=post&id=<?=$id?>&page=1&sortBy=5">Lire la suite</a></button>      
-                </p>
-                    
-        <?php
-        }  
-        ?>
-        </div>     
-</section>
-
-
-
-<h2 id="commentsAnchor">Commentaires</h2>
-<p><strong>Cet article a été commenté <?= $totalCom ?> fois.</strong></p>   
-<?php
-        // FIXME: factoriser le code avec l'affichage ou non (1)du formulaire de commentaire (2) du bouton signaler (3) du reste de l'affichage des boutons / menus si loggé en admin / user / pas loggé
-        if((isset($_COOKIE['login']) AND !empty($_COOKIE['login'])) OR (isset($_SESSION['username']) AND !empty($_SESSION['username'])))
-        {           
-        ?>    
-            <form action="index.php?action=addComment&amp;id=<?= $post->id() ?>" method="post">
-            <div>
-                <input type="text" id="author" name="author" required hidden value="<?php
-                //FIXME : coder une solution plus propre / optimisée
-                if((isset($_COOKIE['login']) AND !empty($_COOKIE['login']))){
-                    echo $_COOKIE['login'];
-                }
-                else{
-                    echo $_SESSION['username'];
-                }
-                
-                ?>"  />
-            </div>
-            <div>
-                <label for="comment">Commentaire (700 carac. max)</label><br />
-                <textarea id="comment" name="comment" cols="80" rows="5" maxlength="700" required onkeyup="textCounter(this,'counter',700);"></textarea>
-            </div>
-
-            <!-- Used to count how many characters there is left -->
-            <input disabled  maxlength="3" size="3" value="700" id="counter">
-
-            <div>
-            <input type="submit" onclick="return confirm('Poster ce commentaire?')" value="Commenter"/>
-            </div>
-            </form>
-        <?php
-        }
-        else{
-        ?>
-        <p><strong>Vous devez être connecté pour commenter ce chapitre.</strong></p>
-        <?php
-        }
-        ?> 
-
+						if($flag < 9999)
+						{
+						?>	
+							
+							<div class="post-comments">
+								<div class="media">
+									<div class="media-left">
+										<img class="media-object" src="./public/img/avatar.png" alt="">
+									</div>
+									<?php			
+												//display reported comments with a red background
+										if($flag > 0)
+										{
+											echo '<div class="media-body reportedComments">
+												<p>Commentaire signalé <strong>' . $flag . '</strong> fois.<em> En attente de modération.</em></p>';
+										}else
+										{
+											echo '<div class="media-body">';
+										}
+										?>
+									
+														<div class="media-heading">
+															<h4><?= htmlspecialchars($author) ?></h4>
+															<!-- id= $comment['id'] used to create an anchor on the comment position to be able to display the right comment directly when selected in manageCommentsView.php (be)-->
+															<span class="time" id="<?= $id ?>">publié le <?= $commentDate ?>
+																<?php
+																//also display update_date if comment has been updated by author
+																if ($commentDate != $updateDate)
+																{ echo ' et modifié le ' . $updateDate;
+																}  
+																?>
+															</span>
+															<p></p>
+														</div>
+														<!-- transform non html links in comments into clickable links-->
+														<p><?= nl2br($comment = preg_replace('#http[s]?://[a-z0-9._/-]+#i', '<a href="$0">$0</a>', htmlspecialchars($comment))) ?></p>
+												</div>
+								</div>
 
 
-
-
-
-
-
-<!-- displays the comments -->
-
-<!-- Comments Pagination -->
-<?php require('templates/pagination.php'); ?>
-<p>Afficher par <button><a href="index.php?action=post&page=<?= $_GET['page'] ?>&id=<?= $_GET['id'] ?>&sortBy=5#commentsAnchor">5</a></button> <button><a href="index.php?action=post&page=<?= $_GET['page'] ?>&id=<?= $_GET['id'] ?>&sortBy=15#commentsAnchor">15</a></button> <button><a href="index.php?action=post&page=<?= $_GET['page'] ?>&id=<?= $_GET['id'] ?>&sortBy=99999999999999999999#commentsAnchor">Tous</a></button></p>  
-    <?php
-
-if(!empty($comments)) //needed otherwise gives an error on the postView.php when no comments on the related post
-{   
-    for ($i = 0 ; $i < sizeof($comments) ; $i++)
-    {
-        $idComment = $comments[$i]->id(); //gets the id of the post to use in buttons "read more" & "comments" urls
-        $author = $comments[$i]->author();
-        $comment = $comments[$i]->comment();
-        $commentDate = $comments[$i]->modCommentDate();
-        $updateDate = $comments[$i]->modUpdateDate();
-        $flag = $comments[$i]->flag();
-
-        if($flag < 9999)
-        {
-            
-            //display reported comments with a red background
-            if($flag > 0)
-            {
-                echo '<div class="reportedComments">
-                    <p>Commentaire signalé <strong>' . $flag . '</strong> fois En attente de modération.</p>';
-            }else
-            {
-                echo '<div class="comments">';
-            }
-            ?>            
-
-                <!-- id= $comment['id'] used to create an anchor on the comment position to be able to display the right comment directly when selected in manageCommentsView.php (be)-->
-                <p id="<?= $id ?>"><strong><?= htmlspecialchars($author) ?></strong> publié le <?= $commentDate ?>
-
-                <?php
-                //also display update_date if comment has been updated by author
-                if ($commentDate != $updateDate)
-                { echo ' et modifié le ' . $updateDate;
-                }  ?></p> 
-                
-                <!-- transform non html links in comments into clickable links--> 
-                <p><?= nl2br($comment = preg_replace('#http[s]?://[a-z0-9._/-]+#i', '<a href="$0">$0</a>', htmlspecialchars($comment))) ?></p>
-                <p>Id du commentaire: <?= $idComment ?></p>
-
-                
-                <?php
+<div class="commentsBtn">
+				<?php
                 // FIXME: factoriser le code avec l'affichage ou non (1)du formulaire de commentaire (2) du bouton signaler (3) du reste de l'affichage des boutons / menus si loggé en admin / user / pas loggé
-                if($flag == 0)
+
+
+				if($flag == 0)
                 {
                     if((isset($_COOKIE['login']) AND !empty($_COOKIE['login'])) OR (isset($_SESSION['username']) AND !empty($_SESSION['username'])))
                     {           
                     ?>
-                    <button class="userBtns"><a href="index.php?action=reportComment&amp;id=<?= $post->id() ?>&amp;commentId=<?= $comments[$i]->id() ?>" onclick="return confirm('Voulez vous vraiment signaler ce commentaire?')">Signaler</a></button>
+                    <a class="reportBtn" href="index.php?action=reportComment&amp;id=<?= $post->id() ?>&amp;commentId=<?= $comments[$i]->id() ?>" onclick="return confirm('Voulez vous vraiment signaler ce commentaire?')"><i class="fas fa-exclamation-triangle"></i></a>
 
                     <?php
                     }
@@ -227,19 +177,20 @@ if(!empty($comments)) //needed otherwise gives an error on the postView.php when
                             <input disabled  maxlength="3" size="3" value="700" id="counter">
 
                             <div>
-                            <input type="submit" class="editBtns" value="Sauvegarder mon commentaire"/>
+                            <input type="submit" class="btn-success" value="Sauvegarder mon commentaire"/>
                             </div>
                         </form>
                     </div> 
 
-                    <button class="editBtns"><a href="index.php?action=deleteComment&amp;id=<?= $post->id() ?>&amp;commentId=<?= $idComment ?>" onclick="return confirm('Etes-vous sûr?')">Supprimer mon commentaire</a></button>
+                    <a href="index.php?action=deleteComment&amp;id=<?= $post->id() ?>&amp;commentId=<?= $idComment ?>" onclick="return confirm('Etes-vous sûr?')"><i class="far fa-trash-alt"></i></a>
                     
-                    <button class="editBtns<?=$idComment ?> editCommentBtn<?=$idComment ?>">Modifier mon commentaire</button>
+                    <button class="far fa-edit editBtns<?=$idComment ?> editCommentBtn<?=$idComment ?>"></button>
                     <script>
                     $(".editBtns<?=$idComment ?>").on("click", function(){
                         $(".editCommentForm<?=$idComment?>, .editCommentBtn<?=$idComment ?>").toggle("slow")
                     })
-                    </script>
+					</script>
+					
                     <?php
                     }
                 }
@@ -253,23 +204,128 @@ if(!empty($comments)) //needed otherwise gives an error on the postView.php when
                             if($flag > 0)
                         {
                             //FIXME : change class of the approve button
-                            echo '<button class="adminBtns"><a href="index.php?action=approveComment&amp;id=' . $post->id() . '&amp;commentId='. $idComment . '"  onclick="return alert(\'Commentaire approuvé\')" >Approuver</a></button>' ;
+                            echo '<a href="index.php?action=approveComment&amp;id=' . $post->id() . '&amp;commentId='. $idComment . '"  onclick="return alert(\'Commentaire approuvé\')" ><i class="far fa-check-circle"></i></a>' ;
                         }
                                 
                     ?>    
                         <!-- gets the commentId as a parameter in the URL of the comment to delete AND the post id to return on the same post after comment has been deleted-->
-                        <button class="adminBtns"><a href="index.php?action=deleteComment&amp;id=<?= $post->id() ?>&amp;commentId=<?= $idComment ?>" onclick="return confirm('Etes-vous sûr?')">Supprimer</a></button>
+                        <a href="index.php?action=deleteComment&amp;id=<?= $post->id() ?>&amp;commentId=<?= $idComment ?>" onclick="return confirm('Etes-vous sûr?')"><i class="fas fa-trash"></i></a>
                     <?php
                     }
-                    ?>           
-                </div>
-                <?php
-        }
-    }
-}    
-    ?>
-    
-<?php $content = ob_get_clean(); ?>
+                    ?> 
+</div>								<!-- /comment -->
+							</div>
+							<?php
+						}
+					}
+				}			
+					?>
+						</div>
+						<!-- /comments -->
+					
+						<!-- reply -->
+						<div class="section-row">
+							<div class="section-title">
+								<h2>Commenter</h2>
+							</div>
+							<?php
+							// FIXME: factoriser le code avec l'affichage ou non (1)du formulaire de commentaire (2) du bouton signaler (3) du reste de l'affichage des boutons / menus si loggé en admin / user / pas loggé
+							if((isset($_COOKIE['login']) AND !empty($_COOKIE['login'])) OR (isset($_SESSION['username']) AND !empty($_SESSION['username'])))
+							{           
+							?>    
+							<form class="post-reply" action="index.php?action=addComment&amp;id=<?= $post->id() ?>" method="post">
+								<div class="row">
+									<input type="text" id="author" name="author" required hidden value="<?php
+									//FIXME : coder une solution plus propre / optimisée
+									if((isset($_COOKIE['login']) AND !empty($_COOKIE['login']))){
+										echo $_COOKIE['login'];
+									}
+									else{
+										echo $_SESSION['username'];
+									}
+									
+									?>"  />
+									
+									<div class="col-md-12">
+										<div class="form-group">
+										<label for="comment">Commentaire (700 carac. max)</label><br />
+                						<textarea id="comment" name="comment" cols="80" rows="5" maxlength="700" required onkeyup="textCounter(this,'counter',700);"></textarea>
+										</div>
+									</div>
+									<!-- Used to count how many characters there is left -->
+									<input disabled  maxlength="3" size="3" value="700" id="counter">
+									<div>
+									<input class="primary-button" type="submit" onclick="return confirm('Poster ce commentaire?')" value="Commenter"/>
+									</div>
+								</div>
+							</form>
+
+
+
+						<?php
+						}
+						else{
+						?>
+						<p><strong>Vous devez être connecté pour commenter ce chapitre.</strong></p>
+						<?php
+						}
+						?> 
+						</div>
+						<!-- /reply -->
+					</div>
+					<!-- /Post content -->
+
+					<!-- aside -->
+					<div class="col-md-4">
+						<!-- post widget -->
+						<div class="aside-widget">
+							<div class="section-title">
+								<h2>Les derniers chapitres</h2>
+							</div>
+
+							<?php
+        for ($i = 0 ; $i < sizeof($lastPosts) ; $i++)
+        {
+            $id = $lastPosts[$i]->id(); //gets the id of the post to use in buttons "read more" & "comments" urls
+            $chapter = $lastPosts[$i]->chapterNb();
+            $content = $lastPosts[$i]->content();
+            $lastPostTitle = $lastPosts[$i]->title();
+            $editDate = $lastPosts[$i]->modEditDate();
+            $publishDate = $lastPosts[$i]->modPublishDate();
+        ?>       
+							<div class="post post-widget">
+								<a class="post-img" href="index.php?action=post&id=<?=$id?>&page=1&sortBy=5"><img src="./public/img/widget-<?=$id?>.jpg" alt=""></a>
+								<div class="post-body">
+									<h3 class="post-title"><a href="index.php?action=post&id=<?=$id?>&page=1&sortBy=5"><?= htmlspecialchars($chapter) ?> : <?= htmlspecialchars($lastPostTitle) ?></a></h3>
+									
+								<p class="lastPostsP">
+                    <?= substr($content, 0, 200) . "..." ?><br/>
+                    <button class="regularBtns"><a href="index.php?action=post&id=<?=$id?>&page=1&sortBy=5">Lire la suite</a></button>      
+                </p>  	
+								</div>
+							</div>
+							<?php
+							}  
+							?>	
+						</div>
+						<!-- /post widget -->
+					</div>
+					<!-- /aside -->
+				</div>
+				<!-- /row -->
+			</div>
+			<!-- /container -->
+		</div>
+		<!-- /section -->
+
+		
+
+		<!-- jQuery Plugins -->
+		<script src="js/jquery.min.js"></script>
+		<script src="js/bootstrap.min.js"></script>
+		<script src="js/main.js"></script>
+
+		<?php $content = ob_get_clean(); ?>
 <!-- < ?php var_dump($lastPosts) //FIXME remove me?>  -->
 
 <?php require('templates/base.php'); ?>

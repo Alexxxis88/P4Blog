@@ -144,6 +144,19 @@ try {
         elseif ($_GET['action'] == 'reportComment') {
             if (isset($_GET['commentId']) && $_GET['commentId'] > 0) {
                 
+
+                //FIXME this should not be needed and this line should work  $sessionController->checkSession();
+
+                if(isset($_COOKIE['id']))
+					{
+						$cookieOrSessionID = $_COOKIE['id'];
+					}
+					elseif(isset($_SESSION['id']))
+					{
+							$cookieOrSessionID = $_SESSION['id'];
+                    }
+                    
+
                 $commentController = new commentController();
                 $sessionController = new sessionController();
                 
