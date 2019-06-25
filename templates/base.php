@@ -68,17 +68,34 @@
         require('front/menu.php');
     }
     ?>
-        <h1><?= $title ?></h1>
         <?= $content ?>
 
-        <section id="footer">
-            <a href="index.php?action=contact">Contact</a>
-            <a href="index.php?action=about">A propos de l'auteur</a>
-            <button><a href="#header">back to top</a></button>
-        </section> 
+        <!-- Footer -->
+        <footer id="footer">
+            <div class="container">
+                <!-- Grid row-->
+                <div class="row text-center d-flex justify-content-center">
+                    <div class="col-md-12 ">
+                        <h5 class="text-uppercase font-weight-bold">
+                            <a href="index.php?action=about">A propos</a> &emsp; 
+                            <a data-toggle="modal" data-target="#exampleModal">Contact</a> &emsp;
+                            <a href="index.php?action=legalNotice">Mentions légales</a>
+                        </h5>
+                    </div>                    
+                </div> 
+            </div>
+            <!-- Back to top -->
+            <a href="#header" onclick="$('html,body').animate({scrollTop:0},'slow');return false;"><i class="fas fa-arrow-circle-up"></i></a>
+            <!-- Copyright -->
+            <div class="footer-copyright text-center py-3">
+                <span>&copy;<script>document.write(new Date().getFullYear());</script> Alexis Gautier | Template en partie réalisé par <a href="https://colorlib.com" target="_blank">Colorlib</a>
+                <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+                </span>
+            </div>    
+        </footer>
 
-    <!-- My JS scripts -->
-    <script src="public/js/displayFunctions.js"></script>
+<?php require('templates/front/contactView.php'); ?>
+
 
     </body>
 </html>

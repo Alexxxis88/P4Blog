@@ -454,15 +454,15 @@ try {
             $generalController = new GeneralController;
             $generalController->displayAboutView();
         }
-        
-    //CONTACT
-        elseif ($_GET['action'] == 'contact') {
-            $formController = new FormController;
-            $formController->displayContactView();
-        }
 
+    //LEGAL NOTICE  
+        elseif ($_GET['action'] == 'legalNotice') {
+            $generalController = new GeneralController;
+            $generalController->displayLegalNoticeView();
+        }
+         
+    //CONTACT
         elseif ($_GET['action'] == 'sendMessage') {
-   
             //testing if all fields a filled
             if (isset($_POST['firstName']) && isset($_POST['lastName']) && isset($_POST['contactEmail']) && isset($_POST['topic']) && isset($_POST['messageContent'])) 
             {

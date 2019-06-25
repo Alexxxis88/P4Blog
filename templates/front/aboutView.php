@@ -1,11 +1,5 @@
-<!DOCTYPE html>
-<html>
-	<head>
-	<meta charset="utf-8">
-    <link href="public/css/style.css" rel="stylesheet" /> 
-	<title>En savoir plus...</title>
-	</head>
-	<body>
+<?php $title = 'A propos de Jean'; ?>
+<?php ob_start(); ?>
 	<div class="about">
         <div class="textAbout">
         <h2>Jean Forteroche...un écrivain pas commes les autres</h2>
@@ -22,4 +16,7 @@
             <img src="public/img/jeanforteroche.jpg" alt="Jean Forteroche" style="width:500px"/>
         </aside>
         </div> 
-        <p><a href="index.php">Retour à la page d'accueil</a></p>
+        <p style="text-align : center"><a href="index.php">Retour à la page d'accueil</a></p>
+
+<?php $content = ob_get_clean(); ?>
+<?php require('templates/base.php'); ?>         

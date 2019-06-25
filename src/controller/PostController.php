@@ -13,7 +13,7 @@ class PostController{
     //Pagitation     
         $totalPages = $postManager->getTotalPages();
         $total = $totalPages['total_posts']; // total of posts in DB
-        $messagesPerPage = 5;
+        $messagesPerPage = 6;
         $nbOfPages = ceil($total/$messagesPerPage);
         if(isset($_GET['page']))
         {

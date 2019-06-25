@@ -1,4 +1,18 @@
-<?php $title = 'Billet simple pour l\'Alaska'; ?>
+<?php $title = 'Billet Simple pour l\'Alaska'; ?>
+
+
+<!-- Full Page Image Header with Vertically Centered Content -->
+<header class="masthead">
+  <div class="container">
+    <div class="row h-100 align-items-center">
+      <div class="col-12 text-center">
+        <h1 class="font-weight-light">Billet Simple pour l'Alaska</h1>
+        <p class="lead">Bienvenue sur le blog de Jean Forteroche</p>
+      </div>
+    </div>
+  </div>
+</header>
+
 
 <?php ob_start(); ?>
 
@@ -6,62 +20,60 @@
 <?php require('templates/pagination.php'); ?>
 
 <!-- Display all posts -->
-<?php 
-// var_dump($post) //FIXME remove me
-
-
-if(!empty($posts)) //needed otherwise gives an error on the listPostsView.php when no posts in DB
-{    
-    for ($i = 0 ; $i < sizeof($posts) ; $i++)
-    {   
-        $id = $posts[$i]->id(); //gets the id of the post to use in buttons "read more" & "comments" urls
-        $chapter = $posts[$i]->chapterNb();
-        $content = $posts[$i]->content();
-        $postTitle = $posts[$i]->title();
-        $editDate = $posts[$i]->modEditDate();
-        $publishDate = $posts[$i]->modPublishDate();
-
-
-        ?>
-
-        <div class="postsBlock">
-        <h3><?= htmlspecialchars($chapter) ?></h3>
-        <h2><?= htmlspecialchars($postTitle) ?></h2>
-        <?php 
-        if($publishDate ==  $editDate)
-        {
-        echo '<p>Publié le '.  $publishDate . '</p>';
-        }
-        else
-        {
-            echo '<p>Edité le '. $editDate . '</p>';
-        }
-        
-        ?>   
-            
-        <p class="posts">
-            <?= substr($content, 0, 600) . "..." ?>
-                <button class="regularBtns"><a href="index.php?action=post&id=<?=$id?>&page=1&sortBy=5">Lire la suite</a></button>
-                <button class="regularBtns"><a href="index.php?action=post&id=<?=$id?>&page=1&sortBy=5#commentsAnchor">Commentaires</a></button> 
-        </p>
-
-        <?php
-        // FIXME: factoriser le code avec l'affichage ou non (1)des boutons modifier / supprimer sur listPostsView et PostView (2) des boutons approuver / supprimer des com sur PostView (3) l'affichage du menu admin de template.php
-        if( isset($checkUserRole['groupId']) && $checkUserRole['groupId'] == 1)
-        { 
-        ?>       
-            <button class="adminBtns"><a href="index.php?action=manageView&id=<?=$id?>">Modifier</a></button>
-            <button class="adminBtns"><a href="index.php?action=deletePost&amp;id=<?= $id?>" onclick="return confirm('Etes-vous sûr?')">Supprimer</a></button>
-        <?php
-        }  
-        ?>     
-        
+<div class="section section-grey">
+    <!-- container -->
+    <div class="container">
+        <!-- row -->
+        <div class="row">
+            <?php 
+            if(!empty($posts)) //needed otherwise gives an error on the listPostsView.php when no posts in DB
+            {    
+                for ($i = 0 ; $i < sizeof($posts) ; $i++)
+                {   
+                    $id = $posts[$i]->id(); //gets the id of the post to use in buttons "read more" & "comments" urls
+                    $chapter = $posts[$i]->chapterNb();
+                    $content = $posts[$i]->content();
+                    $postTitle = $posts[$i]->title();
+                    $editDate = $posts[$i]->modEditDate();
+                    $publishDate = $posts[$i]->modPublishDate();
+                    ?>
+                    <!-- post -->
+                    <div class="col-md-4">
+                        <div class="post">
+                            <a class="post-img" href="index.php?action=post&id=<?=$id?>&page=1&sortBy=5"><img src="./public/img/post-preview-<?= $id?>.jpg" alt=""></a>
+                            <div class="post-body">
+                                <div class="post-meta">
+                                    <span class="post-date">
+                                    <?php 
+                                        if($publishDate ==  $editDate)
+                                        {
+                                        echo '<p>Publié le '.  $publishDate . '</p>';
+                                        }
+                                        else
+                                        {
+                                            echo '<p>Edité le '. $editDate . '</p>';
+                                        }
+                                        ?>      
+                                    </span>
+                                </div>
+                                <a href="index.php?action=post&id=<?=$id?>&page=1&sortBy=5"><em><?= htmlspecialchars($chapter) ?></em> : <?= htmlspecialchars($postTitle) ?></a>
+                                <p class="postIndex"><?= substr($content, 0, 600) . "..." ?><br/></p>
+                                <a href="index.php?action=post&id=<?=$id?>&page=1&sortBy=5"><i class="fas fa-book"></i>&nbsp;Lire la suite</a>
+                                <a href="index.php?action=post&id=<?=$id?>&page=1&sortBy=5#commentsAnchor"><i class="far fa-comments"></i>   Commentaires</a>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- /post -->       
+                    <?php
+                }
+            }
+            ?>
         </div>
-    <?php
-    }
-}
-?>
-
+		<!-- /row -->
+    </div>
+    <!-- /container -->
+</div>
+<!-- /section -->
 
 <!-- Pagination -->
 <?php require('templates/pagination.php'); ?>

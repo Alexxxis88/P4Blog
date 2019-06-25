@@ -195,7 +195,11 @@ button:hover{
 
 #counter{
     font-size: 15px;
-    margin:0 0 5px 15px;
+    margin: 0 0 5px 15px;
+}
+
+.form-group{
+    margin-bottom: 0 !important;
 }
 /*
 .acceptDenyComments{
@@ -279,17 +283,16 @@ button:hover{
     bottom: 50vw;
     border-radius: 30px;
 }
-
+*/
 .about{
     display:flex;
     align-items: center;
-    margin:50px;
 }
 
 .textAbout{
-    margin:150px; */
-/* } */
-
+    margin:150px;
+}
+/*  
 /* Statistics */
 /* 
 .chapterStatsContainer, .userStatsContainer{
@@ -494,6 +497,7 @@ textarea.input {
     background-color: #fbfbfd;
     border-bottom: 1px solid #eceef2;
     border-top: 1px solid #eceef2;
+    margin-bottom: 20px;
 }
 .section .section-title {
     margin-bottom: 40px;
@@ -853,6 +857,26 @@ textarea.input {
 /*----------------------------*\
    post
 \*----------------------------*/
+.masthead {
+    height: 5vh;
+    min-height: 300px;
+    background-image: url('../public/img/home-picture.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    color:white;
+    display: flex;
+    align-items: center;
+    
+  }
+
+  .font-weight-light{
+      color:rgb(168, 169, 199);
+      padding : 10px 0 10px 0;
+      border-top:1px white solid;
+  }
+
+
 .post {
     margin-bottom: 40px;
 }
@@ -866,8 +890,9 @@ textarea.input {
 }
 .post .post-img > img {
     width: 100%;
-    border-radius: 50%;
 }
+
+
 .post .post-meta {
     margin-top: 15px;
     margin-bottom: 15px;
@@ -923,6 +948,10 @@ textarea.input {
     -webkit-transition:0.2s opacity;
     transition:0.2s opacity;
 }
+
+.fa-comments{
+    margin-left:20px;
+}
 /*----------------------------*\
    post thumb
 \*----------------------------*/
@@ -968,6 +997,8 @@ textarea.input {
 }
 .post.post-widget .post-img img {
     width: 100%;
+    border-radius: 50%;
+
 }
 .post.post-widget .post-title {
     font-size: 18px;
@@ -986,6 +1017,9 @@ textarea.input {
 }
 .post.post-row .post-body {
     margin-left: calc(40% + 30px);
+}
+.postIndex{
+    margin-bottom:20px !important;
 }
 .post.post-row .post-meta {
     margin-top: 0px;
@@ -1250,33 +1284,25 @@ textarea.input {
    FOOTER
 ===========================================================*/
 #footer {
-    padding-bottom: 40px;
+    padding-bottom: 20px;
     margin-top: 40px;
+    background:rgb(168, 168, 168);
 }
 #footer .container {
-    padding-top: 80px;
+    padding-top: 20px;
     border-top: 1px solid #F4f4f9;
 }
-.footer-widget {
-    margin-bottom: 40px;
+
+#footer a{
+    cursor: pointer;
+    transition: 0.2s;
 }
-.footer-widget .footer-title {
-    margin-bottom: 40px;
-    text-transform: capitalize;
-    font-size: 18px;
-}
-.footer-widget a {
-    color: #a7b3c6;
-    -webkit-transition: 0.2s color;
-    transition: 0.2s color;
-}
-.footer-widget a:hover, .footer-widget a:focus {
+
+#footer a:hover{
+    color:white;
     text-decoration: none;
-    color: #212631;
 }
-.footer-logo {
-    margin-bottom: 40px;
-}
+
 .footer-nav li {
     display: inline-block;
     margin-right: 15px;
@@ -1286,8 +1312,9 @@ textarea.input {
 }
 .footer-copyright {
     margin-top: 20px;
-    color: #a7b3c6;
+    color: white;
     font-size: 13px;
+    text-align: center;
 }
 .footer-newsletter form {
     position: relative;
@@ -1335,6 +1362,22 @@ textarea.input {
 .footer-social li > a:hover, .footer-social li > a:focus {
     color: #FFF;
     opacity: 0.9;
+}
+
+.fa-arrow-circle-up{
+    float:right;
+    margin-right:10px;
+    font-size:40px;
+    transition:0.2s
+}
+
+.fa-arrow-circle-up:hover{
+    color:rgb(241, 241, 241);
+}
+
+.contactForm .btn-primary{
+    margin-top:5px;
+    float:right;
 }
 /*=========================================================
    RESPONSIVE

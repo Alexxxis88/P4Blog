@@ -2,13 +2,6 @@
 
 class FormController{
 
-
-    public function displayContactView()
-    {
-        require('templates/front/contactView.php');
-    }
-
-
     public function sendMessage($firstName, $lastName, $contactEmail, $topic, $messageContent)
     {
         $to  = 'alexisxgautier@gmail.com, jean-forteroche@jeanforteroche.com';

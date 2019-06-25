@@ -8,7 +8,7 @@ $publishDate = $post->modPublishDate();
 
 
 
-$title = ""; //needed to NOT display any title on postView.php
+$title = $postTitle;
 
 ob_start(); ?>
 	<body>

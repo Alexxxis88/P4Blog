@@ -5,40 +5,52 @@
 	<title>Formulaire de contact</title>
 	</head>
 	<body>
-	<div class="contactForm">
-        <form action="index.php?action=sendMessage" method="post">
-            <div>
-                <label for="firstName">Votre prénom</label><br />
-                <input type="text" id="firstName" name="firstName" placeholder="Votre prénom" maxlength="20" required/>
-            </div>
-            <div>
-                <label for="lastName">Votre nom</label><br />
-                <input type="text" id="lastName" name="lastName" placeholder="Votre nom" maxlength="20" required/>
-            </div>
-            <div>
-                <label for="contactEmail">Votre adresse email</label><br />
-                <input type="text" id="contactEmail" name="contactEmail" placeholder="Votre adresse email" required/>
-            </div>
-            <div>
-                <label for="topic">Intitulé de votre message</label><br />
-                <input type="topic" id="topic" name="topic" placeholder="Intitulé de votre message" maxlength="40"  required/>
-            </div>
-            <div>
-            <div>
-                <label for="messageContent">Votre message</label><br />
-                
-                <textarea id="messageContent" name="messageContent" cols="100" rows="15" maxlength="1000" required onkeyup="textCounter(this,'counter',1000);">Votre message</textarea>
+        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Contacter Jean Forteroche</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <form class="contactForm" action="index.php?action=sendMessage" method="post">
+                            <div class="form-group">
+                                <label for="firstName" class="col-form-label">Votre prénom*</label>
+                                <input type="text" class="form-control" id="firstName" name="firstName" maxlength="20" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="lastName" class="col-form-label">Votre nom*</label>
+                                <input type="text" class="form-control" id="lastName" name="lastName" maxlength="20" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="contactEmail" class="col-form-label">Votre adresse email*</label>
+                                <input type="text" class="form-control" id="contactEmail" name="contactEmail" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="topic" class="col-form-label">Intitulé de votre message*</label>
+                                <input type="text" class="form-control" id="topic" name="topic" maxlength="40" required>
+                            </div>  
+
+                            <div class="form-group">
+                                <label for="messageContent" class="col-form-label">Votre message</label>
+                                <textarea class="form-control" rows="10" id="messageContent" name="messageContent" maxlength="1000" required onkeyup="textCounter(this,'counter',1000);"></textarea>
+                            </div>
+                            <!-- Used to count how many characters there is left -->
+                            <input disabled  maxlength="3" size="3" value="1000" id="counter">
+                            <input type="submit" class="btn btn-primary" value="Envoyer"/>
+                        </form>
+                    </div>
                 </div>
-                <!-- Used to count how many characters there is left -->
-                <input disabled  maxlength="3" size="3" value="1000" id="counter">
-            <div>
-            <!-- FIXME ; rajouter le captcha -->
-            <!-- <input type="hidden" name="recaptcha" id="recaptcha">  -->
-                <input type="submit" value="Envoyer"/>
             </div>
-        </form>
-    </div> 
-        <p><a href="index.php">Retour à la page d'accueil</a></p>
-    <script src="public/js/displayFunctions.js"></script>
+        </div>
     </body>
 </html>    
+
+<!-- FIXME : étrange, ça fonctionne meme si je ne mets pas le code suivant -->
+<!-- <script>
+$('#exampleModal').on('show.bs.modal', function (event) {
+  var button = $(event.relatedTarget) // Button that triggered the modal
+  var modal = $(this)
+})</script> -->
