@@ -11,7 +11,7 @@ $publishDate = $post->modPublishDate();
 $title = $postTitle;
 
 ob_start(); ?>
-	<body>
+
 			<!-- Page Header -->
 			<div id="post-header" class="page-header">
 				<div class="background-img" style="background-image: url('public/img/post-<?= $id?>.jpg');"></div>
@@ -332,6 +332,5 @@ ob_start(); ?>
 		<script src="js/main.js"></script>
 
 		<?php $content = ob_get_clean(); ?>
-<!-- < ?php var_dump($lastPosts) //FIXME remove me?>  -->
 
 <?php require('templates/base.php'); ?>

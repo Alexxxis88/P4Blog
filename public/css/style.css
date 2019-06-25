@@ -79,7 +79,7 @@ button a:hover{
     cursor: pointer;
 } 
 
-.postsBlock{
+/* .postsBlock{
     color:black;
     background: rgb(231, 231, 231);
     transition: 0.3s;
@@ -93,7 +93,7 @@ button a:hover{
 
 .postsBlock:hover{
     color: #0085a1;
-}
+} */
 
 /* Publish View */
 #postContent{

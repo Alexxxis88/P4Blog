@@ -3,19 +3,24 @@
     <head>
         <meta charset="utf-8" />
         <title>Erreur</title>
-        <link href="public/css/style.css" rel="stylesheet" /> 
+        <link href="css/style.css" rel="stylesheet" /> 
+        <!-- <link href="public/css/style.css" rel="stylesheet" /> FIXME : remettre ce lien -->
+
+        <!-- Font Awesome Icon -->
+        <script src="https://kit.fontawesome.com/0e45521ec5.js"></script>
     </head>
         
-    <body>
-        <h1>Oups...on dirait qu'une erreur s'est produite</h1>
-        <p><strong>Voici la cause de cette erreur :</strong> <?= $errorMessage?> </p>
-        <button onclick="goBack()">Retourner à la page précédente</button>
-        <script>
-        function goBack() {
-        window.history.back();
-        }
-        </script>
-        <button><a href="index.php">Retourner à la page d'accueil</a></button>
+    <body class="errorPage">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12 errorPageContainer">
+                    <h1>Oups...on dirait qu'une erreur s'est produite</h1>
+                    <p><strong>Voici la cause de cette erreur :</strong> <?= $errorMessage?> </p>
+                    <a href="index.php"><i class="fas fa-home"></i></i>Retourner à la page d'accueil</a>
 
+                </div>
+            </div>
+        </div>                
     </body>
 </html>
+

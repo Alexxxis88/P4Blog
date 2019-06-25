@@ -23,7 +23,7 @@
                 <a href="index.php?action=logOutCheck"><button type="button" class="btn btn-info ">Deconnexion</button></a>
 
                 <!-- Change Password button -->
-                <button type="button" class="btn btn-info " data-toggle="modal" data-target="#updatePassModal">Changer de Password</button>
+                <button type="button" class="btn btn-info updatePassBtn" data-toggle="modal" data-target="#updatePassModal">Changer de Password</button>
 
  <!-- displays an alert icon if comments to manage -->   
             </div>    

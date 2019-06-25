@@ -59,7 +59,6 @@
 
     <?php
     //display the right menu depending on the user role
-    // FIXME: factoriser le code avec l'affichage ou non (1)des boutons modifier / supprimer sur listPostsView et PostView (2) des boutons approuver / supprimer des com sur PostView (3) l'affichage du menu admin de template.php
     if(isset($checkUserRole['groupId']) && $checkUserRole['groupId'] == 1)
     {
         require('admin/menuAdmin.php');
