@@ -1,13 +1,7 @@
 <?php
 
 class SessionController{
-
-    public function displaySingInView()
-    {
-        require('templates/front/singInView.php');
-    }
-
-    
+  
     public function checkSession()
     {
     //we check wether the member is registered with COOKIE or SESSION
@@ -125,13 +119,6 @@ class SessionController{
                 throw new Exception('Vérifiez vos identifiants de connexion');
             }       
         }
-    }
-
-
-    public function displaychangePasswordView()
-    {
-        $cookieOrSessionID = $this->checkSession();
-        require('templates/front/changePassView.php');
     }
 
 

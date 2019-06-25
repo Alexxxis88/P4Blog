@@ -144,11 +144,9 @@ h4{
 button:hover{
     cursor: pointer;
 }
+*/
 
-.adminMenu{
-    display:flex;
-    justify-content : center;
-}
+/*  
 .comAlert{ */
     /* display:none; */
     /* width:15px;
@@ -285,12 +283,11 @@ button:hover{
 }
 */
 .about{
-    display:flex;
-    align-items: center;
+    margin:150px 70px 150px 70px;
 }
 
-.textAbout{
-    margin:150px;
+.imageAbout img{
+    width:100%;
 }
 /*  
 /* Statistics */
@@ -364,7 +361,7 @@ RESPONSIVE
     font-size: 16px;
     font-weight: 300;
     color: #3d455c;
-    margin: 0;
+    margin: 100px 0 0 0;
     padding: 0;
     overflow-x: hidden;
 }
@@ -512,7 +509,94 @@ textarea.input {
 /*=========================================================
    NAVIGATION
 ===========================================================*/
-#nav {
+
+/* Regular Menu */
+.menu{
+    height:auto;    
+    background-image: linear-gradient(to right, rgba(71, 71, 71, 0.8), rgba(196, 206, 255, 0.8));
+    position:fixed;
+    top:0;
+    z-index: 10;
+    width:100%;
+    box-shadow: 0 2px 5px black;
+}
+
+.menuBtns{
+    display:flex;
+    justify-content: flex-end;
+    
+}
+
+.menu button, .menuAdmin button{
+    margin:10px 20px 10px 0;
+}
+
+.fa-home{
+    color:white;
+    font-size:30px;
+    float:left;
+    margin:15px 0 10px 20px;
+    transition:0.2s;
+}
+
+.fa-home:hover{
+    color:rgb(168, 162, 253);
+}
+
+
+.helloText{
+    color:white;
+    margin:15px 50px 10px 0;
+}
+
+.btn-info{
+    height:10% !important;
+}
+
+/* Admin menu */
+
+.menuAdmin{
+    background-image: linear-gradient(to right, rgba(71, 71, 71, 0.8), rgba(160, 51, 51, 0.8));
+    position:fixed;
+    top:0;
+    z-index: 10;
+    width:100%;
+    box-shadow: 0 2px 5px black;
+}
+
+.adminMenu{
+    display:flex;
+    justify-content : space-around;
+    align-items: center;
+    margin-right:5%;
+}
+
+.adminMenu i{
+    color:white;
+    font-size : 25px;
+    margin:10px;
+    transition: 0.2s;
+}
+
+.adminMenu a{
+    color:white;
+    margin-right:50px;
+    transition: 0.2s;
+}
+
+.adminMenu a:hover{
+    color:#8d8d8d;
+    margin-right:50px;
+    text-decoration: none;
+}
+
+
+
+.adminMenuLink:hover > i{
+    color:#8d8d8d;
+}
+
+/* #nav {
     height: 70px;
 }
 #nav:after {
@@ -595,11 +679,11 @@ textarea.input {
 }
 #nav .container {
     position: relative;
-}
+} */
 /*----------------------------*\
    logo
 \*----------------------------*/
-.nav-logo {
+/* .nav-logo {
     float:left;
 }
 .nav-logo .logo {
@@ -609,11 +693,11 @@ textarea.input {
 .nav-logo .logo > img {
     width: 100%;
     max-height: 70px;
-}
+} */
 /*----------------------------*\
    menu
 \*----------------------------*/
-.nav-menu {
+/* .nav-menu {
     margin-left: 20px;
 }
 .nav-menu li a {
@@ -670,7 +754,7 @@ textarea.input {
 /*----------------------------*\
    search
 \*----------------------------*/
-.nav-btns {
+/* .nav-btns {
     float:right;
 }
 .nav-btns > button {
@@ -716,11 +800,11 @@ textarea.input {
     color: #212631;
     font-size: 22px;
     padding: 0;
-}
+}  */
 /*----------------------------*\
    nav aside
 \*----------------------------*/
-#nav-aside {
+/* #nav-aside {
     position: fixed;
     right: 0;
     top: 0;
@@ -780,7 +864,7 @@ textarea.input {
     font-size: 22px;
     border-radius: 50%;
     padding: 0;
-}
+} */
 /*=========================================================
    HEADER
 ===========================================================*/
@@ -858,7 +942,7 @@ textarea.input {
    post
 \*----------------------------*/
 .masthead {
-    height: 5vh;
+    height: 50vh;
     min-height: 300px;
     background-image: url('../public/img/home-picture.jpg');
     background-size: cover;
@@ -867,11 +951,16 @@ textarea.input {
     color:white;
     display: flex;
     align-items: center;
+    margin-top:-100px !important;
+    margin-bottom:40px;
+    box-shadow: 0 2px 2px black;
+
     
   }
 
   .font-weight-light{
       color:rgb(168, 169, 199);
+      margin-top:50px !important;
       padding : 10px 0 10px 0;
       border-top:1px white solid;
   }
@@ -951,6 +1040,23 @@ textarea.input {
 
 .fa-comments{
     margin-left:20px;
+}
+
+.readMoreAndCommentsIcons{
+    text-decoration: none !important;
+    transition: 0.2s
+}
+
+.readMoreAndCommentsIcons:hover{
+    color:rgb(128, 128, 197);
+}
+
+.listPostIcons{
+    float:right;
+}
+
+.listPostIcons i{
+    color:red;
 }
 /*----------------------------*\
    post thumb

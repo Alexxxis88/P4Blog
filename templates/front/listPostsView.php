@@ -1,4 +1,4 @@
-<?php $title = 'Billet Simple pour l\'Alaska'; ?>
+<?php $title = 'Billet simple pour l\'Alaska'; ?>
 
 
 <!-- Full Page Image Header with Vertically Centered Content -->
@@ -6,7 +6,7 @@
   <div class="container">
     <div class="row h-100 align-items-center">
       <div class="col-12 text-center">
-        <h1 class="font-weight-light">Billet Simple pour l'Alaska</h1>
+        <h1 class="font-weight-light">Billet simple pour l'Alaska</h1>
         <p class="lead">Bienvenue sur le blog de Jean Forteroche</p>
       </div>
     </div>
@@ -58,8 +58,21 @@
                                 </div>
                                 <a href="index.php?action=post&id=<?=$id?>&page=1&sortBy=5"><em><?= htmlspecialchars($chapter) ?></em> : <?= htmlspecialchars($postTitle) ?></a>
                                 <p class="postIndex"><?= substr($content, 0, 600) . "..." ?><br/></p>
-                                <a href="index.php?action=post&id=<?=$id?>&page=1&sortBy=5"><i class="fas fa-book"></i>&nbsp;Lire la suite</a>
-                                <a href="index.php?action=post&id=<?=$id?>&page=1&sortBy=5#commentsAnchor"><i class="far fa-comments"></i>   Commentaires</a>
+                                <a class="readMoreAndCommentsIcons" href="index.php?action=post&id=<?=$id?>&page=1&sortBy=5"><i class="fas fa-book"></i>&nbsp;Lire la suite</a>
+                                <a class="readMoreAndCommentsIcons" href="index.php?action=post&id=<?=$id?>&page=1&sortBy=5#commentsAnchor"><i class="far fa-comments"></i>   Commentaires</a>
+                                
+                                <!-- display edit / delete button for Admin -->
+                                <?php
+                                if( (isset($_COOKIE['login']) AND $_COOKIE['login'] == 'Admin') OR  (isset($_SESSION['username']) AND $_SESSION['username'] == 'Admin'))
+                                { 
+                                ?> 
+                                    <div class="listPostIcons">  
+                                        <a href="index.php?action=manageView&id=<?=$id?>"><i class="far fa-edit"></i></a>
+                                        <a href="index.php?action=deletePost&amp;id=<?= $id?>" onclick="return confirm('Etes-vous sûr?')"><i class="far fa-trash-alt"></i></a>
+                                    </div>    
+                                <?php
+                                }  
+                                ?>     
                             </div>
                         </div>
                     </div>

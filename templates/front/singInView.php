@@ -42,32 +42,46 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['recaptcha']))
 ?>
 
 
-
-        <div class="singIn">
-            <form action="index.php?action=addNewMember" method="post">
-                <div>
-                    <label for="username">Le pseudo doit faire 4 caractères minimum (20 maximum) et peut contenir des lettres et des chiffres</label><br />
-                    <input type="text" id="username" name="username" placeholder="Votre Pseudo" required/>
+        <div class="modal fade" id="singInModal" tabindex="-1" role="dialog" aria-labelledby="singInModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="singInModalLabel">Inscription</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <form class="singInForm" action="index.php?action=addNewMember" method="post">
+                            <div class="form-group">
+                                <label for="username" class="col-form-label"><em>Le pseudo doit faire 4 caractères minimum (20 maximum) et peut contenir des lettres et des chiffres</em><br/><br/>Pseudo*</label>
+                                <input type="text" class="form-control" id="username" name="username" required>
+                            </div><br/><br/>
+                            <div class="form-group">
+                                <label for="pass" class="col-form-label"><em>Le password doit faire 8 caractères minimum (20 maximum) et peut contenir des lettres, chiffres et caractères spéciaux authorisés ( . - _ ! ?)</em><br/><br/>Password*</label>
+                                <input type="password" class="form-control" id="pass" name="pass" required>
+                            </div><br/>
+                            <div class="form-group">
+                                <label for="passCheck" class="col-form-label">Vérification du password*</label>
+                                <input type="password" class="form-control" id="passCheck" name="passCheck" placeholder="Tapez votre Password à nouveau" required>
+                            </div><br/>
+                            <div class="form-group">
+                                <label for="email" class="col-form-label">Adresse Email*</label>
+                                <input type="text" class="form-control" id="email" name="email" required>
+                            </div><br/>
+                            <input type="hidden" name="recaptcha" id="recaptcha">
+                            <input type="submit" class="btn btn-primary" value="S'inscrire"/>
+                        </form>
+                    </div>
                 </div>
-                <div>
-                    <label for="pass">Le password doit faire 8 caractères minimum (20 maximum) et peut contenir des lettres, chiffres et caractères spéciaux authorisés ( . - _ ! ?)</label><br />
-                    <input type="password" id="pass" name="pass" placeholder="Votre Password" required/>
-                </div>
-                <div>
-                    <label for="passCheck">Vérification Password</label><br />
-                    <input type="password" id="passCheck" name="passCheck" placeholder="Tapez votre Password à nouveau" required/>
-                </div>
-                <div>
-                    <label for="email">Adresse Email</label><br />
-                    <input type="text" id="email" name="email" placeholder="Votre adresse Email" required/>
-                </div>
-                <div>
-                <input type="hidden" name="recaptcha" id="recaptcha">
-                    <input type="submit" value="S'inscrire"/>
-                </div>
-            </form>
-        </div> 
-        <p><a href="index.php">Retour à la page d'accueil</a></p>
+            </div>
+        </div>
     </body>
 </html>
    
+<!-- FIXME : étrange, ça fonctionne meme si je ne mets pas le code suivant -->
+<script>
+$('#singInModal').on('show.bs.modal', function (event) {
+  var button = $(event.relatedTarget) // Button that triggered the modal
+  var modal = $(this)
+})</script>

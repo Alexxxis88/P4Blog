@@ -151,7 +151,7 @@ button:hover{
     justify-content : center;
 }
 .comAlert{
-    /* display:none; */
+    display:none;
     width:15px;
     height:15px;
     background:green;

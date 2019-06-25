@@ -230,11 +230,7 @@ try {
 
 
     //SING IN, LOG IN, LOG OUT
-        //SIGN IN
-        elseif ($_GET['action'] == 'singIn') {
-            $sessionController = new SessionController;
-            $sessionController->displaySingInView();
-        }
+       
 
         elseif ($_GET['action'] == 'addNewMember') {
             //testing if all fields a filled
@@ -334,16 +330,7 @@ try {
         }
 
         //UPDATE PASSWORD
-        elseif ($_GET['action'] == 'changePasswordView') {
-            if( (isset($_COOKIE['login']) AND $_COOKIE['login'] != '') OR  (isset($_SESSION['username']) AND $_SESSION['username'] != ''))
-            {
-                $sessionController = new SessionController;
-                $sessionController->displaychangePasswordView();
-            }     
-            else {
-                throw new Exception('Vous devez être connecté pour accéder à cette page');
-            }    
-        }
+        
         elseif ($_GET['action'] == 'UpdatePass') 
         {
             if( (isset($_COOKIE['login']) AND $_COOKIE['login'] != '') OR  (isset($_SESSION['username']) AND $_SESSION['username'] != ''))
@@ -355,7 +342,18 @@ try {
                 $accentedCharactersNewPass = "àèìòùÀÈÌÒÙáéíóúýÁÉÍÓÚÝâêîôûÂÊÎÔÛãñõÃÑÕäëïöüÿÄËÏÖÜŸçÇßØøÅåÆæœ";
                 //needed to check the current pass in DB from the right user (id) 
                 $sessionController = new SessionController();
-                $sessionController->checkSession();
+                // $sessionController->checkSession();
+                
+                //FIXME this should not be needed and this line should work  $sessionController->checkSession();
+                        if(isset($_COOKIE['id']))
+                        {
+                            $cookieOrSessionID = $_COOKIE['id'];
+                        }
+                        elseif(isset($_SESSION['id']))
+                        {
+                                $cookieOrSessionID = $_SESSION['id'];
+                        }
+                        
                 if($sessionController->checkCurrentPass($cookieOrSessionID) == true)   
                 {
                     if(preg_match("#^[a-z".$accentedCharactersNewPass ."0-9._!?-]{8,20}$#i", $_POST['newPass']) )
