@@ -61,8 +61,8 @@ ob_start(); ?>
 								if(isset($checkUserRole['groupId']) && $checkUserRole['groupId'] == 1)
 								{ 
 								?>       
-									<button class="adminBtns"><a href="index.php?action=manageView&id=<?=$post->id()?>">Modifier</a></button>
-									<button class="adminBtns"><a href="index.php?action=deletePost&amp;id=<?= $post->id() ?>" onclick="return confirm('Etes-vous sûr?')" >Supprimer</a></button>
+									<a class="adminIcon" href="index.php?action=manageView&id=<?=$post->id()?>"><i class="far fa-edit editBtns"></i></a>
+									<a class="adminIcon" href="index.php?action=deletePost&amp;id=<?= $post->id() ?>" onclick="return confirm('Etes-vous sûr?')"><i class="far fa-trash-alt"></i></a>
 								<?php
 								}  
 								?>   	
@@ -76,9 +76,15 @@ ob_start(); ?>
 								<h2 id="commentsAnchor"><?= $totalCom ?> commentaires</h2>
 							</div>
 							<!-- Comments Pagination -->
+							
+							<p>Afficher par  
+								<a href="index.php?action=post&page=<?= $_GET['page'] ?>&id=<?= $_GET['id'] ?>&sortBy=5#commentsAnchor"><button class="btn btn-info btn-sm"><strong>5</strong></button></a> 
+								<a href="index.php?action=post&page=<?= $_GET['page'] ?>&id=<?= $_GET['id'] ?>&sortBy=15#commentsAnchor"><button class="btn btn-info btn-sm"><strong>15</strong></button></a>
+								<a href="index.php?action=post&page=<?= $_GET['page'] ?>&id=<?= $_GET['id'] ?>&sortBy=99999999999999999999#commentsAnchor"><button class="btn btn-info btn-sm"><strong>Tous</strong></button></a>
+							</p>
+							<div class="paginationBlock">
 							<?php require('templates/pagination.php'); ?>
-							<p>Afficher par <button><a href="index.php?action=post&page=<?= $_GET['page'] ?>&id=<?= $_GET['id'] ?>&sortBy=5#commentsAnchor">5</a></button> <button><a href="index.php?action=post&page=<?= $_GET['page'] ?>&id=<?= $_GET['id'] ?>&sortBy=15#commentsAnchor">15</a></button> <button><a href="index.php?action=post&page=<?= $_GET['page'] ?>&id=<?= $_GET['id'] ?>&sortBy=99999999999999999999#commentsAnchor">Tous</a></button></p>
-
+							</div>	
 							<!-- displays the comments -->
 				<?php
 				if(!empty($comments)) //needed otherwise gives an error on the postView.php when no comments on the related post
@@ -296,11 +302,11 @@ ob_start(); ?>
 							<div class="post post-widget">
 								<a class="post-img" href="index.php?action=post&id=<?=$id?>&page=1&sortBy=5"><img src="./public/img/widget-<?=$id?>.jpg" alt=""></a>
 								<div class="post-body">
-									<h3 class="post-title"><a href="index.php?action=post&id=<?=$id?>&page=1&sortBy=5"><?= htmlspecialchars($chapter) ?> : <?= htmlspecialchars($lastPostTitle) ?></a></h3>
+									<a href="index.php?action=post&id=<?=$id?>&page=1&sortBy=5"><em class="post-title"><?= htmlspecialchars($chapter) ?></em><br/><p>  <?= htmlspecialchars($lastPostTitle)?></p></a>
 									
 								<p class="lastPostsP">
-                    <?= substr($content, 0, 200) . "..." ?><br/>
-                    <button class="regularBtns"><a href="index.php?action=post&id=<?=$id?>&page=1&sortBy=5">Lire la suite</a></button>      
+                    <?= substr($content, 0, 300) . "..." ?><br/>
+                    <a href="index.php?action=post&id=<?=$id?>&page=1&sortBy=5"><i class="fas fa-book"></i>   Lire la suite</a> 
                 </p>  	
 								</div>
 							</div>

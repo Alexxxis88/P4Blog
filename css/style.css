@@ -177,12 +177,25 @@ button:hover{
     padding-left:10px;
 }
 
+
 .reportedComments p:first-child{
     background: red;
     color: white;
     margin-left:-10px;
-    padding-left:10px;
-    
+    padding-left:10px;   
+}
+
+.reportedComments .time{
+    color: white !important;
+}
+
+.paginationBlock{
+    display: flex;
+}
+
+#counter{
+    font-size: 15px;
+    margin:0 0 5px 15px;
 }
 /*
 .acceptDenyComments{
@@ -1068,9 +1081,9 @@ textarea.input {
    comments
 \*----------------------------*/
 .post-comments .media {
-    padding-top: 15px;
-    border-top: 1px solid #eceef2;
-    margin-top : 20px;
+    padding-top: 15px !important;
+    border-top: 1px solid #eceef2 !important;
+    margin-top : 20px !important;
 }
 .post-comments .media:nth-child(1) {
     padding-top: 0px;
@@ -1104,18 +1117,18 @@ textarea.input {
 
 .fa-exclamation-triangle, .fa-trash{
     color:red;
-    font-size:20px;
+    font-size:17px;
     margin-bottom: 10px;
 }
 
 .fa-check-circle{
     color:green;
-    font-size:20px;
+    font-size:17px;
     margin-bottom: 10px;
 }
 
 .fa-edit, .fa-trash-alt{
-    font-size:20px;
+    font-size:17px;
     margin-bottom: 10px;
 }
 
@@ -1131,8 +1144,10 @@ textarea.input {
 }
 
 .commentsBtn
-{
+{   
     text-align: right;
+    margin-right : 50px;
+    margin-top: -20px;
 }
 .section-title{
     margin-top:100px !important;
@@ -1141,7 +1156,7 @@ textarea.input {
    Aside
 ===========================================================*/
 .aside-widget {
-    margin-bottom: 40px;
+    margin: 0 0 40px 40px;
 }
 /*----------------------------*\
    category
