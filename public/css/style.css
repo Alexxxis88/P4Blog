@@ -207,7 +207,7 @@ button:hover{
     background:green;
     border-radius:50%;
 }
-
+/* 
 .usersDisplay{
     background:lightgrey !important;
     overflow-wrap: break-word;
@@ -216,7 +216,7 @@ button:hover{
 .usersDisplay p:first-child{
     background: grey;
     color: white;
-}
+} */
 
 
 .signInConfirmation{

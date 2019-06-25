@@ -225,15 +225,7 @@ button:hover{
     border-radius:50%;
 }
 
-.usersDisplay{
-    background:lightgrey !important;
-    overflow-wrap: break-word;
-}
 
-.usersDisplay p:first-child{
-    background: grey;
-    color: white;
-}
 
 
 .signInConfirmation{
@@ -1520,6 +1512,55 @@ textarea.input {
     color:white;
     margin-right: 10px;
 }
+
+/*=========================================================
+   USERS
+===========================================================*/
+
+.usersDisplay{
+    overflow-wrap: break-word;
+    border:1px solid black;
+    margin: 0 0 10px 0;
+}
+
+.usersDisplay input[type="checkbox"]{
+    margin-right:25px;
+}
+.userListHeader{
+    background: grey;
+    color: white;
+    padding-left:5px;
+}
+
+.roleAndDelete{
+    padding-left:15px;
+}
+.fa-user-times{
+    color:red;
+    font-size:20px;
+    margin-right:10px;
+}
+
+.btn-danger{
+    margin:15px 0 15px 5px;
+}
+
+.roleAndDelete{
+    display:flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 0 20px 10px 0;
+}
+
+.deleteUserLink{
+    transition:0.2s;
+}
+
+.deleteUserLink:hover{
+    color:red;
+    text-decoration: none;
+}
+
 /*=========================================================
    RESPONSIVE
 ===========================================================*/
