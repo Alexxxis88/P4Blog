@@ -14,8 +14,8 @@ class StatsController{
     $statsManager = new StatsManager();
     $usersStats = $statsManager->getUsersStats();
     $exec =  $statsManager->statsPosts();
-    $rankingBestPost =  $statsManager->ranking("DESC"); //FIXME:not working
-    $rankingWorstPost =  $statsManager->ranking("ASC"); //FIXME:not working
+    $rankingBestPost =  $statsManager->rankingBest();
+    $rankingWorstPost =  $statsManager->rankingWorst();
     $oldestUserRegistered =  $statsManager->oldestUser();
     $newestUserRegistered =  $statsManager->newestUser();
     $bestContributor =  $statsManager->mostComUser();

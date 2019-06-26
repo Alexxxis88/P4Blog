@@ -1134,31 +1134,73 @@ textarea.input {
 /*=========================================================
    STATISTICS
 ===========================================================*/
-.chapterStatsContainer, .userStatsContainer{
+/* .chapterStatsContainer, .userStatsContainer{
     display: flex;
     justify-content: space-between;
     align-items: center;
-}
+} */
+
 
 .chapterStats{
     height: 250px;
     width: 500px;
-    margin: 0 20px 0 50px;
     border: 1px solid darkgrey;
+    background:pink;
+}
+
+.statsTitles{
+    text-align: center;
+    border:1px solid rgb(189, 189, 189);
+    background:rgb(236, 233, 233);
+    padding:5px;
+}
+
+.bestChaptUser{
+    padding:15px;
+    border:1px solid black;
+    margin-bottom: 5px;
+    background:rgb(138, 255, 138);
+}
+
+.worstChaptUser{
+    padding:15px;
+    border:1px solid black;
+    border-collapse: collapse;
+    background:rgba(255, 0, 0, 0.6);
+}
+
+#columnchart12{
+    height:500px;
+}
+
+.chapterStatsRow{
+    display:flex;
+    align-items: center;
+}
+
+.chapterStatsRow h3{
+    border-bottom: 1px solid black;
+}
+
+.chapterStatsRow a:hover, .userStatsRow a:hover{
+    text-decoration:none;
 }
 
 .top10block{
     text-align: center;
-    background:lightblue;
+    background:rgb(227, 248, 255);
     border: 1px solid grey;
-    margin-right: 200px;
-    height:400px;
-    width:700px;
+    border-radius: 3px;
+    margin-top:20px;
+}
+
+.top10block h3{
+    padding:10px;
 }
 
 .topLines{
-    padding: 1px;
-    border-top: 1px solid grey;
+    padding: 1px 10px 1px 10px;
+    border-bottom: 1px solid grey;
 }
 
 .usersBlock{
@@ -1558,7 +1600,14 @@ textarea.input {
         margin-left: 10px;
         font-size:2vw;
     }
-    
+    .chapterStatsRow{
+        display:block;
+        text-align:center;
+    }    
+    #columnchart12{
+        height:500px;
+        width:auto;
+    }
 }
 @media only screen and (max-width: 767px) {
     .page-header h1 {
