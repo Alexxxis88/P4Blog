@@ -15,7 +15,6 @@
                         if(isset($_COOKIE['login']))
                         {
                             $username = $_COOKIE['login'];
-                            $logedAs = 'COOKIE'; //FIXME : delete me
                         }
                         elseif(isset($_SESSION['username']))
                         {
@@ -23,8 +22,7 @@
                             $logedAs = 'SESSION'; //FIXME : delete me
                         }
                     ?>
-                    <p class="helloText"><strong style="color:red"><?= $logedAs ?></strong>  <!-- FIXME : delete me -->
-                        Vous êtes connecté en tant que <strong><?= htmlspecialchars($username) ?></strong> </p>
+                    <p class="helloText">Bonjour <strong><?= htmlspecialchars($username) ?></strong> </p>
                             
                         <!-- Log Out button -->
                         <a href="index.php?action=logOutCheck"><button type="button" class="btn btn-info ">Deconnexion</button></a>
