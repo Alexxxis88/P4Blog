@@ -49,9 +49,9 @@ if(!empty($reportedComments)) //needed otherwise gives an error on the commentsV
                         <input type="checkbox" id="commentID" name="selectComments[]" value="<?= $idComment?>" checked >
         
                         <!-- FIXME : edit class of the approve btn -->
-                        <button class="userBtns"><a href="index.php?action=approveComment&amp;commentId=<?= $idComment ?>"  onclick="return alert('Commentaire approuvé')" >Approuver</a></button>
+                        <button><a href="index.php?action=approveComment&amp;commentId=<?= $idComment ?>"  onclick="return alert('Commentaire approuvé')" >Approuver</a></button>
 
-                        <button class="adminBtns"><a href="index.php?action=deleteComment&amp;id=<?= $postId ?>&amp;commentId=<?= $idComment ?>" onclick="return confirm('Etes-vous sûr?')">Supprimer</a></button>
+                        <button><a href="index.php?action=deleteComment&amp;id=<?= $postId ?>&amp;commentId=<?= $idComment ?>" onclick="return confirm('Etes-vous sûr?')">Supprimer</a></button>
                 </div>
         <?php
         
@@ -114,10 +114,9 @@ if(!empty($newComments)) //needed otherwise gives an error on the commentsView.p
                         <label for="commentPublishID"> Id du commentaire : <?= $idComment ?> </label>
                         <input type="checkbox" id="commentPublishID" name="selectPublishComments[]" value="<?= $idComment?>" checked >
         
-                        <!-- FIXME : edit class of the approve btn -->
-                        <button class="userBtns"><a href="index.php?action=approveComment&amp;commentId=<?= $idComment ?>"  onclick="return alert('Commentaire publié')" >Publier</a></button>
+                        <button><a href="index.php?action=approveComment&amp;commentId=<?= $idComment ?>"  onclick="return alert('Commentaire publié')" >Publier</a></button>
 
-                        <button class="adminBtns"><a href="index.php?action=deleteComment&amp;id=<?= $postId ?>&amp;commentId=<?= $idComment ?>" onclick="return confirm('Etes-vous sûr?')">Supprimer</a></button>
+                        <button><a href="index.php?action=deleteComment&amp;id=<?= $postId ?>&amp;commentId=<?= $idComment ?>" onclick="return confirm('Etes-vous sûr?')">Supprimer</a></button>
                 </div>
         <?php
         

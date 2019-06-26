@@ -304,7 +304,7 @@ ob_start(); ?>
 								<div class="post-body">
 									<a href="index.php?action=post&id=<?=$id?>&page=1&sortBy=5"><em class="post-title"><?= htmlspecialchars($chapter) ?></em><br/><p>  <?= htmlspecialchars($lastPostTitle)?></p></a>
 									
-								<p class="lastPostsP">
+								<p>
                     <?= substr($content, 0, 300) . "..." ?><br/>
                     <a href="index.php?action=post&id=<?=$id?>&page=1&sortBy=5"><i class="fas fa-book"></i>   Lire la suite</a> 
                 </p>  	

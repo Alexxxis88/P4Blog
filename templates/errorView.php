@@ -3,8 +3,7 @@
     <head>
         <meta charset="utf-8" />
         <title>Erreur</title>
-        <link href="css/style.css" rel="stylesheet" /> 
-        <!-- <link href="public/css/style.css" rel="stylesheet" /> FIXME : remettre ce lien -->
+        <link href="public/css/style.css" rel="stylesheet"/> 
 
         <!-- Font Awesome Icon -->
         <script src="https://kit.fontawesome.com/0e45521ec5.js"></script>

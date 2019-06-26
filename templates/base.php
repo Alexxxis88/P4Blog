@@ -14,14 +14,14 @@
 		<link href="https://fonts.googleapis.com/css?family=Nunito+Sans:700%7CNunito:300,600" rel="stylesheet"> 
 
         <!-- Bootstrap -->
-        <link type="text/css" rel="stylesheet" href="css/bootstrap.min.css"/>
+        <link type="text/css" rel="stylesheet" href="./public/css/bootstrap.min.css"/>
 
         <!-- Font Awesome Icon -->
-		<link rel="stylesheet" href="css/font-awesome.min.css">
+		<link rel="stylesheet" href="./public/css/font-awesome.min.css">
         <script src="https://kit.fontawesome.com/0e45521ec5.js"></script>
 
         <!-- Custom stlylesheet -->
-        <link href="css/style.css" rel="stylesheet" /> 
+        <link href="./public/css/style.css" rel="stylesheet" /> 
 
         <!--GDPR Cookies disclaimer-->
         <script id="Cookiebot" src="https://consent.cookiebot.com/uc.js" data-cbid="8f33029f-67db-4439-af40-bfb1da747800" type="text/javascript" async></script>

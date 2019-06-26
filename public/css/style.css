@@ -1,313 +1,4 @@
-
-
-
-
-
-
-
-
-
-
-/* My CSS RULES FIXME */
- h1,h2 {
-    font-family: 'Open Sans','Helvetica Neue',Helvetica,Arial,sans-serif;
-}
-
-h1{
-    text-align: center;
-}
-
-button a{
-    text-decoration: none;
-    color:white; 
-}
-
-button a:hover{
-    color:black; 
-}
-
-#header{
-    text-align: center;
-}
-.adminFields{
-    display: flex;
-    justify-content: flex-end;
-    margin-right:30px;
-}
-
-.adminFields input, .adminBtns, .userBtns, .regularBtns, [class*="editBtns"]{
-    border-radius: 4px;
-    border:1px solid grey;
-    padding:5px;
-}
-
-.adminBtns, .userBtns, .regularBtns{
-    margin-left:5px;
-}
-
-.adminBtns{
-    background:red;
-}
-
-.userBtns{
-    background:green;
-}
-
-.regularBtns{
-    background:rgb(72, 72, 250);
-    margin-top: 20px;
-}
-
-[class*="editBtns"]{
-    background: none !important;
-    color:none !important;
-    border: none;
-}
-
-[class*="editCommentForm"]{
-    display:none;
-}
-
-.adminFields input[type="submit"]{
-    color: white;
-    background:black;
-    transition: 0.3s;
-} 
-
-.adminFields input[type="submit"]:hover{
-    background:green;
-    cursor: pointer;
-} 
-
-/* .postsBlock{
-    color:black;
-    background: rgb(231, 231, 231);
-    transition: 0.3s;
-    padding:20px;
-    margin:20px auto;  
-    border-radius: 10px;
-    width:70%;
-    height:100%;
-    overflow-wrap: break-word;
-}
-
-.postsBlock:hover{
-    color: #0085a1;
-} */
-
-/* Publish View */
-#postContent{
-    width: 100%;
-    height: 800px;
-    margin:auto;
-}
-
-
-/* Post View */
-.postAndlastPosts{
-    display:flex;
-    justify-content: flex-start;
-}
-
-.postsPostView{
-    flex:2;
-    color:black;
-    background: rgb(231, 231, 231);
-    padding:20px;
-    margin:20px;
-    width:70%;
-    height:100%;
-    border-radius: 10px;
-    overflow-wrap: break-word;
-}
-
-
-.lastPosts{
-    flex:1;
-    height:100%;
-    font-size: 0.8em;
-    text-align: center;
-    background: lightblue;
-    margin:20px;
-    border-radius: 10px;
-    overflow-wrap: break-word;
-}
-
-.lastPostsP{
-    margin: 20px 20px 0 20px;
-
-}
-
-/* h4{
-    border-top: 1px solid black;
-} */
-
-button:hover{
-    cursor: pointer;
-}
-
-.adminMenu{
-    display:flex;
-    justify-content : center;
-}
-.comAlert{
-    display:none;
-    width:15px;
-    height:15px;
-    background:green;
-    border-radius:50%;
-}
-
-.manageComBtns{
-    display:flex;
-}
-
-.manageComBtn{
-    background:orange;
-    margin:5px;
-}
-
-.comments{
-    overflow-wrap: break-word;
-}
-.reportedComments{
-    background:rgb(245, 176, 176) !important;
-    overflow-wrap: break-word;
-}
-
-.reportedComments p:first-child{
-    background: red;
-    color: white;
-}
-
-.acceptDenyComments{
-    background:lightblue !important;
-    overflow-wrap: break-word;
-}
-
-.commentHead{
-    background: red;
-    color: white;
-}
-
-.noReportedComments, .noCommentsToManage{
-    color: white;
-    font-weight: bold;
-    background: rgb(84, 212, 84);
-    text-align: center;
-    margin: 50px;
-    padding: 20px;
-}
-
-
-
-.comAlert{
-    width:15px;
-    height:15px;
-    background:green;
-    border-radius:50%;
-}
 /* 
-.usersDisplay{
-    background:lightgrey !important;
-    overflow-wrap: break-word;
-}
-
-.usersDisplay p:first-child{
-    background: grey;
-    color: white;
-} */
-
-
-.signInConfirmation{
-    text-align: center;
-    background : lightgreen;
-    width : 200px;
-    height : 200px;
-    z-index : 2;
-    position: absolute;
-    top: 50%;
-    right: 50%;
-    left: 50%;
-    bottom: 50%;
-    border-radius: 30px;
-}
-
-
-.commentConfirmation{
-    text-align: center;
-    background : lightgreen;
-    width : 200px;
-    height : 200px;
-    z-index : 2;
-    position: absolute;
-    top: 55vw;
-    right: 50vw;
-    left: 50vw;
-    bottom: 50vw;
-    border-radius: 30px;
-}
-
-.updateComConfirmation{
-    text-align: center;
-    background : lightgreen;
-    width : 200px;
-    height : 200px;
-    z-index : 2;
-    position: absolute;
-    top: 55vw;
-    right: 50vw;
-    left: 50vw;
-    bottom: 50vw;
-    border-radius: 30px;
-}
-
-/* .about{
-    display:flex;
-    align-items: center;
-    margin:50px;
-}
-
-.textAbout{
-    margin:150px;
-} */
-
-/* Statistics */
-
-.chapterStatsContainer, .userStatsContainer{
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-.chapterStats{
-    height: 250px;
-    width: 500px;
-    margin: 0 20px 0 50px;
-    border: 1px solid darkgrey;
-}
-
-.top10block{
-    text-align: center;
-    background:lightblue;
-    border: 1px solid grey;
-    margin-right: 200px;
-    height:400px;
-    width:700px;
-}
-
-.topLines{
-    padding: 1px;
-    border-top: 1px solid grey;
-}
-
-.usersBlock{
-    height: 350px;
-    margin: 0 20px 0 50px;
-    border: 1px solid darkgrey; */
-
-
-    /* 
 Template Name: WebMag Html Template
 
 Author: yaminncco
@@ -328,6 +19,13 @@ NAVIGATION
 HEADER
 POST
 POST PAGE
+PUBLISH & MANAGE
+MANAGE COMMENTS
+USERS
+STATISTICS
+ABOUT
+MISC
+CONFIRMATION MESSAGES
 ASIDE
 FOOTER
 RESPONSIVE
@@ -343,7 +41,7 @@ RESPONSIVE
     font-size: 16px;
     font-weight: 300;
     color: #3d455c;
-    margin: 0;
+    margin: 100px 0 0 0;
     padding: 0;
     overflow-x: hidden;
 }
@@ -451,6 +149,24 @@ textarea.input {
     color: #fff;
     opacity: 0.9;
 }
+
+.btn-success{
+    padding: 9px 45px;
+    border: none;
+    text-transform: uppercase;
+    font-size: 13px;
+    color: #fff;
+    -webkit-transition: 0.2s opacity;
+    transition: 0.2s opacity;
+    margin:10px 0 10px 0;
+    border-radius : 5px;
+}
+
+.btn-success:hover,.btn-success:focus {
+    color: #fff;
+    opacity: 0.9;
+}
+
 .section {
     padding-top: 40px;
 }
@@ -458,6 +174,7 @@ textarea.input {
     background-color: #fbfbfd;
     border-bottom: 1px solid #eceef2;
     border-top: 1px solid #eceef2;
+    margin-bottom: 20px;
 }
 .section .section-title {
     margin-bottom: 40px;
@@ -472,7 +189,94 @@ textarea.input {
 /*=========================================================
    NAVIGATION
 ===========================================================*/
-#nav {
+
+/* Regular Menu */
+.menu{
+    height:auto;    
+    background-image: linear-gradient(to right, rgba(71, 71, 71, 0.8), rgba(196, 206, 255, 0.8));
+    position:fixed;
+    top:0;
+    z-index: 10;
+    width:100%;
+    box-shadow: 0 2px 5px black;
+}
+
+.menuBtns{
+    display:flex;
+    justify-content: flex-end;
+    
+}
+
+.menu button, .menuAdmin button{
+    margin:10px 20px 10px 0;
+}
+
+.menuAdmin .fa-home, .menu .fa-home{
+    color:white;
+    font-size:30px;
+    float:left;
+    margin:15px 0 10px 20px;
+    transition:0.2s;
+}
+
+.menuAdmin .fa-home:hover, .menu .fa-home:hover{
+    color:rgb(168, 162, 253);
+}
+
+
+.helloText{
+    color:white;
+    margin:15px 50px 10px 0;
+}
+
+.updatePassBtn{
+    height:10% !important;
+}
+
+/* Admin menu */
+
+.menuAdmin{
+    background-image: linear-gradient(to right, rgba(71, 71, 71, 0.8), rgba(160, 51, 51, 0.8));
+    position:fixed;
+    top:0;
+    z-index: 10;
+    width:100%;
+    box-shadow: 0 2px 5px black;
+}
+
+.adminMenu{
+    display:flex;
+    justify-content : space-around;
+    align-items: center;
+    margin-right:5%;
+}
+
+.adminMenu i{
+    color:white;
+    font-size : 25px;
+    margin:10px;
+    transition: 0.2s;
+}
+
+.adminMenu a{
+    color:white;
+    margin-right:50px;
+    transition: 0.2s;
+}
+
+.adminMenu a:hover{
+    color:#8d8d8d;
+    margin-right:50px;
+    text-decoration: none;
+}
+
+
+
+.adminMenuLink:hover > i{
+    color:#8d8d8d;
+}
+
+/* #nav {
     height: 70px;
 }
 #nav:after {
@@ -555,11 +359,11 @@ textarea.input {
 }
 #nav .container {
     position: relative;
-}
+} */
 /*----------------------------*\
    logo
 \*----------------------------*/
-.nav-logo {
+/* .nav-logo {
     float:left;
 }
 .nav-logo .logo {
@@ -569,11 +373,11 @@ textarea.input {
 .nav-logo .logo > img {
     width: 100%;
     max-height: 70px;
-}
+} */
 /*----------------------------*\
    menu
 \*----------------------------*/
-.nav-menu {
+/* .nav-menu {
     margin-left: 20px;
 }
 .nav-menu li a {
@@ -630,7 +434,7 @@ textarea.input {
 /*----------------------------*\
    search
 \*----------------------------*/
-.nav-btns {
+/* .nav-btns {
     float:right;
 }
 .nav-btns > button {
@@ -676,11 +480,11 @@ textarea.input {
     color: #212631;
     font-size: 22px;
     padding: 0;
-}
+}  */
 /*----------------------------*\
    nav aside
 \*----------------------------*/
-#nav-aside {
+/* #nav-aside {
     position: fixed;
     right: 0;
     top: 0;
@@ -740,7 +544,7 @@ textarea.input {
     font-size: 22px;
     border-radius: 50%;
     padding: 0;
-}
+} */
 /*=========================================================
    HEADER
 ===========================================================*/
@@ -817,6 +621,31 @@ textarea.input {
 /*----------------------------*\
    post
 \*----------------------------*/
+.masthead {
+    height: 50vh;
+    min-height: 300px;
+    background-image: url('../img/home-picture.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    color:white;
+    display: flex;
+    align-items: center;
+    margin-top:-100px !important;
+    margin-bottom:40px;
+    box-shadow: 0 2px 2px black;
+
+    
+  }
+
+  .font-weight-light{
+      color:rgb(168, 169, 199);
+      margin-top:50px !important;
+      padding : 10px 0 10px 0;
+      border-top:1px white solid;
+  }
+
+
 .post {
     margin-bottom: 40px;
 }
@@ -831,6 +660,8 @@ textarea.input {
 .post .post-img > img {
     width: 100%;
 }
+
+
 .post .post-meta {
     margin-top: 15px;
     margin-bottom: 15px;
@@ -886,6 +717,27 @@ textarea.input {
     -webkit-transition:0.2s opacity;
     transition:0.2s opacity;
 }
+
+.fa-comments{
+    margin-left:20px;
+}
+
+.readMoreAndCommentsIcons{
+    text-decoration: none !important;
+    transition: 0.2s
+}
+
+.readMoreAndCommentsIcons:hover{
+    color:rgb(128, 128, 197);
+}
+
+.listPostIcons{
+    float:right;
+}
+
+.listPostIcons i{
+    color:red;
+}
 /*----------------------------*\
    post thumb
 \*----------------------------*/
@@ -931,6 +783,8 @@ textarea.input {
 }
 .post.post-widget .post-img img {
     width: 100%;
+    border-radius: 50%;
+
 }
 .post.post-widget .post-title {
     font-size: 18px;
@@ -949,6 +803,9 @@ textarea.input {
 }
 .post.post-row .post-body {
     margin-left: calc(40% + 30px);
+}
+.postIndex{
+    margin-bottom:20px !important;
 }
 .post.post-row .post-meta {
     margin-top: 0px;
@@ -1040,12 +897,21 @@ textarea.input {
     color: #FFF;
     opacity: 0.9;
 }
+
+
+[class*="editBtns"]{
+    background:none;
+    border:none;
+}
+
+
 /*----------------------------*\
    comments
 \*----------------------------*/
 .post-comments .media {
-    padding-top: 15px;
-    border-top: 1px solid #eceef2;
+    padding-top: 15px !important;
+    border-top: 1px solid #eceef2 !important;
+    margin-top : 20px !important;
 }
 .post-comments .media:nth-child(1) {
     padding-top: 0px;
@@ -1076,11 +942,241 @@ textarea.input {
     color: #212631;
     text-decoration: none;
 }
+
+.fa-exclamation-triangle, .fa-trash{
+    color:red;
+    font-size:17px;
+    margin-bottom: 10px;
+}
+
+.fa-check-circle{
+    color:green;
+    font-size:17px;
+    margin-bottom: 10px;
+}
+
+.fa-edit, .fa-trash-alt{
+    font-size:17px;
+    margin-bottom: 10px;
+}
+
+.adminIcon{
+    font-size : 25px;
+    float:right;
+    margin-left:10px;
+}
+
+.reportBtn{
+    font-family: Arial;
+    font-size:10px;
+}
+
+.commentsBtn
+{   
+    text-align: right;
+    margin-right : 50px;
+    margin-top: -20px;
+}
+.section-title{
+    margin-top:100px !important;
+}
+
+[class*="editCommentForm"]{
+    display:none;
+}
+
+/*=========================================================
+   PUBLISH & MANAGE
+===========================================================*/
+.postsBlock{
+    color:#0085a1;
+    background: rgb(231, 231, 231);
+    transition: 0.3s;
+    padding:20px;
+    margin:20px auto;  
+    border-radius: 10px;
+    width:90%;
+    height:100%;
+    overflow-wrap: break-word;
+}
+
+#postContent{
+    width: 100%;
+    height: 800px;
+    margin:auto;
+}
+
+/*=========================================================
+   MANAGE COMMENTS
+===========================================================*/
+.manageComBtns{
+    display:flex;
+}
+
+.manageComBtn{
+    background:orange;
+    margin:5px;
+}
+
+.comments{
+    overflow-wrap: break-word;
+}
+
+.reportedComments{
+    background:rgb(245, 176, 176) !important;
+    overflow-wrap: break-word;
+    border-radius: 3px;
+    padding-left:10px;
+}
+
+
+.reportedComments p:first-child{
+    background: red;
+    color: white;
+    margin-left:-10px;
+    padding-left:10px;   
+}
+
+.reportedComments .time{
+    color: white !important;
+}
+
+.acceptDenyComments{
+    background:lightblue !important;
+    overflow-wrap: break-word;
+}
+
+.commentHead{
+    background: red;
+    color: white;
+}
+
+.noReportedComments, .noCommentsToManage{
+    color: white;
+    font-weight: bold;
+    background: rgb(84, 212, 84);
+    text-align: center;
+    margin: 50px;
+    padding: 20px;
+}
+
+/*=========================================================
+   USERS
+===========================================================*/
+
+
+/*=========================================================
+   STATISTICS
+===========================================================*/
+.chapterStatsContainer, .userStatsContainer{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.chapterStats{
+    height: 250px;
+    width: 500px;
+    margin: 0 20px 0 50px;
+    border: 1px solid darkgrey;
+}
+
+.top10block{
+    text-align: center;
+    background:lightblue;
+    border: 1px solid grey;
+    margin-right: 200px;
+    height:400px;
+    width:700px;
+}
+
+.topLines{
+    padding: 1px;
+    border-top: 1px solid grey;
+}
+
+.usersBlock{
+    height: 350px;
+    margin: 0 20px 0 50px;
+    border: 1px solid darkgrey;
+}
+
+/*=========================================================
+   ABOUT
+===========================================================*/
+.about{
+    margin:150px 70px 150px 70px;
+}
+
+.imageAbout img{
+    width:100%;
+}
+
+/*=========================================================
+   MISC
+===========================================================*/
+.paginationBlock{
+    display: flex;
+}
+
+#counter{
+    font-size: 15px;
+    margin: 0 0 5px 15px;
+}
+
+.form-group{
+    margin-bottom: 0 !important;
+}
+
+/*=========================================================
+   CONFIRMATION MESSAGES
+===========================================================*/
+.signInConfirmation{
+    text-align: center;
+    background : lightgreen;
+    width : 200px;
+    height : 200px;
+    z-index : 2;
+    position: absolute;
+    top: 50%;
+    right: 50%;
+    left: 50%;
+    bottom: 50%;
+    border-radius: 30px;
+}
+
+
+.commentConfirmation{
+    text-align: center;
+    background : lightgreen;
+    width : 200px;
+    height : 200px;
+    z-index : 2;
+    position: absolute;
+    top: 55vw;
+    right: 50vw;
+    left: 50vw;
+    bottom: 50vw;
+    border-radius: 30px;
+}
+
+.updateComConfirmation{
+    text-align: center;
+    background : lightgreen;
+    width : 200px;
+    height : 200px;
+    z-index : 2;
+    position: absolute;
+    top: 55vw;
+    right: 50vw;
+    left: 50vw;
+    bottom: 50vw;
+    border-radius: 30px;
 /*=========================================================
    Aside
 ===========================================================*/
 .aside-widget {
-    margin-bottom: 40px;
+    margin: 0 0 40px 40px;
 }
 /*----------------------------*\
    category
@@ -1174,33 +1270,26 @@ textarea.input {
    FOOTER
 ===========================================================*/
 #footer {
-    padding-bottom: 40px;
+    width:100%;
+    padding-bottom: 20px;
     margin-top: 40px;
+    background:rgb(168, 168, 168);
 }
 #footer .container {
-    padding-top: 80px;
+    padding-top: 20px;
     border-top: 1px solid #F4f4f9;
 }
-.footer-widget {
-    margin-bottom: 40px;
+
+#footer a{
+    cursor: pointer;
+    transition: 0.2s;
 }
-.footer-widget .footer-title {
-    margin-bottom: 40px;
-    text-transform: capitalize;
-    font-size: 18px;
-}
-.footer-widget a {
-    color: #a7b3c6;
-    -webkit-transition: 0.2s color;
-    transition: 0.2s color;
-}
-.footer-widget a:hover, .footer-widget a:focus {
+
+#footer a:hover{
+    color:white;
     text-decoration: none;
-    color: #212631;
 }
-.footer-logo {
-    margin-bottom: 40px;
-}
+
 .footer-nav li {
     display: inline-block;
     margin-right: 15px;
@@ -1210,8 +1299,9 @@ textarea.input {
 }
 .footer-copyright {
     margin-top: 20px;
-    color: #a7b3c6;
+    color: white;
     font-size: 13px;
+    text-align: center;
 }
 .footer-newsletter form {
     position: relative;
@@ -1260,6 +1350,109 @@ textarea.input {
     color: #FFF;
     opacity: 0.9;
 }
+
+.fa-arrow-circle-up{
+    float:right;
+    margin-right:10px;
+    font-size:40px;
+    transition:0.2s
+}
+
+.fa-arrow-circle-up:hover{
+    color:rgb(241, 241, 241);
+}
+
+.contactForm .btn-primary{
+    margin-top:5px;
+    float:right;
+}
+
+
+/*=========================================================
+   ERROR PAGE
+===========================================================*/
+
+.errorPage{
+    background-image: url('../img/ErrorPage.jpg');
+    background-size: cover;
+    background-position: top;
+    background-repeat: no-repeat;
+    text-align: center;
+}
+
+.errorPageContainer{
+    background: rgba(0, 0, 0, 0.3);
+    width:50%;
+    margin:auto;
+    padding:80px;
+    border-radius: 30px;
+    color:white;
+}
+
+.errorPageContainer h1, .errorPageContainer strong{
+    color:white;
+    margin-bottom: 50px;
+}
+
+.errorPage .fa-home{
+    font-size: 20px;
+    color:white;
+    margin-right: 10px;
+}
+
+.errorPage a{
+    color:white;
+    margin-right: 10px;
+}
+
+/*=========================================================
+   USERS
+===========================================================*/
+
+.usersDisplay{
+    overflow-wrap: break-word;
+    border:1px solid black;
+    margin: 0 0 10px 0;
+}
+
+.usersDisplay input[type="checkbox"]{
+    margin-right:25px;
+}
+.userListHeader{
+    background: grey;
+    color: white;
+    padding-left:5px;
+}
+
+.roleAndDelete{
+    padding-left:15px;
+}
+.fa-user-times{
+    color:red;
+    font-size:20px;
+    margin-right:10px;
+}
+
+.btn-danger{
+    margin:15px 0 15px 5px;
+}
+
+.roleAndDelete{
+    display:flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 0 20px 10px 0;
+}
+
+.deleteUserLink{
+    transition:0.2s;
+}
+
+.deleteUserLink:hover{
+    color:red;
+    text-decoration: none;
+}
+
 /*=========================================================
    RESPONSIVE
 ===========================================================*/
