@@ -1075,13 +1075,87 @@ textarea.input {
 /*=========================================================
    MANAGE COMMENTS
 ===========================================================*/
-.manageComBtns{
+
+.titleManageCom{
+    text-align: center;
+    border-bottom: 1px solid black;
+    
+}
+
+#sectionReported{
+    margin-bottom:100px;
+}
+
+.btn-successs{
+    background:rgb(24, 167, 24);
+    color:white;
+}
+
+.manageComIcons{
+    display:flex;
+    justify-content: space-between;
+}
+
+.viewComArticle{
     display:flex;
 }
 
+.approvDelComs{
+    margin-right:20px;
+}
+
+.approvDelComs a{
+    margin-right:20px;
+}
+
+.viewComArticle p{
+    margin-right: 30px;
+}
+
+.viewComArticle a{
+    transition: 0.2s;
+}
+.viewComArticle a:hover{
+    text-decoration: none;
+    color:rgb(94, 94, 255);
+}
+
+
+
+.approvDelComs a:first-child{
+    color:green;
+    text-decoration: none;
+    transition: 0.2s;
+}
+
+.approvDelComs a:first-child:hover{
+    color:rgb(15, 202, 15);    
+}
+
+.approvDelComs a:nth-child(2){
+    color:red;
+    text-decoration: none;
+    transition: 0.2s;
+}
+
+.approvDelComs a:nth-child(2):hover{
+    color:rgb(255, 130, 28);    
+}
+
+
+
+
+.manageComBtns{
+    margin:20px 0 40px 0 ;
+}
+
 .manageComBtn{
-    background:orange;
-    margin:5px;
+    transition:0.2s;
+}
+
+.manageComBtn:hover{
+    text-decoration: none;
+    color:#f5c908;
 }
 
 .comments{
@@ -1089,32 +1163,40 @@ textarea.input {
 }
 
 .reportedComments{
-    background:rgb(245, 176, 176) !important;
+    background:rgb(255, 216, 216) !important;
     overflow-wrap: break-word;
     border-radius: 3px;
     padding-left:10px;
+    margin-bottom: 10px;
 }
 
-
-.reportedComments p:first-child{
-    background: red;
-    color: white;
-    margin-left:-10px;
-    padding-left:10px;   
-}
 
 .reportedComments .time{
-    color: white !important;
+    color: rgb(85, 17, 17) !important;
 }
 
 .acceptDenyComments{
-    background:lightblue !important;
+    background:rgb(214, 242, 252) !important;
     overflow-wrap: break-word;
+    border-radius: 3px;
+    padding-left:10px;
+    margin-bottom: 10px;
 }
 
 .commentHead{
     background: red;
     color: white;
+    margin-left:-10px;
+    padding-left:10px;   
+    border-radius:3px;
+}
+
+.newCommentHead{
+    background: lightgrey;
+    color: black;
+    margin-left:-10px;
+    padding-left:10px;   
+    border-radius:3px;
 }
 
 .noReportedComments, .noCommentsToManage{
@@ -1626,4 +1708,7 @@ textarea.input {
     .post.post-row .post-body p {
         display:none;
    }
+   .manageComIcons{
+        display:block;
+    }
 }
