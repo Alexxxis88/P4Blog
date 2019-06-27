@@ -133,7 +133,7 @@ class CommentManager extends Manager
     }
 
     //must receive an array of ids to delete all the comments at once. (?) = my array, see here https://www.tutorialspoint.com/mysql/mysql-in-clause.htm
-    public function eraseAllSelectedComments($arrayCommentsIDs) //NOT WORKING :
+    public function eraseAllSelectedComments($arrayCommentsIDs) 
     {
         //on compte la longueur du tableau pour arrêter la boucle for au bon moment
         $arrayLength = count($arrayCommentsIDs, COUNT_NORMAL);
@@ -164,12 +164,9 @@ class CommentManager extends Manager
 
     public function getNbOfReportedComments() // display number of comments to manage 
     {
-        $reportedCommentNb = $this->_db->query('SELECT SUM(flag) AS flagTotal FROM comments');
+        $req = $this->_db->query('SELECT SUM(flag) AS flagTotal FROM comments');
+        $reportedCommentNb= $req->fetch();
         return $reportedCommentNb;
     }
-
-  
- 
-
 
 }

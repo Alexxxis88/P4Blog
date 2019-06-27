@@ -81,6 +81,11 @@ class CommentController{
     //display reported and new comments
     public function listAllComments()
     {   
+
+        //change color of the menu comment icon in red if comments to manage FIXME : factoriser ? au lieu de copier plein de fois ? 
+        $commentManager = new CommentManager();
+        $nbOfReportedComments = $commentManager->getNbOfReportedComments();
+
         //check the role of the logged in user to display or not Admin features
         $sessionController = new SessionController;
         $checkUserRole = $sessionController->checkUserRole();
@@ -111,31 +116,4 @@ class CommentController{
         header('Location: ' . $_SERVER['HTTP_REFERER'] . '&success=6');
         exit;
     }
-
-    public function nbOfReportedComments() // NOT WORKING : display number of comments to manage 
-    {   
-        $commentManager = new CommentManager();
-        $nbOfReportedComments = $commentManager->getNbOfReportedComments();
-        // if($nbOfReportedComments>0){
-        // ? >
-        // <!-- displays an alert icon if comments to manage -->   
-        //     <script>
-        //             if ( !$.trim($('.reportedComments').html() ).length ) 
-        //             {
-        //                     $('.comAlert').css("display", "none");
-        //             } else {
-        //                     $('.comAlert').css("display", "block");
-        //             }
-        //    </script> 
-        // <?php        
-        // }
-    }
-    
-    
-
-   
-
-
-
-
 }

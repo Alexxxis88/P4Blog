@@ -7,7 +7,12 @@ class PostController{
 
   //gets all the post to display in listPostsView. 
     public function listPosts()
-    {
+    {   
+
+    //change color of the menu comment icon in red if comments to manage FIXME : factoriser ? au lieu de copier plein de fois ? 
+        $commentManager = new CommentManager();
+        $nbOfReportedComments = $commentManager->getNbOfReportedComments();
+
         $postManager = new PostManager();
     
     //Pagitation     
@@ -46,6 +51,11 @@ class PostController{
 
     public function post()
     {   
+
+        //change color of the menu comment icon in red if comments to manage FIXME : factoriser ? au lieu de copier plein de fois ? 
+        $commentManager = new CommentManager();
+        $nbOfReportedComments = $commentManager->getNbOfReportedComments();
+
         $sessionController = new SessionController;
         $checkUserRole = $sessionController->checkUserRole();
 
@@ -97,6 +107,11 @@ class PostController{
 
     public function displayPublishView()
     {   
+
+        //change color of the menu comment icon in red if comments to manage FIXME : factoriser ? au lieu de copier plein de fois ? 
+        $commentManager = new CommentManager();
+        $nbOfReportedComments = $commentManager->getNbOfReportedComments();
+        
         $sessionController = new SessionController;
         $checkUserRole = $sessionController->checkUserRole();
         if($checkUserRole['groupId'] != 1)
@@ -133,6 +148,10 @@ class PostController{
         {
             throw new Exception('Vous n\'avez pas accès à cette page');
         }
+        
+        //change color of the menu comment icon in red if comments to manage FIXME : factoriser ? au lieu de copier plein de fois ? 
+        $commentManager = new CommentManager();
+        $nbOfReportedComments = $commentManager->getNbOfReportedComments();
         
         $postManager = new PostManager();
         $displayedPostToEdit = $postManager->getPost($postId);

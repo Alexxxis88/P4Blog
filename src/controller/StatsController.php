@@ -11,6 +11,10 @@ class StatsController{
         throw new Exception('Vous n\'avez pas accès à cette page');
     }
 
+    //change color of the menu comment icon in red if comments to manage FIXME : factoriser ? au lieu de copier plein de fois ? 
+    $commentManager = new CommentManager();
+    $nbOfReportedComments = $commentManager->getNbOfReportedComments();
+    
     $statsManager = new StatsManager();
     $usersStats = $statsManager->getUsersStats();
     $exec =  $statsManager->statsPosts();

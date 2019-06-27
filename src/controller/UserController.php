@@ -11,7 +11,11 @@ class UserController{
     {
         throw new Exception('Vous n\'avez pas accès à cette page');
     }
-        
+    
+    //change color of the menu comment icon in red if comments to manage FIXME : factoriser ? au lieu de copier plein de fois ? 
+    $commentManager = new CommentManager();
+    $nbOfReportedComments = $commentManager->getNbOfReportedComments();
+
     $userManager = new UserManager();
     
     //Pagination
@@ -72,7 +76,4 @@ class UserController{
     header('Location: ' . $_SERVER['HTTP_REFERER']); //FIXME : SQL injection issue ? 
     exit;
   }
-
-
-
 }
