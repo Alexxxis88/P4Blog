@@ -33,10 +33,19 @@
 		<link href="https://fonts.googleapis.com/css?family=Nunito+Sans:700%7CNunito:300,600" rel="stylesheet"> 
 
         <!-- Bootstrap -->
-        <link type="text/css" rel="stylesheet" href="./public/css/bootstrap.min.css"/>
+            <!-- <link type="text/css" rel="stylesheet" href="./public/css/bootstrap.min.css"/> FIXME DELETE? --> 
+            <!-- Latest compiled and minified CSS -->
+            <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 
+            <!-- Optional theme -->
+            <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+
+            <!-- Latest compiled and minified JavaScript -->
+            <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+        
         <!-- Font Awesome Icon -->
-		<link rel="stylesheet" href="./public/css/font-awesome.min.css">
+		<!-- <link rel="stylesheet" href="./public/css/font-awesome.min.css"> FIXME DELETE -->
         <script src="https://kit.fontawesome.com/0e45521ec5.js"></script>
 
         <!-- Custom stlylesheet -->
@@ -61,7 +70,8 @@
         <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
         <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"> FIXME : delete ? change l'apparence du menu. Une fois le design fini voir si le fait de l'enlever /rajouter change un truc--> 
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+        <!-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script> FIXME : delete ? -->
+
         <?php require('templates/admin/statsCharts.php'); ?>
 
         <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->

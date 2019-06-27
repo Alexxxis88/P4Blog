@@ -320,13 +320,6 @@ ob_start(); ?>
 		</div>
 		<!-- /section -->
 
-		
-
-		<!-- jQuery Plugins -->
-		<script src="js/jquery.min.js"></script>
-		<script src="js/bootstrap.min.js"></script>
-		<script src="js/main.js"></script>
-
 		<?php $content = ob_get_clean(); ?>
 
 <?php require('templates/base.php'); ?>
