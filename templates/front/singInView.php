@@ -41,8 +41,8 @@ $clef_du_site = "6Lck9KoUAAAAAMCUwtdhDPbJPiAQTEzi8mIFOpI9";
                                 <label for="email" class="col-form-label">Adresse Email*</label>
                                 <input type="text" class="form-control" id="email" name="email" required>
                             </div><br/>
-                            <div class="g-recaptcha" data-sitekey="6Lck9KoUAAAAAMCUwtdhDPbJPiAQTEzi8mIFOpI9"></div><br/>
-                            <input type="submit" class="btn btn-primary" value="S'inscrire"/>
+                            <div class="g-recaptcha" data-sitekey="6Lck9KoUAAAAAMCUwtdhDPbJPiAQTEzi8mIFOpI9" data-callback="enableBtn"></div><br/>
+                            <input type="submit" class="btn btn-primary" id="signInBtn" value="S'inscrire"/>
                         </form>
                     </div>
                 </div>
@@ -57,3 +57,12 @@ $('#singInModal').on('show.bs.modal', function (event) {
   var button = $(event.relatedTarget) // Button that triggered the modal
   var modal = $(this)
 })</script>
+
+
+<!-- Enable submit button only if reCaptcha is valid -->
+<script>
+    document.getElementById("signInBtn").disabled = true;
+    function enableBtn(){
+        document.getElementById("signInBtn").disabled = false;
+    }
+</script>
