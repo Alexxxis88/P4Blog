@@ -299,7 +299,7 @@ ob_start(); ?>
             $publishDate = $lastPosts[$i]->modPublishDate();
         ?>       
 							<div class="post post-widget">
-								<a class="post-img" href="index.php?action=post&id=<?=$id?>&page=1&sortBy=5"><img src="./public/img/widget-<?=$id?>.jpg" alt=""></a>
+								<a class="post-img" href="index.php?action=post&id=<?=$id?>&page=1&sortBy=5"><img src="./public/img/post-<?=$id?>.jpg" alt=""></a>
 								<div class="post-body">
 									<a href="index.php?action=post&id=<?=$id?>&page=1&sortBy=5"><em class="post-title"><?= htmlspecialchars($chapter) ?></em><br/><p>  <?= htmlspecialchars($lastPostTitle)?></p></a>
 									

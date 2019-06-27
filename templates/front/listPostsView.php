@@ -63,7 +63,7 @@
                     <!-- post -->
                     <div class="col-md-4">
                         <div class="post">
-                            <a class="post-img" href="index.php?action=post&id=<?=$id?>&page=1&sortBy=5"><img src="./public/img/post-preview-<?= $id?>.jpg" alt=""></a>
+                            <a class="post-img" href="index.php?action=post&id=<?=$id?>&page=1&sortBy=5"><img src="./public/img/post-<?= $id?>.jpg" alt=""></a>
                             <div class="post-body">
                                 <div class="post-meta">
                                     <span class="post-date">

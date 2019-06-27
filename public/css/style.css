@@ -642,10 +642,9 @@ textarea.input {
     background-image: linear-gradient(to top, rgba(33, 38, 49, 0.3) 0%, transparent 100%);
 }
 #post-header.page-header {
-    padding-top: 120px;
+    padding-top: 200px;
 }
 .page-header h1 {
-    text-transform: capitalize;
     margin-bottom: 0px;
 }
 #post-header.page-header h1 {
@@ -715,6 +714,12 @@ textarea.input {
 .post {
     margin-bottom: 40px;
 }
+
+.post p{
+    overflow: hidden;
+    max-height:220px;
+}
+
 .post .post-img {
     display: block;
     -webkit-transition: 0.2s opacity;
@@ -1348,7 +1353,6 @@ SUCCESS MESSAGES
 }
 
 .successModal-content p{
-    word-break: break-all;
     text-align: center;
     line-height: 25px;
     font-size: 15px;
