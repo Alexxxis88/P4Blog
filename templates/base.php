@@ -43,7 +43,7 @@
         <link href="./public/css/style.css" rel="stylesheet" /> 
 
         <!--GDPR Cookies disclaimer-->
-        <script id="Cookiebot" src="https://consent.cookiebot.com/uc.js" data-cbid="8f33029f-67db-4439-af40-bfb1da747800" type="text/javascript" async></script>
+        <script id="Cookiebot" src="https://consent.cookiebot.com/uc.js" data-cbid="56b79623-bfec-4453-85a4-74b56c492891" type="text/javascript" async></script>
 
         <!-- TinyMCE -->
         <script src="https://cdn.tiny.cloud/1/mpujcznv2qarii6l81l67tjf7m8okalduchv3ot3xy9hv0g3/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
