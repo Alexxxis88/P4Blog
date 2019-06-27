@@ -25,7 +25,7 @@ USERS
 STATISTICS
 ABOUT
 MISC
-CONFIRMATION MESSAGES
+SUCCESS MESSAGES
 ASIDE
 FOOTER
 RESPONSIVE
@@ -1241,14 +1241,14 @@ textarea.input {
     padding:15px;
     border:1px solid black;
     margin-bottom: 5px;
-    background:rgb(138, 255, 138);
+    background:rgb(183, 255, 183);
 }
 
 .worstChaptUser{
     padding:15px;
     border:1px solid black;
     border-collapse: collapse;
-    background:rgba(255, 0, 0, 0.6);
+    background:rgba(255, 92, 92, 0.6);
 }
 
 #columnchart12{
@@ -1319,50 +1319,42 @@ textarea.input {
 }
 
 /*=========================================================
-   CONFIRMATION MESSAGES
+SUCCESS MESSAGES
 ===========================================================*/
-.signInConfirmation{
-    text-align: center;
-    background : lightgreen;
-    width : 200px;
-    height : 200px;
-    z-index : 2;
-    position: absolute;
-    top: 50%;
-    right: 50%;
-    left: 50%;
-    bottom: 50%;
-    border-radius: 30px;
+
+
+/* Custom Modal Box*/
+
+
+.successModal {
+    display: block;
+    position: fixed;
+    z-index: 100;
+    left: 0;
+    top: 0;
+    width: 100%; 
+    height: 100%; 
+    overflow: auto; 
+    background-color: rgba(0,0,0,0.4);
 }
 
-
-.commentConfirmation{
-    text-align: center;
-    background : lightgreen;
-    width : 200px;
-    height : 200px;
-    z-index : 2;
-    position: absolute;
-    top: 55vw;
-    right: 50vw;
-    left: 50vw;
-    bottom: 50vw;
-    border-radius: 30px;
+.successModal-content {
+    background-color: #fefefe;
+    margin: 10% auto;
+    padding: 20px;
+    border: 1px solid black;
+    border-radius: 10px;
+    width: 50%;  
 }
 
-.updateComConfirmation{
+.successModal-content p{
+    word-break: break-all;
     text-align: center;
-    background : lightgreen;
-    width : 200px;
-    height : 200px;
-    z-index : 2;
-    position: absolute;
-    top: 55vw;
-    right: 50vw;
-    left: 50vw;
-    bottom: 50vw;
-    border-radius: 30px;
-}    
+    line-height: 25px;
+    font-size: 15px;
+}
+
+    
 /*=========================================================
    Aside
 ===========================================================*/

@@ -114,7 +114,8 @@
 
 <?php require('templates/front/contactView.php'); ?>
 <!-- My scripts -->
-<!-- <script src="/public/js/burger.js" ></script> -->
+<!-- <script src="./public/js/burger.js" ></script> -->
+<script src="./public/js/myModal.js" ></script>
 
 <script>
 // Burger menu

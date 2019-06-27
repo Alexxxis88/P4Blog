@@ -20,7 +20,7 @@ class CommentController{
         
         $commentManager = new CommentManager();
         $commentApproved =  $commentManager->approveComment($commentId);
-        header('Location: ' . $_SERVER['HTTP_REFERER']);
+        header('Location: ' . $_SERVER['HTTP_REFERER'] . '&success=6');
         exit;
     }
 
@@ -100,7 +100,7 @@ class CommentController{
         $commentManager = new CommentManager();
         
         $deleteAllSelectedComments = $commentManager->eraseAllSelectedComments($arrayCommentsIDs);
-        header('Location: ' . $_SERVER['HTTP_REFERER']);
+        header('Location: index.php?action=manageComments');
         exit;
     }
 
@@ -108,7 +108,7 @@ class CommentController{
     {
         $commentManager = new CommentManager();
         $approveAllSelectedComments = $commentManager->acceptAllSelectedComments($arrayCommentsIDs);
-        header('Location: ' . $_SERVER['HTTP_REFERER']);
+        header('Location: ' . $_SERVER['HTTP_REFERER'] . '&success=6');
         exit;
     }
 

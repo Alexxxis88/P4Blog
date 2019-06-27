@@ -209,13 +209,12 @@ ob_start(); ?>
                         //display approve button only if comment already reported
                             if($flag > 0)
                         {
-                            //FIXME : change class of the approve button
-                            echo '<a href="index.php?action=approveComment&amp;id=' . $post->id() . '&amp;commentId='. $idComment . '"  onclick="return alert(\'Commentaire approuvé\')" ><i class="far fa-check-circle"></i></a>' ;
+                            echo '<a href="index.php?action=approveComment&amp;id=' . $post->id() . '&amp;commentId='. $idComment . '"  onclick="return confirm(\'Approuver ce commentaire ?\')" ><i class="far fa-check-circle"></i></a>' ;
                         }
                                 
                     ?>    
                         <!-- gets the commentId as a parameter in the URL of the comment to delete AND the post id to return on the same post after comment has been deleted-->
-                        <a href="index.php?action=deleteComment&amp;id=<?= $post->id() ?>&amp;commentId=<?= $idComment ?>" onclick="return confirm('Etes-vous sûr?')"><i class="fas fa-trash"></i></a>
+                        <a href="index.php?action=deleteComment&amp;id=<?= $post->id() ?>&amp;commentId=<?= $idComment ?>" onclick="return confirm('Supprimer ce commentaire ?')"><i class="fas fa-trash"></i></a>
                     <?php
                     }
                     ?> 

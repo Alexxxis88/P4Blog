@@ -14,8 +14,8 @@
                 <form action="index.php?action=manageAllSelectedComments" method="post"> 
                         <input type="checkbox" id="checkAllReported" checked>
                         <label for="checkAllReported"> Tout sélectionner / désélectionner </label>
-                        <input type="submit" class="btn btn-danger btn-sm" name="deleteSelectedComments[]" value="Supprimer" onclick="return confirm('Etes-vous sûr?')">
-                        <input type="submit" class="btn btn-successs btn-sm" name="approveSelectedComments[]" value="Approuver" onclick="return alert('Commentaire(s) approuvé(s)')">
+                        <input type="submit" class="btn btn-danger btn-sm" name="deleteSelectedComments[]" value="Supprimer" onclick="return confirm('Supprimer tous ces commentaires ?')">
+                        <input type="submit" class="btn btn-successs btn-sm" name="approveSelectedComments[]" value="Approuver" onclick="return confirm('Approuver tous ces commentaires ?')">
                 <?php
                         //je déclare un tableau vide qui va me servir a stocker tous les ids des commentaires signalés
                         $arrayComments = array();
@@ -53,9 +53,9 @@
                                                 </div>
                                                 
                                                 <div class="approvDelComs">
-                                                <a href="index.php?action=approveComment&amp;commentId=<?= $idComment ?>"  onclick="return alert('Commentaire approuvé')" ><i class="far fa-check-square"></i>  Approuver</a>
+                                                <a href="index.php?action=approveComment&amp;commentId=<?= $idComment ?>"  onclick="return confirm('Approuver ce commentaire ?')" ><i class="far fa-check-square"></i>  Approuver</a>
 
-                                                <a href="index.php?action=deleteComment&amp;id=<?= $postId ?>&amp;commentId=<?= $idComment ?>" onclick="return confirm('Etes-vous sûr?')"><i class="far fa-trash-alt"></i> Supprimer</a>
+                                                <a href="index.php?action=deleteComment&amp;id=<?= $postId ?>&amp;commentId=<?= $idComment ?>" onclick="return confirm('Supprimer ce commentaire ?')"><i class="far fa-trash-alt"></i> Supprimer</a>
                                                 </div>
                                         </div>
                                 
@@ -100,8 +100,8 @@
                 <form action="index.php?action=publishAllSelectedComments" method="post"> 
                         <input type="checkbox" id="checkAllToPublish" checked>
                         <label for="checkAllToPublish"> Tout sélectionner / désélectionner </label>
-                        <input type="submit" class="btn btn-danger btn-sm" name="deleteSelectedComments[]" value="Supprimer" onclick="return confirm('Etes-vous sûr?')">
-                        <input type="submit" class="btn btn-successs btn-sm" name="publishSelectedComments[]" value="Publier" onclick="return alert('Commentaire(s) publié(s)')">
+                        <input type="submit" class="btn btn-danger btn-sm" name="deleteSelectedComments[]" value="Supprimer" onclick="return confirm('Supprimer tous ces commentaires ?')">
+                        <input type="submit" class="btn btn-successs btn-sm" name="publishSelectedComments[]" value="Publier" onclick="return confirm('Approuver tous ces commentaires ?')">
                 <?php
                 //je déclare un tableau vide qui va me servir a stocker tous les ids des commentaires signalés
                 $arrayPublish = array();
@@ -129,9 +129,9 @@
                                 </div>                
                                 
                                 <div class="approvDelComs">
-                                        <a href="index.php?action=approveComment&amp;commentId=<?= $idComment ?>"  onclick="return alert('Commentaire publié')" ><i class="far fa-check-square"></i> Publier</a>
+                                        <a href="index.php?action=approveComment&amp;commentId=<?= $idComment ?>"  onclick="return confirm('Publier ce commentaire ?')" ><i class="far fa-check-square"></i> Publier</a>
 
-                                        <a href="index.php?action=deleteComment&amp;id=<?= $postId ?>&amp;commentId=<?= $idComment ?>" onclick="return confirm('Etes-vous sûr?')"><i class="far fa-trash-alt"></i> Supprimer</a>
+                                        <a href="index.php?action=deleteComment&amp;id=<?= $postId ?>&amp;commentId=<?= $idComment ?>" onclick="return confirm('Supprimer ce commentaire ?')"><i class="far fa-trash-alt"></i> Supprimer</a>
                                 </div>
                         </div>
                 </div>
@@ -144,28 +144,32 @@
         }    
         ?>           
                 </form>
-</div>
-
         <!-- Select / Deselect all checkboxes (for Reported comments)  -->   
         <script>
                 $('#checkAllToPublish').change(function(){
                         $('input[type=checkbox][id=commentPublishID]').prop('checked', $(this).prop('checked'))
                 })
                 </script>
+
+        <!-- displays a message if no new comments -->   
+        <div class="noCommentsToManage">Il n'y a pas de commentaire à publier</div>
+                <script>
+                        if ( !$.trim($('.acceptDenyComments').html() ).length ) 
+                        {
+                                $('.noCommentsToManage').css("display", "block");
+                        } else {
+                                $('.noCommentsToManage').css("display", "none");
+                        }
+        </script>          
+
         </section>
+</div>
+
+        
 
          
 
-        <!-- displays a message if no reported comments -->   
-       <div class="noCommentsToManage">Il n'y a pas de commentaire à publier</div>
-        <script>
-                if ( !$.trim($('.acceptDenyComments').html() ).length ) 
-                {
-                        $('.noCommentsToManage').css("display", "block");
-                } else {
-                        $('.noCommentsToManage').css("display", "none");
-                }
-       </script>    
+          
         
 
 
