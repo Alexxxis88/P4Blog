@@ -116,6 +116,7 @@
 <!-- My scripts -->
 <!-- <script src="./public/js/burger.js" ></script> -->
 <script src="./public/js/myModal.js" ></script>
+<script src="./public/js/main.js"></script>
 
 <script>
 // Burger menu

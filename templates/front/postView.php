@@ -176,11 +176,8 @@ ob_start(); ?>
                             </div> -->
                             <div>
                                 <label for="comment">Commentaire (700 carac. max)</label><br />
-                                <textarea id="comment" name="comment" cols="80" rows="5" maxlength="700" required onkeyup="textCounter(this,'counter',700);"><?= $comment ?> </textarea>
+                                <textarea id="comment" name="comment" cols="80" rows="5" maxlength="700" required><?= $comment ?> </textarea>
                             </div>
-
-                            <!-- Used to count how many characters there is left -->
-                            <input disabled  maxlength="3" size="3" value="700" id="counter">
 
                             <div>
                             <input type="submit" class="btn-success" value="Sauvegarder mon commentaire"/>
@@ -254,13 +251,13 @@ ob_start(); ?>
 									<div class="col-md-12">
 										<div class="form-group">
 										<label for="comment">Commentaire (700 carac. max)</label><br />
-                						<textarea id="comment" name="comment" cols="80" rows="5" maxlength="700" required onkeyup="textCounter(this,'counter',700);"></textarea>
+                						<textarea id="comment" name="comment"  required onkeyup="textCounter(this,'counterPost',700);"></textarea>
 										</div>
 									</div>
 									<!-- Used to count how many characters there is left -->
-									<input disabled  maxlength="3" size="3" value="700" id="counter">
+									<input disabled  maxlength="3" size="3" value="700" id="counterPost">
 									<div>
-									<input class="primary-button" type="submit" onclick="return confirm('Poster ce commentaire?')" value="Commenter"/>
+									<input class="primary-button" id="submitComBtn" type="submit" onclick="return confirm('Poster ce commentaire?')" value="Commenter"/>
 									</div>
 								</div>
 							</form>

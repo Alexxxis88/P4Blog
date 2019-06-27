@@ -1056,6 +1056,20 @@ textarea.input {
     display:none;
 }
 
+textarea#comment{
+    width:700px;
+    height:150px;
+}
+
+#counterPost{
+    margin: 0 0 5px 15px;
+}
+
+#submitComBtn{
+    margin: 0 0 5px 15px;
+}
+
+
 /*=========================================================
    PUBLISH & MANAGE
 ===========================================================*/
@@ -1316,16 +1330,12 @@ textarea.input {
 
 #counter{
     font-size: 15px;
-    margin: 0 0 5px 15px;
+    margin-top: 5px;
 }
 
 .form-group{
     margin-bottom: 0 !important;
 }
-
-/* #signInBtn{
-    display : none;
-} */
 
 /*=========================================================
 SUCCESS MESSAGES
@@ -1710,5 +1720,8 @@ SUCCESS MESSAGES
    }
    .manageComIcons{
         display:block;
+    }
+    textarea#comment{
+        width:100%;
     }
 }
