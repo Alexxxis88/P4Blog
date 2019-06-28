@@ -1,18 +1,13 @@
-<!DOCTYPE html>
-<html>
-    <head>
-        <meta charset="utf-8" />
-    </head>
-    <body>
+
     <div class="menuAdmin">
-        <a href="index.php"><i class="fas fa-home"></i></a>
+        <a href="index.php"><span class="fas fa-home"></span></a>
             <div class="menuBtns" id="menuDesktop" >
                 <div class="adminMenu">
-                    <a class="adminMenuLink" href="index.php?action=displayPublishView"><i class="fas fa-pen-nib"></i>Publier</a>
-                    <a class="adminMenuLink" href="index.php?action=listPosts"><i class="fas fa-edit"></i>Editer</a>
-                    <a class="adminMenuLink" href="index.php?action=manageComments"><i class="fas fa-comments" id="comAlert"></i>Commentaires</a>
-                    <a class="adminMenuLink" href="index.php?action=manageUsers&page=1&sortBy=10"><i class="fas fa-users"></i>Utilisateurs</a>
-                    <a class="adminMenuLink" href="index.php?action=displayStatsView"><i class="fas fa-chart-line"></i>Statistiques</a>
+                    <a class="adminMenuLink" href="index.php?action=displayPublishView"><span class="fas fa-pen-nib"></span>Publier</a>
+                    <a class="adminMenuLink" href="index.php?action=listPosts"><span class="fas fa-edit"></span>Editer</a>
+                    <a class="adminMenuLink" href="index.php?action=manageComments"><span class="fas fa-comments" id="comAlert"></span>Commentaires</a>
+                    <a class="adminMenuLink" href="index.php?action=manageUsers&page=1&sortBy=10"><span class="fas fa-users"></span>Utilisateurs</a>
+                    <a class="adminMenuLink" href="index.php?action=displayStatsView"><span class="fas fa-chart-line"></span>Statistiques</a>
                 </div>
                 
                 <!-- Log Out button -->
@@ -29,25 +24,24 @@
         <div class="bar2"></div>
         <div class="bar3"></div>
     </div>
-                    
-    <!-- Burger Menu Navigation -->         
+
+    <!-- Burger Menu Navigation -->
     <nav class="navMenu"  id="burgerNav">
         <ul>
-            <li><a class="adminMenuLink" href="index.php?action=displayPublishView"><i class="fas fa-pen-nib"></i>Publier</a></li>
-            <li><a class="adminMenuLink" href="index.php?action=listPosts"><i class="fas fa-edit"></i>Editer</a></li>
-            <li><a class="adminMenuLink" href="index.php?action=manageComments"><i class="fas fa-comment-alt"></i>Commentaires</a></li>
-            <li><a class="adminMenuLink" href="index.php?action=manageUsers&page=1&sortBy=10"><i class="fas fa-users"></i>Utilisateurs</a></li>
+            <li><a class="adminMenuLink" href="index.php?action=displayPublishView"><span class="fas fa-pen-nib"></span>Publier</a></li>
+            <li><a class="adminMenuLink" href="index.php?action=listPosts"><span class="fas fa-edit"></span>Editer</a></li>
+            <li><a class="adminMenuLink" href="index.php?action=manageComments"><span class="fas fa-comment-alt"></span>Commentaires</a></li>
+            <li><a class="adminMenuLink" href="index.php?action=manageUsers&page=1&sortBy=10"><span class="fas fa-users"></span>Utilisateurs</a></li>
 
-            <li><a class="adminMenuLink" href="index.php?action=displayStatsView"><i class="fas fa-chart-line"></i>Statistiques</a></li>
+            <li><a class="adminMenuLink" href="index.php?action=displayStatsView"><span class="fas fa-chart-line"></span>Statistiques</a></li>
             <!-- Log Out button -->
-            <li><a href="index.php?action=logOutCheck"><i class="fas fa-sign-out-alt"></i>Deconnexion</button></a></li>
+            <li><a href="index.php?action=logOutCheck"><span class="fas fa-sign-out-alt"></span>Deconnexion</button></a></li>
 
             <!-- Change Password button -->
-            <li><a href="" data-toggle="modal" data-target="#updatePassModal"><i class="fas fa-unlock-alt"></i>Changer de Password</a></li>
+            <li><a href="" data-toggle="modal" data-target="#updatePassModal"><span class="fas fa-unlock-alt"></span>Changer de Password</a></li>
         </ul>
     </nav>
-    </body>
-</html>
+
 
 <!-- Display comment to manage alert -->
 <!-- gives an arary, the first value ( [0] ) is the result of SUM on the flag column in comments table -->

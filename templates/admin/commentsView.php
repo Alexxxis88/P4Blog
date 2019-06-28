@@ -6,7 +6,7 @@
         <section id="sectionReported">
                 <div class="row manageComBtns">
                         <div class="col-md-12">
-                               <a class="manageComBtn js-scrollTo" href="#sectionNewCom"><i class="fas fa-anchor"></i> Voir les commentaires à publier</a>
+                               <a class="manageComBtn js-scrollTo" href="#sectionNewCom"><span class="fas fa-anchor"></span> Voir les commentaires à publier</a>
                         </div>        
                 </div> 
                 <h2 class="titleManageCom">Commentaires signalés</h2>
@@ -34,21 +34,20 @@
                                         Le commentaire de <strong><?= htmlspecialchars($author) ?></strong> du <?= $commentDate ?>
                                         a été signalé <strong> <?= $flag ?></strong> fois </p>
 
-                                        <!-- transform non html links in comments into clickable links--> 
+                                        <!-- transform non html links in comments into clickable links-->
                                         <p><?= nl2br($comment = preg_replace('#http[s]?://[a-z0-9._/-]+#i', '<a href="$0">$0</a>', htmlspecialchars($comment))) ?></p>
                                         <div class="manageComIcons">
                                                 <div class="viewComArticle">
-                                                        <p><a href="index.php?action=post&id=<?= $postId?>&page=1&sortBy=5"><i class="fas fa-eye"></i> Voir l'article associé</a> 
+                                                        <p><a href="index.php?action=post&id=<?= $postId?>&page=1&sortBy=5"><span class="fas fa-eye"></span> Voir l'article associé</a>
                                                         </p>
 
                                                         <!-- sends straight to the right comment using the comment id as an anchor -->
-                                                        <p><a href="index.php?action=post&id=<?= $postId?>&page=1&sortBy=99999999999999999999#<?= $idComment?>"><i class="far fa-comment-dots"></i> Voir le commentaire</a> </p>
+                                                        <p><a href="index.php?action=post&id=<?= $postId?>&page=1&sortBy=99999999999999999999#<?= $idComment?>"><span class="far fa-comment-dots"></span> Voir le commentaire</a> </p>
                                                 </div>
-                                                
                                                 <div class="approvDelComs">
-                                                <a href="index.php?action=approveComment&amp;commentId=<?= $idComment ?>"  onclick="return confirm('Approuver ce commentaire ?')" ><i class="far fa-check-square"></i>  Approuver</a>
+                                                <a href="index.php?action=approveComment&amp;commentId=<?= $idComment ?>"  onclick="return confirm('Approuver ce commentaire ?')" ><span class="far fa-check-square"></span>  Approuver</a>
 
-                                                <a href="index.php?action=deleteComment&amp;id=<?= $postId ?>&amp;commentId=<?= $idComment ?>" onclick="return confirm('Supprimer ce commentaire ?')"><i class="far fa-trash-alt"></i> Supprimer</a>
+                                                <a href="index.php?action=deleteComment&amp;id=<?= $postId ?>&amp;commentId=<?= $idComment ?>" onclick="return confirm('Supprimer ce commentaire ?')"><span class="far fa-trash-alt"></span> Supprimer</a>
                                                 </div>
                                         </div>
                                 
@@ -72,7 +71,7 @@
         <section id="sectionNewCom">
                 <div class="row manageComBtns">
                         <div class="col-md-12">
-                                <a class="manageComBtn js-scrollTo" href="#sectionReported"><i class="fas fa-anchor"></i> Voir les commentaires signalés</a>
+                                <a class="manageComBtn js-scrollTo" href="#sectionReported"><span class="fas fa-anchor"></span> Voir les commentaires signalés</a>
                         </div>        
                 </div>                      
                 <h2 class="titleManageCom">Commentaires à publier</h2>
@@ -93,26 +92,26 @@
                         $comment = $newComments[$i2]->comment();
                         $commentDate = $newComments[$i2]->modCommentDate(); ?>
 
-                        
+
                 <div class="acceptDenyComments">
                         <p class="newCommentHead"> <input type="checkbox" id="commentPublishID" name="selectPublishComments[]" value="<?= $idComment?>" checked > <strong><?= htmlspecialchars($author) ?></strong> a posté le <?= $commentDate ?>
-                        
-                        <!-- transform non html links in comments into clickable links--> 
+
+                        <!-- transform non html links in comments into clickable links-->
                         <p><?= nl2br($comment = preg_replace('#http[s]?://[a-z0-9._/-]+#i', '<a href="$0">$0</a>', htmlspecialchars($comment))) ?></p>
                         <div class="manageComIcons">
                                 <div class="viewComArticle">
-                                        <p><a href="index.php?action=post&id=<?= $postId?>&page=1&sortBy=5"><i class="fas fa-eye"></i> Voir l'article associé</a> </p>
-                                </div>                
-                                
-                                <div class="approvDelComs">
-                                        <a href="index.php?action=approveComment&amp;commentId=<?= $idComment ?>"  onclick="return confirm('Publier ce commentaire ?')" ><i class="far fa-check-square"></i> Publier</a>
+                                        <p><a href="index.php?action=post&id=<?= $postId?>&page=1&sortBy=5"><span class="fas fa-eye"></span> Voir l'article associé</a> </p>
+                                </div>
 
-                                        <a href="index.php?action=deleteComment&amp;id=<?= $postId ?>&amp;commentId=<?= $idComment ?>" onclick="return confirm('Supprimer ce commentaire ?')"><i class="far fa-trash-alt"></i> Supprimer</a>
+                                <div class="approvDelComs">
+                                        <a href="index.php?action=approveComment&amp;commentId=<?= $idComment ?>"  onclick="return confirm('Publier ce commentaire ?')" ><span class="far fa-check-square"></span> Publier</a>
+
+                                        <a href="index.php?action=deleteComment&amp;id=<?= $postId ?>&amp;commentId=<?= $idComment ?>" onclick="return confirm('Supprimer ce commentaire ?')"><span class="far fa-trash-alt"></span> Supprimer</a>
                                 </div>
                         </div>
                 </div>
         <?php
-                        
+
         //pour chaque commentaire à publier, je rajoute son id dans le tableau $arrayPublish
         array_push($arrayPublish, $idComment);
                     }

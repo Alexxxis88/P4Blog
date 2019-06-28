@@ -1,12 +1,6 @@
-<!DOCTYPE html>
-<html>
-    <head>
-        <meta charset="utf-8" />
-        <title><?= $title ?></title>
-    </head>
-    <body>
+
         <div class="menu">
-             <a href="index.php"><i class="fas fa-home"></i></a>
+             <a href="index.php"><span class="fas fa-home"></span></a>
                 <div class="menuBtns">
                     <?php //if there is cookies or session information, they are used to display user name
                     if (isset($_COOKIE['login']) or isset($_SESSION['id'])) {
@@ -37,8 +31,7 @@
                     ?> 
             </div>    
         </div>      
-    </body>
-</html>
+
 <?php require('templates/front/logInView.php'); ?>
 <?php require('templates/front/singInView.php'); ?>
 <?php require('templates/front/changePassView.php'); ?>

@@ -33,7 +33,7 @@
                         <p class="userListHeader"><input type="checkbox" id="userID" name="selectUsers[]" value="<?= $userid?>" ><strong><?= htmlspecialchars($username) ?></strong>&emsp;-&emsp;<?= $email ?>&emsp;-&emsp;enregistré le <strong> <?= $registrationDate ?></strong></p> 
 
                             <div class="roleAndDelete">
-                                <p ><a class="deleteUserLink" href="index.php?action=deleteUser&amp;userID=<?= $userid ?>" onclick="return confirm('Etes-vous sûr?')"><i class="fas fa-user-times"></i>Supprimer</a>    
+                                <p ><a class="deleteUserLink" href="index.php?action=deleteUser&amp;userID=<?= $userid ?>" onclick="return confirm('Etes-vous sûr?')"><span class="fas fa-user-times"></span>Supprimer</a>    
                                 <p><strong>Role :</strong> 
                                 <?php
                                 if ($group == 0) {

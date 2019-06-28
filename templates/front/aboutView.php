@@ -12,13 +12,13 @@
                     </p>
                     <p>Dans ce nouveau roman, "Billet simple pour l'Alaska", Jean Forteroche raconte l'histoire de Christopher McCandless : un étudiant américain brillant qui vient d'obtenir son diplôme et qui est promis à un grand avenir. Rejetant les principes de la société moderne, après un dîner dans un restaurant avec ses parents, pour fêter son diplôme, il décide de partir sur les routes, sans prévenir sa famille. Découvrez les aventures trépidantes de ce personnage attachant et au caractère bien trempé tout au long de ce nouvel ouvrage...
                     </p>
-            </div>  
-            <div class="imageAbout col-md-4">  
+            </div>
+            <div class="imageAbout col-md-4">
                     <img src="public/img/jeanforteroche.jpg" alt="Jean Forteroche"/>
             </div>
         </div>
-    </div>             
+    </div>
                 <p style="text-align : center"><a href="index.php">Retour à la page d'accueil</a></p>
 
 <?php $content = ob_get_clean(); ?>
-<?php require('templates/base.php'); ?>         
+<?php require('templates/base.php'); ?>

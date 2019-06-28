@@ -1,5 +1,5 @@
 <?php
-echo '<p align="center">Page : ';
+echo '<p style="text-align : center">Page : ';
 for ($i=1; $i<=$nbOfPages; $i++) {
     if ($i==$currentPage) {
         echo ' [ '.$i.' ] ';

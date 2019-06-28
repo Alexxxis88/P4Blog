@@ -10,7 +10,7 @@ $title = $postTitle;
 
 ob_start(); ?>
 
-			<!-- Page Header -->
+					
 			<div id="post-header" class="page-header">
 				<div class="background-img" style="background-image: url('public/img/post-<?= $id?>.jpg');"></div>
 				<div class="container">
@@ -21,9 +21,7 @@ ob_start(); ?>
 					</div>
 				</div>
 			</div>
-			<!-- /Page Header -->
-		</header>
-		<!-- /Header -->
+		
            
 		<!-- section -->
 		<div class="section">
@@ -36,7 +34,7 @@ ob_start(); ?>
 						<div class="section-row sticky-container">
 							<div class="main-post">
 							<div class="post-meta">
-								<span class="post-date">
+								<div class="post-date">
 								<?php
                                 if ($publishDate ==  $editDate) {
                                     echo '<p>Publié le '. $publishDate . '</p>';
@@ -44,23 +42,23 @@ ob_start(); ?>
                                     echo '<p>Edité le '. $editDate . '</p>';
                                 }
                                 ?>
-								</span>
+								</div>
 							</div>
-								<h3><?= htmlspecialchars($chapter) ?></h3>
+								<h2><?= htmlspecialchars($chapter) ?></h2>
 								<p><?= nl2br($content) ?></p>
 								<figure class="figure-img">
 									<img class="img-responsive" src="./public/img/post-<?= $id?>.jpg" alt="<?= $postTitle ?>">
 								</figure>
 								<?php
                                 if (isset($checkUserRole['groupId']) && $checkUserRole['groupId'] == 1) {
-                                    ?>       
-									<a class="adminIcon" href="index.php?action=manageView&id=<?=$post->id()?>"><i class="far fa-edit editBtns"></i></a>
-									<a class="adminIcon" href="index.php?action=deletePost&amp;id=<?= $post->id() ?>" onclick="return confirm('Etes-vous sûr?')"><i class="far fa-trash-alt"></i></a>
+                                    ?>
+									<a class="adminIcon" href="index.php?action=manageView&id=<?=$post->id()?>"><span class="far fa-edit editBtns"></span></a>
+									<a class="adminIcon" href="index.php?action=deletePost&amp;id=<?= $post->id() ?>" onclick="return confirm('Etes-vous sûr?')"><span class="far fa-trash-alt"></span></a>
 								<?php
                                 }
-                                ?>   	
+                                ?>
 							</div>
-							
+
 						</div>
 
 						<!-- comments -->
@@ -105,7 +103,7 @@ ob_start(); ?>
                                         } else {
                                             echo '<div class="media-body">';
                                         } ?>
-									
+
 														<div class="media-heading">
 															<h4><?= htmlspecialchars($author) ?></h4>
 															<!-- id= $comment['id'] used to create an anchor on the comment position to be able to display the right comment directly when selected in manageCommentsView.php (be)-->
@@ -131,7 +129,7 @@ ob_start(); ?>
                 if ($flag == 0) {
                     if ((isset($_COOKIE['login']) and !empty($_COOKIE['login'])) or (isset($_SESSION['username']) and !empty($_SESSION['username']))) {
                         ?>
-                    <a class="reportBtn" href="index.php?action=reportComment&amp;id=<?= $post->id() ?>&amp;commentId=<?= $comments[$i]->id() ?>" onclick="return confirm('Voulez vous vraiment signaler ce commentaire?')"><i class="fas fa-exclamation-triangle"></i></a>
+                    <a class="reportBtn" href="index.php?action=reportComment&amp;id=<?= $post->id() ?>&amp;commentId=<?= $comments[$i]->id() ?>" onclick="return confirm('Voulez vous vraiment signaler ce commentaire?')"><span class="fas fa-exclamation-triangle"></span></a>
 
                     <?php
                     } ?> 
@@ -144,7 +142,7 @@ ob_start(); ?>
                     } elseif (isset($_SESSION['username'])) {
                         $cookieOrSessionUserNAme = $_SESSION['username'];
                     }
-                        
+
                     if (isset($cookieOrSessionUserNAme) and !empty($cookieOrSessionUserNAme) and  $cookieOrSessionUserNAme == $author) {
                         ?>
                     <!-- form only displayed and used to edit an existing comment -->
@@ -152,10 +150,10 @@ ob_start(); ?>
                     <div class="editCommentForm<?=$idComment ?>">
                         <form action="index.php?action=updateComment&amp;id=<?= $post->id() ?>&amp;commentId=<?= $idComment ?>" method="post">
                                 <!-- <div>
-                                <input type="text" id="author" name="author" required hidden value="< ?php $cookieOrSessionUserNAme ?>"/> 
+                                <input type="text" id="author" name="author" required hidden value="< ?php $cookieOrSessionUserNAme ?>"/>
                             </div> -->
                             <div>
-                                <label for="comment">Commentaire (700 carac. max)</label><br />
+                                <label for="comment">Commentaire (700 carac. max)</label><br>
                                 <textarea id="comment" name="comment" cols="80" rows="5" maxlength="700" required><?= $comment ?> </textarea>
                             </div>
 
@@ -163,12 +161,12 @@ ob_start(); ?>
                             <input type="submit" class="btn-success" value="Sauvegarder mon commentaire"/>
                             </div>
                         </form>
-                    </div> 
+                    </div>
 
-                    <a href="index.php?action=deleteComment&amp;id=<?= $post->id() ?>&amp;commentId=<?= $idComment ?>" onclick="return confirm('Etes-vous sûr?')"><i class="far fa-trash-alt"></i></a>
-                    
+                    <a href="index.php?action=deleteComment&amp;id=<?= $post->id() ?>&amp;commentId=<?= $idComment ?>" onclick="return confirm('Etes-vous sûr?')"><span class="far fa-trash-alt"></span></a>
+
                     <button class="far fa-edit editBtns<?=$idComment ?> editCommentBtn<?=$idComment ?>"></button>
-					
+
 					<!-- this script stays here because it uses PHP variables and can't work in Main.js -->
 					<script>
                     $(".editBtns<?=$idComment ?>").on("click", function(){
@@ -184,10 +182,10 @@ ob_start(); ?>
                     if (isset($checkUserRole['groupId']) && $checkUserRole['groupId'] == 1) {
                         //display approve button only if comment already reported
                         if ($flag > 0) {
-                            echo '<a href="index.php?action=approveComment&amp;id=' . $post->id() . '&amp;commentId='. $idComment . '"  onclick="return confirm(\'Approuver ce commentaire ?\')" ><i class="far fa-check-circle"></i></a>' ;
+                            echo '<a href="index.php?action=approveComment&amp;id=' . $post->id() . '&amp;commentId='. $idComment . '"  onclick="return confirm(\'Approuver ce commentaire ?\')" ><span class="far fa-check-circle"></span></a>' ;
                         } ?>    
                         <!-- gets the commentId as a parameter in the URL of the comment to delete AND the post id to return on the same post after comment has been deleted-->
-                        <a href="index.php?action=deleteComment&amp;id=<?= $post->id() ?>&amp;commentId=<?= $idComment ?>" onclick="return confirm('Supprimer ce commentaire ?')"><i class="fas fa-trash"></i></a>
+                        <a href="index.php?action=deleteComment&amp;id=<?= $post->id() ?>&amp;commentId=<?= $idComment ?>" onclick="return confirm('Supprimer ce commentaire ?')"><span class="fas fa-trash"></span></a>
                     <?php
                     } ?> 
 </div>					
@@ -208,19 +206,19 @@ ob_start(); ?>
 							<?php
                             if ((isset($_COOKIE['login']) and !empty($_COOKIE['login'])) or (isset($_SESSION['username']) and !empty($_SESSION['username']))) {
 
-								//get author's name depending on COOKIE or SESSION	
+								//get author's name depending on COOKIE or SESSION
 								if ((isset($_COOKIE['login']) and !empty($_COOKIE['login']))) {
 									$commentAuthor =  $_COOKIE['login'];
 								} else {
 									$commentAuthor = $_SESSION['username'];
 								}
-                            ?>    
+                            ?>
 							<form class="post-reply" action="index.php?action=addComment&amp;id=<?= $post->id() ?>" method="post">
 								<div class="row">
 									<input type="text" id="author" name="author" required hidden value="<?= $commentAuthor ?>"  />
 									<div class="col-md-12">
 										<div class="form-group">
-										<label for="comment">Commentaire (700 carac. max)</label><br />
+										<label for="comment">Commentaire (700 carac. max)</label><br>
                 						<textarea id="comment" name="comment"  required onkeyup="textCounter(this,'counterPost',700);"></textarea>
 										</div>
 									</div>
@@ -259,21 +257,21 @@ ob_start(); ?>
             $content = $lastPosts[$i]->content();
             $lastPostTitle = $lastPosts[$i]->title();
             $editDate = $lastPosts[$i]->modEditDate();
-            $publishDate = $lastPosts[$i]->modPublishDate(); ?>       
+            $publishDate = $lastPosts[$i]->modPublishDate(); ?>
 							<div class="post post-widget">
 								<a class="post-img" href="index.php?action=post&id=<?=$id?>&page=1&sortBy=5"><img src="./public/img/post-<?=$id?>.jpg" alt="<?= $lastPostTitle ?>"></a>
 								<div class="post-body">
-									<a href="index.php?action=post&id=<?=$id?>&page=1&sortBy=5"><em class="post-title"><?= htmlspecialchars($chapter) ?></em><br/><p>  <?= htmlspecialchars($lastPostTitle)?></p></a>
-									
+									<a href="index.php?action=post&id=<?=$id?>&page=1&sortBy=5"><em class="post-title"><?= htmlspecialchars($chapter) ?></em><br><p>  <?= htmlspecialchars($lastPostTitle)?></p></a>
+
 								<p>
-                    <?= substr($content, 0, 300) . "..." ?><br/>
-                    <a href="index.php?action=post&id=<?=$id?>&page=1&sortBy=5"><i class="fas fa-book"></i>   Lire la suite</a> 
-                </p>  	
+                    <?= substr($content, 0, 300) . "..." ?><br>
+                    <a href="index.php?action=post&id=<?=$id?>&page=1&sortBy=5"><span class="fas fa-book"></span>   Lire la suite</a>
+                </p>
 								</div>
 							</div>
 							<?php
         }
-                            ?>	
+                            ?>
 						</div>
 					</div>
 				</div>

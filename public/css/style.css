@@ -283,7 +283,7 @@ textarea.input {
     margin-right: 3%;
 }
 
-.adminMenu i {
+.adminMenu span {
     color: white;
     font-size: 20px;
     margin: 10px;
@@ -302,7 +302,7 @@ textarea.input {
     text-decoration: none;
 }
 
-.adminMenuLink:hover>i {
+.adminMenuLink:hover>span {
     color: #f5c908;
 }
 
@@ -362,7 +362,7 @@ textarea.input {
 }
 
 #burgerNav a,
-#burgerNav i {
+#burgerNav span {
     font-size: 2.5vw;
     color: white;
     margin-right: 7px;
@@ -373,7 +373,7 @@ textarea.input {
     color: #f5c908;
 }
 
-#burgerNav a:hover>i {
+#burgerNav a:hover>span {
     color: #f5c908;
 }
 
@@ -598,7 +598,7 @@ textarea.input {
     float: right;
 }
 
-.listPostIcons i {
+.listPostIcons span {
     color: red;
 }
 
@@ -1310,7 +1310,7 @@ SUCCESS MESSAGES
 
 /* Desktop computers */
 @media all and (max-width: 1280px) {
-    .adminMenu i {
+    .adminMenu span {
         font-size: 15px;
         margin: 10px;
     }

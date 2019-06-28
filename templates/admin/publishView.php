@@ -3,23 +3,22 @@
     <div class="postsBlock">
         <form action="index.php?action=publishChapter" method="post">
             <div>
-                <label for="chapter">Chapitre n°</label><br />
+                <label for="chapter">Chapitre n°</label><br>
                 <input type="text" id="chapter" name="chapter" placeholder="Chapitre n°" required/>
             </div>
             <div>
-                <label for="title">Titre</label><br />
+                <label for="title">Titre</label><br>
                 <input type="text" id="title" name="title" placeholder="Titre du chapitre" required/>
-            </div><br/>
+            </div><br>
             <div>
-                <label for="postContent">Contenu</label><br />
+                <label for="postContent">Contenu</label><br>
                 <textarea id="postContent" name="postContent">Contenu du chapitre</textarea>
             </div>
             <div>
                 <input type="submit" class="primary-button" onclick="return confirm('Publier le chapitre?')" value="Publier"/>
             </div>
         </form>
-    </div> 
-   
+    </div>
 <?php $content = ob_get_clean(); ?>
 
 <?php require('templates/base.php'); ?>
