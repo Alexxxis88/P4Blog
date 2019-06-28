@@ -16,7 +16,6 @@ if(isset($_COOKIE['id']))
     <head>
         <meta charset="utf-8" />
         <title>Changement de mot de passe</title>
-        <link href="public/css/style.css" rel="stylesheet" />
     </head>
         
     <body>

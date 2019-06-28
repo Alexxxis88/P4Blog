@@ -8,7 +8,6 @@ $clef_du_site = "6Lck9KoUAAAAAMCUwtdhDPbJPiAQTEzi8mIFOpI9";
     <head>
         <meta charset="utf-8" />
         <title>Page d'inscription</title>
-        <link href="public/css/style.css" rel="stylesheet" /> 
         <script src="https://www.google.com/recaptcha/api.js" async defer></script>
 
     </head>
