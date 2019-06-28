@@ -54,7 +54,7 @@ ob_start(); ?>
 								<h3><?= htmlspecialchars($chapter) ?></h3>
 								<p><?= nl2br($content) ?></p>
 								<figure class="figure-img">
-									<img class="img-responsive" src="./public/img/post-<?= $id?>.jpg" alt="">
+									<img class="img-responsive" src="./public/img/post-<?= $id?>.jpg" alt="<?= $postTitle ?>">
 								</figure>
 								<?php
 								// FIXME: factoriser le code avec l'affichage ou non (1)des boutons modifier / supprimer sur listPostsView et PostView (2) des boutons approuver / supprimer des com sur PostView (3) l'affichage du menu admin de template.php
@@ -105,7 +105,7 @@ ob_start(); ?>
 							<div class="post-comments">
 								<div class="media">
 									<div class="media-left">
-										<img class="media-object" src="./public/img/avatar.png" alt="">
+										<img class="media-object" src="./public/img/avatar.png" alt="avatar">
 									</div>
 									<?php			
 												//display reported comments with a red background
@@ -298,7 +298,7 @@ ob_start(); ?>
             $publishDate = $lastPosts[$i]->modPublishDate();
         ?>       
 							<div class="post post-widget">
-								<a class="post-img" href="index.php?action=post&id=<?=$id?>&page=1&sortBy=5"><img src="./public/img/post-<?=$id?>.jpg" alt=""></a>
+								<a class="post-img" href="index.php?action=post&id=<?=$id?>&page=1&sortBy=5"><img src="./public/img/post-<?=$id?>.jpg" alt="<?= $lastPostTitle ?>"></a>
 								<div class="post-body">
 									<a href="index.php?action=post&id=<?=$id?>&page=1&sortBy=5"><em class="post-title"><?= htmlspecialchars($chapter) ?></em><br/><p>  <?= htmlspecialchars($lastPostTitle)?></p></a>
 									
