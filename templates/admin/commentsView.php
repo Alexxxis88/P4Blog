@@ -1,5 +1,4 @@
 <?php $title = 'Gestion des commentaires'; ?>
-
 <?php ob_start(); ?>
 
 <div class="container">
@@ -70,23 +69,10 @@
                 ?>        
                 </form>
 
-                <!-- Select / Deselect all checkboxes (for Reported comments)  -->   
-                        <script>
-                        $('#checkAllReported').change(function(){
-                                $('input[type=checkbox][id=commentID]').prop('checked', $(this).prop('checked'))
-                        })
-                        </script>
-
+                
                 <!-- displays a message if no reported comments -->   
                 <div class="noReportedComments">Il n'y a pas de commentaire signalé</div>
-                        <script>
-                                if ( !$.trim($('.reportedComments').html() ).length ) 
-                                {
-                                        $('.noReportedComments').css("display", "block");
-                                } else {
-                                        $('.noReportedComments').css("display", "none");
-                                }
-                </script>
+                       
         </section>
         
         <!-- NEW COMMENTS -->   
@@ -144,23 +130,11 @@
         }    
         ?>           
                 </form>
-        <!-- Select / Deselect all checkboxes (for Reported comments)  -->   
-        <script>
-                $('#checkAllToPublish').change(function(){
-                        $('input[type=checkbox][id=commentPublishID]').prop('checked', $(this).prop('checked'))
-                })
-                </script>
+        
 
         <!-- displays a message if no new comments -->   
         <div class="noCommentsToManage">Il n'y a pas de commentaire à publier</div>
-                <script>
-                        if ( !$.trim($('.acceptDenyComments').html() ).length ) 
-                        {
-                                $('.noCommentsToManage').css("display", "block");
-                        } else {
-                                $('.noCommentsToManage').css("display", "none");
-                        }
-        </script>          
+                      
 
         </section>
 </div>
@@ -173,27 +147,7 @@
         
 
 
- <!-- displays a message if no new comments -->   
-        <script>
-                if ( !$.trim($('.reportedComments, .acceptDenyComments').html() ).length ) 
-                {
-                        $('.comAlert').css("display", "none");
-                } else {
-                        $('.comAlert').css("display", "block");
-                }
-       </script>    
-
-        <script>
-        //Smooth Scroling
-        $(document).ready(function() {
-        $(".js-scrollTo").on("click", function() {
-                let section = $(this).attr("href");
-                let speed = 750;
-                $("html").animate( { scrollTop: $(section).offset().top }, speed );
-                return ;
-        });
-        });
-        </script>
+ 
    
 <?php $content = ob_get_clean(); ?>
 

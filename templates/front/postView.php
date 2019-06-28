@@ -188,7 +188,9 @@ ob_start(); ?>
                     <a href="index.php?action=deleteComment&amp;id=<?= $post->id() ?>&amp;commentId=<?= $idComment ?>" onclick="return confirm('Etes-vous sûr?')"><i class="far fa-trash-alt"></i></a>
                     
                     <button class="far fa-edit editBtns<?=$idComment ?> editCommentBtn<?=$idComment ?>"></button>
-                    <script>
+					
+					<!-- this script stays here because it uses PHP variables and can't work in Main.js -->
+					<script>
                     $(".editBtns<?=$idComment ?>").on("click", function(){
                         $(".editCommentForm<?=$idComment?>, .editCommentBtn<?=$idComment ?>").toggle("slow")
                     })

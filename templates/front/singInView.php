@@ -49,19 +49,4 @@ $clef_du_site = "6Lck9KoUAAAAAMCUwtdhDPbJPiAQTEzi8mIFOpI9";
         </div>
     </body>
 </html>
-   
-<!-- FIXME : étrange, ça fonctionne meme si je ne mets pas le code suivant -->
-<script>
-$('#singInModal').on('show.bs.modal', function (event) {
-  var button = $(event.relatedTarget) // Button that triggered the modal
-  var modal = $(this)
-})</script>
 
-
-<!-- Enable submit button only if reCaptcha is valid -->
-<script>
-    document.getElementById("signInBtn").disabled = true;
-    function enableBtn(){
-        document.getElementById("signInBtn").disabled = false;
-    }
-</script>

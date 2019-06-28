@@ -67,14 +67,8 @@
                 ?>    
             </form>
 </div>
-<!-- < ?php var_dump($allUsers); ?> FIXME : erase me -->
 
-    <!-- Select / Deselect all checkboxes (for Reported comments)  -->   
-        <script>
-        $('#checkAllUsers').change(function(){
-                $('input[type=checkbox][id=userID]').prop('checked', $(this).prop('checked'))
-        })
-        </script>
+    
 
 
 <?php $content = ob_get_clean(); ?>

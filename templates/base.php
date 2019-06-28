@@ -20,58 +20,49 @@
     </head>
         
     <body>
-    <!-- Back to top button anchor -->
-    <div id="header"></div>
+        <!-- Back to top button anchor -->
+        <div id="header"></div>
 
-    <?php
-    //display the right menu depending on the user role
-    if(isset($checkUserRole['groupId']) && $checkUserRole['groupId'] == 1)
-    {
-        require('admin/menuAdmin.php');
-    }
-    else{
-        require('front/menu.php');
-    }
-    ?>
-        <?= $content ?>
+        <?php
+        //display the right menu depending on the user role
+        if(isset($checkUserRole['groupId']) && $checkUserRole['groupId'] == 1)
+        {
+            require('admin/menuAdmin.php');
+        }
+        else{
+            require('front/menu.php');
+        }
+        ?>
+            <?= $content ?>
 
-        <!-- Footer -->
-        <footer id="footer">
-            <div class="container">
-                <!-- Grid row-->
-                <div class="row text-center d-flex justify-content-center">
-                    <div class="col-md-12 ">
-                        <h5 class="text-uppercase font-weight-bold">
-                            <a href="index.php?action=about">A propos</a> &emsp; 
-                            <a data-toggle="modal" data-target="#exampleModal">Contact</a> &emsp;
-                            <a href="index.php?action=legalNotice">Mentions légales</a>
-                        </h5>
-                    </div>                    
-                </div> 
-            </div>
-            <!-- Back to top -->
-            <a href="#header" onclick="$('html,body').animate({scrollTop:0},'slow');return false;"><i class="fas fa-arrow-circle-up"></i></a>
-            <!-- Copyright -->
-            <div class="footer-copyright text-center py-3">
-                <span>&copy;<script>document.write(new Date().getFullYear());</script> Alexis Gautier | Template en partie réalisé par <a href="https://colorlib.com" target="_blank">Colorlib</a>
-                <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-                </span>
-            </div>    
-        </footer>
+            <!-- Footer -->
+            <footer id="footer">
+                <div class="container">
+                    <!-- Grid row-->
+                    <div class="row text-center d-flex justify-content-center">
+                        <div class="col-md-12 ">
+                            <h5 class="text-uppercase font-weight-bold">
+                                <a href="index.php?action=about">A propos</a> &emsp; 
+                                <a data-toggle="modal" data-target="#contactModal">Contact</a> &emsp;
+                                <a href="index.php?action=legalNotice">Mentions légales</a>
+                            </h5>
+                        </div>                    
+                    </div> 
+                </div>
+                <!-- Back to top -->
+                <a href="#header" onclick="$('html,body').animate({scrollTop:0},'slow');return false;"><i class="fas fa-arrow-circle-up"></i></a>
+                <!-- Copyright -->
+                <div class="footer-copyright text-center py-3">
+                    <span>&copy;<script>document.write(new Date().getFullYear());</script> Alexis Gautier | Template en partie réalisé par <a href="https://colorlib.com" target="_blank">Colorlib</a>
+                    <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+                    </span>
+                </div>    
+            </footer>
 
-<?php require('templates/front/contactView.php'); ?>
-<!-- My scripts -->
-<!-- <script src="./public/js/burger.js" ></script> -->
-<script src="./public/js/myModal.js" ></script>
-<script src="./public/js/main.js"></script>
+        <?php require('templates/front/contactView.php'); ?>
 
-<script>
-// Burger menu
-$("#burgerMenu").on("click", () => { 
-    $("#burgerNav").toggle();
-    $(".bar1, .bar2, .bar3").toggleClass("change");
-    $(".menuAdmin, .menu").css("box-shadow", "none");
-});</script>
+        <!-- My scripts -->
+        <script src="./public/js/main.min.js"></script>
 
     </body>
 </html>

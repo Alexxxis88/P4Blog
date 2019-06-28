@@ -36,10 +36,3 @@
         </div>
     </body>
 </html>    
-
-<!-- FIXME : étrange, ça fonctionne meme si je ne mets pas le code suivant -->
-<script>
-$('#logInModal').on('show.bs.modal', function (event) {
-  var button = $(event.relatedTarget) // Button that triggered the modal
-  var modal = $(this)
-})</script>

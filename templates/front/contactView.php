@@ -5,11 +5,11 @@
 	<title>Formulaire de contact</title>
 	</head>
 	<body>
-        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal fade" id="contactModal" tabindex="-1" role="dialog" aria-labelledby="contactModalLabel" aria-hidden="true">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Contacter Jean Forteroche</h5>
+                        <h5 class="modal-title" id="contactModalLabel">Contacter Jean Forteroche</h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                         </button>
@@ -47,23 +47,3 @@
         </div>
     </body>
 </html>    
-
-<!-- FIXME : étrange, ça fonctionne meme si je ne mets pas le code suivant -->
-<!-- <script>
-$('#exampleModal').on('show.bs.modal', function (event) {
-  var button = $(event.relatedTarget) // Button that triggered the modal
-  var modal = $(this)
-})</script> -->
-
-<script>
-function textCounter(field,field2,maxlimit)
-{
-let countfield = document.getElementById(field2);
-if ( field.value.length > maxlimit ) {
-field.value = field.value.substring( 0, maxlimit );
-return false;
-} else {
-countfield.value = maxlimit - field.value.length;
-}
-}
-</script>
