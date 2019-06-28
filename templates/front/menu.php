@@ -9,18 +9,12 @@
              <a href="index.php"><i class="fas fa-home"></i></a>
                 <div class="menuBtns">
                     <?php //if there is cookies or session information, they are used to display user name
-                    if(isset($_COOKIE['login']) OR isset($_SESSION['id']))
-                    { 
-                        if(isset($_COOKIE['login']))
-                        {
+                    if (isset($_COOKIE['login']) or isset($_SESSION['id'])) {
+                        if (isset($_COOKIE['login'])) {
                             $username = $_COOKIE['login'];
-                        }
-                        elseif(isset($_SESSION['username']))
-                        {
+                        } elseif (isset($_SESSION['username'])) {
                             $username = $_SESSION['username'];
-                            $logedAs = 'SESSION'; //FIXME : delete me
-                        }
-                    ?>
+                        } ?>
                     <p class="helloText">Bonjour <strong><?= htmlspecialchars($username) ?></strong> </p>
                             
                         <!-- Log Out button -->
@@ -29,9 +23,7 @@
                         <!-- Change Password button -->
                         <button type="button" class="btn btn-info updatePassBtn " data-toggle="modal" data-target="#updatePassModal">Changer de Password</button>
                     <?php
-                    } 
-                    
-                    else{ //else user name not knwon, hence name not displayed
+                    } else { //else user name not knwon, hence name not displayed
                     ?>
 
                     <!-- Log In button -->

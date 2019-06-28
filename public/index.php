@@ -11,73 +11,55 @@ require_once('src/controller/FormController.php');
 //AUTOLOAD
 function classAutoLoad($class)
 {
-  require 'src/entity/' . $class . '.php'; 
+    require 'src/entity/' . $class . '.php';
 }
 spl_autoload_register('classAutoLoad');
 
 
 try {
     if (isset($_GET['action'])) {
-
         $sessionController = new SessionController();
         $sessionController->checkSession();
     
-    //POSTS
+        //POSTS
         //FRONTEND
-        if ($_GET['action'] == 'listPosts' OR $_GET['action'] == '') {
-            if (isset($_GET['page']) && $_GET['page'] <= 0) 
-            {
+        if ($_GET['action'] == 'listPosts' or $_GET['action'] == '') {
+            if (isset($_GET['page']) && $_GET['page'] <= 0) {
                 throw new Exception('Cette page n\'existe pas');
-               
-            }
-            else {
+            } else {
                 $postController = new PostController;
                 $postController->listPosts();
-            }    
-        }
-
-        elseif ($_GET['action'] == 'post') 
-        {
-            if (isset($_GET['id']) && $_GET['id'] > 0) 
-            {
-                if(!isset($_GET['page']) OR !isset($_GET['id']) OR !isset($_GET['sortBy']) OR $_GET['page']<1 OR $_GET['id']<1 OR $_GET['sortBy']<1)
-                { 
+            }
+        } elseif ($_GET['action'] == 'post') {
+            if (isset($_GET['id']) && $_GET['id'] > 0) {
+                if (!isset($_GET['page']) or !isset($_GET['id']) or !isset($_GET['sortBy']) or $_GET['page']<1 or $_GET['id']<1 or $_GET['sortBy']<1) {
                     throw new Exception('Il manque le numéro de page, du billet ou la classement des commentaires');
-                }
-                else{
+                } else {
                     $postController = new PostController;
                     $postController->post();
                 }
 
                 //Confirmation message when posting a comment
-                if (isset($_GET['success']) AND $_GET['success'] == 4) 
-                {
+                if (isset($_GET['success']) and $_GET['success'] == 4) {
                     include('templates/success-messages/success4.html');
                 }
                 
                 //Confirmation message when updating a comment
-                if (isset($_GET['success']) AND $_GET['success'] == 5) 
-                {
+                if (isset($_GET['success']) and $_GET['success'] == 5) {
                     include('templates/success-messages/success5.html');
                 }
-                    
-            }
-            else {
+            } else {
                 throw new Exception('Aucun identifiant de billet envoyé');
             }
-        }
-
-
-        elseif ($_GET['action'] == 'deletePost') {
+        } elseif ($_GET['action'] == 'deletePost') {
             if (isset($_GET['id']) && $_GET['id'] > 0) {
                 $postController = new PostController;
                 $commentController = new CommentController;
 
-                $postId = $_GET['id']; // pas utile de factoriser ? 
+                $postId = $_GET['id']; // pas utile de factoriser ?
                 $commentController->deleteAllComments($postId); //delete all the comments related to the post we're deleting with deletePost()
                 $postController->deletePost($postId);
-            }
-            else {
+            } else {
                 throw new Exception('Aucun identifiant de billet envoyé');
             }
         }
@@ -86,47 +68,36 @@ try {
         elseif ($_GET['action'] == 'displayPublishView') {
             $postController = new PostController;
             $postController->displayPublishView();
-        }     
-
-        elseif ($_GET['action'] == 'publishChapter') {
+        } elseif ($_GET['action'] == 'publishChapter') {
             $postController = new PostController;
             $postController->newPost($_POST['chapter'], $_POST['title'], $_POST['postContent']);
-        }
-
-        elseif ($_GET['action'] == 'manageView') {
+        } elseif ($_GET['action'] == 'manageView') {
             $postController = new PostController;
-            $postController->displayPostToEdit($_GET['id']); 
-        }
-    
-        elseif ($_GET['action'] == 'updatePost') {
+            $postController->displayPostToEdit($_GET['id']);
+        } elseif ($_GET['action'] == 'updatePost') {
             $postController = new PostController;
             $postController->updatePost($_POST['chapter'], $_POST['title'], $_POST['postContent'], $_GET['id']);
         }
 
 
-    //COMMENTS
+        //COMMENTS
         //FRONTEND
         elseif ($_GET['action'] == 'addComment') {
             if (isset($_GET['id']) && $_GET['id'] > 0) {
                 if (!empty($_POST['author']) && !empty($_POST['comment'])) {
-                //needed to update the user_com_counter in members table
-                $sessionController = new SessionController();
-                $sessionController->checkSession();
+                    //needed to update the user_com_counter in members table
+                    $sessionController = new SessionController();
+                    $cookieOrSessionID = $sessionController->checkSession();
 
-                $commentController = new commentController();
-                $commentController->addComment($_GET['id'], $_POST['author'], $_POST['comment'], $_GET['id'], $cookieOrSessionID);
-                }
-                else {
+                    $commentController = new commentController();
+                    $commentController->addComment($_GET['id'], $_POST['author'], $_POST['comment'], $_GET['id'], $cookieOrSessionID);
+                } else {
                     throw new Exception('Tous les champs ne sont pas remplis !');
                 }
-            }
-            else {
+            } else {
                 throw new Exception('Aucun identifiant de billet envoyé');
             }
-        }
-
-
-        elseif ($_GET['action'] == 'deleteComment') {
+        } elseif ($_GET['action'] == 'deleteComment') {
             if (isset($_GET['commentId']) && $_GET['commentId'] > 0) {
 
                 //needed to update the userComCounter in members table
@@ -135,39 +106,22 @@ try {
 
                 $commentController = new CommentController;
                 $commentController->deleteComment($_GET['commentId'], $_GET['id'], $cookieOrSessionID);
-            }
-            else {
+            } else {
                 throw new Exception('Aucun identifiant de billet envoyé');
             }
-        }
-
-        elseif ($_GET['action'] == 'reportComment') {
+        } elseif ($_GET['action'] == 'reportComment') {
             if (isset($_GET['commentId']) && $_GET['commentId'] > 0) {
                 
-
-                //FIXME this should not be needed and this line should work  $sessionController->checkSession();
-
-                if(isset($_COOKIE['id']))
-					{
-						$cookieOrSessionID = $_COOKIE['id'];
-					}
-					elseif(isset($_SESSION['id']))
-					{
-							$cookieOrSessionID = $_SESSION['id'];
-                    }
-                    
-
+                $sessionController = new sessionController(); 
                 $commentController = new commentController();
-                $sessionController = new sessionController();
                 
                 //checks in the controler if the member already reported the same comment
+                $cookieOrSessionID = $sessionController->checkSession();
                 $commentController->checkIfReported();
                 //needed to checks in the controler if the member already reported the same comment
-                $sessionController->checkSession();
                 $commentController->reportCommentsCheck($cookieOrSessionID, $_GET['commentId']); //the reported comment is registered into reported_comments DB
                 $commentController->reportComments($_GET['commentId']);    //the reported comment is actually reported in comments DB and BE
-            }
-            else {
+            } else {
                 throw new Exception('Aucun identifiant de commentaire envoyé');
             }
         }
@@ -175,11 +129,9 @@ try {
         //user can edit his own comment
         elseif ($_GET['action'] == 'updateComment') {
             if (isset($_GET['commentId']) && $_GET['commentId'] > 0) {
-
                 $commentController = new commentController();
-                $commentController->updateComment($_POST['comment'],$_GET['commentId']);
-            }
-            else {
+                $commentController->updateComment($_POST['comment'], $_GET['commentId']);
+            } else {
                 throw new Exception('Aucun identifiant de commentaire envoyé');
             }
         }
@@ -191,43 +143,36 @@ try {
             $commentController->listAllComments();
 
             //Confirmation message when posting a comment
-            if (isset($_GET['success']) AND $_GET['success'] == 6) 
-            {
+            if (isset($_GET['success']) and $_GET['success'] == 6) {
                 include('templates/success-messages/success6.html');
             }
         }
         
         //to approve or delete all reported comments
         elseif ($_GET['action'] == 'manageAllSelectedComments') {
-            if(isset($_POST['deleteSelectedComments'])){
+            if (isset($_POST['deleteSelectedComments'])) {
                 $commentController = new commentController();
-                $commentController->deleteAllSelectedComments($_POST['selectComments']); // j'essaie de récupérer le tableau de commentsView.php 
-            }
-            elseif(isset($_POST['approveSelectedComments'])){
+                $commentController->deleteAllSelectedComments($_POST['selectComments']); // j'essaie de récupérer le tableau de commentsView.php
+            } elseif (isset($_POST['approveSelectedComments'])) {
                 $commentController = new commentController();
                 $commentController->approveAllSelectedComments($_POST['selectComments']);
-            }
-            else{
+            } else {
                 throw new Exception('Il y a une erreur');
-            }  
+            }
         }
 
         //to publish or delete all new comments
         elseif ($_GET['action'] == 'publishAllSelectedComments') {
-            if(isset($_POST['deleteSelectedComments'])){
+            if (isset($_POST['deleteSelectedComments'])) {
                 $commentController = new commentController();
-                $commentController->deleteAllSelectedComments($_POST['selectPublishComments']); // j'essaie de récupérer le tableau de commentsView.php 
-            }
-            elseif(isset($_POST['publishSelectedComments'])){
+                $commentController->deleteAllSelectedComments($_POST['selectPublishComments']); // j'essaie de récupérer le tableau de commentsView.php
+            } elseif (isset($_POST['publishSelectedComments'])) {
                 $commentController = new commentController();
                 $commentController->approveAllSelectedComments($_POST['selectPublishComments']);
-            }
-            else{
+            } else {
                 throw new Exception('Il y a une erreur');
-            }  
-        }
-    
-        elseif ($_GET['action'] == 'approveComment') {
+            }
+        } elseif ($_GET['action'] == 'approveComment') {
             $commentController = new commentController();
             $commentController->approveComments($_GET['commentId']);
         }
@@ -235,7 +180,7 @@ try {
 
 
 
-    //SING IN, LOG IN, LOG OUT
+        //SING IN, LOG IN, LOG OUT
        
 
         elseif ($_GET['action'] == 'addNewMember') {
@@ -248,125 +193,92 @@ try {
                 $_POST['email'] = htmlspecialchars($_POST['email']);
                 $accentedCharacters = "àèìòùÀÈÌÒÙáéíóúýÁÉÍÓÚÝâêîôûÂÊÎÔÛãñõÃÑÕäëïöüÿÄËÏÖÜŸçÇßØøÅåÆæœ";
                 
-                //testing if username only has authorised caracters and length  
-                if (preg_match("#^[a-z".$accentedCharacters ."0-9]{4,20}$#i",$_POST['username']))
-                {
+                //testing if username only has authorised caracters and length
+                if (preg_match("#^[a-z".$accentedCharacters ."0-9]{4,20}$#i", $_POST['username'])) {
                     //testing if passwords is conform
-                    if (preg_match("#^[a-z".$accentedCharacters ."0-9._!?-]{8,20}$#i",$_POST['pass']) ){
+                    if (preg_match("#^[a-z".$accentedCharacters ."0-9._!?-]{8,20}$#i", $_POST['pass'])) {
                         //testing if both passwords match
-                        if($_POST['pass'] == $_POST['passCheck']){
+                        if ($_POST['pass'] == $_POST['passCheck']) {
                             
                             //testing if email is conform
-                            if( preg_match("#^[a-z0-9._-]+@[a-z0-9._-]{2,}\.[a-z]{2,4}$#i", $_POST['email']))
-                            {
+                            if (preg_match("#^[a-z0-9._-]+@[a-z0-9._-]{2,}\.[a-z]{2,4}$#i", $_POST['email'])) {
                                 //hash password (security feature)
                                 $_POST['pass'] = password_hash($_POST['pass'], PASSWORD_DEFAULT);
                                 //check if username of email are already taken
 
                                 $sessionController = new SessionController;
 
-                                if( $sessionController->checkUsernameAvailability($_POST['username']) == false){
-                                    if($sessionController->checkEmailAvailability($_POST['email']) == false){
-
-                                       
-                                       $sessionController->addNewMember($_POST['username'], $_POST['pass'], $_POST['email']);
+                                if ($sessionController->checkUsernameAvailability($_POST['username']) == false) {
+                                    if ($sessionController->checkEmailAvailability($_POST['email']) == false) {
+                                        $sessionController->addNewMember($_POST['username'], $_POST['pass'], $_POST['email']);
+                                    } else {
+                                        throw new Exception('Cette adresse email n\'est pas disponible');
                                     }
-                                    else
-                                     {
-                                         throw new Exception('Cette adresse email n\'est pas disponible'); 
-                                     }
+                                } else {
+                                    throw new Exception('Ce pseudo n\'est pas disponible');
                                 }
-                                else
-                                 {
-                                     throw new Exception('Ce pseudo n\'est pas disponible'); 
-                                 }
-   
+                            } else {
+                                throw new Exception('L\'adresse email n\'est pas conforme');
                             }
-                            else{
-                                throw new Exception('L\'adresse email n\'est pas conforme'); 
-                            } 
+                        } else {
+                            throw new Exception('Les deux mots de passe ne sont pas identiques');
                         }
-                        else{
-                            throw new Exception('Les deux mots de passe ne sont pas identiques');   
-                        }
-                    }
-                    else{
+                    } else {
                         throw new Exception('Le mot de passe n\'est pas conforme.');
-                    }    
-                }
-                else{
+                    }
+                } else {
                     throw new Exception('Le pseudo n\'est pas conforme.');
                 }
-            }
-            else {
+            } else {
                 throw new Exception('Il manque des informations.');
-            }       
+            }
         }
 
         //LOG IN
         elseif ($_GET['action'] == 'logInCheck') {
-            if(isset($_POST['username']) && isset($_POST['pass'])){
+            if (isset($_POST['username']) && isset($_POST['pass'])) {
                 $sessionController = new SessionController;
                 $sessionController->checkLog($_POST['username']);
                 
-                //if there is a session open, displays a message        
-                if (isset($_SESSION['id']) AND isset($_SESSION['username']))
-                {
+                //if there is a session open, displays a message
+                if (isset($_SESSION['id']) and isset($_SESSION['username'])) {
                     require('templates/front/menu.php');
-                }  
-            }
-            else{
-                throw new Exception('Vérifiez vos identifiants de connexion');   
+                }
+            } else {
+                throw new Exception('Vérifiez vos identifiants de connexion');
             }
         }
 
         //LOG OUT
         elseif ($_GET['action'] == 'logOutCheck') {
-            if(isset($_SESSION['id']) AND isset($_SESSION['username'])){
-                
+            if (isset($_SESSION['id']) and isset($_SESSION['username'])) {
                 $sessionController = new SessionController;
                 $sessionController->killSession();
                 
                 header('Location: index.php');
                 exit;
-            }
-            else{
-                throw new Exception('Vous êtes déja déconnecté');   
+            } else {
+                throw new Exception('Vous êtes déja déconnecté');
             }
         }
 
         //UPDATE PASSWORD
         
-        elseif ($_GET['action'] == 'UpdatePass') 
-        {
-            if( (isset($_COOKIE['login']) AND $_COOKIE['login'] != '') OR  (isset($_SESSION['username']) AND $_SESSION['username'] != ''))
-            {
+        elseif ($_GET['action'] == 'UpdatePass') {
+            if ((isset($_COOKIE['login']) and $_COOKIE['login'] != '') or  (isset($_SESSION['username']) and $_SESSION['username'] != '')) {
                 //to avoid problems with inputs
                 $_POST['currentPass'] = htmlspecialchars($_POST['currentPass']);
                 $_POST['newPass'] = htmlspecialchars($_POST['newPass']);
                
                 $accentedCharactersNewPass = "àèìòùÀÈÌÒÙáéíóúýÁÉÍÓÚÝâêîôûÂÊÎÔÛãñõÃÑÕäëïöüÿÄËÏÖÜŸçÇßØøÅåÆæœ";
-                //needed to check the current pass in DB from the right user (id) 
+                //needed to check the current pass in DB from the right user (id)
                 $sessionController = new SessionController();
-                // $sessionController->checkSession();
-                
-                //FIXME this should not be needed and this line should work  $sessionController->checkSession();
-                        if(isset($_COOKIE['id']))
-                        {
-                            $cookieOrSessionID = $_COOKIE['id'];
-                        }
-                        elseif(isset($_SESSION['id']))
-                        {
-                                $cookieOrSessionID = $_SESSION['id'];
-                        }
+                $cookieOrSessionID = $sessionController->checkSession();
                         
-                if($sessionController->checkCurrentPass($cookieOrSessionID) == true)   
-                {
-                    if(preg_match("#^[a-z".$accentedCharactersNewPass ."0-9._!?-]{8,20}$#i", $_POST['newPass']) )
-                    {
+                if ($sessionController->checkCurrentPass($cookieOrSessionID) == true) {
+                    if (preg_match("#^[a-z".$accentedCharactersNewPass ."0-9._!?-]{8,20}$#i", $_POST['newPass'])) {
                         //if the password is Correct check if current and new pass are the same
-                        if($_POST['currentPass'] != $_POST['newPass'])
-                        {
+                        if ($_POST['currentPass'] != $_POST['newPass']) {
                             //hash password (security feature)
                             $_POST['newPass'] = password_hash($_POST['newPass'], PASSWORD_DEFAULT);
                 
@@ -376,100 +288,84 @@ try {
                             //success2 needed to display the confirmation message
                             header('Location: index.php?success=2#header');
                             exit;
-                        }
-                        else
-                        {
+                        } else {
                             throw new Exception('Votre nouveau password est le même que l\'actuel');
                         }
-                    }
-                    else
-                    {
+                    } else {
                         throw new Exception('Votre nouveau password n\'est pas conforme');
-                    }                    
-                }
-                else {
+                    }
+                } else {
                     throw new Exception('Votre password actuel n\'est pas le bon');
-                } 
-            }     
-            else {
+                }
+            } else {
                 throw new Exception('Vous devez être connecté pour accéder à cette page');
-            }   
+            }
         }
 
 
 
-    //USERS
+        //USERS
         elseif ($_GET['action'] == 'manageUsers') {
-
-            
-            if(!isset($_GET['page']) OR !isset($_GET['sortBy']) OR $_GET['page']<1 OR $_GET['sortBy']<1)
-            { 
+            if (!isset($_GET['page']) or !isset($_GET['sortBy']) or $_GET['page']<1 or $_GET['sortBy']<1) {
                 throw new Exception('Il manque le numéro de page ou le classement des utilisateurs');
-            }
-            else{
+            } else {
                 $userController = new UserController;
                 $userController->listAllUsers();
-            }   
+            }
         }
 
         //to delete all selected users
         elseif ($_GET['action'] == 'manageAllSelectedUsers') {
-            if(isset($_POST['deleteSelectedUsers'])){
+            if (isset($_POST['deleteSelectedUsers'])) {
                 $userController = new UserController;
-                $userController->deleteAllSelectedUsers($_POST['selectUsers']);  
-            }
-            else{
+                $userController->deleteAllSelectedUsers($_POST['selectUsers']);
+            } else {
                 throw new Exception('Il y a une erreur');
-            }  
+            }
         }
         
         //to update role
         elseif ($_GET['action'] == 'updateRole') {
-            if(isset($_GET['role'])){
+            if (isset($_GET['role'])) {
                 $userController = new UserController;
-                $userController->updateUserRole($_GET['role'], $_GET['userID']);  
-            }
-            else{
+                $userController->updateUserRole($_GET['role'], $_GET['userID']);
+            } else {
                 throw new Exception('Il y a une erreur');
-            }  
-        }
-
-        elseif ($_GET['action'] == 'deleteUser') {
+            }
+        } elseif ($_GET['action'] == 'deleteUser') {
             if (isset($_GET['userID']) && $_GET['userID'] > 0) {
                 $userController = new UserController;
                 $userController->deleteUser($_GET['userID']);
-            }
-            else {
+            } else {
                 throw new Exception('Aucun identifiant de billet envoyé');
             }
         }
 
 
 
-    //STATISTICS
+        //STATISTICS
         elseif ($_GET['action'] == 'displayStatsView') {
             $statsController = new StatsController;
             $statsController->displayStatsView();
         }
 
 
-    //ABOUT
+        //ABOUT
         elseif ($_GET['action'] == 'about') {
             $generalController = new GeneralController;
             $generalController->displayAboutView();
         }
 
-    //LEGAL NOTICE  
+        //LEGAL NOTICE
         elseif ($_GET['action'] == 'legalNotice') {
             $generalController = new GeneralController;
             $generalController->displayLegalNoticeView();
         }
          
-    //CONTACT
+        //CONTACT
         elseif ($_GET['action'] == 'sendMessage') {
             //testing if all fields a filled
-            if (isset($_POST['firstName']) && isset($_POST['lastName']) && isset($_POST['contactEmail']) && isset($_POST['topic']) && isset($_POST['messageContent'])) 
-            {
+            if (isset($_POST['firstName']) && isset($_POST['lastName']) && isset($_POST['contactEmail']) && isset($_POST['topic']) && isset($_POST['messageContent'])) {
                 //to avoid problems with inputs
                 $_POST['firstName'] = htmlspecialchars($_POST['firstName']);
                 $_POST['lastName'] = htmlspecialchars($_POST['lastName']);
@@ -478,79 +374,62 @@ try {
                 $_POST['messageContent'] = htmlspecialchars($_POST['messageContent']);
                 $accentedCharacters = "àèìòùÀÈÌÒÙáéíóúýÁÉÍÓÚÝâêîôûÂÊÎÔÛãñõÃÑÕäëïöüÿÄËÏÖÜŸçÇßØøÅåÆæœ";
                 
-                //testing if firstName only has authorised caracters   
-                if (preg_match("#^[a-z". $accentedCharacters ."]+[' -]?[a-z". $accentedCharacters ."]+$#i",$_POST['firstName']))
-                {
+                //testing if firstName only has authorised caracters
+                if (preg_match("#^[a-z". $accentedCharacters ."]+[' -]?[a-z". $accentedCharacters ."]+$#i", $_POST['firstName'])) {
                     //testing if lastName only has authorised caracters
-                    if (preg_match("#^[a-z". $accentedCharacters ."]+[' -]?[a-z". $accentedCharacters ."]+$#i",$_POST['lastName']))
-                    {
+                    if (preg_match("#^[a-z". $accentedCharacters ."]+[' -]?[a-z". $accentedCharacters ."]+$#i", $_POST['lastName'])) {
                         //testing if email is conform
-                        if( preg_match("#^[a-z0-9._-]+@[a-z0-9._-]{2,}\.[a-z]{2,4}$#i", $_POST['contactEmail']))
-                        { 
+                        if (preg_match("#^[a-z0-9._-]+@[a-z0-9._-]{2,}\.[a-z]{2,4}$#i", $_POST['contactEmail'])) {
                             //testing if topic is conform
-                            if (preg_match("#^[a-z". $accentedCharacters ."(' \-)*]+[a-z". $accentedCharacters ."]+$#i",$_POST['topic']))
-                            {
+                            if (preg_match("#^[a-z". $accentedCharacters ."(' \-)*]+[a-z". $accentedCharacters ."]+$#i", $_POST['topic'])) {
                                 $formController = new FormController;
-                                $formController->sendMessage($_POST['firstName'], $_POST['lastName'], $_POST['contactEmail'], $_POST['topic'],  $_POST['messageContent']);
+                                $formController->sendMessage($_POST['firstName'], $_POST['lastName'], $_POST['contactEmail'], $_POST['topic'], $_POST['messageContent']);
+                            } else {
+                                throw new Exception('L\'intitulé n\'est pas conforme');
                             }
-                            else{
-                                throw new Exception('L\'intitulé n\'est pas conforme'); 
-                            } 
+                        } else {
+                            throw new Exception('L\'adresse email n\'est pas conforme');
                         }
-                        else{
-                            throw new Exception('L\'adresse email n\'est pas conforme');   
-                        }
-                    }
-                    else{
+                    } else {
                         throw new Exception('Le nom n\'est pas conforme.');
-                    }    
-                }
-                else{
+                    }
+                } else {
                     throw new Exception('Le prénom n\'est pas conforme.');
                 }
-            }
-            else {
+            } else {
                 throw new Exception('Il manque des informations.');
-            }      
-        }     
-
+            }
+        }
     }
 
-//DEFAULT BEHAVIOR
+    //DEFAULT BEHAVIOR
     else {
-        if (isset($_GET['page']) && $_GET['page'] <= 0) 
-        {
-            throw new Exception('Cette page n\'existe pas');  
-        }
-        else {
+        if (isset($_GET['page']) && $_GET['page'] <= 0) {
+            throw new Exception('Cette page n\'existe pas');
+        } else {
             $postController = new PostController;
             $postController->listPosts();
 
             //Confirmation message when singin in
-            if (isset($_GET['success']) AND $_GET['success'] == 1) 
-            {
+            if (isset($_GET['success']) and $_GET['success'] == 1) {
                 include('templates/success-messages/success1.html');
             }
 
             //Confirmation message when password updated
-            if (isset($_GET['success']) AND $_GET['success'] == 2) 
-            {
+            if (isset($_GET['success']) and $_GET['success'] == 2) {
                 include('templates/success-messages/success2.html');
             }
 
             //Confirmation message when message sent through contact page
-            if (isset($_GET['success']) AND $_GET['success'] == 3) 
-            {
+            if (isset($_GET['success']) and $_GET['success'] == 3) {
                 include('templates/success-messages/success3.html');
             }
-        }   
+        }
     }
 }
 
 //ERROR BEHAVIOR
-catch(Exception $e) {
+catch (Exception $e) {
     $errorMessage = $e->getMessage();
     require('templates/errorView.php');
-
 }
-?>

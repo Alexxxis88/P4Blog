@@ -1,7 +1,7 @@
 <?php
 class PostManager extends Manager
 {
-//FRONTEND
+    //FRONTEND
     //gets the last X posts to display in listPostsView. X depends on $messagesPerPage
     public function getPosts($firstEntry, $messagesPerPage)
     {
@@ -10,14 +10,12 @@ class PostManager extends Manager
         $req->bindValue(2, $messagesPerPage, PDO::PARAM_INT);
         $req->execute();
 
-        while ($datas = $req->fetch(PDO::FETCH_ASSOC))
-        {           
+        while ($datas = $req->fetch(PDO::FETCH_ASSOC)) {
             $posts[] = new Post($datas);
         }
-        if(!empty($posts)) //needed otherwise gives an error on the listPostView.php when no posts in DB
-        {
+        if (!empty($posts)) { //needed otherwise gives an error on the listPostView.php when no posts in DB
             return $posts;
-        } 
+        }
     }
 
 
@@ -38,20 +36,17 @@ class PostManager extends Manager
         $req->execute(array($postId));
         $datas = $req->fetch();
         
-        if($datas == false) //needed here otherwise if a user puts a random pageID in url the Post construct receive a boolean false and a PHP error is displayed in FO
-            {
-                throw new Exception('Ce chapitre n\'existe pas');
-            }
-        else{
+        if ($datas == false) { //needed here otherwise if a user puts a random pageID in url the Post construct receive a boolean false and a PHP error is displayed in FO
+            throw new Exception('Ce chapitre n\'existe pas');
+        } else {
             $post = new Post($datas);
             return $post;
-        }    
-        
+        }
     }
 
 
 
-//BACKEND
+    //BACKEND
     public function insertNewPost($chapter, $title, $content)
     {
         $newPostDb = $this->_db->prepare('INSERT INTO posts( chapterNb, title, content, publishDate, editDate ) VALUES(?, ?, ?, NOW(), NOW())');
@@ -59,7 +54,7 @@ class PostManager extends Manager
     }
 
 
-    public function erasePost($postId) // est ce que ce $postId est le même que celui de postComment ? 
+    public function erasePost($postId) // est ce que ce $postId est le même que celui de postComment ?
     {
         $postDelete = $this->_db->prepare('DELETE FROM posts WHERE id = ?');
         $postDelete->execute(array($postId));

@@ -1,10 +1,8 @@
 <?php
 class SessionManager extends Manager
 {
-    
     public function insertMember($username, $pass, $email)
     {
-       
         $newMember = $this->_db->prepare('INSERT INTO members( username, pass, email, registrationDate) VALUES(?, ?, ?, NOW())');
         $newMember->execute(array($username, $pass, $email));
     }
@@ -25,17 +23,15 @@ class SessionManager extends Manager
         return $checkLogIn;
     }
     
-     //FIXME : factoriser avec la fonction checkLogIn ? 
-     public function checkRole($userID)
-     {
-         $req = $this->_db->prepare('SELECT groupId FROM members WHERE id = ?');
-         $req->execute(array($userID));
-         $checkRole = $req->fetch();
+    public function checkRole($userID)
+    {
+        $req = $this->_db->prepare('SELECT groupId FROM members WHERE id = ?');
+        $req->execute(array($userID));
+        $checkRole = $req->fetch();
      
-         return $checkRole;
-     }
+        return $checkRole;
+    }
 
-    //FIXME : factoriser avec la fonction checkLogIn ? 
     public function checkUsername($userName)
     {
         $check = $this->_db->prepare('SELECT username FROM members WHERE username = ?');
@@ -45,7 +41,6 @@ class SessionManager extends Manager
         return $checkUsername;
     }
     
-    //FIXME : factoriser avec la fonction checkLogIn ? 
     public function checkEmail($email)
     {
         $check = $this->_db->prepare('SELECT email FROM members WHERE email = ?');
@@ -55,7 +50,6 @@ class SessionManager extends Manager
         return $checkEmail;
     }
     
-    //FIXME : factoriser avec la fonction checkLogIn ? 
     public function checkPass($userID)
     {
         $check = $this->_db->prepare('SELECT pass FROM members WHERE id = ?');
@@ -64,9 +58,4 @@ class SessionManager extends Manager
     
         return $checkPass;
     }
-   
-    
- 
-
-
 }

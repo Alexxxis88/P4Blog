@@ -3,45 +3,42 @@
 
 
 
-class PostController{
+class PostController
+{
 
-  //gets all the post to display in listPostsView. 
+  //gets all the post to display in listPostsView.
     public function listPosts()
-    {   
+    {
 
-    //change color of the menu comment icon in red if comments to manage FIXME : factoriser ? au lieu de copier plein de fois ? 
+        //comments to manage red icon
         $commentManager = new CommentManager();
         $nbOfReportedComments = $commentManager->getNbOfReportedComments();
 
         $postManager = new PostManager();
     
-    //Pagitation     
+        //Pagitation
         $totalPages = $postManager->getTotalPages();
         $total = $totalPages['total_posts']; // total of posts in DB
         $messagesPerPage = 6;
         $nbOfPages = ceil($total/$messagesPerPage);
-        if(isset($_GET['page']))
-        {
+        if (isset($_GET['page'])) {
             $currentPage = intval($_GET['page']); //intval gets the integer ( 4.2 = 4) value of a variable
         
-            if($currentPage>$nbOfPages) // if a user puts the value of a page that doesnt exist, it redirects to the last page ($nbOfPages)
-            {
+            if ($currentPage>$nbOfPages) { // if a user puts the value of a page that doesnt exist, it redirects to the last page ($nbOfPages)
                 $currentPage=$nbOfPages;
             }
-        }
-        else
-        {
-            $currentPage = 1; 
+        } else {
+            $currentPage = 1;
         }
         $firstEntry = ($currentPage-1)*$messagesPerPage; // first entry to read
         
         $currentView = "listPost"; //to display the correct Pagination View
         
-  //Display post depending on pagination parameters
+        //Display post depending on pagination parameters
         $posts = $postManager->getPosts($firstEntry, $messagesPerPage);
 
 
-    //check the role of the logged in user to display or not Admin features
+        //check the role of the logged in user to display or not Admin features
         $sessionController = new SessionController;
         $checkUserRole = $sessionController->checkUserRole();
         
@@ -50,9 +47,9 @@ class PostController{
 
 
     public function post()
-    {   
+    {
 
-        //change color of the menu comment icon in red if comments to manage FIXME : factoriser ? au lieu de copier plein de fois ? 
+        //comments to manage red icon
         $commentManager = new CommentManager();
         $nbOfReportedComments = $commentManager->getNbOfReportedComments();
 
@@ -62,29 +59,23 @@ class PostController{
         $postManager = new PostManager();
         $commentManager = new CommentManager();
 
-    //Pagination for comments
+        //Pagination for comments
         $totalComments = $commentManager->getTotalComments($_GET['id']);
         $totalCom=$totalComments['total_comments']; // total of posts in DB
 
-        if(isset($_GET['sortBy'])){
+        if (isset($_GET['sortBy'])) {
             $messagesPerPage = $_GET['sortBy'];
-        }
-        else
-        {
+        } else {
             $messagesPerPage = 5;
         }
         $nbOfPages=ceil($totalCom/$messagesPerPage);
-        if(isset($_GET['page']))
-        {
+        if (isset($_GET['page'])) {
             $currentPage=intval($_GET['page']); //intval gets the integer ( 4.2 = 4) value of a variable
-            if($currentPage>$nbOfPages) // if a user puts the value of a page that doesnt exist, it redirects to the last page ($nbOfPages)
-            {
+            if ($currentPage>$nbOfPages) { // if a user puts the value of a page that doesnt exist, it redirects to the last page ($nbOfPages)
                 $currentPage=$nbOfPages;
             }
-        }
-        else
-        {
-            $currentPage=1; 
+        } else {
+            $currentPage=1;
         }
         $firstEntry=($currentPage-1)*$messagesPerPage; // first comment to read
         $comments = $commentManager->getComments($_GET['id'], $firstEntry, $messagesPerPage);
@@ -94,28 +85,26 @@ class PostController{
         
         $post = $postManager->getPost($_GET['id']);
         //check if post exists in DB
-        if($post == false)
-        {
+        if ($post == false) {
             throw new Exception('Ce chapitre n\'existe pas');
         }
 
-        $lastPosts = $postManager->getPosts(0,3); // 0,3 = the last 3 posts published
+        $lastPosts = $postManager->getPosts(0, 3); // 0,3 = the last 3 posts published
 
         require('templates/front/postView.php');
     }
 
 
     public function displayPublishView()
-    {   
+    {
 
-        //change color of the menu comment icon in red if comments to manage FIXME : factoriser ? au lieu de copier plein de fois ? 
+        //comments to manage red icon
         $commentManager = new CommentManager();
         $nbOfReportedComments = $commentManager->getNbOfReportedComments();
         
         $sessionController = new SessionController;
         $checkUserRole = $sessionController->checkUserRole();
-        if($checkUserRole['groupId'] != 1)
-        {
+        if ($checkUserRole['groupId'] != 1) {
             throw new Exception('Vous n\'avez pas accès à cette page');
         }
         require('templates/admin/publishView.php');
@@ -123,7 +112,7 @@ class PostController{
 
 
     public function newPost($chapter, $title, $content)
-    {   
+    {
         $postManager = new PostManager();
         $newPost = $postManager->insertNewPost($chapter, $title, $content);
         header('Location: index.php?action=listPosts');
@@ -132,24 +121,23 @@ class PostController{
 
 
     public function deletePost($postId)
-    {   
+    {
         $postManager = new PostManager();
         $postDelete = $postManager->erasePost($postId);
         header('Location: index.php');
         exit;
-    } 
+    }
 
 
     public function displayPostToEdit($postId)
-    {   
+    {
         $sessionController = new SessionController;
         $checkUserRole = $sessionController->checkUserRole();
-        if($checkUserRole['groupId'] != 1)
-        {
+        if ($checkUserRole['groupId'] != 1) {
             throw new Exception('Vous n\'avez pas accès à cette page');
         }
         
-        //change color of the menu comment icon in red if comments to manage FIXME : factoriser ? au lieu de copier plein de fois ? 
+        //comments to manage red icon
         $commentManager = new CommentManager();
         $nbOfReportedComments = $commentManager->getNbOfReportedComments();
         
@@ -164,9 +152,5 @@ class PostController{
         $updatedPost = $postManager->editPost($chapter, $title, $content, $postId);
         header('Location: index.php?action=post&id=' . $postId . '&page=1&sortBy=5');
         exit;
-}
-
-
-
-
+    }
 }

@@ -1,7 +1,7 @@
 <?php
 
-class FormController{
-
+class FormController
+{
     public function sendMessage($firstName, $lastName, $contactEmail, $topic, $messageContent)
     {
         $to  = 'alexisxgautier@gmail.com, jean-forteroche@jeanforteroche.com';
@@ -23,7 +23,6 @@ class FormController{
         
         //success3 needed to display the confirmation message
         header('Location: index.php?success=3#header');
-        exit;  
+        exit;
     }
-
 }

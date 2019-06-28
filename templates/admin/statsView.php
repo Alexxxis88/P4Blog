@@ -1,5 +1,5 @@
 
-<?php $title = 'Statistiques du site'; 
+<?php $title = 'Statistiques du site';
 ob_start(); ?>
 
 <div class="container">
@@ -56,16 +56,15 @@ ob_start(); ?>
         <div class="col-md-offset-1 col-md-6 col-md-offset-1">
             <div class="top10block">
                 <h3>Top 10 des meilleurs contributeurs </h3>
-                <?php 
+                <?php
                 $i = 1;
-                while ($datasUsers = $usersStats->fetch())
-                {  
-                ?>
+                while ($datasUsers = $usersStats->fetch()) {
+                    ?>
                     <div class="topLines">
                         <p><strong><?= $i++ ?> . <?= $datasUsers['username'] ?> </strong>inscrit le <?= $datasUsers['mod_registrationDate'] ?>. Commentaires : <strong> <?= $datasUsers['userComCount'] ?></strong></p>
                     </div>     
-                <?php  
-                }    
+                <?php
+                }
                 ?> 
             </div> 
         </div>

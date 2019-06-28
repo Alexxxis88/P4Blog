@@ -11,18 +11,16 @@ class CommentManager extends Manager
         $req->bindValue(3, $messagesPerPage, PDO::PARAM_INT);
         $req->execute();
 
-        while ($datasComments = $req->fetch(PDO::FETCH_ASSOC))
-        {           
+        while ($datasComments = $req->fetch(PDO::FETCH_ASSOC)) {
             $comments[] = new Comment($datasComments);
         }
-        if(!empty($comments)) //needed otherwise gives an error on the postView.php when no comments on the related post
-        {
+        if (!empty($comments)) { //needed otherwise gives an error on the postView.php when no comments on the related post
             return $comments;
-        } 
+        }
     }
 
     //Pagination comments
-        //AND NOT flag = 9999 added otherwise the number of page will include the comments to moderate before publish even if they are not displayed
+    //AND NOT flag = 9999 added otherwise the number of page will include the comments to moderate before publish even if they are not displayed
     public function getTotalComments($postId)
     {
         $getTotalComments = $this->_db->prepare('SELECT COUNT(*) AS total_comments FROM comments WHERE postId = ? AND NOT flag = 9999');
@@ -32,7 +30,7 @@ class CommentManager extends Manager
         return $returnTotalComments;
     }
 
-    public function postComment($postId, $author, $comment,$postIdComCounts, $userIdComCounts)
+    public function postComment($postId, $author, $comment, $postIdComCounts, $userIdComCounts)
     {
         $comments = $this->_db->prepare('INSERT INTO comments(postId, author, comment, commentDate, updateDate) VALUES(?, ?, ?, NOW(), NOW())');
         $affectedLines = $comments->execute(array($postId, $author, $comment));
@@ -107,66 +105,59 @@ class CommentManager extends Manager
     public function getReportedComments()
     {
         $req = $this->_db->query('SELECT id, postId, author, comment, DATE_FORMAT(commentDate, \'%d/%m/%Y à %Hh%imin%ss\') AS modCommentDate, flag FROM comments WHERE flag > 0 AND flag < 9999 ORDER BY flag DESC, commentDate');
-        while ($datasReportedComments = $req->fetch(PDO::FETCH_ASSOC))
-        {           
+        while ($datasReportedComments = $req->fetch(PDO::FETCH_ASSOC)) {
             $reportedComments[] = new Comment($datasReportedComments);
         }
-        if(!empty($reportedComments)) //needed otherwise gives an error on the commentsView.php when no comments reported
-        {
+        if (!empty($reportedComments)) { //needed otherwise gives an error on the commentsView.php when no comments reported
             return $reportedComments;
-        } 
+        }
     }
 
     //get new comments (flag value = 9999 by default)
     public function getNewComments()
     {
         $req = $this->_db->query('SELECT id, postId, author, comment, DATE_FORMAT(commentDate, \'%d/%m/%Y à %Hh%imin%ss\') AS modCommentDate, flag FROM comments WHERE flag = 9999 ORDER BY commentDate');
-        while ($datasNewComments = $req->fetch(PDO::FETCH_ASSOC))
-        {           
+        while ($datasNewComments = $req->fetch(PDO::FETCH_ASSOC)) {
             $newComments[] = new Comment($datasNewComments);
         }
 
-        if(!empty($newComments)) //needed otherwise gives an error on the commentsView.php when no new comments to manage
-        {
+        if (!empty($newComments)) { //needed otherwise gives an error on the commentsView.php when no new comments to manage
             return $newComments;
-        } 
+        }
     }
 
     //must receive an array of ids to delete all the comments at once. (?) = my array, see here https://www.tutorialspoint.com/mysql/mysql-in-clause.htm
-    public function eraseAllSelectedComments($arrayCommentsIDs) 
+    public function eraseAllSelectedComments($arrayCommentsIDs)
     {
         //on compte la longueur du tableau pour arrêter la boucle for au bon moment
         $arrayLength = count($arrayCommentsIDs, COUNT_NORMAL);
         
         //on fait une boucle pour injecter la VALEUR ENTIERE de chaque entrée du tableau $arrayCommentsIDs en tant que paramètre ? de (IN)
-        for( $i = 0; $i < $arrayLength; $i++){
+        for ($i = 0; $i < $arrayLength; $i++) {
             $id = $arrayCommentsIDs[$i];
             $eraseAllSelectedComments = $this->_db->prepare('DELETE FROM comments WHERE id IN (?)'); // je veux que ? soit les valeurs successives d'un tableau donc je dois faire une boucle
             $eraseAllSelectedComments->execute(array($id));
         }
-        
     }
 
     //accept all the selected reported comments
-    public function acceptAllSelectedComments($arrayCommentsIDs) 
+    public function acceptAllSelectedComments($arrayCommentsIDs)
     {
         //on compte la longueur du tableau pour arrêter la boucle for au bon moment
         $arrayLength = count($arrayCommentsIDs, COUNT_NORMAL);
         
         //on fait une boucle pour injecter la VALEUR ENTIERE de chaque entrée du tableau $arrayCommentsIDs en tant que paramètre ? de (IN)
-        for( $i = 0; $i < $arrayLength; $i++){
+        for ($i = 0; $i < $arrayLength; $i++) {
             $id = $arrayCommentsIDs[$i];
             $acceptAllSelectedComments = $this->_db->prepare('UPDATE comments SET flag = 0 WHERE id IN (?)'); // je veux que ? soit les valeurs successives d'un tableau donc je dois faire une boucle
             $acceptAllSelectedComments->execute(array($id));
         }
-        
     }
 
-    public function getNbOfReportedComments() // display number of comments to manage 
+    public function getNbOfReportedComments() // display number of comments to manage
     {
         $req = $this->_db->query('SELECT SUM(flag) AS flagTotal FROM comments');
         $reportedCommentNb= $req->fetch();
         return $reportedCommentNb;
     }
-
 }

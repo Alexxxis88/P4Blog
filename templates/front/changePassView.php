@@ -1,13 +1,11 @@
 <?php
-//FIXME this should not be needed and this line should work  $sessionController->checkSession();
+//Needed here because I can't call the $sessionController->checkSession(); in the routeur because there is no action to dislplay the changePassView.php as it's opened in a modal box and not a proper view
 
-if(isset($_COOKIE['id']))
-    {
-        $cookieOrSessionID = $_COOKIE['id'];
-    }
-    elseif(isset($_SESSION['id']))
-    {
-            $cookieOrSessionID = $_SESSION['id'];
+//Get user's ID using COOKIE or SESSION
+if (isset($_COOKIE['id'])) {
+    $cookieOrSessionID = $_COOKIE['id'];
+} elseif (isset($_SESSION['id'])) {
+        $cookieOrSessionID = $_SESSION['id'];
     }
     ?>
     

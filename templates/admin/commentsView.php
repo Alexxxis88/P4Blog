@@ -18,21 +18,15 @@
                 <?php
                         //je déclare un tableau vide qui va me servir a stocker tous les ids des commentaires signalés
                         $arrayComments = array();
-                if(!empty($reportedComments)) //needed otherwise gives an error on the commentsView.php when no comments reported
-                {       
-                for ($i = 0 ; $i < sizeof($reportedComments) ; $i++)
-                {
-
+                if (!empty($reportedComments)) { //needed otherwise gives an error on the commentsView.php when no comments reported
+                    for ($i = 0 ; $i < sizeof($reportedComments) ; $i++) {
                         $idComment = $reportedComments[$i]->id(); //gets the id of the post to use in buttons "read more" & "comments" urls
                         $postId = $reportedComments[$i]->postId();
                         $author = $reportedComments[$i]->author();
                         $comment = $reportedComments[$i]->comment();
                         $commentDate = $reportedComments[$i]->modCommentDate();
                         $updateDate = $reportedComments[$i]->modUpdateDate();
-                        $flag = $reportedComments[$i]->flag();
-
-                        
-                ?>
+                        $flag = $reportedComments[$i]->flag(); ?>
 
 
                                 <div class="reportedComments">
@@ -63,8 +57,7 @@
                         
                         //pour chaque commentaire, je rajoute son id dans le tableau $arrayComments
                         array_push($arrayComments, $idComment);
-                
-                }
+                    }
                 }
                 ?>        
                 </form>
@@ -92,16 +85,13 @@
                 //je déclare un tableau vide qui va me servir a stocker tous les ids des commentaires signalés
                 $arrayPublish = array();
 
-                if(!empty($newComments)) //needed otherwise gives an error on the commentsView.php when no new comments to manage
-                {
-                for ($i2 = 0 ; $i2 < sizeof($newComments) ; $i2++)
-                { 
+                if (!empty($newComments)) { //needed otherwise gives an error on the commentsView.php when no new comments to manage
+                    for ($i2 = 0 ; $i2 < sizeof($newComments) ; $i2++) {
                         $idComment = $newComments[$i2]->id(); //gets the id of the post to use in buttons "read more" & "comments" urls
                         $postId = $newComments[$i2]->postId();
                         $author = $newComments[$i2]->author();
                         $comment = $newComments[$i2]->comment();
-                        $commentDate = $newComments[$i2]->modCommentDate();
-                ?>
+                        $commentDate = $newComments[$i2]->modCommentDate(); ?>
 
                         
                 <div class="acceptDenyComments">
@@ -125,9 +115,8 @@
                         
         //pour chaque commentaire à publier, je rajoute son id dans le tableau $arrayPublish
         array_push($arrayPublish, $idComment);
-
-        }
-        }    
+                    }
+                }
         ?>           
                 </form>
         
@@ -139,18 +128,8 @@
         </section>
 </div>
 
-        
-
-         
-
-          
-        
-
-
- 
    
 <?php $content = ob_get_clean(); ?>
-
 <?php require('templates/base.php'); ?>
 
 

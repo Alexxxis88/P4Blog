@@ -1,11 +1,12 @@
 <?php
 class Manager
-{  
+{
     protected $_db = null;
 
-    public function __construct(){
-		$this->dbConnect();
-	}
+    public function __construct()
+    {
+        $this->dbConnect();
+    }
 
         
     // General protected function to connect to database

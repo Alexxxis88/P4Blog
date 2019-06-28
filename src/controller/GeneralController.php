@@ -1,10 +1,10 @@
 <?php
 
-class GeneralController{
-
+class GeneralController
+{
     public function displayAboutView()
-    {   
-        //change color of the menu comment icon in red if comments to manage FIXME : factoriser ? au lieu de copier plein de fois ? 
+    {
+        //comments to manage red icon
         $commentManager = new CommentManager();
         $nbOfReportedComments = $commentManager->getNbOfReportedComments();
 
@@ -14,8 +14,8 @@ class GeneralController{
     }
 
     public function displayLegalNoticeView()
-    {   
-        //change color of the menu comment icon in red if comments to manage FIXME : factoriser ? au lieu de copier plein de fois ? 
+    {
+        //comments to manage red icon
         $commentManager = new CommentManager();
         $nbOfReportedComments = $commentManager->getNbOfReportedComments();
         
@@ -23,5 +23,4 @@ class GeneralController{
         $checkUserRole = $sessionController->checkUserRole();
         require('templates/front/legalNoticeView.php');
     }
-
 }

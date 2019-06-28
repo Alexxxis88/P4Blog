@@ -25,11 +25,9 @@
 
         <?php
         //display the right menu depending on the user role
-        if(isset($checkUserRole['groupId']) && $checkUserRole['groupId'] == 1)
-        {
+        if (isset($checkUserRole['groupId']) && $checkUserRole['groupId'] == 1) {
             require('admin/menuAdmin.php');
-        }
-        else{
+        } else {
             require('front/menu.php');
         }
         ?>

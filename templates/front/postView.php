@@ -1,12 +1,10 @@
-<?php 
+<?php
 $id = $post->id(); //gets the id of the post to use in buttons "read more" & "comments" urls
 $chapter = $post->chapterNb();
 $content = $post->content();
 $postTitle = $post->title();
 $editDate = $post->modEditDate();
-$publishDate = $post->modPublishDate(); 
-
-
+$publishDate = $post->modPublishDate();
 
 $title = $postTitle;
 
@@ -39,16 +37,13 @@ ob_start(); ?>
 							<div class="main-post">
 							<div class="post-meta">
 								<span class="post-date">
-								<?php 
-								if($publishDate ==  $editDate )
-								{
-								echo '<p>Publié le '. $publishDate . '</p>';
-								}
-								else
-								{
-									echo '<p>Edité le '. $editDate . '</p>';
-								}
-								?>
+								<?php
+                                if ($publishDate ==  $editDate) {
+                                    echo '<p>Publié le '. $publishDate . '</p>';
+                                } else {
+                                    echo '<p>Edité le '. $editDate . '</p>';
+                                }
+                                ?>
 								</span>
 							</div>
 								<h3><?= htmlspecialchars($chapter) ?></h3>
@@ -57,15 +52,13 @@ ob_start(); ?>
 									<img class="img-responsive" src="./public/img/post-<?= $id?>.jpg" alt="<?= $postTitle ?>">
 								</figure>
 								<?php
-								// FIXME: factoriser le code avec l'affichage ou non (1)des boutons modifier / supprimer sur listPostsView et PostView (2) des boutons approuver / supprimer des com sur PostView (3) l'affichage du menu admin de template.php
-								if(isset($checkUserRole['groupId']) && $checkUserRole['groupId'] == 1)
-								{ 
-								?>       
+                                if (isset($checkUserRole['groupId']) && $checkUserRole['groupId'] == 1) {
+                                    ?>       
 									<a class="adminIcon" href="index.php?action=manageView&id=<?=$post->id()?>"><i class="far fa-edit editBtns"></i></a>
 									<a class="adminIcon" href="index.php?action=deletePost&amp;id=<?= $post->id() ?>" onclick="return confirm('Etes-vous sûr?')"><i class="far fa-trash-alt"></i></a>
 								<?php
-								}  
-								?>   	
+                                }
+                                ?>   	
 							</div>
 							
 						</div>
@@ -87,48 +80,41 @@ ob_start(); ?>
 							</div>	
 							<!-- displays the comments -->
 				<?php
-				if(!empty($comments)) //needed otherwise gives an error on the postView.php when no comments on the related post
-				{   
-					for ($i = 0 ; $i < sizeof($comments) ; $i++)
-					{
-						$idComment = $comments[$i]->id(); //gets the id of the post to use in buttons "read more" & "comments" urls
-						$author = $comments[$i]->author();
-						$comment = $comments[$i]->comment();
-						$commentDate = $comments[$i]->modCommentDate();
-						$updateDate = $comments[$i]->modUpdateDate();
-						$flag = $comments[$i]->flag();
+                if (!empty($comments)) { //needed otherwise gives an error on the postView.php when no comments on the related post
+                    for ($i = 0 ; $i < sizeof($comments) ; $i++) {
+                        $idComment = $comments[$i]->id(); //gets the id of the post to use in buttons "read more" & "comments" urls
+                        $author = $comments[$i]->author();
+                        $comment = $comments[$i]->comment();
+                        $commentDate = $comments[$i]->modCommentDate();
+                        $updateDate = $comments[$i]->modUpdateDate();
+                        $flag = $comments[$i]->flag();
 
-						if($flag < 9999)
-						{
-						?>	
+                        if ($flag < 9999) {
+                            ?>	
 							
 							<div class="post-comments">
 								<div class="media">
 									<div class="media-left">
 										<img class="media-object" src="./public/img/avatar.png" alt="avatar">
 									</div>
-									<?php			
-												//display reported comments with a red background
-										if($flag > 0)
-										{
-											echo '<div class="media-body reportedComments">
+									<?php
+                                                //display reported comments with a red background
+                                        if ($flag > 0) {
+                                            echo '<div class="media-body reportedComments">
 												<p>Commentaire signalé <strong>' . $flag . '</strong> fois.<em> En attente de modération.</em></p>';
-										}else
-										{
-											echo '<div class="media-body">';
-										}
-										?>
+                                        } else {
+                                            echo '<div class="media-body">';
+                                        } ?>
 									
 														<div class="media-heading">
 															<h4><?= htmlspecialchars($author) ?></h4>
 															<!-- id= $comment['id'] used to create an anchor on the comment position to be able to display the right comment directly when selected in manageCommentsView.php (be)-->
 															<span class="time" id="<?= $id ?>">publié le <?= $commentDate ?>
 																<?php
-																//also display update_date if comment has been updated by author
-																if ($commentDate != $updateDate)
-																{ echo ' et modifié le ' . $updateDate;
-																}  
-																?>
+                                                                //also display update_date if comment has been updated by author
+                                                                if ($commentDate != $updateDate) {
+                                                                    echo ' et modifié le ' . $updateDate;
+                                                                } ?>
 															</span>
 															<p></p>
 														</div>
@@ -140,33 +126,27 @@ ob_start(); ?>
 
 <div class="commentsBtn">
 				<?php
-                // FIXME: factoriser le code avec l'affichage ou non (1)du formulaire de commentaire (2) du bouton signaler (3) du reste de l'affichage des boutons / menus si loggé en admin / user / pas loggé
 
 
-				if($flag == 0)
-                {
-                    if((isset($_COOKIE['login']) AND !empty($_COOKIE['login'])) OR (isset($_SESSION['username']) AND !empty($_SESSION['username'])))
-                    {           
-                    ?>
+                if ($flag == 0) {
+                    if ((isset($_COOKIE['login']) and !empty($_COOKIE['login'])) or (isset($_SESSION['username']) and !empty($_SESSION['username']))) {
+                        ?>
                     <a class="reportBtn" href="index.php?action=reportComment&amp;id=<?= $post->id() ?>&amp;commentId=<?= $comments[$i]->id() ?>" onclick="return confirm('Voulez vous vraiment signaler ce commentaire?')"><i class="fas fa-exclamation-triangle"></i></a>
 
                     <?php
-                    }
-                    ?> 
+                    } ?> 
 
 
                     <?php
                     // allows the author to edit / delete his comments only if it has not been reported and pending for management
-                    if(isset($_COOKIE['login'])){
+                    if (isset($_COOKIE['login'])) {
                         $cookieOrSessionUserNAme = $_COOKIE['login'];
-                        }
-                        elseif(isset($_SESSION['username'])){
-                            $cookieOrSessionUserNAme = $_SESSION['username'];
-                        }
+                    } elseif (isset($_SESSION['username'])) {
+                        $cookieOrSessionUserNAme = $_SESSION['username'];
+                    }
                         
-                    if(isset($cookieOrSessionUserNAme) AND !empty($cookieOrSessionUserNAme) AND  $cookieOrSessionUserNAme == $author)
-                    {           
-                    ?>
+                    if (isset($cookieOrSessionUserNAme) and !empty($cookieOrSessionUserNAme) and  $cookieOrSessionUserNAme == $author) {
+                        ?>
                     <!-- form only displayed and used to edit an existing comment -->
                     <!-- i add the $comment['id'] in the class name to display only the form on the selected comment -->
                     <div class="editCommentForm<?=$idComment ?>">
@@ -198,32 +178,25 @@ ob_start(); ?>
 					
                     <?php
                     }
-                }
-                ?> 
+                } ?> 
 
                     <?php
-                    // FIXME: factoriser le code avec l'affichage ou non (1)des boutons modifier / supprimer sur listPostsView et PostView (2) des boutons approuver / supprimer des com sur PostView (3) l'affichage du menu admin de template.php 
-                    if(isset($checkUserRole['groupId']) && $checkUserRole['groupId'] == 1)
-                    {  
+                    if (isset($checkUserRole['groupId']) && $checkUserRole['groupId'] == 1) {
                         //display approve button only if comment already reported
-                            if($flag > 0)
-                        {
+                        if ($flag > 0) {
                             echo '<a href="index.php?action=approveComment&amp;id=' . $post->id() . '&amp;commentId='. $idComment . '"  onclick="return confirm(\'Approuver ce commentaire ?\')" ><i class="far fa-check-circle"></i></a>' ;
-                        }
-                                
-                    ?>    
+                        } ?>    
                         <!-- gets the commentId as a parameter in the URL of the comment to delete AND the post id to return on the same post after comment has been deleted-->
                         <a href="index.php?action=deleteComment&amp;id=<?= $post->id() ?>&amp;commentId=<?= $idComment ?>" onclick="return confirm('Supprimer ce commentaire ?')"><i class="fas fa-trash"></i></a>
                     <?php
-                    }
-                    ?> 
-</div>								<!-- /comment -->
+                    } ?> 
+</div>					
 							</div>
 							<?php
-						}
-					}
-				}			
-					?>
+                        }
+                    }
+                }
+                    ?>
 						</div>
 						<!-- /comments -->
 					
@@ -233,23 +206,18 @@ ob_start(); ?>
 								<h2>Commenter</h2>
 							</div>
 							<?php
-							// FIXME: factoriser le code avec l'affichage ou non (1)du formulaire de commentaire (2) du bouton signaler (3) du reste de l'affichage des boutons / menus si loggé en admin / user / pas loggé
-							if((isset($_COOKIE['login']) AND !empty($_COOKIE['login'])) OR (isset($_SESSION['username']) AND !empty($_SESSION['username'])))
-							{           
-							?>    
+                            if ((isset($_COOKIE['login']) and !empty($_COOKIE['login'])) or (isset($_SESSION['username']) and !empty($_SESSION['username']))) {
+
+								//get author's name depending on COOKIE or SESSION	
+								if ((isset($_COOKIE['login']) and !empty($_COOKIE['login']))) {
+									$commentAuthor =  $_COOKIE['login'];
+								} else {
+									$commentAuthor = $_SESSION['username'];
+								}
+                            ?>    
 							<form class="post-reply" action="index.php?action=addComment&amp;id=<?= $post->id() ?>" method="post">
 								<div class="row">
-									<input type="text" id="author" name="author" required hidden value="<?php
-									//FIXME : coder une solution plus propre / optimisée
-									if((isset($_COOKIE['login']) AND !empty($_COOKIE['login']))){
-										echo $_COOKIE['login'];
-									}
-									else{
-										echo $_SESSION['username'];
-									}
-									
-									?>"  />
-									
+									<input type="text" id="author" name="author" required hidden value="<?= $commentAuthor ?>"  />
 									<div class="col-md-12">
 										<div class="form-group">
 										<label for="comment">Commentaire (700 carac. max)</label><br />
@@ -264,16 +232,13 @@ ob_start(); ?>
 								</div>
 							</form>
 
-
-
 						<?php
-						}
-						else{
-						?>
+                            } else {
+                            ?>
 						<p><strong>Vous devez être connecté pour commenter ce chapitre.</strong></p>
 						<?php
-						}
-						?> 
+                        }
+                        ?> 
 						</div>
 						<!-- /reply -->
 					</div>
@@ -288,15 +253,13 @@ ob_start(); ?>
 							</div>
 
 							<?php
-        for ($i = 0 ; $i < sizeof($lastPosts) ; $i++)
-        {
+        for ($i = 0 ; $i < sizeof($lastPosts) ; $i++) {
             $id = $lastPosts[$i]->id(); //gets the id of the post to use in buttons "read more" & "comments" urls
             $chapter = $lastPosts[$i]->chapterNb();
             $content = $lastPosts[$i]->content();
             $lastPostTitle = $lastPosts[$i]->title();
             $editDate = $lastPosts[$i]->modEditDate();
-            $publishDate = $lastPosts[$i]->modPublishDate();
-        ?>       
+            $publishDate = $lastPosts[$i]->modPublishDate(); ?>       
 							<div class="post post-widget">
 								<a class="post-img" href="index.php?action=post&id=<?=$id?>&page=1&sortBy=5"><img src="./public/img/post-<?=$id?>.jpg" alt="<?= $lastPostTitle ?>"></a>
 								<div class="post-body">
@@ -309,19 +272,14 @@ ob_start(); ?>
 								</div>
 							</div>
 							<?php
-							}  
-							?>	
+        }
+                            ?>	
 						</div>
-						<!-- /post widget -->
 					</div>
-					<!-- /aside -->
 				</div>
-				<!-- /row -->
 			</div>
-			<!-- /container -->
 		</div>
-		<!-- /section -->
 
-		<?php $content = ob_get_clean(); ?>
+<?php $content = ob_get_clean(); ?>
 
 <?php require('templates/base.php'); ?>

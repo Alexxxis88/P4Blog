@@ -5,13 +5,12 @@
  function drawChart() {
  var data = google.visualization.arrayToDataTable([
  ['chapterNb','Nb de commentaires'],
- <?php 
-			
-			 while($row = mysqli_fetch_array($exec)){
+ <?php
             
-			 echo "['".$row['chapterNb']."',".$row['commentCount']."],";
-			 }
-			 ?> 
+             while ($row = mysqli_fetch_array($exec)) {
+                 echo "['".$row['chapterNb']."',".$row['commentCount']."],";
+             }
+             ?> 
  
  ]);
  var options = {

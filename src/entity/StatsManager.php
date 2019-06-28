@@ -1,23 +1,25 @@
 <?php
 class StatsManager extends Manager
 {
-    public function nbComPerPost($postId){
+    public function nbComPerPost($postId)
+    {
         $totalComPerPosts = $this->_db->prepare(
             'SELECT COUNT(*) AS nb_com, p.id
                 FROM posts p 
                 INNER JOIN comments c 
                 ON c.postId = p.id
                 WHERE p.id = ?
-                ');
+                '
+        );
         $totalComPerPosts->execute(array($postId));
         return $totalComPerPosts;
     }
  
-    public function statsPosts() 
+    public function statsPosts()
     {
-        $db = mysqli_connect('localhost','root','','p4blog');
+        $db = mysqli_connect('localhost', 'root', '', 'p4blog');
         $query = "SELECT * from posts ORDER BY id";
-        $exec = mysqli_query($db,$query);
+        $exec = mysqli_query($db, $query);
         return $exec;
     }
     
@@ -28,7 +30,8 @@ class StatsManager extends Manager
         return $rankingBest;
     }
 
-    public function rankingWorst(){
+    public function rankingWorst()
+    {
         $req = $this->_db->query('SELECT id, chapterNb, title, content, DATE_FORMAT(publishDate, \'%d/%m/%Y à %Hh%imin%ss\') AS modPublishDate, commentCount FROM posts ORDER BY commentCount , publishDate LIMIT 1 ');
         $rankingWorst = $req->fetch();
         return $rankingWorst;

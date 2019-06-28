@@ -22,48 +22,37 @@
                 //This array is used to stock every users'Ids
                 $arrayUsersIDs = array();
             
-            if(!empty($allUsers)) //needed otherwise gives an error on the usersView.php when no users in DB
-            {    
-                for ($i = 0 ; $i < sizeof($allUsers) ; $i++)
-                {
-                    $userid = $allUsers[$i]->id(); 
+            if (!empty($allUsers)) { //needed otherwise gives an error on the usersView.php when no users in DB
+                for ($i = 0 ; $i < sizeof($allUsers) ; $i++) {
+                    $userid = $allUsers[$i]->id();
                     $username = $allUsers[$i]->username();
                     $email = $allUsers[$i]->email();
                     $registrationDate = $allUsers[$i]->modRegistrationDate();
-                    $group = $allUsers[$i]->groupId();
-
-                ?>
+                    $group = $allUsers[$i]->groupId(); ?>
                     <div class="usersDisplay">
                         <p class="userListHeader"><input type="checkbox" id="userID" name="selectUsers[]" value="<?= $userid?>" ><strong><?= htmlspecialchars($username) ?></strong>&emsp;-&emsp;<?= $email ?>&emsp;-&emsp;enregistré le <strong> <?= $registrationDate ?></strong></p> 
 
                             <div class="roleAndDelete">
                                 <p ><a class="deleteUserLink" href="index.php?action=deleteUser&amp;userID=<?= $userid ?>" onclick="return confirm('Etes-vous sûr?')"><i class="fas fa-user-times"></i>Supprimer</a>    
                                 <p><strong>Role :</strong> 
-                                <?php 
-                                if( $group == 0)
-                                    { 
-                                        echo  'Utilisateur';
-                                        ?>
+                                <?php
+                                if ($group == 0) {
+                                    echo  'Utilisateur'; ?>
                                         <button class="btn btn-warning btn-sm"><a href="index.php?action=updateRole&amp;userID=<?= $userid ?>&amp;role=1" onclick="return confirm('Etes-vous sûr?')">Passer en Admin</a></button>
                                         <?php
-                                        
-                                    }
-                                elseif( $group == 1)
-                                { 
-                                    echo '<strong style="color:red">Admin</strong>';
-                                    ?>
+                                } elseif ($group == 1) {
+                                    echo '<strong style="color:red">Admin</strong>'; ?>
                                     <button class="btn btn-warning btn-sm"><a href="index.php?action=updateRole&amp;userID=<?= $userid ?>&amp;role=0" onclick="return confirm('Etes-vous sûr?')">Passer en Utilisateur</a></button>
                                     <?php
-                                }      
-                                ?></p>
+                                } ?></p>
                             </div>           
                     </div>
                 <?php
                     
                     //pour chaque utilisateur, je rajoute son id dans le tableau $arrayUsersIDs
-                    array_push($arrayUsersIDs, $userid);    
+                    array_push($arrayUsersIDs, $userid);
                 }
-            }    
+            }
                 ?>    
             </form>
 </div>
