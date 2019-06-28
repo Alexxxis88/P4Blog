@@ -68,8 +68,8 @@
             </script>
 
             <!-- Google Charts -->
-            <script src="https://www.google.com/jsapi"></script>
-            <script src="https://www.gstatic.com/charts/loader.js"></script>
+            <script src="https://www.google.com/jsapi" async defer></script>
+            <script src="https://www.gstatic.com/charts/loader.js" ></script>
 
             <?php require('templates/admin/statsCharts.php'); ?>
 
@@ -102,12 +102,12 @@
                     <!-- Grid row-->
                     <div class="row text-center d-flex justify-content-center">
                         <div class="col-md-12 ">
-                            <h5 class="text-uppercase font-weight-bold">
+
                                 <a href="index.php?action=about">A propos</a> &emsp; 
                                 <a data-toggle="modal" data-target="#contactModal">Contact</a> &emsp;
                                 <a href="index.php?action=legalNotice">Mentions légales</a>
-                            </h5>
-                        </div>                    
+
+                        </div>
                     </div> 
                 </div>
                 <!-- Back to top -->
