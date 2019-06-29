@@ -140,21 +140,19 @@ function hideThanks() {
 let delayConfirmationMsg = setTimeout(hideThanks, 1500);
 
 
-
-
 // ----- MANAGE COMMENTS PAGE ----- //
-// Select / Deselect all checkboxes (for Reported comments)    
+// Select / Deselect all checkboxes (for Reported comments)
 $('#checkAllReported').change(function () {
 	$('input[type=checkbox][id=commentID]').prop('checked', $(this).prop('checked'))
 })
 
-// Select / Deselect all checkboxes (for Reported comments)    
+// Select / Deselect all checkboxes (for Reported comments)
 $('#checkAllToPublish').change(function () {
 	$('input[type=checkbox][id=commentPublishID]').prop('checked', $(this).prop('checked'))
 })
 
 
-// displays a message if no reported comments   
+// displays a message if no reported comments
 if (!$.trim($('.reportedComments').html()).length) {
 	$('.noReportedComments').css("display", "block");
 } else {
@@ -162,7 +160,7 @@ if (!$.trim($('.reportedComments').html()).length) {
 }
 
 
-// displays a message if no new comments   
+// displays a message if no new comments
 if (!$.trim($('.acceptDenyComments').html()).length) {
 	$('.noCommentsToManage').css("display", "block");
 } else {
@@ -184,7 +182,7 @@ $(document).ready(function () {
 
 
 // ----- USERS PAGE ----- //
-// Select / Deselect all checkboxes   
+// Select / Deselect all checkboxes
 $('#checkAllUsers').change(function () {
 	$('input[type=checkbox][id=userID]').prop('checked', $(this).prop('checked'))
 })

@@ -66,7 +66,7 @@ ob_start(); ?>
 					<div class="paginationBlock">
 					<?php require('templates/pagination.php'); ?>
 					</div>
-					
+
 				<!-- displays the comments -->
 				<?php
 				if (!empty($comments)) { //needed otherwise gives an error on the postView.php when no comments on the related post
@@ -95,8 +95,8 @@ ob_start(); ?>
 										echo '<div class="media-body">';} ?>
 											<div class="media-heading">
 												<h4><?= htmlspecialchars($author) ?></h4>
-												<!-- id= $comment['id'] used to create an anchor on the comment position to be able to display the right comment directly when selected in manageCommentsView.php -->
-												<span class="time" id="<?= $id ?>">publié le <?= $commentDate ?>
+												<!-- $idComment = $comments[$i]->id(); used to create an anchor on the comment position to be able to display the right comment directly when selected in manageCommentsView.php -->
+												<span class="time" id="<?= $idComment ?>">publié le <?= $commentDate ?>
 													<?php
 													//also display update_date if comment has been updated by author
 													if ($commentDate != $updateDate) {

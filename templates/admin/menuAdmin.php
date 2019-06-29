@@ -5,7 +5,7 @@
         <div class="adminMenu">
             <a class="adminMenuLink" href="index.php?action=displayPublishView"><span class="fas fa-pen-nib"></span>Publier</a>
             <a class="adminMenuLink" href="index.php?action=listPosts"><span class="fas fa-edit"></span>Editer</a>
-            <a class="adminMenuLink" href="index.php?action=manageComments"><span class="fas fa-comments" id="comAlert"></span>Commentaires</a>
+            <a class="adminMenuLink" href="index.php?action=manageComments"><span class="fas fa-comments comAlert"></span>Commentaires</a>
             <a class="adminMenuLink" href="index.php?action=manageUsers&page=1&sortBy=10"><span class="fas fa-users"></span>Utilisateurs</a>
             <a class="adminMenuLink" href="index.php?action=displayStatsView"><span class="fas fa-chart-line"></span>Statistiques</a>
         </div>
@@ -30,7 +30,7 @@
     <ul>
         <li><a class="adminMenuLink" href="index.php?action=displayPublishView"><span class="fas fa-pen-nib"></span>Publier</a></li>
         <li><a class="adminMenuLink" href="index.php?action=listPosts"><span class="fas fa-edit"></span>Editer</a></li>
-        <li><a class="adminMenuLink" href="index.php?action=manageComments"><span class="fas fa-comment-alt"></span>Commentaires</a></li>
+        <li><a class="adminMenuLink" href="index.php?action=manageComments"><span class="fas fa-comment-alt comAlert"></span>Commentaires</a></li>
         <li><a class="adminMenuLink" href="index.php?action=manageUsers&page=1&sortBy=10"><span class="fas fa-users"></span>Utilisateurs</a></li>
         <li><a class="adminMenuLink" href="index.php?action=displayStatsView"><span class="fas fa-chart-line"></span>Statistiques</a></li>
         <!-- Log Out button -->
@@ -44,7 +44,7 @@
 <!-- gives an arary, the first value ( [0] ) is the result of SUM on the flag column in comments table -->
 <?php
 if ($nbOfReportedComments[0] > 0) { ?>
-    <script>$('#comAlert').css("color", "red");</script>
+    <script>$('.comAlert').css("color", "red");</script>
 <?php }
 require('templates/front/changePassView.php');
 ?>
