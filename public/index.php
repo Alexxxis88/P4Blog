@@ -186,10 +186,7 @@ try {
             //testing if all fields a filled
             if (isset($_POST['username']) && isset($_POST['pass']) && isset($_POST['passCheck']) && isset($_POST['email'])) {
                 //to avoid problems with inputs
-                $_POST['username'] = htmlspecialchars($_POST['username']);
-                $_POST['pass'] = htmlspecialchars($_POST['pass']);
-                $_POST['passCheck'] = htmlspecialchars($_POST['passCheck']);
-                $_POST['email'] = htmlspecialchars($_POST['email']);
+                
                 $accentedCharacters = "àèìòùÀÈÌÒÙáéíóúýÁÉÍÓÚÝâêîôûÂÊÎÔÛãñõÃÑÕäëïöüÿÄËÏÖÜŸçÇßØøÅåÆæœ";
 
                 //testing if username only has authorised caracters and length
@@ -264,8 +261,7 @@ try {
         elseif ($_GET['action'] == 'UpdatePass') {
             if ((isset($_COOKIE['login']) and $_COOKIE['login'] != '') or  (isset($_SESSION['username']) and $_SESSION['username'] != '')) {
                 //to avoid problems with inputs
-                $_POST['currentPass'] = htmlspecialchars($_POST['currentPass']);
-                $_POST['newPass'] = htmlspecialchars($_POST['newPass']);
+                
                 $accentedCharactersNewPass = "àèìòùÀÈÌÒÙáéíóúýÁÉÍÓÚÝâêîôûÂÊÎÔÛãñõÃÑÕäëïöüÿÄËÏÖÜŸçÇßØøÅåÆæœ";
 
                 //needed to check the current pass in DB from the right user (id)
@@ -358,11 +354,7 @@ try {
             //testing if all fields a filled
             if (isset($_POST['firstName']) && isset($_POST['lastName']) && isset($_POST['contactEmail']) && isset($_POST['topic']) && isset($_POST['messageContent'])) {
                 //to avoid problems with inputs
-                $_POST['firstName'] = htmlspecialchars($_POST['firstName']);
-                $_POST['lastName'] = htmlspecialchars($_POST['lastName']);
-                $_POST['contactEmail'] = htmlspecialchars($_POST['contactEmail']);
-                $_POST['topic'] = htmlspecialchars($_POST['topic']);
-                $_POST['messageContent'] = htmlspecialchars($_POST['messageContent']);
+               
                 $accentedCharacters = "àèìòùÀÈÌÒÙáéíóúýÁÉÍÓÚÝâêîôûÂÊÎÔÛãñõÃÑÕäëïöüÿÄËÏÖÜŸçÇßØøÅåÆæœ";
 
                 //testing if firstName only has authorised caracters

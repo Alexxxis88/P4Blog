@@ -7,7 +7,7 @@ class FormController
         $message = '
         <html>
             <body>
-                <p>' .  $messageContent . '</p>
+                <p>' .  strip_tags($messageContent) . '</p>
             </body>
         </html>
         ';

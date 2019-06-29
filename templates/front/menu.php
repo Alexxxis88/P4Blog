@@ -8,7 +8,7 @@
             } elseif (isset($_SESSION['username'])) {
                 $username = $_SESSION['username'];
             } ?>
-            <p class="helloText">Bonjour <strong><?= htmlspecialchars($username) ?></strong> </p>
+            <p class="helloText">Bonjour <strong><?= $username ?></strong> </p>
 
             <!-- Log Out button -->
             <a href="index.php?action=logOutCheck"><button type="button" class="btn btn-info ">Deconnexion</button></a>

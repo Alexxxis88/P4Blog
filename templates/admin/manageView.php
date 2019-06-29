@@ -6,11 +6,11 @@ ob_start();
         <form action="index.php?action=updatePost&amp;id=<?= $displayedPostToEdit->id()?>" method="post">
             <div>
                 <label for="chapter">Chapitre n°</label><br>
-                <input type="text" id="chapter" name="chapter" value="<?= htmlspecialchars($displayedPostToEdit->chapterNb()) ?>" required/>
+                <input type="text" id="chapter" name="chapter" value="<?= $displayedPostToEdit->chapterNb() ?>" required/>
             </div>
             <div>
                 <label for="title">Titre</label><br>
-                <input type="text" id="title" name="title" value="<?= htmlspecialchars($displayedPostToEdit->title()) ?>" required/>
+                <input type="text" id="title" name="title" value="<?= $displayedPostToEdit->title() ?>" required/>
             </div><br>
             <div>
                 <label for="postContent">Contenu</label><br>

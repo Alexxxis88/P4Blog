@@ -42,7 +42,7 @@
                                         } ?>
                                     </div>
                                 </div>
-                                <a href="index.php?action=post&id=<?=$id?>&page=1&sortBy=5"><em><?= htmlspecialchars($chapter) ?></em> : <?= htmlspecialchars($postTitle) ?></a>
+                                <a href="index.php?action=post&id=<?=$id?>&page=1&sortBy=5"><em><?= $chapter ?></em> : <?= $postTitle ?></a>
                                 <p class="postIndex"><?= substr($content, 0, 600) . "..." ?><br></p>
                                 <a class="readMoreAndCommentsIcons" href="index.php?action=post&id=<?=$id?>&page=1&sortBy=5"><span class="fas fa-book"></span>&nbsp;Lire la suite</a>
                                 <a class="readMoreAndCommentsIcons" href="index.php?action=post&id=<?=$id?>&page=1&sortBy=5#commentsAnchor"><span class="far fa-comments"></span>   Commentaires</a>

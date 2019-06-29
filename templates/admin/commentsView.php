@@ -31,11 +31,11 @@ ob_start();
                                                 $flag = $reportedComments[$i]->flag(); ?>
                                                 <div class="reportedComments">
                                                         <p class="commentHead"><input type="checkbox" id="commentID" name="selectComments[]" value="<?= $idComment?>" checked >
-                                                        Le commentaire de <strong><?= htmlspecialchars($author) ?></strong> du <?= $commentDate ?>
+                                                        Le commentaire de <strong><?= $author ?></strong> du <?= $commentDate ?>
                                                         a été signalé <strong> <?= $flag ?></strong> fois </p>
 
                                                         <!-- transform non html links in comments into clickable links-->
-                                                        <p><?= nl2br($comment = preg_replace('#http[s]?://[a-z0-9._/-]+#i', '<a href="$0">$0</a>', htmlspecialchars($comment))) ?></p>
+                                                        <p><?= nl2br($comment = preg_replace('#http[s]?://[a-z0-9._/-]+#i', '<a href="$0">$0</a>', $comment)) ?></p>
                                                         <div class="manageComIcons">
                                                                 <div class="viewComArticle">
                                                                         <p><a href="index.php?action=post&id=<?= $postId?>&page=1&sortBy=5"><span class="fas fa-eye"></span> Voir l'article associé</a>
@@ -87,10 +87,10 @@ ob_start();
                                                 $comment = $newComments[$i2]->comment();
                                                 $commentDate = $newComments[$i2]->modCommentDate(); ?>
                                                 <div class="acceptDenyComments">
-                                                        <p class="newCommentHead"> <input type="checkbox" id="commentPublishID" name="selectPublishComments[]" value="<?= $idComment?>" checked > <strong><?= htmlspecialchars($author) ?></strong> a posté le <?= $commentDate ?></p>
+                                                        <p class="newCommentHead"> <input type="checkbox" id="commentPublishID" name="selectPublishComments[]" value="<?= $idComment?>" checked > <strong><?= $author ?></strong> a posté le <?= $commentDate ?></p>
 
                                                         <!-- transform non html links in comments into clickable links-->
-                                                        <p><?= nl2br($comment = preg_replace('#http[s]?://[a-z0-9._/-]+#i', '<a href="$0">$0</a>', htmlspecialchars($comment))) ?></p>
+                                                        <p><?= nl2br($comment = preg_replace('#http[s]?://[a-z0-9._/-]+#i', '<a href="$0">$0</a>', $comment)) ?></p>
                                                         <div class="manageComIcons">
                                                                 <div class="viewComArticle">
                                                                         <p><a href="index.php?action=post&id=<?= $postId?>&page=1&sortBy=5"><span class="fas fa-eye"></span> Voir l'article associé</a> </p>

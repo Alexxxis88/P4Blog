@@ -24,7 +24,7 @@ $title = 'Gestion des utilisateurs';
                         $registrationDate = $allUsers[$i]->modRegistrationDate();
                         $group = $allUsers[$i]->groupId(); ?>
                         <div class="usersDisplay">
-                            <p class="userListHeader"><input type="checkbox" id="userID" name="selectUsers[]" value="<?= $userid?>" ><strong><?= htmlspecialchars($username) ?></strong>&emsp;-&emsp;<?= $email ?>&emsp;-&emsp;enregistré le <strong> <?= $registrationDate ?></strong></p>
+                            <p class="userListHeader"><input type="checkbox" id="userID" name="selectUsers[]" value="<?= $userid?>" ><strong><?= $username ?></strong>&emsp;-&emsp;<?= $email ?>&emsp;-&emsp;enregistré le <strong> <?= $registrationDate ?></strong></p>
                             <div class="roleAndDelete">
                                 <p ><a class="deleteUserLink" href="index.php?action=deleteUser&amp;userID=<?= $userid ?>" onclick="return confirm('Etes-vous sûr?')"><span class="fas fa-user-times"></span>Supprimer</a></p>
                                 <p><strong>Role :</strong>

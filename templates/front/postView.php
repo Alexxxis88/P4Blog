@@ -13,7 +13,7 @@ ob_start(); ?>
 	<div class="container">
 		<div class="row">
 			<div class="col-md-10">
-				<h1><?= htmlspecialchars($postTitle) ?></h1>
+				<h1><?= $postTitle ?></h1>
 			</div>
 		</div>
 	</div>
@@ -37,7 +37,7 @@ ob_start(); ?>
 							?>
 							</div>
 						</div>
-							<h2><?= htmlspecialchars($chapter) ?></h2>
+							<h2><?= $chapter ?></h2>
 							<p><?= nl2br($content) ?></p>
 							<figure class="figure-img">
 								<img class="img-responsive" src="./public/img/post-<?= $id?>.jpg" alt="<?= $postTitle ?>">
@@ -94,7 +94,7 @@ ob_start(); ?>
 									else {
 										echo '<div class="media-body">';} ?>
 											<div class="media-heading">
-												<h4><?= htmlspecialchars($author) ?></h4>
+												<h4><?= $author ?></h4>
 												<!-- $idComment = $comments[$i]->id(); used to create an anchor on the comment position to be able to display the right comment directly when selected in manageCommentsView.php -->
 												<span class="time" id="<?= $idComment ?>">publié le <?= $commentDate ?>
 													<?php
@@ -106,7 +106,7 @@ ob_start(); ?>
 												<p></p>
 											</div>
 											<!-- transform non html links in comments into clickable links-->
-											<p><?= nl2br($comment = preg_replace('#http[s]?://[a-z0-9._/-]+#i', '<a href="$0">$0</a>', htmlspecialchars($comment))) ?></p>
+											<p><?= nl2br($comment = preg_replace('#http[s]?://[a-z0-9._/-]+#i', '<a href="$0">$0</a>', $comment)) ?></p>
 										</div>
 								</div>
 								<div class="commentsBtn">
@@ -222,7 +222,7 @@ ob_start(); ?>
 						<div class="post post-widget">
 							<a class="post-img" href="index.php?action=post&id=<?=$id?>&page=1&sortBy=5"><img src="./public/img/post-<?=$id?>.jpg" alt="<?= $lastPostTitle ?>"></a>
 							<div class="post-body">
-								<a href="index.php?action=post&id=<?=$id?>&page=1&sortBy=5"><em class="post-title"><?= htmlspecialchars($chapter) ?></em><br><p>  <?= htmlspecialchars($lastPostTitle)?></p></a>
+								<a href="index.php?action=post&id=<?=$id?>&page=1&sortBy=5"><em class="post-title"><?= $chapter ?></em><br><p>  <?= $lastPostTitle?></p></a>
 								<p><?= substr($content, 0, 300) . "..." ?><br>
                     				<a href="index.php?action=post&id=<?=$id?>&page=1&sortBy=5"><span class="fas fa-book"></span>   Lire la suite</a>
                 				</p>
