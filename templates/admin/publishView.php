@@ -1,5 +1,7 @@
-<?php $title = 'Publier un nouveau chapitre'; ?>
-<?php ob_start(); ?>
+<?php
+$title = 'Publier un nouveau chapitre';
+ob_start();
+?>
     <div class="postsBlock">
         <form action="index.php?action=publishChapter" method="post">
             <div>
@@ -19,6 +21,7 @@
             </div>
         </form>
     </div>
-<?php $content = ob_get_clean(); ?>
-
-<?php require('templates/base.php'); ?>
+<?php
+$content = ob_get_clean();
+require('templates/base.php');
+?>

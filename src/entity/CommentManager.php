@@ -1,7 +1,6 @@
 <?php
 class CommentManager extends Manager
 {
-
     //FRONTEND
     public function getComments($postId, $firstEntry, $messagesPerPage)
     {
@@ -73,7 +72,6 @@ class CommentManager extends Manager
     public function checkIfAlreadyReportedCom()
     {
         $alreadyRep = $this->_db->query('SELECT memberId, repComId, flagRep FROM reported_comments');
-        
         return $alreadyRep;
     }
 
@@ -82,7 +80,7 @@ class CommentManager extends Manager
         $updateCom = $this->_db->prepare('UPDATE comments SET comment = ?, updateDate = NOW()  WHERE id = ?');
         $updateCom->execute(array($comment, $commentId));
     }
-   
+
     //erase all the comments related to a post when "delete post" action is done
     public function eraseAllComments($postId)
     {
@@ -95,11 +93,7 @@ class CommentManager extends Manager
         $commentApprove = $this->_db->prepare('UPDATE comments SET flag = 0 WHERE id = ?');
         $commentApprove->execute(array($commentId));
     }
-    
 
-
-
-   
     //BACKEND
     //gets the Reported comments (where flag >0 and sort them by number of time reported OR by date showing older first if reported the same nb of times)
     public function getReportedComments()
@@ -126,16 +120,13 @@ class CommentManager extends Manager
         }
     }
 
-    //must receive an array of ids to delete all the comments at once. (?) = my array, see here https://www.tutorialspoint.com/mysql/mysql-in-clause.htm
+    //must receive an array of ids to delete all the comments at once
     public function eraseAllSelectedComments($arrayCommentsIDs)
     {
-        //on compte la longueur du tableau pour arrêter la boucle for au bon moment
         $arrayLength = count($arrayCommentsIDs, COUNT_NORMAL);
-        
-        //on fait une boucle pour injecter la VALEUR ENTIERE de chaque entrée du tableau $arrayCommentsIDs en tant que paramètre ? de (IN)
         for ($i = 0; $i < $arrayLength; $i++) {
             $id = $arrayCommentsIDs[$i];
-            $eraseAllSelectedComments = $this->_db->prepare('DELETE FROM comments WHERE id IN (?)'); // je veux que ? soit les valeurs successives d'un tableau donc je dois faire une boucle
+            $eraseAllSelectedComments = $this->_db->prepare('DELETE FROM comments WHERE id IN (?)');
             $eraseAllSelectedComments->execute(array($id));
         }
     }
@@ -143,18 +134,16 @@ class CommentManager extends Manager
     //accept all the selected reported comments
     public function acceptAllSelectedComments($arrayCommentsIDs)
     {
-        //on compte la longueur du tableau pour arrêter la boucle for au bon moment
         $arrayLength = count($arrayCommentsIDs, COUNT_NORMAL);
-        
-        //on fait une boucle pour injecter la VALEUR ENTIERE de chaque entrée du tableau $arrayCommentsIDs en tant que paramètre ? de (IN)
         for ($i = 0; $i < $arrayLength; $i++) {
             $id = $arrayCommentsIDs[$i];
-            $acceptAllSelectedComments = $this->_db->prepare('UPDATE comments SET flag = 0 WHERE id IN (?)'); // je veux que ? soit les valeurs successives d'un tableau donc je dois faire une boucle
+            $acceptAllSelectedComments = $this->_db->prepare('UPDATE comments SET flag = 0 WHERE id IN (?)');
             $acceptAllSelectedComments->execute(array($id));
         }
     }
 
-    public function getNbOfReportedComments() // display number of comments to manage
+    //turn comments icon (menuAdmin) in red if comments to manage (flagTotal > 0)
+    public function getNbOfReportedComments()
     {
         $req = $this->_db->query('SELECT SUM(flag) AS flagTotal FROM comments');
         $reportedCommentNb= $req->fetch();

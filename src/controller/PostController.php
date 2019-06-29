@@ -1,8 +1,4 @@
 <?php
-    
-
-
-
 class PostController
 {
 
@@ -15,36 +11,31 @@ class PostController
         $nbOfReportedComments = $commentManager->getNbOfReportedComments();
 
         $postManager = new PostManager();
-    
         //Pagitation
         $totalPages = $postManager->getTotalPages();
-        $total = $totalPages['total_posts']; // total of posts in DB
+        $total = $totalPages['total_posts'];
         $messagesPerPage = 6;
         $nbOfPages = ceil($total/$messagesPerPage);
         if (isset($_GET['page'])) {
-            $currentPage = intval($_GET['page']); //intval gets the integer ( 4.2 = 4) value of a variable
-        
-            if ($currentPage>$nbOfPages) { // if a user puts the value of a page that doesnt exist, it redirects to the last page ($nbOfPages)
+            $currentPage = intval($_GET['page']);
+
+            // if a user puts the value of a page that doesnt exist, it redirects to the last page ($nbOfPages)
+            if ($currentPage>$nbOfPages) {
                 $currentPage=$nbOfPages;
             }
         } else {
             $currentPage = 1;
         }
-        $firstEntry = ($currentPage-1)*$messagesPerPage; // first entry to read
-        
+        $firstEntry = ($currentPage-1)*$messagesPerPage;
         $currentView = "listPost"; //to display the correct Pagination View
-        
-        //Display post depending on pagination parameters
+
         $posts = $postManager->getPosts($firstEntry, $messagesPerPage);
 
-
-        //check the role of the logged in user to display or not Admin features
         $sessionController = new SessionController;
         $checkUserRole = $sessionController->checkUserRole();
-        
+
         require('templates/front/listPostsView.php');
     }
-
 
     public function post()
     {
@@ -61,7 +52,7 @@ class PostController
 
         //Pagination for comments
         $totalComments = $commentManager->getTotalComments($_GET['id']);
-        $totalCom=$totalComments['total_comments']; // total of posts in DB
+        $totalCom=$totalComments['total_comments'];
 
         if (isset($_GET['sortBy'])) {
             $messagesPerPage = $_GET['sortBy'];
@@ -70,38 +61,35 @@ class PostController
         }
         $nbOfPages=ceil($totalCom/$messagesPerPage);
         if (isset($_GET['page'])) {
-            $currentPage=intval($_GET['page']); //intval gets the integer ( 4.2 = 4) value of a variable
-            if ($currentPage>$nbOfPages) { // if a user puts the value of a page that doesnt exist, it redirects to the last page ($nbOfPages)
+            $currentPage=intval($_GET['page']);
+
+            // if a user puts the value of a page that doesnt exist, it redirects to the last page ($nbOfPages)
+            if ($currentPage>$nbOfPages) {
                 $currentPage=$nbOfPages;
             }
         } else {
             $currentPage=1;
         }
-        $firstEntry=($currentPage-1)*$messagesPerPage; // first comment to read
+        $firstEntry=($currentPage-1)*$messagesPerPage;
         $comments = $commentManager->getComments($_GET['id'], $firstEntry, $messagesPerPage);
-
         $currentView = "comments";
-
-        
         $post = $postManager->getPost($_GET['id']);
+
         //check if post exists in DB
         if ($post == false) {
             throw new Exception('Ce chapitre n\'existe pas');
         }
 
-        $lastPosts = $postManager->getPosts(0, 3); // 0,3 = the last 3 posts published
-
+        $lastPosts = $postManager->getPosts(0, 3); //the last 3 posts published
         require('templates/front/postView.php');
     }
 
-
     public function displayPublishView()
     {
-
         //comments to manage red icon
         $commentManager = new CommentManager();
         $nbOfReportedComments = $commentManager->getNbOfReportedComments();
-        
+
         $sessionController = new SessionController;
         $checkUserRole = $sessionController->checkUserRole();
         if ($checkUserRole['groupId'] != 1) {
@@ -109,7 +97,6 @@ class PostController
         }
         require('templates/admin/publishView.php');
     }
-
 
     public function newPost($chapter, $title, $content)
     {
@@ -119,7 +106,6 @@ class PostController
         exit;
     }
 
-
     public function deletePost($postId)
     {
         $postManager = new PostManager();
@@ -128,7 +114,6 @@ class PostController
         exit;
     }
 
-
     public function displayPostToEdit($postId)
     {
         $sessionController = new SessionController;
@@ -136,11 +121,10 @@ class PostController
         if ($checkUserRole['groupId'] != 1) {
             throw new Exception('Vous n\'avez pas accès à cette page');
         }
-        
+
         //comments to manage red icon
         $commentManager = new CommentManager();
         $nbOfReportedComments = $commentManager->getNbOfReportedComments();
-        
         $postManager = new PostManager();
         $displayedPostToEdit = $postManager->getPost($postId);
         require('templates/admin/manageView.php');

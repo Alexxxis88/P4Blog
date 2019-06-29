@@ -1,5 +1,7 @@
-<?php $title = 'Editer les chapitres'; ?>
-<?php ob_start(); ?>
+<?php
+$title = 'Editer les chapitres';
+ob_start();
+?>
     <div class="postsBlock">
         <form action="index.php?action=updatePost&amp;id=<?= $displayedPostToEdit->id()?>" method="post">
             <div>
@@ -21,6 +23,7 @@
             </div>
         </form>
     </div>
-<?php $content = ob_get_clean(); ?>
-
-<?php require('templates/base.php'); ?>
+<?php
+$content = ob_get_clean();
+require('templates/base.php');
+?>

@@ -1,5 +1,7 @@
-<?php $title = 'Mentions Légales'; ?>
-<?php ob_start(); ?>
+<?php
+$title = 'Mentions Légales';
+ob_start();
+?>
 	<div class="legalNotice">
         <div class="container">
             <div class="terms-block">
@@ -65,6 +67,7 @@
             </div>
         </div>
     </div>
-    <?php $content = ob_get_clean(); ?>
-
-<?php require('templates/base.php'); ?>
+<?php
+$content = ob_get_clean();
+require('templates/base.php');
+?>

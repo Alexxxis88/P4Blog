@@ -9,7 +9,6 @@
         private $_groupId ;
         private $_userComCount ;
 
-
         public function __construct(array $userDatas)
         {
             $this->hydrate($userDatas);
@@ -19,7 +18,6 @@
         {
             foreach ($userDatas as $key => $value) {
                 $method = 'set'.ucfirst($key);
-                    
                 if (method_exists($this, $method)) {
                     $this->$method($value);
                 }
@@ -56,12 +54,10 @@
             return $this->_userComCount;
         }
 
-
         //SETTERS
         public function setId($id)
         {
             $id = (int) $id;
-    
             if ($id > 0) {
                 $this->_id = $id;
             }
@@ -73,7 +69,7 @@
                 $this->_username = $username;
             }
         }
-        
+
         public function setPass($pass)
         {
             if (is_string($pass)) {
@@ -96,7 +92,6 @@
         public function setGroupId($groupId)
         {
             $groupId = (int) $groupId;
-    
             if ($groupId >= 0) {
                 $this->_groupId = $groupId;
             }
@@ -105,7 +100,6 @@
         public function setCommentCount($userComCount)
         {
             $userComCount = (int) $userComCount;
-    
             if ($userComCount >= 0) {
                 $this->_userComCount = $userComCount;
             }

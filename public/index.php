@@ -20,7 +20,7 @@ try {
     if (isset($_GET['action'])) {
         $sessionController = new SessionController();
         $sessionController->checkSession();
-    
+
         //POSTS
         //FRONTEND
         if ($_GET['action'] == 'listPosts' or $_GET['action'] == '') {
@@ -30,7 +30,8 @@ try {
                 $postController = new PostController;
                 $postController->listPosts();
             }
-        } elseif ($_GET['action'] == 'post') {
+        }
+        elseif ($_GET['action'] == 'post') {
             if (isset($_GET['id']) && $_GET['id'] > 0) {
                 if (!isset($_GET['page']) or !isset($_GET['id']) or !isset($_GET['sortBy']) or $_GET['page']<1 or $_GET['id']<1 or $_GET['sortBy']<1) {
                     throw new Exception('Il manque le numéro de page, du billet ou la classement des commentaires');
@@ -43,7 +44,7 @@ try {
                 if (isset($_GET['success']) and $_GET['success'] == 4) {
                     include('templates/success-messages/success4.html');
                 }
-                
+
                 //Confirmation message when updating a comment
                 if (isset($_GET['success']) and $_GET['success'] == 5) {
                     include('templates/success-messages/success5.html');
@@ -51,14 +52,14 @@ try {
             } else {
                 throw new Exception('Aucun identifiant de billet envoyé');
             }
-        } elseif ($_GET['action'] == 'deletePost') {
+        }
+        elseif ($_GET['action'] == 'deletePost') {
             if (isset($_GET['id']) && $_GET['id'] > 0) {
                 $postController = new PostController;
                 $commentController = new CommentController;
 
-                $postId = $_GET['id']; // pas utile de factoriser ?
-                $commentController->deleteAllComments($postId); //delete all the comments related to the post we're deleting with deletePost()
-                $postController->deletePost($postId);
+                $commentController->deleteAllComments($_GET['id']); //delete all the comments related to the post we're deleting with deletePost
+                $postController->deletePost($_GET['id']);
             } else {
                 throw new Exception('Aucun identifiant de billet envoyé');
             }
@@ -68,17 +69,19 @@ try {
         elseif ($_GET['action'] == 'displayPublishView') {
             $postController = new PostController;
             $postController->displayPublishView();
-        } elseif ($_GET['action'] == 'publishChapter') {
+        }
+        elseif ($_GET['action'] == 'publishChapter') {
             $postController = new PostController;
             $postController->newPost($_POST['chapter'], $_POST['title'], $_POST['postContent']);
-        } elseif ($_GET['action'] == 'manageView') {
+        }
+        elseif ($_GET['action'] == 'manageView') {
             $postController = new PostController;
             $postController->displayPostToEdit($_GET['id']);
-        } elseif ($_GET['action'] == 'updatePost') {
+        }
+        elseif ($_GET['action'] == 'updatePost') {
             $postController = new PostController;
             $postController->updatePost($_POST['chapter'], $_POST['title'], $_POST['postContent'], $_GET['id']);
         }
-
 
         //COMMENTS
         //FRONTEND
@@ -97,7 +100,8 @@ try {
             } else {
                 throw new Exception('Aucun identifiant de billet envoyé');
             }
-        } elseif ($_GET['action'] == 'deleteComment') {
+        }
+        elseif ($_GET['action'] == 'deleteComment') {
             if (isset($_GET['commentId']) && $_GET['commentId'] > 0) {
 
                 //needed to update the userComCounter in members table
@@ -109,12 +113,12 @@ try {
             } else {
                 throw new Exception('Aucun identifiant de billet envoyé');
             }
-        } elseif ($_GET['action'] == 'reportComment') {
+        }
+        elseif ($_GET['action'] == 'reportComment') {
             if (isset($_GET['commentId']) && $_GET['commentId'] > 0) {
-                
-                $sessionController = new sessionController(); 
+                $sessionController = new sessionController();
                 $commentController = new commentController();
-                
+
                 //checks in the controler if the member already reported the same comment
                 $cookieOrSessionID = $sessionController->checkSession();
                 $commentController->checkIfReported();
@@ -125,7 +129,6 @@ try {
                 throw new Exception('Aucun identifiant de commentaire envoyé');
             }
         }
-        
         //user can edit his own comment
         elseif ($_GET['action'] == 'updateComment') {
             if (isset($_GET['commentId']) && $_GET['commentId'] > 0) {
@@ -137,7 +140,6 @@ try {
         }
 
         //BACKEND
-
         elseif ($_GET['action'] == 'manageComments') {
             $commentController = new commentController();
             $commentController->listAllComments();
@@ -147,12 +149,12 @@ try {
                 include('templates/success-messages/success6.html');
             }
         }
-        
+
         //to approve or delete all reported comments
         elseif ($_GET['action'] == 'manageAllSelectedComments') {
             if (isset($_POST['deleteSelectedComments'])) {
                 $commentController = new commentController();
-                $commentController->deleteAllSelectedComments($_POST['selectComments']); // j'essaie de récupérer le tableau de commentsView.php
+                $commentController->deleteAllSelectedComments($_POST['selectComments']);
             } elseif (isset($_POST['approveSelectedComments'])) {
                 $commentController = new commentController();
                 $commentController->approveAllSelectedComments($_POST['selectComments']);
@@ -165,24 +167,21 @@ try {
         elseif ($_GET['action'] == 'publishAllSelectedComments') {
             if (isset($_POST['deleteSelectedComments'])) {
                 $commentController = new commentController();
-                $commentController->deleteAllSelectedComments($_POST['selectPublishComments']); // j'essaie de récupérer le tableau de commentsView.php
+                $commentController->deleteAllSelectedComments($_POST['selectPublishComments']);
             } elseif (isset($_POST['publishSelectedComments'])) {
                 $commentController = new commentController();
                 $commentController->approveAllSelectedComments($_POST['selectPublishComments']);
             } else {
                 throw new Exception('Il y a une erreur');
             }
-        } elseif ($_GET['action'] == 'approveComment') {
+        }
+        elseif ($_GET['action'] == 'approveComment') {
             $commentController = new commentController();
             $commentController->approveComments($_GET['commentId']);
         }
 
 
-
-
         //SING IN, LOG IN, LOG OUT
-       
-
         elseif ($_GET['action'] == 'addNewMember') {
             //testing if all fields a filled
             if (isset($_POST['username']) && isset($_POST['pass']) && isset($_POST['passCheck']) && isset($_POST['email'])) {
@@ -192,14 +191,14 @@ try {
                 $_POST['passCheck'] = htmlspecialchars($_POST['passCheck']);
                 $_POST['email'] = htmlspecialchars($_POST['email']);
                 $accentedCharacters = "àèìòùÀÈÌÒÙáéíóúýÁÉÍÓÚÝâêîôûÂÊÎÔÛãñõÃÑÕäëïöüÿÄËÏÖÜŸçÇßØøÅåÆæœ";
-                
+
                 //testing if username only has authorised caracters and length
                 if (preg_match("#^[a-z".$accentedCharacters ."0-9]{4,20}$#i", $_POST['username'])) {
                     //testing if passwords is conform
                     if (preg_match("#^[a-z".$accentedCharacters ."0-9._!?-]{8,20}$#i", $_POST['pass'])) {
                         //testing if both passwords match
                         if ($_POST['pass'] == $_POST['passCheck']) {
-                            
+
                             //testing if email is conform
                             if (preg_match("#^[a-z0-9._-]+@[a-z0-9._-]{2,}\.[a-z]{2,4}$#i", $_POST['email'])) {
                                 //hash password (security feature)
@@ -207,7 +206,6 @@ try {
                                 //check if username of email are already taken
 
                                 $sessionController = new SessionController;
-
                                 if ($sessionController->checkUsernameAvailability($_POST['username']) == false) {
                                     if ($sessionController->checkEmailAvailability($_POST['email']) == false) {
                                         $sessionController->addNewMember($_POST['username'], $_POST['pass'], $_POST['email']);
@@ -239,7 +237,7 @@ try {
             if (isset($_POST['username']) && isset($_POST['pass'])) {
                 $sessionController = new SessionController;
                 $sessionController->checkLog($_POST['username']);
-                
+
                 //if there is a session open, displays a message
                 if (isset($_SESSION['id']) and isset($_SESSION['username'])) {
                     require('templates/front/menu.php');
@@ -254,7 +252,7 @@ try {
             if (isset($_SESSION['id']) and isset($_SESSION['username'])) {
                 $sessionController = new SessionController;
                 $sessionController->killSession();
-                
+
                 header('Location: index.php');
                 exit;
             } else {
@@ -263,25 +261,23 @@ try {
         }
 
         //UPDATE PASSWORD
-        
         elseif ($_GET['action'] == 'UpdatePass') {
             if ((isset($_COOKIE['login']) and $_COOKIE['login'] != '') or  (isset($_SESSION['username']) and $_SESSION['username'] != '')) {
                 //to avoid problems with inputs
                 $_POST['currentPass'] = htmlspecialchars($_POST['currentPass']);
                 $_POST['newPass'] = htmlspecialchars($_POST['newPass']);
-               
                 $accentedCharactersNewPass = "àèìòùÀÈÌÒÙáéíóúýÁÉÍÓÚÝâêîôûÂÊÎÔÛãñõÃÑÕäëïöüÿÄËÏÖÜŸçÇßØøÅåÆæœ";
+
                 //needed to check the current pass in DB from the right user (id)
                 $sessionController = new SessionController();
                 $cookieOrSessionID = $sessionController->checkSession();
-                        
+
                 if ($sessionController->checkCurrentPass($cookieOrSessionID) == true) {
                     if (preg_match("#^[a-z".$accentedCharactersNewPass ."0-9._!?-]{8,20}$#i", $_POST['newPass'])) {
                         //if the password is Correct check if current and new pass are the same
                         if ($_POST['currentPass'] != $_POST['newPass']) {
                             //hash password (security feature)
                             $_POST['newPass'] = password_hash($_POST['newPass'], PASSWORD_DEFAULT);
-                
                             $sessionController = new SessionController;
                             $sessionController->UpdatePassWord($_POST['newPass'], $_POST['id']);
                             $sessionController->killSession();
@@ -302,8 +298,6 @@ try {
             }
         }
 
-
-
         //USERS
         elseif ($_GET['action'] == 'manageUsers') {
             if (!isset($_GET['page']) or !isset($_GET['sortBy']) or $_GET['page']<1 or $_GET['sortBy']<1) {
@@ -323,7 +317,7 @@ try {
                 throw new Exception('Il y a une erreur');
             }
         }
-        
+
         //to update role
         elseif ($_GET['action'] == 'updateRole') {
             if (isset($_GET['role'])) {
@@ -341,14 +335,11 @@ try {
             }
         }
 
-
-
         //STATISTICS
         elseif ($_GET['action'] == 'displayStatsView') {
             $statsController = new StatsController;
             $statsController->displayStatsView();
         }
-
 
         //ABOUT
         elseif ($_GET['action'] == 'about') {
@@ -361,7 +352,7 @@ try {
             $generalController = new GeneralController;
             $generalController->displayLegalNoticeView();
         }
-         
+
         //CONTACT
         elseif ($_GET['action'] == 'sendMessage') {
             //testing if all fields a filled
@@ -373,7 +364,7 @@ try {
                 $_POST['topic'] = htmlspecialchars($_POST['topic']);
                 $_POST['messageContent'] = htmlspecialchars($_POST['messageContent']);
                 $accentedCharacters = "àèìòùÀÈÌÒÙáéíóúýÁÉÍÓÚÝâêîôûÂÊÎÔÛãñõÃÑÕäëïöüÿÄËÏÖÜŸçÇßØøÅåÆæœ";
-                
+
                 //testing if firstName only has authorised caracters
                 if (preg_match("#^[a-z". $accentedCharacters ."]+[' -]?[a-z". $accentedCharacters ."]+$#i", $_POST['firstName'])) {
                     //testing if lastName only has authorised caracters

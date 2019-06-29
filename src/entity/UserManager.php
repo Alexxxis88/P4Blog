@@ -11,7 +11,6 @@ class UserManager extends Manager
         while ($userDatas = $req->fetch(PDO::FETCH_ASSOC)) {
             $users[] = new User($userDatas);
         }
-        
         if (!empty($users)) { //needed otherwise gives an error on the usersView.php when no users in DB
             return $users;
         }
@@ -31,16 +30,13 @@ class UserManager extends Manager
         $req->execute(array($userId));
     }
 
-    //must receive an array of ids to delete all the users at once. (?) = my array, see here https://www.tutorialspoint.com/mysql/mysql-in-clause.htm
-    public function eraseAllSelectedUsers($arrayUsersIDs) //NOT WORKING :
-    {
-        //on compte la longueur du tableau pour arrêter la boucle for au bon moment
+    public function eraseAllSelectedUsers($arrayUsersIDs)
+    {//must receive an array of ids to delete all the users at once.
         $arrayLength = count($arrayUsersIDs, COUNT_NORMAL);
-        
-        //on fait une boucle pour injecter la VALEUR ENTIERE de chaque entrée du tableau $arrayUsersIDs en tant que paramètre ? de (IN)
+        //loop needed to add each int entry of $arrayUsersIDs as a (?) paramater for IN
         for ($i = 0; $i < $arrayLength; $i++) {
             $id = $arrayUsersIDs[$i];
-            $req = $this->_db->prepare('DELETE FROM members WHERE id IN (?)'); // je veux que ? soit les valeurs successives d'un tableau donc je dois faire une boucle
+            $req = $this->_db->prepare('DELETE FROM members WHERE id IN (?)');
             $req->execute(array($id));
         }
     }

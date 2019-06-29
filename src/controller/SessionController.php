@@ -14,7 +14,6 @@ class SessionController
         }
     }
 
-
     //check the role of the logged in user to display or not Admin features
     public function checkUserRole()
     {
@@ -22,23 +21,20 @@ class SessionController
             $cookieOrSessionID = $_COOKIE['id'];
             $sessionManager = new SessionManager;
             $checkRole = $sessionManager->checkRole($cookieOrSessionID);
-
             return $checkRole;
         } elseif (isset($_SESSION['id'])) {
             $cookieOrSessionID = $_SESSION['id'];
             $sessionManager = new SessionManager;
             $checkRole = $sessionManager->checkRole($cookieOrSessionID);
-
             return $checkRole;
         }
     }
- 
-    
+
     public function addNewMember($username, $pass, $email)
     {
         $sessionManager = new SessionManager();
         $newMember = $sessionManager->insertMember($username, $pass, $email);
-        //success1 needed to display the confirmation message
+
         header('Location: index.php?success=1#header');
         exit;
     }
@@ -55,7 +51,6 @@ class SessionController
         }
     }
 
-
     public function checkEmailAvailability($email)
     {
         $sessionManager = new SessionManager();
@@ -66,7 +61,6 @@ class SessionController
             return false;
         }
     }
-
 
     public function checkLog($userName)
     {
@@ -81,14 +75,14 @@ class SessionController
             if ($isPasswordCorrect) {
                 $_SESSION['id'] = $checkLogIn['id'];
                 $_SESSION['username'] = $userName;
-                
+
                 //if the autolog checkbox is selected COOKIES are created
                 if (isset($_POST['autoLogIn'])) {
                     setcookie('id', $checkLogIn['id'], time() + 365*24*3600, null, null, false, true);
                     setcookie('login', $_POST['username'], time() + 365*24*3600, null, null, false, true);
                     setcookie('hash_pass', password_hash($_POST['pass'], PASSWORD_DEFAULT), time() + 365*24*3600, null, null, false, true);
                 }
-                
+
                 //redirects on the right page depending on the user group (user / admin)
                 if ($checkLogIn['groupId'] == 0) {
                     header('Location: index.php');
@@ -109,21 +103,19 @@ class SessionController
         $sessionManager = new SessionManager();
         $UpdatePassWord = $sessionManager->UpdatePass($newpass, $id);
     }
-    
 
     public function checkCurrentPass($userID)
     {
         $sessionManager = new SessionManager();
         $checkCurrentPass = $sessionManager->checkPass($userID);
         $isPasswordCorrect = password_verify($_POST['currentPass'], $checkCurrentPass['pass']);
-    
+
         if ($isPasswordCorrect) {
             return true;
         } else {
             return false;
         }
     }
-
 
     public function killSession()
     {

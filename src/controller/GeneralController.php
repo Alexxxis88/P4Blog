@@ -1,5 +1,4 @@
 <?php
-
 class GeneralController
 {
     public function displayAboutView()
@@ -18,7 +17,7 @@ class GeneralController
         //comments to manage red icon
         $commentManager = new CommentManager();
         $nbOfReportedComments = $commentManager->getNbOfReportedComments();
-        
+
         $sessionController = new SessionController;
         $checkUserRole = $sessionController->checkUserRole();
         require('templates/front/legalNoticeView.php');

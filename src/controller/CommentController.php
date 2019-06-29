@@ -1,5 +1,4 @@
 <?php
-
 class CommentController
 {
     public function addComment($postId, $author, $comment, $postIdComCounts, $userIdComCounts)
@@ -9,7 +8,7 @@ class CommentController
         if ($affectedLines === false) {
             throw new Exception('Impossible d\'ajouter le commentaire !');
         } else {
-            //success4 needed to display the confirmation message
+
             header('Location: index.php?action=post&id=' . $postId . '&success=4&page=1&sortBy=5#commentsAnchor');
             exit;
         }
@@ -35,7 +34,7 @@ class CommentController
     {
         $commentManager = new CommentManager();
         $commentReported = $commentManager->reportComment($commentId);
-        header('Location: ' . $_SERVER['HTTP_REFERER'] . '#commentsAnchor'); 
+        header('Location: ' . $_SERVER['HTTP_REFERER'] . '#commentsAnchor');
         exit;
     }
 
@@ -76,12 +75,11 @@ class CommentController
         $commentManager = new CommentManager();
         $AllcomsDelete = $commentManager->eraseAllComments($postId);
     }
-    
+
 
     //display reported and new comments
     public function listAllComments()
     {
-
         //comments to manage red icon
         $commentManager = new CommentManager();
         $nbOfReportedComments = $commentManager->getNbOfReportedComments();
@@ -102,7 +100,6 @@ class CommentController
     public function deleteAllSelectedComments($arrayCommentsIDs)
     {
         $commentManager = new CommentManager();
-        
         $deleteAllSelectedComments = $commentManager->eraseAllSelectedComments($arrayCommentsIDs);
         header('Location: index.php?action=manageComments');
         exit;

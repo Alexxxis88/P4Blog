@@ -18,24 +18,20 @@ class PostManager extends Manager
         }
     }
 
-
     //Pagination
     public function getTotalPages()
     {
         $getTotalPages = $this->_db->query('SELECT COUNT(*) AS total_posts FROM posts');
         $returnTotalPages= $getTotalPages->fetch();
-        
         return $returnTotalPages;
     }
-
-
 
     public function getPost($postId)
     {
         $req = $this->_db->prepare('SELECT id, chapterNb, title, content, DATE_FORMAT(publishDate, \'%d/%m/%Y à %Hh%imin%ss\') AS modPublishDate, DATE_FORMAT(editDate, \'%d/%m/%Y à %Hh%imin%ss\') AS modEditDate, commentCount FROM posts WHERE id = ?');
         $req->execute(array($postId));
         $datas = $req->fetch();
-        
+
         if ($datas == false) { //needed here otherwise if a user puts a random pageID in url the Post construct receive a boolean false and a PHP error is displayed in FO
             throw new Exception('Ce chapitre n\'existe pas');
         } else {
@@ -44,8 +40,6 @@ class PostManager extends Manager
         }
     }
 
-
-
     //BACKEND
     public function insertNewPost($chapter, $title, $content)
     {
@@ -53,13 +47,11 @@ class PostManager extends Manager
         $newPostDb->execute(array($chapter, $title, $content));
     }
 
-
-    public function erasePost($postId) // est ce que ce $postId est le même que celui de postComment ?
+    public function erasePost($postId)
     {
         $postDelete = $this->_db->prepare('DELETE FROM posts WHERE id = ?');
         $postDelete->execute(array($postId));
     }
-
 
     public function editPost($chapter, $title, $content, $postId)
     {

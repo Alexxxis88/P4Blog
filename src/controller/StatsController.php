@@ -13,7 +13,7 @@ class StatsController
         //comments to manage red icon
         $commentManager = new CommentManager();
         $nbOfReportedComments = $commentManager->getNbOfReportedComments();
-    
+
         $statsManager = new StatsManager();
         $usersStats = $statsManager->getUsersStats();
         $exec =  $statsManager->statsPosts();

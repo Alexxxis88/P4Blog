@@ -1,7 +1,5 @@
 <?php $title = 'Billet simple pour l\'Alaska'; ?>
 <?php ob_start(); ?>
-<!-- Full Page Image Header with Vertically Centered Content -->
-
     <div class ="masthead">
         <div class="container ">
             <div class="row h-100 align-items-center">
@@ -13,14 +11,11 @@
         </div>
     </div>
 
-<!-- Pagination -->
 <?php require('templates/pagination.php'); ?>
-   
+
 <!-- Display all posts -->
 <div class="section section-grey">
-    <!-- container -->
     <div class="container">
-        <!-- row -->
         <div class="row">
             <?php
             if (!empty($posts)) { //needed otherwise gives an error on the listPostsView.php when no posts in DB
@@ -31,6 +26,7 @@
                     $postTitle = $posts[$i]->title();
                     $editDate = $posts[$i]->modEditDate();
                     $publishDate = $posts[$i]->modPublishDate(); ?>
+
                     <!-- post -->
                     <div class="col-md-4">
                         <div class="post">
@@ -64,20 +60,16 @@
                             </div>
                         </div>
                     </div>
-                    <!-- /post -->
-                    <?php
+                <?php
                 }
             }
             ?>
         </div>
-		<!-- /row -->
     </div>
-    <!-- /container -->
 </div>
-<!-- /section -->
 
-<!-- Pagination -->
-<?php require('templates/pagination.php'); ?>
-
-<?php $content = ob_get_clean(); ?>
-<?php require('templates/base.php'); ?>
+<?php
+require('templates/pagination.php');
+$content = ob_get_clean();
+require('templates/base.php');
+?>

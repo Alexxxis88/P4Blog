@@ -9,21 +9,17 @@
         private $_modUpdateDate ;
         private $_flag ;
 
-
         public function __construct(array $datas)
         {
             $this->hydrate($datas);
         }
 
-        public function hydrate(array $datas) // ne fonctionne pas avec les champs qui ont une Majuscule au milieu
+        public function hydrate(array $datas)
         {
             foreach ($datas as $key => $value) {
-                // On récupère le nom du setter correspondant à l'attribut.
                 $method = 'set'.ucfirst($key);
-                    
-                // Si le setter correspondant existe.
+
                 if (method_exists($this, $method)) {
-                    // On appelle le setter.
                     $this->$method($value);
                 }
             }
@@ -64,7 +60,6 @@
         public function setId($id)
         {
             $id = (int) $id;
-    
             if ($id > 0) {
                 $this->_id = $id;
             }
@@ -73,12 +68,11 @@
         public function setPostId($postId)
         {
             $postId = (int) $postId;
-    
             if ($postId > 0) {
                 $this->_postId = $postId;
             }
         }
-        
+
         public function setAuthor($author)
         {
             if (is_string($author)) {
@@ -106,7 +100,6 @@
         public function setFlag($flag)
         {
             $flag = (int) $flag;
-    
             if ($flag >= 0) {
                 $this->_flag = $flag;
             }

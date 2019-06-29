@@ -5,16 +5,15 @@ class StatsManager extends Manager
     {
         $totalComPerPosts = $this->_db->prepare(
             'SELECT COUNT(*) AS nb_com, p.id
-                FROM posts p 
-                INNER JOIN comments c 
+                FROM posts p
+                INNER JOIN comments c
                 ON c.postId = p.id
-                WHERE p.id = ?
-                '
+                WHERE p.id = ?'
         );
         $totalComPerPosts->execute(array($postId));
         return $totalComPerPosts;
     }
- 
+
     public function statsPosts()
     {
         $db = mysqli_connect('localhost', 'root', '', 'p4blog');
@@ -22,7 +21,7 @@ class StatsManager extends Manager
         $exec = mysqli_query($db, $query);
         return $exec;
     }
-    
+
     public function rankingBest()
     {
         $req = $this->_db->query('SELECT id, chapterNb, title, content, DATE_FORMAT(publishDate, \'%d/%m/%Y à %Hh%imin%ss\') AS modPublishDate, commentCount FROM posts ORDER BY commentCount DESC, publishDate DESC LIMIT 1 ');
@@ -37,11 +36,9 @@ class StatsManager extends Manager
         return $rankingWorst;
     }
 
-
     public function getUsersStats()
     {
-        $usersStats = $this->_db->query('SELECT id, username, DATE_FORMAT(registrationDate, \'%d/%m/%Y à %Hh%imin%ss\') AS mod_registrationDate, userComCount FROM members ORDER BY userComCount DESC LIMIT 0, 10 ');
-        
+        $usersStats = $this->_db->query('SELECT id, username, DATE_FORMAT(registrationDate, \'%d/%m/%Y à %Hh%imin%ss\') AS mod_registrationDate,userComCount FROM members ORDER BY userComCount DESC LIMIT 0, 10 ');
         return $usersStats;
     }
 

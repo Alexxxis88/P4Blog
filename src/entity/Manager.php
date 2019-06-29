@@ -8,7 +8,6 @@ class Manager
         $this->dbConnect();
     }
 
-        
     // General protected function to connect to database
     protected function dbConnect()
     {

@@ -1,5 +1,7 @@
-<?php $title = 'A propos de Jean'; ?>
-<?php ob_start(); ?>
+<?php
+$title = 'A propos de Jean';
+ob_start();
+?>
 	<div class=" container about">
         <div class="row">
             <div class="textAbout col-md-8">
@@ -18,7 +20,8 @@
             </div>
         </div>
     </div>
-                <p style="text-align : center"><a href="index.php">Retour à la page d'accueil</a></p>
-
-<?php $content = ob_get_clean(); ?>
-<?php require('templates/base.php'); ?>
+    <p style="text-align : center"><a href="index.php">Retour à la page d'accueil</a></p>
+<?php
+$content = ob_get_clean();
+require('templates/base.php');
+?>
