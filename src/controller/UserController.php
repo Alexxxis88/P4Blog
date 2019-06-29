@@ -21,7 +21,7 @@ class UserController
         $total = $totalPages['total_users']; // total of users in DB
 
         if (isset($_GET['sortBy'])) {
-            $usersPerPage = $_GET['sortBy'];
+            $usersPerPage = intval($_GET['sortBy']);
         } else {
             $usersPerPage = 10;
         }

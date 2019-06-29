@@ -55,7 +55,7 @@ class PostController
         $totalCom=$totalComments['total_comments'];
 
         if (isset($_GET['sortBy'])) {
-            $messagesPerPage = $_GET['sortBy'];
+            $messagesPerPage = intval($_GET['sortBy']);
         } else {
             $messagesPerPage = 5;
         }

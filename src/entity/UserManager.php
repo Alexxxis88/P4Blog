@@ -9,10 +9,10 @@ class UserManager extends Manager
         $req->execute();
 
         while ($userDatas = $req->fetch(PDO::FETCH_ASSOC)) {
-            $users[] = new User($userDatas);
+            $allUsers[] = new User($userDatas);
         }
-        if (!empty($users)) { //needed otherwise gives an error on the usersView.php when no users in DB
-            return $users;
+        if (!empty($allUsers)) { //needed otherwise gives an error on the usersView.php when no users in DB
+            return $allUsers;
         }
     }
 

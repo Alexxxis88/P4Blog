@@ -8,8 +8,7 @@ $title = 'Gestion des utilisateurs';
         <p>Afficher par
             <a href="index.php?action=manageUsers&page=<?= $_GET['page'] ?>&sortBy=10"><button class="btn btn-info btn-sm"><strong>10</strong></button></a>
             <a href="index.php?action=manageUsers&page=<?= $_GET['page'] ?>&sortBy=20"><button class="btn btn-info btn-sm"><strong>20</strong></button></a>
-            <a href="index.php?action=manageUsers&page=<?= $_GET['page'] ?>&sortBy=99999999999999999999"><button class="btn btn-info btn-sm"><strong>Tous</strong></button></a>
-        </p>
+            <a href="index.php?action=manageUsers&page=<?= $_GET['page'] ?>&sortBy=99999999999999999999"><button class="btn btn-info btn-sm"><strong>Tous</strong></button></a></p>
         <form action="index.php?action=manageAllSelectedUsers" method="post">
                 <input type="checkbox" id="checkAllUsers" >
                 <label for="checkAllUsers"> Tout sélectionner / désélectionner </label>

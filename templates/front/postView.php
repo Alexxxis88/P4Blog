@@ -66,6 +66,7 @@ ob_start(); ?>
 					<div class="paginationBlock">
 					<?php require('templates/pagination.php'); ?>
 					</div>
+					
 				<!-- displays the comments -->
 				<?php
 				if (!empty($comments)) { //needed otherwise gives an error on the postView.php when no comments on the related post
