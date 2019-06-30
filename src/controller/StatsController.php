@@ -16,7 +16,7 @@ class StatsController
 
         $statsManager = new StatsManager();
         $usersStats = $statsManager->getUsersStats();
-        $exec =  $statsManager->statsPosts();
+        $chartStats =  $statsManager->statsPosts();
         $rankingBestPost =  $statsManager->rankingBest();
         $rankingWorstPost =  $statsManager->rankingWorst();
         $oldestUserRegistered =  $statsManager->oldestUser();

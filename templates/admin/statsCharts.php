@@ -5,7 +5,7 @@
     var data = google.visualization.arrayToDataTable([
     ['chapterNb','Nb de commentaires'],
     <?php
-          while ($row = mysqli_fetch_array($exec)) {
+          while ($row = $chartStats->fetch()) {
               echo "['".$row['chapterNb']."',".$row['commentCount']."],";
           }
           ?>

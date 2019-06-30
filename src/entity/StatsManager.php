@@ -16,10 +16,8 @@ class StatsManager extends Manager
 
     public function statsPosts()
     {
-        $db = mysqli_connect('localhost', 'root', '', 'p4blog');
-        $query = "SELECT * from posts ORDER BY id";
-        $exec = mysqli_query($db, $query);
-        return $exec;
+        $chartStats = $this->_db->query('SELECT * from posts ORDER BY id');
+        return $chartStats;
     }
 
     public function rankingBest()

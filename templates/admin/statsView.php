@@ -29,6 +29,7 @@ ob_start();
             </div>
             <div class="col-md-8">
                 <div id="columnchart12"></div>
+                
             </div>
         </div>
     </div>
@@ -74,4 +75,5 @@ ob_start();
 <?php
 $content = ob_get_clean();
 require('templates/base.php');
+require('templates/admin/statsCharts.php');
 ?>
