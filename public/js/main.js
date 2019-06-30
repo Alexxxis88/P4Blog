@@ -126,7 +126,7 @@ function textCounter(field, field2, maxlimit) {
 
 
 // Burger menu
-$("#burgerMenu").on("click", () => {
+$("#burgerMenu").on("click", function() {
 	$("#burgerNav").toggle();
 	$(".bar1, .bar2, .bar3").toggleClass("change");
 });

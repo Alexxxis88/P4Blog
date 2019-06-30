@@ -34,7 +34,7 @@
         <li><a class="adminMenuLink" href="index.php?action=manageUsers&page=1&sortBy=10"><span class="fas fa-users"></span>Utilisateurs</a></li>
         <li><a class="adminMenuLink" href="index.php?action=displayStatsView"><span class="fas fa-chart-line"></span>Statistiques</a></li>
         <!-- Log Out button -->
-        <li><a href="index.php?action=logOutCheck"><span class="fas fa-sign-out-alt"></span>Deconnexion</button></a></li>
+        <li><a href="index.php?action=logOutCheck"><span class="fas fa-sign-out-alt"></span>Deconnexion</a></li>
         <!-- Change Password button -->
         <li><a href="" data-toggle="modal" data-target="#updatePassModal"><span class="fas fa-unlock-alt"></span>Changer de Password</a></li>
     </ul>

@@ -1342,7 +1342,7 @@ SUCCESS MESSAGES
     }
 
     #burgerMenu {
-        display: initial;
+        display: block;
     }
 
     .helloText {
