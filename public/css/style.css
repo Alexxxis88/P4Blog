@@ -1167,6 +1167,10 @@ textarea#comment {
     margin-bottom: 0 !important;
 }
 
+#idNewPass{
+    background:lightgray;
+}
+
 /*=========================================================
 SUCCESS MESSAGES
 ===========================================================*/

@@ -273,7 +273,7 @@ try {
                             //hash password (security feature)
                             $_POST['newPass'] = password_hash($_POST['newPass'], PASSWORD_DEFAULT);
                             $sessionController = new SessionController;
-                            $sessionController->UpdatePassWord($_POST['newPass'], $_POST['id']);
+                            $sessionController->UpdatePassWord($_POST['newPass'], $_POST['idNewPass']);
                             $sessionController->killSession();
                             //success2 needed to display the confirmation message
                             header('Location: index.php?success=2#header');

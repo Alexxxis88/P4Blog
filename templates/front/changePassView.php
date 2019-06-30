@@ -20,8 +20,8 @@ if (isset($_COOKIE['id'])) {
             <div class="modal-body">
                 <form class="updatePassForm" action="index.php?action=UpdatePass" method="post">
                     <div class="form-group">
-                        <label for="id" class="col-form-label">Votre numéro de session</label><br>
-                        <input type="text" id="id" name="id" value="<?= $cookieOrSessionID ?>"  disabled required/>
+                        <label for="idNewPass" class="col-form-label">Votre numéro de session</label><br>
+                        <input type="text" id="idNewPass" name="idNewPass" value="<?= $cookieOrSessionID ?>"  readonly="readonly" required/>
                     </div><br><br>
                     <div class="form-group">
                         <label for="currentPass" class="col-form-label">Votre password actuel*</label>
@@ -31,7 +31,7 @@ if (isset($_COOKIE['id'])) {
                         <label for="newPass" class="col-form-label"><em>Votre nouveau password doit faire 8 caractères minimum (20 maximum) et peut contenir des lettres, chiffres et caractères spéciaux authorisés ( . - _ ! ?)</em><br><br>Nouveau password*</label>
                         <input type="password" class="form-control" id="newPass" name="newPass" required>
                     </div><br><br>
-                    <input type="submit" class="btn btn-primary" value="Mettre à jour le password"/>
+                    <input type="submit" class="btn btn-primary" id="changePassBtn" value="Mettre à jour le password"/>
                 </form>
             </div>
         </div>

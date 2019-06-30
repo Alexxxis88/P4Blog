@@ -33,7 +33,7 @@ class SessionController
     public function addNewMember($username, $pass, $email)
     {
         $sessionManager = new SessionManager();
-        $newMember = $sessionManager->insertMember($username, $pass, $email);
+        $newMember = $sessionManager->insertMember(strip_tags($username), strip_tags($pass), strip_tags($email));
 
         header('Location: index.php?success=1#header');
         exit;
@@ -68,7 +68,7 @@ class SessionController
         $checkLogIn = $sessionManager->checkLogIn($userName);
 
         // Check is password matches the one registered in DB
-        $isPasswordCorrect = password_verify($_POST['pass'], $checkLogIn['pass']);
+        $isPasswordCorrect = password_verify(strip_tags($_POST['pass']), $checkLogIn['pass']);
         if (!$checkLogIn) {
             throw new Exception('Vérifiez vos identifiants de connexion');
         } else {   //if the password is Correct SESSION variables are created
@@ -79,18 +79,12 @@ class SessionController
                 //if the autolog checkbox is selected COOKIES are created
                 if (isset($_POST['autoLogIn'])) {
                     setcookie('id', $checkLogIn['id'], time() + 365*24*3600, null, null, false, true);
-                    setcookie('login', $_POST['username'], time() + 365*24*3600, null, null, false, true);
+                    setcookie('login', strip_tags($_POST['username']), time() + 365*24*3600, null, null, false, true);
                     setcookie('hash_pass', password_hash($_POST['pass'], PASSWORD_DEFAULT), time() + 365*24*3600, null, null, false, true);
                 }
 
-                //redirects on the right page depending on the user group (user / admin)
-                if ($checkLogIn['groupId'] == 0) {
-                    header('Location: index.php');
-                    exit;
-                } elseif ($checkLogIn['groupId'] == 1) {
-                    header('Location: index.php?action=listPosts');
-                    exit;
-                }
+                header('Location: index.php');
+                exit;
             } else {
                 throw new Exception('Vérifiez vos identifiants de connexion');
             }
@@ -101,7 +95,7 @@ class SessionController
     public function UpdatePassWord($newpass, $id)
     {
         $sessionManager = new SessionManager();
-        $UpdatePassWord = $sessionManager->UpdatePass($newpass, $id);
+        $UpdatePassWord = $sessionManager->UpdatePass(strip_tags($newpass), $id);
     }
 
     public function checkCurrentPass($userID)
