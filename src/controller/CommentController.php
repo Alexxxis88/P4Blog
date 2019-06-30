@@ -4,7 +4,7 @@ class CommentController
     public function addComment($postId, $author, $comment, $postIdComCounts, $userIdComCounts)
     {
         $commentManager = new CommentManager();
-        $affectedLines = $commentManager->postComment($postId, strip_tags($author), strip_tags($comment), $postIdComCounts, $userIdComCounts);
+        $affectedLines = $commentManager->postComment($postId, htmlspecialchars($author), htmlspecialchars($comment), $postIdComCounts, $userIdComCounts);
         if ($affectedLines === false) {
             throw new Exception('Impossible d\'ajouter le commentaire !');
         } else {
@@ -41,7 +41,7 @@ class CommentController
     public function updateComment($comment, $commentId)
     {
         $commentManager = new CommentManager();
-        $commentUpdated = $commentManager->updateCom(strip_tags($comment), $commentId);
+        $commentUpdated = $commentManager->updateCom(htmlspecialchars($comment), $commentId);
         header('Location: index.php?action=post&id=' . $_GET['id'] . '&success=5&page=1&sortBy=99999999999999999999#' . $_GET['commentId'] .'');
         exit;
     }

@@ -101,7 +101,7 @@ class PostController
     public function newPost($chapter, $title, $content)
     {
         $postManager = new PostManager();
-        $newPost = $postManager->insertNewPost(strip_tags($chapter), strip_tags($title), $content);
+        $newPost = $postManager->insertNewPost(htmlspecialchars($chapter), htmlspecialchars($title), $content);
         header('Location: index.php?action=listPosts');
         exit;
     }
@@ -133,7 +133,7 @@ class PostController
     public function updatePost($chapter, $title, $content, $postId)
     {
         $postManager = new PostManager();
-        $updatedPost = $postManager->editPost(strip_tags($chapter), strip_tags($title), $content, $postId);
+        $updatedPost = $postManager->editPost(htmlspecialchars($chapter), htmlspecialchars($title), $content, $postId);
         header('Location: index.php?action=post&id=' . $postId . '&page=1&sortBy=5');
         exit;
     }

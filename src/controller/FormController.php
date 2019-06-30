@@ -7,7 +7,7 @@ class FormController
         $message = '
         <html>
             <body>
-                <p>' .  strip_tags($messageContent) . '</p>
+                <p>' .  htmlspecialchars($messageContent) . '</p>
             </body>
         </html>
         ';
@@ -17,7 +17,7 @@ class FormController
 
         // Additional headers
         $headers[] = 'To: Alexis <alexisxgautier@gmail.com>, Jean <jean-forteroche@jeanforteroche.com>';
-        $headers[] = 'From: ' . strip_tags($firstName) . ' '. strip_tags($lastName) . '<'. strip_tags($contactEmail) . '>';
+        $headers[] = 'From: ' . htmlspecialchars($firstName) . ' '. htmlspecialchars($lastName) . '<'. htmlspecialchars($contactEmail) . '>';
         mail($to, $topic, $message, implode("\r\n", $headers));
 
         header('Location: index.php?success=3#header');
