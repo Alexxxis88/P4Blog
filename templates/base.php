@@ -94,6 +94,20 @@
         }
         ?>
 
+        <!-- Displays a message if user is not using Javascript -->
+        <noscript>
+                <h1>Vous devez activer JavaScript pour utiliser ce site !</h1>
+                <h2>Comment activer JavaScript ?</h2>
+                <p>Chrome : <a href="http://aboutjavascript.com/fr/how-to-enable-javascript-in-chrome.html">voir le tutoriel</a></p>
+                <p>Firefox : <a href="http://aboutjavascript.com/fr/how-to-enable-javascript-in-firefox.html">voir le tutoriel</a></p>
+                <p>Internet Explorer : <a href="http://aboutjavascript.com/fr/how-to-enable-javascript-in-internet-explorer.html">voir le tutoriel</a></p>
+                <p>Edge : <a href="https://assistance.orange.fr/ordinateurs-peripheriques/depanner/probleme-de-navigation/impossible-de-naviguer/edge/microsoft-edge-activer-javascript_201172-745288">voir le tutoriel</a></p>
+                <p>Opera : <a href="http://aboutjavascript.com/fr/how-to-enable-javascript-in-opera.html">voir le tutoriel</a></p>
+                <p>Safari : <a href="http://aboutjavascript.com/fr/how-to-enable-javascript-in-safari.html">voir le tutoriel</a></p>
+                <p>Safari iOS : <a href="http://aboutjavascript.com/fr/how-to-enable-javascript-in-safari.html#ios">voir le tutoriel</a></p>
+                <p>Android : <a href="http://aboutjavascript.com/fr/how-to-enable-javascript-in-android.html">voir le tutoriel</a></p>
+        </noscript>
+        
         <?= $content ?>
 
         <!-- Footer -->

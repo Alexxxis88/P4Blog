@@ -19,8 +19,8 @@
                         <input type="password" class="form-control" id="passLog" name="pass" required>
                     </div>
                     <div class="form-group">
-                        <label for="autoLogIn" class="col-form-label">Connexion automatique</label>
-                        <input type="checkbox" id="autoLogIn" name="autoLogIn">
+                        <label title="un cookie de connexion automatique sera créé" for="autoLogIn" class="col-form-label">Connexion automatique</label>
+                        <input title="un cookie de connexion automatique sera créé" type="checkbox" id="autoLogIn" name="autoLogIn">
                     </div>
                     <input type="submit" class="btn btn-primary" name="login" value="Connexion"/>
                 </form>

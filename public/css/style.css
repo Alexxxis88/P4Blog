@@ -496,7 +496,12 @@ textarea.input {
 
 .post p {
     overflow: hidden;
-    max-height: 220px;
+    max-height: 224px;
+    text-align: justify;
+}
+
+.main-post p{
+    text-align: justify;
 }
 
 .post .post-img {
@@ -803,6 +808,10 @@ textarea.input {
 .post-comments .media .media-body .media-heading .reply:focus {
     color: #212631;
     text-decoration: none;
+}
+
+.post-comments p{
+    text-align: justify;
 }
 
 .fa-exclamation-triangle,
@@ -1171,6 +1180,22 @@ textarea#comment {
     background:lightgray;
 }
 
+noscript{
+    text-align:center;
+    width:100%;
+    background: rgba(255, 0, 0, 0.9);
+    z-index: 1000;
+    position:fixed;
+    top:15%;
+}
+
+noscript h1,noscript a{
+    color:yellow;
+}
+
+noscript h2, noscript p{
+    color:white;
+}
 /*=========================================================
 SUCCESS MESSAGES
 ===========================================================*/
