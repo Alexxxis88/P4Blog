@@ -235,7 +235,7 @@ try {
                 $sessionController->checkLog($_POST['username']);
 
                 //if there is a session open, displays a message
-                if (isset($_SESSION['id']) and isset($_SESSION['username'])) {
+                if (isset($_SESSION['id']) AND isset($_SESSION['username'])) {
                     require('templates/front/menu.php');
                 }
             } else {
@@ -245,7 +245,7 @@ try {
 
         //LOG OUT
         elseif ($_GET['action'] == 'logOutCheck') {
-            if (isset($_SESSION['id']) and isset($_SESSION['username'])) {
+            if (isset($_SESSION['id']) OR isset($_COOKIE['id'])) {
                 $sessionController = new SessionController;
                 $sessionController->killSession();
 
