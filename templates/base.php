@@ -105,7 +105,7 @@
                 <p>Safari iOS : <a href="http://aboutjavascript.com/fr/how-to-enable-javascript-in-safari.html#ios">voir le tutoriel</a></p>
                 <p>Android : <a href="http://aboutjavascript.com/fr/how-to-enable-javascript-in-android.html">voir le tutoriel</a></p>
         </noscript>
-        
+
         <?= $content ?>
 
         <!-- Footer -->
