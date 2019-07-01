@@ -380,6 +380,9 @@ try {
                 throw new Exception('Il manque des informations.');
             }
         }
+        else {
+            throw new Exception('Cette page n\'existe pas');
+        }
     }
 
     //DEFAULT BEHAVIOR
