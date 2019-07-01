@@ -24,9 +24,19 @@ $title = 'Gestion des utilisateurs';
                         $registrationDate = $allUsers[$i]->modRegistrationDate();
                         $group = $allUsers[$i]->groupId(); ?>
                         <div class="usersDisplay">
-                            <p class="userListHeader"><input type="checkbox" id="userID" name="selectUsers[]" value="<?= $userid?>" ><strong><?= $username ?></strong>&emsp;-&emsp;<?= $email ?>&emsp;-&emsp;enregistré le <strong> <?= $registrationDate ?></strong></p>
+                            <p class="userListHeader">
+                            <?php
+                            if ($username != 'Admin') {?>
+                                <input type="checkbox" id="userID" name="selectUsers[]" value="<?= $userid?>" >
+                            <?php
+                            }?>
+                            <strong><?= $username ?></strong>&emsp;-&emsp;<?= $email ?>&emsp;-&emsp;enregistré le <strong> <?= $registrationDate ?></strong></p>
                             <div class="roleAndDelete">
+                            <?php
+                            if ($username != 'Admin') {?>
                                 <p ><a class="deleteUserLink" href="index.php?action=deleteUser&amp;userID=<?= $userid ?>" onclick="return confirm('Etes-vous sûr?')"><span class="fas fa-user-times"></span>Supprimer</a></p>
+                            <?php
+                            }?>
                                 <p><strong>Role :</strong>
                                     <?php
                                     if ($group == 0) {
@@ -34,9 +44,11 @@ $title = 'Gestion des utilisateurs';
                                             <button class="btn btn-warning btn-sm"><a href="index.php?action=updateRole&amp;userID=<?= $userid ?>&amp;role=1" onclick="return confirm('Etes-vous sûr?')">Passer en Admin</a></button>
                                             <?php
                                     } elseif ($group == 1) {
-                                        echo '<strong style="color:red">Admin</strong>'; ?>
-                                        <button class="btn btn-warning btn-sm"><a href="index.php?action=updateRole&amp;userID=<?= $userid ?>&amp;role=0" onclick="return confirm('Etes-vous sûr?')">Passer en Utilisateur</a></button>
+                                        echo '<strong style="color:red">Admin</strong>';
+                                        if ($username != 'Admin') {?>
+                                            <button class="btn btn-warning btn-sm"><a href="index.php?action=updateRole&amp;userID=<?= $userid ?>&amp;role=0" onclick="return confirm('Etes-vous sûr?')">Passer en Utilisateur</a></button>
                                         <?php
+                                        }
                                     } ?>
                                 </p>
                             </div>

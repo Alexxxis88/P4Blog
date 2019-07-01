@@ -2,6 +2,7 @@
     <head>
         <title>Erreur</title>
         <link href="public/css/style.css" rel="stylesheet"/>
+        <link rel="icon" href="./public/img/favicon.ico" type="image/x-icon">
     </head>
     <body class="errorPage">
         <div class="container">
