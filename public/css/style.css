@@ -827,10 +827,11 @@ textarea.input {
     margin-bottom: 10px;
 }
 
-.fa-edit,
-.fa-trash-alt {
+.main-post .fa-edit,
+.main-post .fa-trash-alt {
     font-size: 17px;
     margin-bottom: 10px;
+    color:red;
 }
 
 .adminIcon {

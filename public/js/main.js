@@ -144,7 +144,7 @@ let delayConfirmationMsg = setTimeout(hideThanks, 1500);
 // Select / Deselect all checkboxes (for Reported comments)
 $("#checkAllReported").change(function () {
 	$("input[type=checkbox][id=commentID]").prop("checked", $(this).prop("checked"));
-})
+});
 
 // Select / Deselect all checkboxes (for Reported comments)
 $("#checkAllToPublish").change(function () {
@@ -194,4 +194,4 @@ document.getElementById("signInBtn").disabled = true;
 
 function enableBtn() {
 	document.getElementById("signInBtn").disabled = false;
-};
+}
