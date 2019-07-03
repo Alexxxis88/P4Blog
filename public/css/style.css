@@ -496,8 +496,11 @@ textarea.input {
 
 .post p {
     overflow: hidden;
-    max-height: 224px;
     text-align: justify;
+}
+
+.post-body-listPost {
+    height: 25em;
 }
 
 .main-post p{
