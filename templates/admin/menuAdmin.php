@@ -2,13 +2,15 @@
 <div class="menuAdmin">
     <a href="index.php"><span class="fas fa-home"></span></a>
     <div class="menuBtns" id="menuDesktop" >
-        <div class="adminMenu">
-            <a class="adminMenuLink" href="index.php?action=displayPublishView"><span class="fas fa-pen-nib"></span>Publier</a>
-            <a class="adminMenuLink" href="index.php?action=listPosts"><span class="fas fa-edit"></span>Editer</a>
-            <a class="adminMenuLink" href="index.php?action=manageComments"><span class="fas fa-comments comAlert"></span>Commentaires</a>
-            <a class="adminMenuLink" href="index.php?action=manageUsers&page=1&sortBy=10"><span class="fas fa-users"></span>Utilisateurs</a>
-            <a class="adminMenuLink" href="index.php?action=displayStatsView"><span class="fas fa-chart-line"></span>Statistiques</a>
-        </div>
+        <nav class="adminMenu">
+            <ul>
+               <li><a class="adminMenuLink" href="index.php?action=displayPublishView"><span class="fas fa-pen-nib"></span>Publier</a></li>
+               <li><a class="adminMenuLink" href="index.php?action=listPosts"><span class="fas fa-edit"></span>Editer</a></li>
+               <li><a class="adminMenuLink" href="index.php?action=manageComments"><span class="fas fa-comments comAlert"></span>Commentaires</a></li>
+               <li><a class="adminMenuLink" href="index.php?action=manageUsers&page=1&sortBy=10"><span class="fas fa-users"></span>Utilisateurs</a></li>
+               <li><a class="adminMenuLink" href="index.php?action=displayStatsView"><span class="fas fa-chart-line"></span>Statistiques</a></li>
+            </ul>
+        </nav>
 
         <!-- Log Out button -->
         <a href="index.php?action=logOutCheck"><button type="button" class="btn btn-info ">Deconnexion</button></a>

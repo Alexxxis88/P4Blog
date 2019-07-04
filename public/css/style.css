@@ -278,10 +278,17 @@ textarea.input {
 
 .adminMenu {
     display: flex;
-    justify-content: space-around;
     align-items: center;
     margin-right: 3%;
+
 }
+
+.adminMenu ul {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
 
 .adminMenu span {
     color: white;
@@ -298,7 +305,6 @@ textarea.input {
 
 .adminMenu a:hover {
     color: #f5c908;
-    margin-right: 50px;
     text-decoration: none;
 }
 
