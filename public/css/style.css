@@ -1365,6 +1365,10 @@ SUCCESS MESSAGES
         display: none !important;
         /* needed to close the menu when resizing the window */
     }
+
+    .listpostPosts {
+        height: 640px;
+    }
 }
 
 @media only screen and (max-width: 991px) {

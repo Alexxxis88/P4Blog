@@ -29,7 +29,7 @@
 
                     <!-- post -->
                     <div class="col-md-4">
-                        <div class="post">
+                        <div class="post listpostPosts">
                             <a class="post-img" href="index.php?action=post&id=<?=$id?>&page=1&sortBy=5"><img src="./public/img/post-<?= $id?>.jpg" alt="<?= $postTitle ?>"></a>
                             <div class="post-body post-body-listPost">
                                 <div class="post-meta">
